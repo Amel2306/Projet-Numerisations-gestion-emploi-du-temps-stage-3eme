@@ -50,12 +50,12 @@ const Eleve = db.define('Eleve', {
         },
       },
 });
-Élève.belongsTo(Professeur, {
+Eleve.belongsTo(Professeur, {
     foreignKey: 'professeurId',
     onDelete: 'CASCADE', // Optionnel : définir l'action à effectuer lors de la suppression du professeur associé
   });
 
-  Professeur.hasMany(Élève, {
+  Professeur.hasMany(Eleve, {
     foreignKey: 'professeurId',
   });
 

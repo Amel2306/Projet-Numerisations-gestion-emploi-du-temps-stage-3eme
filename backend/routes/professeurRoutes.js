@@ -1,9 +1,11 @@
 const express = require('express');
-const professeurControllers = require ('../controllers/professeursControllers');
+const ProfesseurControllers = require ('../controllers/professeursControllers');
 
 const router = express.Router()
 
-router.get ('/', professeurControllers.getAllProfesseur);
-router.post('/', professeurControllers.addProfesseur);
+router.get ('/', ProfesseurControllers.getAllProfesseurs);
+router.post('/', ProfesseurControllers.addProfesseur);
+router.delete('/:id', ProfesseurControllers.deleteProfesseur);
+router.delete('/', ProfesseurControllers.deleteAllProfesseurs)
 
 module.exports = router;
