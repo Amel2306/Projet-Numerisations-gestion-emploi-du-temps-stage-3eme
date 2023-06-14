@@ -6,7 +6,6 @@ const router = express.Router();
 router.get("/", EleveControllers.getAllEleves);
 router.post("/", EleveControllers.addEleve);
 router.post("/:id/confirmation", EleveControllers.confirmeEleve);
-router.get("/:tuteurId", EleveControllers.getEleveByTuteur);
 router.delete("/:id", EleveControllers.deleteEleve);
 router.delete("/", EleveControllers.deleteAllEleve);
 

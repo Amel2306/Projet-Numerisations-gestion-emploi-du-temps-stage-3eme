@@ -99,18 +99,6 @@ exports.confirmeEleve = async (req, res) => {
   }
 };
 
-exports.getEleveByTuteur = async (req, res) => {
-  const professeurId = req.params.tuteurId;
-
-  try {
-    const eleves = await Eleve.findAll({where: {professeurId}})
-    res.status(200).json(eleves)
-  }
-  catch (err) {
-    res.status(404).json({message: "Aucun élève trouvé ayant comme tuteur ce tuteur. ", err});
-  }
-}
-
 exports.deleteEleve = async (req, res) => {
   const eleveId = res.params.id;
   try {
