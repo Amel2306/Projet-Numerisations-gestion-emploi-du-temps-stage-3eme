@@ -8,6 +8,17 @@ exports.getAllProfesseurs = async (req, res) => {
     res.json(professeurs);
 };
 
+exports.getEleveByTuteur = async (req, res) => {
+  const professeurId = req.params.tuteurId;
+
+  try {
+    const eleves = await Eleve.findAll({where: {professeurId}})
+    res.status(200).json(eleves)
+  }
+  catch (err) {
+    res.status(404).json({message: "Aucun élève trouvé ayant comme tuteur ce tuteur. ", err});
+  }
+}
 
 exports.addProfesseur = async (req, res) => {
     const { nom, prenom, email, numero_tel, metier, etablissement, role, nb_eleve_tuteur} = req.body;
@@ -34,18 +45,6 @@ exports.deleteProfesseur = async (req, res) => {
 
   }catch (err) {
     res.status(500).json({message: "Une erreur s'est produite lors de la suppression du prof"});
-  }
-}
-
-exports.getEleveByTuteur = async (req, res) => {
-  const professeurId = req.params.tuteurId;
-
-  try {
-    const eleves = await Eleve.findAll({where: {professeurId}})
-    res.status(200).json(eleves)
-  }
-  catch (err) {
-    res.status(404).json({message: "Aucun élève trouvé ayant comme tuteur ce tuteur. ", err});
   }
 }
 
