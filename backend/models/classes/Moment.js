@@ -1,8 +1,10 @@
+
 class Moment {
     constructor() {
       this.activite_dispo = new Map();
     }
   
+    //on ajoute id de l'activité et nb_eleve_max de l'activité
     addActivite(activite, dispo) {
       this.activite_dispo.set(activite, dispo);
     }
@@ -11,8 +13,8 @@ class Moment {
       let activitePrise = null;
       for (const [activite, dispo] of this.activite_dispo) {
         let found = false;
-        for (const [moment, activite] of parcours) {
-          if (activite !== null && activite === activite) {
+        for (const [moment, act] of parcours) {
+          if (act !== null && act === activite) {
             found = true;
             break;
           }
