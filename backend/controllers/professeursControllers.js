@@ -1,4 +1,5 @@
 const Professeur = require('../models/Professeur')
+const Eleve = require('../models/Eleve');
 const bcrypt = require('bcrypt');
 const  { generateRandomPassword, generatedPassword }  = require('../utilities/passwordFunctions');
 
