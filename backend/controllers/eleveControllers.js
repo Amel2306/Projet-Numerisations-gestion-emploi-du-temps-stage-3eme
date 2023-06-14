@@ -21,6 +21,7 @@ exports.addEleve = async (req, res) => {
       }
 }
 
+// cas ou l'élève est confirmé par l'admin : on lui assigne un tuteur
 exports.confirmeEleve = async (req, res) => {
   const eleveId = req.params.id;
 
@@ -31,27 +32,31 @@ exports.confirmeEleve = async (req, res) => {
       return res.status(404).json({ message: 'Eleve not found' });
     }
 
+    // findAndCountAll permet de récupérer une liste de 2 éléments : row et count,
+    // les row correspondent aux attributs qu'on veut
+    // les count correspondent au count de ce qu'on veut compter 
     const counts = await Eleve.findAndCountAll({
       attributes: ['professeurId'],
       group: 'professeurId'
     });
-    console.log(counts);
-    //res.json(counts);
 
+    // prof qui apparaissent autant que tuteur mais qui peuvent être tuteur encore
     const avaibleProfs= [];
+
+    //prof qui apparaissent autant que tuteur mais ne peuvent plus l'être
+    // utile pour l'exclure de tous les profs pouvant encore être tuteur
     const notAvaibleProfs = [];
 
     for (let i = 0; i < counts.rows.length; i++) {
       const professeurId = counts.rows[i].professeurId;
-      console.log(professeurId);
     
       if (professeurId !== null) {
+
         const prof = await Professeur.findByPk(professeurId);
-        //console.log(prof);
+
+        // on vérifie si le prof en question peut être tuteur de plus d'élèves
         if (prof.dataValues.nb_eleve_tuteur > counts.count[i].count) {
-          console.log("**************")
           avaibleProfs.push(professeurId);
-          console.log(avaibleProfs);
         }
         else {
           notAvaibleProfs.push(professeurId);
@@ -59,21 +64,11 @@ exports.confirmeEleve = async (req, res) => {
       }
     }
 
-    console.log("**************")
-    console.log(avaibleProfs);
-    console.log(notAvaibleProfs);
-
-    /*const notAvailableProfesseursIds = counts.rows
-    .filter((row) => {
-      const professeurId = row.professeurId;
-      const professeur = Professeur.findByPk(professeurId);
-      return professeurId !== null && professeur.nb_eleve_tuteur <= row.count;
-    })
-    .map((row) => row.professeurId);*/
-
     const allProfs = await Professeur.findAll();
     for (const item of allProfs) {
       if (item.nb_eleve_tuteur > 0) {
+
+        // indicateur permet de nous indiquer si le prof en questions apparait dans les profs indisponibles
         let indicateur = 0;
         for (const profNot of notAvaibleProfs) {
           if (profNot === item.id) {
@@ -85,29 +80,16 @@ exports.confirmeEleve = async (req, res) => {
         }
       }
     }
-    /*const additionalProfesseurs = await Professeur.findAll({
-      attributes: ['id'],
-      where: {
-        nb_eleve_tuteur: {
-          [Op.gte]: 1
-        },
-        id: {
-          [Op.not]: notAvailableProfesseursIds
-        }
-      }
-    });*/
-    //const additionalIds = additionalProfesseurs.map((professeur) => professeur.id);
 
-    console.log(avaibleProfs);
-
-    //const allProfesseurs = avaibleProfs.concat(additionalProfesseurs);
-
+    //TODO : ajouter mylène dans le cas où il n'y a plus de prof disponible
     if (avaibleProfs.length === 0) {
       return res.status(404).json({ message: 'Pas de tuteur dispo ajouter Mylène' });
     }
 
+    //sinon on prend le premier prof dispo pour être tuteur
     const selectedProfesseur = avaibleProfs[0];
 
+    //on modifie dans eleve le professeurId
     await eleve.update({ professeurId: selectedProfesseur });
 
     return res.status(200).json({ message: 'Tuteur bien assigné' });
