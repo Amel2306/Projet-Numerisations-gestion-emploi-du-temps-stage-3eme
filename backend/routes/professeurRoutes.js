@@ -3,10 +3,10 @@ const ProfesseurControllers = require ('../controllers/professeursControllers');
 
 const router = express.Router()
 
-router.get ('/', ProfesseurControllers.getAllProfesseurs);
-router.get ('/tuteur/:tuteurId', ProfesseurControllers.getEleveByTuteur)
-router.post('/', ProfesseurControllers.addProfesseur);
-router.delete('/:id', ProfesseurControllers.deleteProfesseur);
-router.delete('/', ProfesseurControllers.deleteAllProfesseurs)
+router.get ('/', ProfesseurControllers.getAllProfesseursController);
+router.get ('/tuteur/:tuteurId', ProfesseurControllers.getEleveByTuteurController)
+router.post('/', ProfesseurControllers.addProfesseurController);
+router.delete('/:id', ProfesseurControllers.deleteProfesseurController);
+router.delete('/all', ProfesseurControllers.deleteAllProfesseursController)
 
-module.exports = router;
+module.exports = router; 

@@ -1,61 +1,69 @@
-const Professeur = require('../models/Professeur')
-const Eleve = require('../models/Eleve');
+const professeurService = require('../services/professeurServices');
+const { generatedPassword } = require ('../utilities/passwordFunctions');
 const bcrypt = require('bcrypt');
-const  { generateRandomPassword, generatedPassword }  = require('../utilities/passwordFunctions');
 
-exports.getAllProfesseurs = async (req, res) => {
-    const professeurs = await Professeur.findAll();
+
+exports.getAllProfesseursController = async (req, res) => {
+  try {
+    const professeurs = await professeurService.getAllProfesseurs();
     res.json(professeurs);
+  } catch (error) {
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de la récupération des professeurs.' });
+  }
 };
 
-exports.getEleveByTuteur = async (req, res) => {
-  const professeurId = req.params.tuteurId;
+exports.getEleveByTuteurController = async (req, res) => {
+  const tuteurId = req.params.tuteurId;
 
   try {
-    const eleves = await Eleve.findAll({where: {professeurId}})
-    res.status(200).json(eleves)
+    const eleves = await professeurService.getEleveByTuteur(tuteurId);
+    res.status(200).json(eleves);
+  } catch (error) {
+    res.status(404).json({ message: 'Aucun élève trouvé ayant ce tuteur.', error });
   }
-  catch (err) {
-    res.status(404).json({message: "Aucun élève trouvé ayant comme tuteur ce tuteur. ", err});
-  }
-}
+};
 
-exports.addProfesseur = async (req, res) => {
-    const { nom, prenom, email, numero_tel, metier, etablissement, role, nb_eleve_tuteur} = req.body;
-    const password = generatedPassword;
-      try {
-        const hashedPassword = await bcrypt.hash(password, 10); // Génère le hachage du mot de passe avec un coût de 10
-        const nouveauProfesseur = await Professeur.create({ nom, prenom, email, numero_tel, metier, etablissement, role ,nb_eleve_tuteur, password: hashedPassword});
-        res.status(201).json(nouveauProfesseur);
-      } catch (error) {
-        res.status(400).json({ message: 'Error creating professeur', error });
-      }
-}
+exports.addProfesseurController = async (req, res) => {
+  const { nom, prenom, email, numero_tel, metier, etablissement, role, nb_eleve_tuteur} = req.body;
 
-//suppression d'un professeur en particulier
-exports.deleteProfesseur = async (req, res) => {
-  const professeurId = res.params.id;
+
   try {
-    const prof = await Professeur.findByPk(professeurId)
-    if (!prof) {
-      return res.status(404).json({message: "Le prof que vous souhaitez supprimer n'existe pas"})
+    const password = generatedPassword; 
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const profData = {
+      nom,
+      prenom,
+      email,
+      numero_tel,
+      metier,
+      etablissement,
+      role,
+      nb_eleve_tuteur,
+      password: hashedPassword,
     }
-    await prof.destroy();
-    res.status(200).json({message: "Le professeur a bien été supprimé"})
-
-  }catch (err) {
-    res.status(500).json({message: "Une erreur s'est produite lors de la suppression du prof"});
+    const nouveauProfesseur = await professeurService.addProfesseur(profData);
+    res.status(201).json(nouveauProfesseur);
+  } catch (error) {
+    res.status(400).json({ message: 'Erreur lors de la création du professeur.', error });
   }
-}
+};
 
-//suppression de tous les professeurs
-exports.deleteAllProfesseurs = async (req, res) => {
+exports.deleteProfesseurController = async (req, res) => {
+  const professeurId = req.params.id;
+
   try {
-    const nb_prof_supp = await Professeur.destroy({
-      where: {}
-    })
-    res.status(200).json({message: "Nombre de prof supprimés", nb_prof_supp})
-  }catch(err) {
-    res.status(500).json({message: "Error lors de la suppression de tous les professeurs"})
+    await professeurService.deleteProfesseur(professeurId);
+    res.status(200).json({ message: 'Le professeur a bien été supprimé.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de la suppression du professeur.' });
   }
-}
+};
+
+exports.deleteAllProfesseursController = async (req, res) => {
+  try {
+    const nb_prof_supp = await professeurService.deleteAllProfesseurs();
+    res.status(200).json({ message: 'Nombre de professeurs supprimés :', nb_prof_supp });
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur lors de la suppression de tous les professeurs.' });
+  }
+};
