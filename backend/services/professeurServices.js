@@ -15,7 +15,6 @@ exports.getEleveByTuteur= async (tuteurId) =>{
 
 exports.addProfesseur = async (profData) => {
   try {
-    console.log("je recois ", profData)
     const newProfesseur = await Professeur.create(profData);
     return newProfesseur
   } catch (error) {
