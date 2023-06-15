@@ -3,7 +3,7 @@ const { generatedPassword } = require ('../utilities/passwordFunctions');
 const bcrypt = require('bcrypt');
 
 
-exports.getAllProfesseursController = async (req, res) => {
+exports.getAllProfesseurs = async (req, res) => {
   try {
     const professeurs = await professeurService.getAllProfesseurs();
     res.json(professeurs);
@@ -12,7 +12,7 @@ exports.getAllProfesseursController = async (req, res) => {
   }
 };
 
-exports.getEleveByTuteurController = async (req, res) => {
+exports.getEleveByTuteur = async (req, res) => {
   const tuteurId = req.params.tuteurId;
 
   try {
@@ -23,7 +23,7 @@ exports.getEleveByTuteurController = async (req, res) => {
   }
 };
 
-exports.addProfesseurController = async (req, res) => {
+exports.addProfesseur = async (req, res) => {
   const { nom, prenom, email, numero_tel, metier, etablissement, role, nb_eleve_tuteur} = req.body;
 
 
@@ -48,7 +48,7 @@ exports.addProfesseurController = async (req, res) => {
   }
 };
 
-exports.deleteProfesseurController = async (req, res) => {
+exports.deleteProfesseur = async (req, res) => {
   const professeurId = req.params.id;
 
   try {
@@ -59,7 +59,7 @@ exports.deleteProfesseurController = async (req, res) => {
   }
 };
 
-exports.deleteAllProfesseursController = async (req, res) => {
+exports.deleteAllProfesseurs = async (req, res) => {
   try {
     const nb_prof_supp = await professeurService.deleteAllProfesseurs();
     res.status(200).json({ message: 'Nombre de professeurs supprimés :', nb_prof_supp });
