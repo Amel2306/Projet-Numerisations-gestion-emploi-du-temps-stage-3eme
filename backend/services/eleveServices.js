@@ -18,7 +18,6 @@ exports.getEleveById = async (eleveId) => {
 
 // Fonction pour attribuer un tuteur à un élève
 exports.assignTuteur = async (eleve) => {
-    console.log("salut")
     try {
       const counts = await Eleve.findAndCountAll({
         attributes: ['professeurId'],
@@ -41,7 +40,6 @@ exports.assignTuteur = async (eleve) => {
           }
         }
       }
-      console.log(avaibleProfs);
   
       const allProfs = await Professeur.findAll();
       for (const item of allProfs) {

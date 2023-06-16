@@ -1,4 +1,4 @@
-const activiteService = require('../services/activiteService');
+const activiteService = require('../services/activiteServices');
 
 exports.getAllActivites = async (req, res) => {
   try {
@@ -20,7 +20,7 @@ exports.getActivite = async (req, res) => {
 };
 
 exports.addActivite = async (req, res) => {
-  const { nom, description, nb_realisations, nb_eleve_max, l1, l2, ma1, ma2, me1, me2, j1, j2, v1, v2, professeurId, parcoursId } = req.body;
+  const { nom, description, nb_realisations, nb_eleve_max, l1, l2, ma1, ma2, me1, me2, j1, j2, v1, v2, professeurId } = req.body;
   try {
     const activiteData = {
       nom,
@@ -38,7 +38,6 @@ exports.addActivite = async (req, res) => {
       v1,
       v2,
       professeurId,
-      parcoursId
     };
     const activite = await activiteService.createActivite(activiteData);
     res.status(201).json({ message: 'Activité créée avec succès', activite });

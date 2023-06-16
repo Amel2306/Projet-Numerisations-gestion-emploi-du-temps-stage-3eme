@@ -1,12 +1,9 @@
 const Activite = require('../models/Activite');
 
 exports.getAllActivites = async () => {
-  try {
+    console.log("j'arrive ici t'as capté")
     const activites = await Activite.findAll();
     return activites;
-  } catch (err) {
-    throw new Error("Aucune activité n'a été trouvée", err);
-  }
 };
 
 exports.getActiviteById = async (activiteId) => {
@@ -19,12 +16,10 @@ exports.getActiviteById = async (activiteId) => {
 };
 
 exports.createActivite = async (activiteData) => {
-  try {
-    const activite = await Activite.create(activiteData);
-    return activite;
-  } catch (error) {
-    throw new Error("Erreur lors de la création de l'activité", error);
-  }
+    console.log("je reçois ", activiteData)
+    const newActivite = await Activite.create(activiteData);
+    console.log(newActivite.json)
+    return newActivite;
 };
 
 exports.deleteActiviteById = async (activiteId) => {

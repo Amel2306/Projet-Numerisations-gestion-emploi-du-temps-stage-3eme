@@ -6,6 +6,8 @@ const app = express();
 // les routes necessaires
 const professeurRoutes = require('./routes/professeurRoutes');
 const eleveRoutes = require('./routes/eleveRoutes');
+const activiteRoutes = require ('./routes/activiteRoutes');
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,8 +23,9 @@ app.use(express.urlencoded({ extended: true })); // Permet de lire les données 
 app.use('/api/professeurs', professeurRoutes);
 
 //routes eleves
-app.use
-
-
 app.use('/api/eleves', eleveRoutes);
+
+//route activites
+app.use('/api/activites', activiteRoutes);
+
 module.exports = app;

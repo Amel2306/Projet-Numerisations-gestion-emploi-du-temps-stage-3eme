@@ -3,7 +3,7 @@ const db = require('../config/dbConfig');
 const Professeur = require ('./Professeur');
 const Parcours = require ('./Parcours');
 
-const Activite = db.define('Activte', {
+const Activite = db.define('activites', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -80,8 +80,7 @@ const Activite = db.define('Activte', {
             model: 'Parcours',
             key: 'id',
         },
-    }
-    
+    },
 });
 
 Activite.belongsTo(Professeur, {
@@ -93,3 +92,5 @@ Activite.belongsTo(Parcours, {
    foreignKey: 'parcoursId',
    onDelete: 'CASCADE',
 })
+
+module.exports = Activite;

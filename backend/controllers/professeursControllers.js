@@ -24,9 +24,15 @@ exports.getEleveByTuteur = async (req, res) => {
 };
 
 exports.addProfesseur = async (req, res) => {
-  const { nom, prenom, email, numero_tel, metier, etablissement, role, nb_eleve_tuteur} = req.body;
-
-
+  const { 
+    nom, 
+    prenom, 
+    email, 
+    numero_tel,
+    metier,
+    etablissement, 
+    role, 
+    nb_eleve_tuteur} = req.body;
   try {
     const password = generatedPassword; 
     const hashedPassword = await bcrypt.hash(password, 10);
