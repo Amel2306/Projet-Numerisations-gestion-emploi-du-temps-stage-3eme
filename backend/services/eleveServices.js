@@ -1,4 +1,5 @@
 const Eleve = require('../models/Eleve');
+const Parcours = require('../models/Parcours');
 const Professeur = require('../models/Professeur');
 
 exports.getAllEleves = async () => {
@@ -69,6 +70,48 @@ exports.assignTuteur = async (eleve) => {
     } catch (error) {
       throw new Error("Error lors de l'attribution du tuteur");
     }
+};
+
+exports.assignParcours = async (eleveId) => {
+  const eleve = await Eleve.findByPk(eleveId);
+
+  // Comptage des parcours
+  const counts = await Eleve.findAndCountAll({
+    attributes: ['parcoursId'],
+    group: ['parcoursId'],
+  });
+
+  const all_parcours = await Parcours.findAll();
+
+  // les parcours ayant été attribué à 2 personnes
+  const parc_not_available = [];
+
+  for (let i = 0; i < counts.rows.length; i++) {
+    const count = counts.count[i].count; // récupère le count pour le parcoursId d'indice i
+    const parcoursId = counts.rows[i].parcoursId;// récupère le parcoursId d'indice i
+    if (count >= 2 ) {
+      parc_not_available.push(parcoursId);
+    }
+  }
+
+  for (const parc of all_parcours) {
+    let indicateur = 0; // permet de savoir si id du parcours apparait dans parc_not_available
+
+    for (const parc_not of parc_not_available) {
+      if (parc_not === parc.id) {
+        indicateur++;
+      }
+    }
+
+    if (indicateur === 0) {
+      await eleve.update({
+        parcoursId: parc.id,
+      });
+      break;
+    }
+  }
+
+  return eleve;
 };
 
 exports.deleteEleve = async (eleveId) => {

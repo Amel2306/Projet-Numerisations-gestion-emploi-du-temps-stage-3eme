@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../config/dbConfig');
 const Professeur = require ('./Professeur');
+const Parcours = require ('./Parcours')
 
 const Eleve = db.define('Eleve', {
     id: {
@@ -45,18 +46,37 @@ const Eleve = db.define('Eleve', {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-          model: 'Professeurs', // Nom de la table référencée (dans ce cas, la table des professeurs)
-          key: 'id', // Nom de la colonne référencée (dans ce cas, l'ID du professeur)
+          model: 'Professeurs',
+          key: 'id',
         },
-      },
+    },
+
+    parcoursId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Parcours', 
+          key: 'id',
+        },
+    },
 });
+
+
 Eleve.belongsTo(Professeur, {
     foreignKey: 'professeurId',
-    onDelete: 'CASCADE', // Optionnel : définir l'action à effectuer lors de la suppression du professeur associé
-  });
-
-  Professeur.hasMany(Eleve, {
+    onDelete: 'SET NULL', 
+});
+Professeur.hasMany(Eleve, {
     foreignKey: 'professeurId',
-  });
+});
+
+
+Eleve.belongsTo(Parcours, {
+    foreignKey: 'parcoursId',
+    onDelete: 'SET NULL', 
+});
+Parcours.hasMany(Eleve, {
+    foreignKey: 'parcoursId'
+})
 
 module.exports = Eleve;

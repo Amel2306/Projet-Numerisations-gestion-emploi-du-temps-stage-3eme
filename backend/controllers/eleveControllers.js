@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const { generatedPassword } = require('../utilities/passwordFunctions');
 const eleveService = require('../services/eleveServices');
+const Eleve = require('../models/Eleve');
 
 exports.getAllEleves = async (req, res) => {
   try {
@@ -40,8 +41,8 @@ exports.confirmeEleve = async (req, res) => {
     if (!eleve) {
        res.status(404).json({ message: 'Eleve not found' });
     }
-   await eleveService.assignTuteur(eleve);
-    res.status(200).json({ message: 'Tuteur bien assigné' });
+    await eleveService.assignTuteur(eleve);
+    res.status(200).json(eleve);
   } catch (error) {
      res.status(500).json({ message: 'Error lors de l\'attribution de tuteur', error });
   }
@@ -69,3 +70,13 @@ exports.deleteAllEleve = async (req, res) => {
     res.status(500).json({ message: "Error lors de la suppression de tous les élèves" });
   }
 };
+
+exports.asignParcours = async (req, res ) => {
+  const eleveId = req.params.id
+  try {
+    const eleve = await eleveService.assignParcours(eleveId)
+    res.status(201).json(eleve)
+  }catch (error) {
+    res.status(500).json({ message: "Error lors de l'attribution d'un emploi du temps à un élève'" });
+  }
+}
