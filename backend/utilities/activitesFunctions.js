@@ -11,17 +11,17 @@ async function momentsActivite(activiteId) {
         return null
     }
 
-    moments[0] = activite.l1;
-    moments[1] = activite.l2;
-    moments[2] = activite.ma1;
-    moments[3] = activite.ma2;
-    moments[4] = activite.me1;
-    moments[5] = activite.me2;
-    moments[6] = activite.j1;
-    moments[7] = activite.j2;
-    moments[8] = activite.v1;
-    moments[9] = activite.v2;
-
+    moments[0] = parseInt(activite.l1);
+    moments[1] = parseInt(activite.l2);
+    moments[2] = parseInt(activite.ma1);
+    moments[3] = parseInt(activite.ma2);
+    moments[4] = parseInt(activite.me1);
+    moments[5] = parseInt(activite.me2);
+    moments[6] = parseInt(activite.j1);
+    moments[7] = parseInt(activite.j2);
+    moments[8] = parseInt(activite.v1);
+    moments[9] = parseInt(activite.v2);
+    
     return moments
 }
 
