@@ -73,24 +73,11 @@ const Activite = db.define('activites', {
           key: 'id',
         },
     },
-    parcoursId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-            model: 'Parcours',
-            key: 'id',
-        },
-    },
 });
 
 Activite.belongsTo(Professeur, {
     foreignKey: 'professeurId',
     onDelete: 'CASCADE', 
 });
-
-Activite.belongsTo(Parcours, {
-   foreignKey: 'parcoursId',
-   onDelete: 'CASCADE',
-})
 
 module.exports = Activite;

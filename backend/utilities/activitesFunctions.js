@@ -2,7 +2,7 @@ const Activite = require("../models/Activite")
 
 //permet de déterminer un tableau des moments de l'activité
 //le moment ou l'activité est possible est égale à 1, 0 sinon
-async function moments_activite(activiteId) {
+async function momentsActivite(activiteId) {
     var moments = new Array(10);
     const activite = await Activite.findByPk(activiteId)
 
@@ -26,5 +26,5 @@ async function moments_activite(activiteId) {
 }
 
 module.exports = {
-    moments_activite,
+    momentsActivite,
 }

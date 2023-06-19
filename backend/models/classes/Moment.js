@@ -9,11 +9,11 @@ class Moment {
       this.activite_dispo.set(activite, dispo);
     }
   
-    giveActivite(parcours) {
+    giveActivite(parc) {
       let activitePrise = null;
       for (const [activite, dispo] of this.activite_dispo) {
         let found = false;
-        for (const [moment, act] of parcours) {
+        for (const  act of parc) {
           if (act !== null && act === activite) {
             found = true;
             break;
