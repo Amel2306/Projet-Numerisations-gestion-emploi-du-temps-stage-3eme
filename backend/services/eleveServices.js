@@ -16,7 +16,8 @@ exports.getEleveById = async (eleveId) => {
   return eleve;
 };
 
-// Fonction pour attribuer un tuteur à un élève
+// Fonction pour attribuer un tuteur à un élève 
+//au moment ou celui-ci est confirmé par l'admin
 exports.assignTuteur = async (eleve) => {
     try {
       const counts = await Eleve.findAndCountAll({
@@ -64,7 +65,7 @@ exports.assignTuteur = async (eleve) => {
   
       await eleve.update({ professeurId: selectedProfesseur });
   
-      return true; // Retourne true si l'attribution du tuteur est réussie
+      return true; // Retourne true si l'attribution du tuteur est réussi
     } catch (error) {
       throw new Error("Error lors de l'attribution du tuteur");
     }

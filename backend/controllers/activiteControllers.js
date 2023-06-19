@@ -21,9 +21,7 @@ exports.getActivite = async (req, res) => {
 
 exports.addActivite = async (req, res) => {
   const { nom, description, nb_realisations, nb_eleve_max, l1, l2, ma1, ma2, me1, me2, j1, j2, v1, v2, professeurId } = req.body;
-  console.log("j'arrive");
   try {
-    console.log("j'arrive");
     const activiteData = {
       nom,
       description,

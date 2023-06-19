@@ -16,7 +16,6 @@ exports.getActiviteById = async (activiteId) => {
 };
 
 exports.createActivite = async (activiteData) => {
-    console.log("je reçois ", activiteData)
     const newActivite = await Activite.create(activiteData);
     console.log(newActivite.json)
     return newActivite;

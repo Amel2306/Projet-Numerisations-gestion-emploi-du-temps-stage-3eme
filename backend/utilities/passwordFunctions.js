@@ -1,3 +1,5 @@
+// paramètres : taille du mot de passe à générer
+//génère un mot de passe au hazard de la taille souhaité
 function generateRandomPassword(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let password = '';

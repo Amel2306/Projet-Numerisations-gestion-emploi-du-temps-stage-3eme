@@ -5,6 +5,8 @@ const Moment = require ('../models/classes/Moment');
 const {activiteByMoment, minMom} = require ('./momentFunctions');
 
 
+//paramètre : nombre de parcours souhaité à indiquer par l'admin
+//permet de créer des parcours en récupérant des activtiés pour chaque moment de la semaine si cela est possible
 async function associeParcoursActivite(nb_parcours) {
     try {
       // Création des parcours
@@ -24,30 +26,30 @@ async function associeParcoursActivite(nb_parcours) {
               parcoursId: parcoursId,
             }
           });
+
+          //Permet d'avoir toutes les id d'activité d'un parcours
+          // utile pour la fonction giveActivite de Moment
           const idActivites = [];
           for (const act of activites) {
             idActivites.push(act.activiteId);
           }
   
+          //permet récupération d'une activité pour un moment donné
           const newActParcours = moments_pleins[j].giveActivite(idActivites);
   
           if (newActParcours !== null) {
-            //const oldActParc = ActiviteParcours.findByPk(parcoursId, newActParc)
-            //if (oldActParc === undefined) {
+            // création d'une activite_parcours
               const parcId = tableau_parcours[j_parcours].id
               await ActiviteParcours.create({
                 parcoursId: parcId,
                 activiteId: newActParcours,
                 indexMoment: j
               })
-            //}
           }
         }
       }
     } catch (error) {
-      // Gérer l'erreur ici
       console.error("Une erreur s'est produite :", error);
-      // Vous pouvez également lancer une nouvelle erreur si nécessaire
       throw new Error("Une erreur s'est produite lors de l'association des parcours aux activités.");
     }
 }
