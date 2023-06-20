@@ -21,6 +21,16 @@ exports.getElevesByActMoment = async (req, res) => {
   }
 }
 
+exports.getBinome = async (req, res) => {
+  const eleveId = req.params.id
+  try {
+    const binome = await EleveService.getBinome(eleveId)
+    res.json(binome);
+  }catch(err) {
+    res.status(404).json({message: "Aucun binôme n'a été trouvé pour cet élève"})
+  }
+}
+
 exports.addEleve = async (req, res) => {
   try {
     const { nom, prenom, email, numero_tel, numero_tel_parent, adress, etablissement } = req.body;

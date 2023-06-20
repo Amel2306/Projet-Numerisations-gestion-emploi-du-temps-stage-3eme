@@ -2,6 +2,7 @@ const ActiviteParcours = require('../models/ActiviteParcours');
 const Eleve = require('../models/Eleve');
 const Parcours = require('../models/Parcours');
 const Professeur = require('../models/Professeur');
+const { Op } = require('sequelize');
 
 exports.getAllEleves = async () => {
   const eleves = await Eleve.findAll();
@@ -38,6 +39,21 @@ exports.getElevesByActMoment = async (activiteId, indexMoment) => {
   console.log(eleves);
   return eleves;
 };
+
+exports.getBinome = async (eleveId) => {
+  const eleve = await Eleve.findByPk(eleveId)
+  const parcours_commun = eleve.parcoursId
+  const binome = await Eleve.findOne({
+    where: {
+      parcoursId: parcours_commun,
+      id: {
+        [Op.ne]: eleveId
+      }
+    }
+  })
+
+  return binome
+}
 
 exports.createEleve = async (eleveData) => {
   const nouvelEleve = await Eleve.create(eleveData);
