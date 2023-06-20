@@ -33,6 +33,25 @@ exports.getActiviteByParcours = async (req, res) => {
         res.status(404).json({message: "Aucune activtié n'est lié à ce parcours"})
     }
 }
+exports.getActiviteParcByProf = async (req, res) => {
+    const prof_id = req.params.profId
+    try {
+        const parcours_pr = await ActiviteParcoursServices.getActiviteParcByProf(prof_id)
+        res.status(200).json(parcours_pr)
+    }catch (err) {
+        res.status(400).json({message: "Error aucune activtié parcours trouvé pour ce professeur "})
+    }
+}
+
+exports.getActiviteParcByEleve = async (req, res) => {
+    const eleve_id = req.params.eleveId
+    try {
+        const activtie_parcours_el = await ActiviteParcoursServices.getActiviteParcByEleve(eleve_id)
+        res.status(200).json(activtie_parcours_el)
+    }catch (err) {
+        res.status(400).json({message: "Error aucun parcours trouvé pour cet élève "})
+    }
+}
 
 exports.associateActiviteParcours= async (req, res) => {
     const { parcoursId, activiteId, indexMoment} = req.body
