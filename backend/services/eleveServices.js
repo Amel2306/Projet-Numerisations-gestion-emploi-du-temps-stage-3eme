@@ -3,6 +3,9 @@ const Eleve = require('../models/Eleve');
 const Parcours = require('../models/Parcours');
 const Professeur = require('../models/Professeur');
 const { Op } = require('sequelize');
+const { generateRandomPassword, generatedPassword } = require ("../utilities/passwordFunctions");
+const bcrypt = require('bcrypt');
+const emailTemplates = require('../utilities/emailTemplates');
 
 exports.getAllEleves = async () => {
   const eleves = await Eleve.findAll();
@@ -153,8 +156,28 @@ exports.assignParcours = async (eleveId) => {
       break;
     }
   }
-
   return eleve;
+};
+
+exports.sendPassword = async (eleveId) => {
+  try {
+    const eleve = await Eleve.findByPk(eleveId);
+    const password = generatedPassword;
+    const recipientEmail = eleve.email;
+
+    await emailTemplates.sendPasswordEmail(recipientEmail, password);
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await eleve.update({
+      password: hashedPassword
+    });
+
+    return { message: "Mot de passe envoyé à l'élève avec succès" };
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi de mot de passe à l\'élève', error);
+    throw new Error("Erreur lors de l'envoi de mot de passe à l'élève");
+  }
 };
 
 exports.deleteEleve = async (eleveId) => {

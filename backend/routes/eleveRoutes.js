@@ -8,8 +8,8 @@ router.get("/activite", EleveControllers.getElevesByActMoment)
 router.get("/binome/:id",EleveControllers.getBinome);
 router.post("/", EleveControllers.addEleve);
 router.post("/confirmation/:id", EleveControllers.confirmeEleve);
+router.put("/password/:id", EleveControllers.sendPassword);
 router.delete("/:id", EleveControllers.deleteEleve);
 router.delete("/", EleveControllers.deleteAllEleve);
-router.post("/parcours/:id", EleveControllers.asignParcours);
 
 module.exports = router;

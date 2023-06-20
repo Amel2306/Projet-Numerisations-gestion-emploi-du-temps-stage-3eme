@@ -40,7 +40,7 @@ const Eleve = db.define('Eleve', {
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     professeurId: {
         type: DataTypes.INTEGER,

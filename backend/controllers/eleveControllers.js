@@ -1,5 +1,3 @@
-const bcrypt = require('bcrypt');
-const { generatedPassword } = require('../utilities/passwordFunctions');
 const EleveService = require('../services/eleveServices');
 
 exports.getAllEleves = async (req, res) => {
@@ -34,8 +32,6 @@ exports.getBinome = async (req, res) => {
 exports.addEleve = async (req, res) => {
   try {
     const { nom, prenom, email, numero_tel, numero_tel_parent, adress, etablissement } = req.body;
-    const password = generatedPassword;
-    const hashedPassword = await bcrypt.hash(password, 10);
     const eleveData = {
       nom,
       prenom,
@@ -44,7 +40,6 @@ exports.addEleve = async (req, res) => {
       numero_tel_parent,
       adress,
       etablissement,
-      password: hashedPassword,
     }
     const nouvelEleve = await EleveService.createEleve(eleveData);
     res.status(201).json(nouvelEleve);
@@ -67,6 +62,16 @@ exports.confirmeEleve = async (req, res) => {
   }
 };
 
+exports.sendPassword = async (req, res) => {
+  const eleveId = req.params.id;
+  try {
+    await EleveService.sendPassword(eleveId);
+    res.json({ message: "Mot de passe envoyé avec succès" });
+  } catch (err) {
+    res.status(500).json({ message: "Erreur lors de l'envoi de mot de passe à l'élève", error: err });
+  }
+};
+
 exports.deleteEleve = async (req, res) => {
   try {
     const eleveId = req.params.id;
@@ -77,7 +82,7 @@ exports.deleteEleve = async (req, res) => {
     await EleveService.deleteEleve(eleveId);
     res.status(200).json({ message: "L'élève a bien été supprimé" });
   } catch (error) {
-    res.status(500).json({ message: "Une erreur s'est produite lors de la suppression de l'élève" });
+    res.status(500).json({ message: "Une erreur s'est produite lors de la suppression de l'élève" }, error);
   }
 };
 
