@@ -4,6 +4,7 @@ const EleveControllers = require('../controllers/eleveControllers');
 const router = express.Router();
 
 router.get("/", EleveControllers.getAllEleves);
+router.get("/activite", EleveControllers.getElevesByActMoment)
 router.post("/", EleveControllers.addEleve);
 router.post("/confirmation/:id", EleveControllers.confirmeEleve);
 router.delete("/:id", EleveControllers.deleteEleve);

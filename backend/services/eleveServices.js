@@ -1,3 +1,4 @@
+const ActiviteParcours = require('../models/ActiviteParcours');
 const Eleve = require('../models/Eleve');
 const Parcours = require('../models/Parcours');
 const Professeur = require('../models/Professeur');
@@ -7,14 +8,40 @@ exports.getAllEleves = async () => {
   return eleves;
 };
 
-exports.createEleve = async (eleveData) => {
-  const nouvelEleve = await Eleve.create(eleveData);
-  return nouvelEleve;
-};
-
 exports.getEleveById = async (eleveId) => {
   const eleve = await Eleve.findByPk(eleveId);
   return eleve;
+};
+
+exports.getElevesByActMoment = async (activiteId, indexMoment) => {
+  const parcours = await ActiviteParcours.findAll({
+    attributes: ['parcoursId'],
+    where: {
+      activiteId: activiteId,
+      indexMoment: indexMoment
+    }
+  });
+
+  console.log(parcours);
+
+  const eleves = [];
+  for (const parc of parcours) {
+    console.log(parc.dataValues);
+    const eleve_found = await Eleve.findAll({
+      where: {
+        parcoursId: parc.dataValues.parcoursId
+      }
+    });
+
+    eleves.push(...eleve_found);
+  }
+  console.log(eleves);
+  return eleves;
+};
+
+exports.createEleve = async (eleveData) => {
+  const nouvelEleve = await Eleve.create(eleveData);
+  return nouvelEleve;
 };
 
 // Fonction pour attribuer un tuteur à un élève 
