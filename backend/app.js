@@ -9,6 +9,7 @@ const eleveRoutes = require('./routes/eleveRoutes');
 const activiteRoutes = require ('./routes/activiteRoutes');
 const parcoursRoutes = require('./routes/parcoursRoutes');
 const activiteParcoursRoutes = require('./routes/activiteParcoursRoutes');
+const questionRoutes = require ('./routes/questionsRoutes');
 
 
 app.use((req, res, next) => {
@@ -34,6 +35,9 @@ app.use('/api/activites', activiteRoutes);
 app.use('/api/parcours', parcoursRoutes);
 
 //route parcours activite 
-app.use ('/api/activiteparcours', activiteParcoursRoutes)
+app.use('/api/activiteparcours', activiteParcoursRoutes)
+
+//route questions 
+app.use('/api/questions', questionRoutes);
 
 module.exports = app;
