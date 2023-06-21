@@ -52,11 +52,23 @@ exports.getResponsesByEncadrant = async (req, res) => {
     const profId = req.params.profId;
 
     try {
-        const all_reponses = await ReponseServices.getResponsesByEncadrant(profId)
+        const all_reponses = await ReponseServices.getReponsesByEncadrant(profId)
         res.status(200).json(all_reponses)
 
     }catch (error) {
         res.status(404).json({message: "Error aucune réponse n'a été trouvée concernant cet encadrant", error})
+    }
+}
+
+exports.getResponsesByEleve = async (req, res) => {
+    const eleveId = req.params.eleveId
+
+    try {
+        const all_reponses = await ReponseServices.getReponsesByEleve(eleveId)
+        res.status(200).json(all_reponses)
+
+    }catch (error) {
+        res.status(404).json({message: "Error aucune réponse n'a été trouvée de la part de cet élève", error})
     }
 }
 

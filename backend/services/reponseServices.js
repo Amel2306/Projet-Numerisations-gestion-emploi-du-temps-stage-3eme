@@ -89,7 +89,7 @@ exports.getReponsesByTuteur = async (profId) => {
 }
 
 //permet à un encadrant de récupérer les réponses qu'il a effectué sur chaque activite
-exports.getResponsesByEncadrant = async (profId) => {
+exports.getReponsesByEncadrant = async (profId) => {
     const encadrant_questions_reponses = {}
 
     const activite_respo = await Activite.findAll({
@@ -105,6 +105,28 @@ exports.getResponsesByEncadrant = async (profId) => {
     }
 
     return encadrant_questions_reponses;
+}
+
+exports.getReponsesByEleve = async (eleveId) => {
+    const questions_eleves = await QuestionServices.getQuestionsByQuestionnaire("Eleve");
+    const eleve_question_reponse = {}
+
+    for (const quest of questions_eleves) {
+        const questionId = quest.id;
+        const contenu = quest.contenu
+
+        const reponses = await Reponse.findAll ({
+            where: {
+                questionId,
+                repondantEleveId: eleveId
+            }
+        })
+        eleve_question_reponse[questionId] = {
+            question: contenu,
+            reponses: reponses
+        }
+    }
+    return eleve_question_reponse;
 }
 
 exports.addReponse = async (reponseData) => {
