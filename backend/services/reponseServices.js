@@ -107,6 +107,7 @@ exports.getReponsesByEncadrant = async (profId) => {
     return encadrant_questions_reponses;
 }
 
+//permet de récupérer les réponses d'un élèves au questionnaire élève
 exports.getReponsesByEleve = async (eleveId) => {
     const questions_eleves = await QuestionServices.getQuestionsByQuestionnaire("Eleve");
     const eleve_question_reponse = {}
