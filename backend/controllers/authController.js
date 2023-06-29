@@ -5,11 +5,11 @@ exports.login = async (req, res) => {
     const {email, password} = req.body
 
     try {
-        if (personne === "eleve") {
+        if (personne === "eleves") {
             const eleve = await AuthServices.loginEleve(email, password)
             res.status(200).json(eleve)
         }
-        else if (personne === "professeur") {
+        else if (personne === "professeurs") {
             const prof = await AuthServices.loginProf(email, password)
             res.status(200).json(prof)
         }
@@ -26,11 +26,11 @@ exports.logout = async (req, res) => {
     const personneId = req.params.id
 
     try {
-        if (personne === "eleve") {
+        if (personne === "eleves") {
             const eleve = await AuthServices.logoutEleve(personneId)
             res.status(200).json({message: "Eleve déconnecté"})
         }
-        else if (personne === "professeur") {
+        else if (personne === "professeurs") {
             const prof = await AuthServices.logoutProf(personneId)
             res.status(200).json({message: "Professeur déconnecté"})
         }

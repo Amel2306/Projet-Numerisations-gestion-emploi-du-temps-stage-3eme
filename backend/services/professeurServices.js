@@ -5,6 +5,10 @@ exports.getAllProfesseurs = async () =>{
   return await Professeur.findAll();
 }
 
+exports.getProfesseur = async (eleveId) => {
+  return await Professeur.findByPk(eleveId)
+}
+
 exports.getEleveByTuteur= async (tuteurId) =>{
   try {
     return await Eleve.findAll({ where: { professeurId: tuteurId } });

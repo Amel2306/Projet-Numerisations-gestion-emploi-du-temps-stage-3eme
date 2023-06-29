@@ -1,7 +1,13 @@
 const express = require('express');
+const cors = require('cors');
+
 
 //création de l'app
 const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:3001',
+}));
 
 // les routes necessaires
 const professeurRoutes = require('./routes/professeurRoutes');

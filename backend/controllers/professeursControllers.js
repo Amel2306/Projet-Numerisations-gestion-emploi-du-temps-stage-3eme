@@ -12,6 +12,16 @@ exports.getAllProfesseurs = async (req, res) => {
   }
 };
 
+exports.getProfesseur = async (req, res) => {
+  const eleveId = req.params.id
+  try {
+    const professeur = await professeurService.getProfesseur(eleveId);
+    res.json(professeur);
+  } catch (error) {
+    res.status(500).json({ message: 'Une erreur s\'est produite lors de la récupération de ce professeur.' });
+  }
+}
+
 exports.getEleveByTuteur = async (req, res) => {
   const tuteurId = req.params.tuteurId;
 

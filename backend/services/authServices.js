@@ -18,7 +18,8 @@ exports.loginEleve = async (email, password) => {
                 const secretKey = "ceci_est_une_clée_secrette";
                 const options = { expiresIn: '2h' };
                 const token = jwt.sign(payload, secretKey, options);
-                return { eleve, token };
+                const eleveId = eleve.id
+                return { eleveId, token };
             } else {
                 throw new Error('Mot de passe incorrect');
             }
@@ -46,7 +47,8 @@ exports.loginProf = async (email, password) => {
                 const secretKey = "ceci_est_une_clée_secrette";
                 const options = { expiresIn: '2h' };
                 const token = jwt.sign(payload, secretKey, options);
-                return { prof, token };
+                const profId = prof.id
+                return { profId, token };
             } else {
                 throw new Error('Mot de passe incorrect');
             }

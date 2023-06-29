@@ -5,9 +5,19 @@ exports.getAllEleves = async (req, res) => {
     const eleves = await EleveService.getAllEleves();
     res.json(eleves);
   } catch (error) {
-    res.status(500).json({ message: 'Error retrieving eleves', error });
+    res.status(500).json({ message: 'Error aucun eleves', error });
   }
 };
+
+exports.getEleve = async (req, res) => {
+  const eleveId = req.params.id
+  try {
+    const eleve = await EleveService.getEleveById(eleveId);
+    res.json(eleve)
+  }catch (error) {
+    res.status(500).json({ message: 'Error aucun eleve trouvé', error });
+  }
+}
 
 exports.getElevesByActMoment = async (req, res) => {
   const {activiteId, indexMoment} = req.body
