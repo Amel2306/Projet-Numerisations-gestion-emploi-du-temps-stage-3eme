@@ -20,7 +20,8 @@ exports.getEleve = async (req, res) => {
 }
 
 exports.getElevesByActMoment = async (req, res) => {
-  const {activiteId, indexMoment} = req.body
+  const activiteId = req.params.activiteId
+  const indexMoment = req.params.indexMoment
   try {
     const eleves = await EleveService.getElevesByActMoment(activiteId, indexMoment);
     res.json(eleves)
@@ -82,6 +83,16 @@ exports.sendPassword = async (req, res) => {
   }
 };
 
+exports.asignParcours = async (req, res ) => {
+  const eleveId = req.params.id
+  try {
+    const eleve = await EleveService.assignParcours(eleveId)
+    res.status(201).json(eleve)
+  }catch (error) {
+    res.status(500).json({ message: "Error lors de l'attribution d'un emploi du temps à un élève'" });
+  }
+}
+
 exports.deleteEleve = async (req, res) => {
   try {
     const eleveId = req.params.id;
@@ -105,12 +116,3 @@ exports.deleteAllEleve = async (req, res) => {
   }
 };
 
-exports.asignParcours = async (req, res ) => {
-  const eleveId = req.params.id
-  try {
-    const eleve = await EleveService.assignParcours(eleveId)
-    res.status(201).json(eleve)
-  }catch (error) {
-    res.status(500).json({ message: "Error lors de l'attribution d'un emploi du temps à un élève'" });
-  }
-}

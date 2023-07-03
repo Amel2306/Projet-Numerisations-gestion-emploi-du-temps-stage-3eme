@@ -1,4 +1,4 @@
-import '../style/Navbar.css'
+import './Navbar.css'
 import '@fortawesome/fontawesome-svg-core'
 import {Link} from "react-router-dom"
 import { useState } from 'react'
@@ -30,6 +30,21 @@ function Navbar(props) {
                                 </li>
                                 <li>
                                     <Link to="/login/eleves">Élève</Link>
+                                </li>
+                                <li>
+                                    <Link to="/eleves">Liste élèves</Link>
+                                </li>
+                                <li>
+                                    <Link to="/professeurs">Liste professeurs</Link>
+                                </li>
+                                <li>
+                                    <Link to="/activites">Liste Activités</Link>
+                                </li>
+                                <li>
+                                    <Link to="/parcoursGeneration">Générer des parcours</Link>
+                                </li>
+                                <li>
+                                    <Link to="/parcours">Parcours</Link>
                                 </li>
                             </>
                         ) : (

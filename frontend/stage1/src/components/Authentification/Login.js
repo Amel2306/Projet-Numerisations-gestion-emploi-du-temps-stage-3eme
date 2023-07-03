@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "../config/axiosConfig.js";
+import axiosInstance from "../../config/axiosConfig.js";
 import { useParams } from 'react-router-dom'
 
 function Login() {

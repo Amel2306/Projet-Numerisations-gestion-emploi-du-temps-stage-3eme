@@ -44,6 +44,33 @@ exports.getActiviteParcByProf = async (profId) => {
     return act_of_prof;
 }
 
+exports.getActParcByProf = async (profId) => {
+
+    const activites = await Activite.findAll({
+        where: {
+            professeurId: profId
+        }
+    })
+
+    const tab_moments = {}
+
+    for (let i = 0; i<10; i++) {
+        tab_moments[i] = [];
+        for (const act of activites ) {
+            const act_present = await ActiviteParcours.findAll({
+                where: {
+                    activiteId: act.id,
+                    indexMoment: i
+                }
+            })
+            if (act_present.length > 0) {
+                tab_moments[i].push(act_present)                
+            }
+        }
+    }
+    return tab_moments
+}
+
 exports.getActiviteParcByEleve = async (eleveId) => {
     const eleve = await Eleve.findByPk(eleveId)
     const parc_of_el = eleve.parcoursId

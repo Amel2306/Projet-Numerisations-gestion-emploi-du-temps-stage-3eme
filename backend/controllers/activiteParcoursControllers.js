@@ -33,10 +33,11 @@ exports.getActiviteByParcours = async (req, res) => {
         res.status(404).json({message: "Aucune activtié n'est lié à ce parcours"})
     }
 }
+
 exports.getActiviteParcByProf = async (req, res) => {
     const prof_id = req.params.profId
     try {
-        const parcours_pr = await ActiviteParcoursServices.getActiviteParcByProf(prof_id)
+        const parcours_pr = await ActiviteParcoursServices.getActParcByProf(prof_id)
         res.status(200).json(parcours_pr)
     }catch (err) {
         res.status(400).json({message: "Error aucune activtié parcours trouvé pour ce professeur "})

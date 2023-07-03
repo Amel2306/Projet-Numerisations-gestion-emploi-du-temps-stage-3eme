@@ -13,6 +13,7 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6,label, span{
+  margin: 15px;
   font-weight: 500;
   font-family: 'Fira sans', sans-serif;
 }
@@ -69,5 +70,14 @@ body, html, App, #root, .auth-wrapper {
 }
 
 .forgot-password {
-  color: rgb(184, 223, 194);
+  color: #b8dfc2;
+}
+
+.btn {
+  border-radius: 15px;
+  background: #b8dfc2;
+  padding: 10px;
+  font-size: 25px;
+  margin: 10px;
+  cursor: pointer;
 }

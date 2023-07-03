@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import axiosInstance from '../config/axiosConfig';
+import axiosInstance from "../../config/axiosConfig";
+import { useState } from "react";
+import {Link} from "react-router-dom"
+import ProfesseurFichier from "./ProfesseurFichier";
 
 function ProfForm () {
 
-    const [prof, setProf] = useState(null)
     const [nom, setNom] = useState("")
     const [prenom, setPrenom] = useState("")
     const [email, setEmail] = useState("")
@@ -47,6 +48,7 @@ function ProfForm () {
                     value = {nom}
                     onChange={(e) => setNom(e.target.value)}
                     placeholder="Nom"
+                    required
                     />                    
                 </div>
                 <div className="label-form" >
@@ -55,6 +57,7 @@ function ProfForm () {
                     value = {prenom}
                     onChange={(e) => setPrenom(e.target.value)}
                     placeholder="Prenom"
+                    required
                     />                    
                 </div>
                 <div className="label-form" >
@@ -63,6 +66,7 @@ function ProfForm () {
                     value = {email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
+                    required
                     />                    
                 </div>
                 <div className="label-form" >
@@ -70,7 +74,8 @@ function ProfForm () {
                     <input type="text"
                     value = {numero_tel}
                     onChange={(e) => setNum(e.target.value)}
-                    placeholder="Numéro de téléphone"                    
+                    placeholder="Numéro de téléphone" 
+                    required                   
                     />                    
                 </div>
                 <div className="label-form" >
@@ -79,6 +84,7 @@ function ProfForm () {
                     value = {metier}
                     onChange={(e) => setMetier(e.target.value)}
                     placeholder="Métier"
+                    required
                     />                    
                 </div>
                 <div className="label-form" >
@@ -87,11 +93,12 @@ function ProfForm () {
                     value = {etablissement}
                     onChange={(e) => setEtablissement(e.target.value)}
                     placeholder="Établissement..."
+                    required
                     />                    
                 </div>
                 <div className="label-form" >
                     <label>Je souhaite être...</label>
-                    <select value={role} onChange={(e) => setRole(e.target.value)}>
+                    <select value={role} onChange={(e) => setRole(e.target.value)} required>
                         <option value="Encadrant">Encadrant d'une activité</option>                        
                         <option value="Tuteur">Tuteur d'un élève</option>
                         <option value="Encadrant et Tuteur">Tuteur et encadrant</option>
@@ -104,6 +111,7 @@ function ProfForm () {
                     <input type="number"
                     value = {nb_eleve_tuteur}
                     onChange={(e) => setNombre(e.target.value)}
+                    required
                     />                                 
                 </div>
                 )}
@@ -112,9 +120,12 @@ function ProfForm () {
                     <button>Valider</button>
                 ) :
                 (
-                    <button>Ajouter une activité</button>
+                    <button>
+                        <Link to="/activiteForm">Ajouter une activité</Link>
+                    </button>
                 )}
             </form>
+            <ProfesseurFichier />
         </div>
     )
 }

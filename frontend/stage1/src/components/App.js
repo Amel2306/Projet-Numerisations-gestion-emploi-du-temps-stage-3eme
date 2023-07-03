@@ -1,15 +1,14 @@
 import '../style/App.css';
-import Home from "./Home"
-import Login from "./Login"
-import Navbar from "./Navbar"
-import ProfForm from './ProfForm';
+import Navbar from "./Navbar/Navbar"
 import axiosInstance from '../config/axiosConfig';
-import {Routes, Route} from 'react-router-dom'
 import { useState, useEffect } from "react"
+import "./Activites/Activites.css"
+import Rootes from './Routes';
 
 function App() {
 
   const [user, setUser] = useState(null);
+  const [semaine, setSemaine] = useState("")
 
   useEffect(() => {
       const personne = localStorage.getItem("personne")
@@ -29,11 +28,7 @@ function App() {
   return (
     <div className="App">
       <Navbar user={user} setUser = {setUser}/>
-      <Routes>
-        <Route exact path="/" element={<Home user={user}/>} />
-        <Route path="/login/:personne" element={<Login/>} />
-        <Route path="/profForm" element= {<ProfForm/>} />
-      </Routes>
+      <Rootes user={user} setUser = {setUser} semaine={semaine} setSemaine = {setSemaine}/>
     </div>
   );
 }

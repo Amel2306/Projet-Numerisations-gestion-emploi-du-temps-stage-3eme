@@ -5,9 +5,15 @@ function Home(props) {
     const user = props.user;
     if (!user) {
         return (
+
           <div>
             <h1>Vous n'êtes pas connecté</h1>
-            <Link to="/profForm"> Tuteur ou encadrant</Link>
+            <div>
+                <Link to="/profForm"> Tuteur ou encadrant</Link>    
+            </div>
+            <div>
+                <Link to="eleveForm" >Eleve</Link>
+            </div>
           </div>
         );
       }
