@@ -1,7 +1,6 @@
 import axiosInstance from "../../config/axiosConfig";
 import { useEffect, useState } from "react";
-import {Link, useParams} from 'react-router-dom'
-import Activite from '../Activites/Activite'
+import ActiviteDescr from "../Activites/ActiviteDescr";
 
 
 function Parc (props) {
@@ -62,7 +61,7 @@ function Parc (props) {
               {(activites && etat) && activites.map((act) => (
                 <li key={act.activiteId}>
                     <h3>{moment[act.indexMoment]} :</h3>
-                    <Activite id={act.activiteId} />
+                    <ActiviteDescr id={act.activiteId} />
                 </li>
               ))}
             </ul>

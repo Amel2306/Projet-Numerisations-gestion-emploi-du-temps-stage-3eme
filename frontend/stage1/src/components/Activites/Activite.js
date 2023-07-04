@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {Link, useParams } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
+import ActiviteDescr from "./ActiviteDescr";
 import EleveActivite from "./EleveActivite";
 
 function Activite (props) {
@@ -8,9 +9,6 @@ function Activite (props) {
     const [activite, setActivite] = useState(null)
 
     let {id} = useParams()
-    if (props.id) {
-        id = props.id
-    }
 
     const handleSupprime = (id) => {
         const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer cette activité ?");
@@ -39,10 +37,7 @@ function Activite (props) {
     return (
             activite && (
                 <div>
-                    <h3>{activite.nom}</h3>
-                    <p>Description: {activite.description}</p>
-                    <p>Nombre de réalisation: {activite.nb_realisations}</p>
-                    <p>Nombre d'élèves au maximum: {activite.nb_eleve_max}</p>
+                    <ActiviteDescr id={id}/>
                     <div> 
                         <p>Professeur respo: {activite.professeurId}</p>
                         <Link to={`/professeur/${activite.professeurId}` } >Voir professeur</Link>                     
@@ -54,7 +49,7 @@ function Activite (props) {
                     ))}
                     <button 
                         className="btn"
-                        onClick={() => handleSupprime(activite.id)}
+                        onClick={() => handleSupprime(id)}
                     >
                         Supprimer
                     </button>      

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import Activite from "../Activites/Activite";
 import axiosInstance from "../../config/axiosConfig";
+import ActiviteDescr from "../Activites/ActiviteDescr";
 
 function ParcProf(props) {
 
@@ -43,16 +43,19 @@ function ParcProf(props) {
         <div>
             <button className="btn" onClick={() => handleAfficherParc()}> 
               {etat ? 
-                <i class="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
-                <i class="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
+                <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
+                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
             </button>
             {activites && etat && Object.entries(activites).map(([index, moments]) => (
             <div key={index}>
-            <h3> {tab_moment[index]} : </h3>
+            <h3> {moments.length > 0  && tab_moment[index]} </h3>
             {moments.length > 0 && moments.map((moment, momentIndex) => (
                 <ul key={momentIndex}>
                 {moment && moment.map((activite, activiteIndex) => (
-                    <Activite key={activiteIndex} id={activite.activiteId} />
+                    <div>
+                        <ActiviteDescr key={activiteIndex} id={activite.activiteId} />
+                        <h3> Parcours : {activite.parcoursId}</h3>                        
+                    </div>
                 ))}
                 </ul>
             ))}
