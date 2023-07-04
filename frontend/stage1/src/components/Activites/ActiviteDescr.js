@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import {Link, useParams } from "react-router-dom"
+import {Link } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
 
 function ActiviteDescr (props) {
 
-    let {id} = useParams()
-    if (props.id) {
-        id = props.id
-    }
+    const id = props.id
 
     const [activite, setActivite] = useState(null)
 
@@ -28,6 +25,7 @@ function ActiviteDescr (props) {
                 <p>Description: {activite.description}</p>
                 <p>Nombre de réalisation: {activite.nb_realisations}</p>
                 <p>Nombre d'élèves au maximum: {activite.nb_eleve_max}</p>
+                <p>id : {activite.id}</p>
                 <Link to={`/activite/${id}`}>Voir activité</Link>
             </div>
         )

@@ -3,10 +3,14 @@ import { useState } from "react";
 import axiosInstance from "../../config/axiosConfig";
 import {Link, useParams} from 'react-router-dom'
 import Parc from "../Parcours/Parc";
+import EleveDescr from "./EleveDescr";
 
-function Eleve () {
+function Eleve (props) {
 
-    const {id }= useParams()
+    let {id} = useParams()
+    if (props.id) {
+        id = props.id
+    }
 
     const [eleve, setEleve] = useState(null)
 
@@ -76,24 +80,14 @@ function Eleve () {
 
         <div className="eleve">
 
-            <h1>{eleve.nom} {eleve.prenom} </h1>
-            <ul>
-                <li> Email de l'élève : {eleve.email}</li>
-                <li> Numéro de téléphone de l'élève : {eleve.numero_tel}</li>
-                <li> Numéro de téléphone d'un parent de l'élève : {eleve.email}</li>
-                <li> adresse de l'élève : {eleve.adress}</li>
-                <li> établissement de l'élève : {eleve.etablissement}</li>
-                <li> tuteur de l'élève : {eleve.professeurId}</li>
-                <li> parcours de l'élève : {eleve.parcoursId} </li>
+            <EleveDescr id={id} />
                 {eleve.parcoursId &&
                     <div>
 
                         <h1>Mon parcours :</h1>
                         <Parc parcoursId={eleve.parcoursId} />                    
                     </div> 
-                }  
-            </ul> 
-
+                }
                 <button
                     className="btn"
                     onClick={() => handleSupprime(eleve.id)}

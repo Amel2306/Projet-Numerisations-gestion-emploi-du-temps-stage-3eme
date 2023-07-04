@@ -33,10 +33,9 @@ exports.getElevesByActMoment = async (activiteId, indexMoment) => {
     console.log(parc.dataValues);
     const eleve_found = await Eleve.findAll({
       where: {
-        parcoursId: parc.dataValues.parcoursId
+        parcoursId: parc.dataValues.parcoursId,
       }
     });
-
     eleves.push(...eleve_found);
   }
   console.log(eleves);

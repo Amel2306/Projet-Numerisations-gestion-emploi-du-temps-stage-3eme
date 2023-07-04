@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { useEffect } from "react"
+import {Link} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig"
 import Eleve from "../Eleves/Eleve"
+import EleveDescr from "../Eleves/EleveDescr"
 
 function EleveActivite (props) {
 
@@ -18,22 +20,21 @@ function EleveActivite (props) {
         "Vendredi Aprés-midi"
     ]
 
+    const indexMoment = props.indexMoment
+    const activiteId = props.activiteId
 
     const [etat, setEtat] = useState(false)
+    const [eleves, setEleves] = useState(null)    
 
     const handleAfficherParc = () => {
       setEtat(!etat);
     }
 
-    const indexMoment = props.indexMoment
-    const activiteId = props.activiteId
-
-    const [eleves, setEleves] = useState(null)
-
     useEffect(() => {
         axiosInstance.get(`/eleves/activite/${activiteId}/${indexMoment}`)
         .then ((res) => {
             setEleves(res.data)
+            console.log(res.data)
         })
         .catch((err) => {
             console.error(err)
@@ -49,13 +50,13 @@ function EleveActivite (props) {
                     <i class="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
                     <i class="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
             </button>        
-            {(etat && eleves) && Object.entries(eleves).map((eleve) => (
-                <div>
-                    <Eleve id={eleve.id} />
+            {(etat && eleves) && Object.values(eleves).map((eleve) => (
+                <div key={eleve.id}>
+                    <EleveDescr id={eleve.id}/>
+                    {console.log(eleve)}
                 </div>
-
-                ))
-            }            
+                ))    
+            }       
         </div>
     )
 }
