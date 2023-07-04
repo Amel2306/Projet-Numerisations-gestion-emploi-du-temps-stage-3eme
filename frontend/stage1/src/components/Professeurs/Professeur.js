@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import {useParams} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
-import Eleve from "../Eleves/Eleve";
-import Parc from "../Parcours/Parc";
+import EleveDescr from "../Eleves/EleveDescr";
 import ParcProf from "../Parcours/ParcProf";
 
 function Professeur () {
@@ -36,6 +35,11 @@ function Professeur () {
 
     }, [])
 
+    const [etat, setEtat] = useState(false)
+
+    const handleAfficherParc = () => {
+      setEtat(!etat);
+    }
 
     const handleSupprime = () => {
         const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer ce professeur ?");
@@ -61,14 +65,22 @@ function Professeur () {
             <h4>Rôle : {professeur.role}</h4>
             <h4>Identifiant : {professeur.id}</h4>
             {(professeur.role === "Tuteur" || professeur.role === "Encadrant et Tuteur") && (
-                <>
-                    <h3>Mes élèves</h3>
-                    {eleves && Object.entries(eleves).map((eleve) => (
-                        <div key={eleve.id}>
-                            <Eleve id={eleve.id} />                            
-                        </div>
-                    ))}       
-                </>
+                    eleves && eleves.lenght > 0 && (
+                    <>                        
+                        <h3>Mes élèves</h3>
+                        <button className="btn" onClick={() => handleAfficherParc()}> 
+                            {etat ? 
+                                <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
+                                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
+                        </button>
+                        {eleves && etat && Object.values(eleves).map((eleve) => (
+                            <div key={eleve.id}>
+                                <EleveDescr id={eleve.id} />                            
+                            </div>
+                        ))} 
+                    </>
+                    )
+   
             )}
 
             {(professeur.role === "Encadrant" || professeur.role === "Encadrant et Tuteur") && (

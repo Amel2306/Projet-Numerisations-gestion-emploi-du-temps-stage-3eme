@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
-import {Link} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig"
-import Eleve from "../Eleves/Eleve"
 import EleveDescr from "../Eleves/EleveDescr"
 
 function EleveActivite (props) {

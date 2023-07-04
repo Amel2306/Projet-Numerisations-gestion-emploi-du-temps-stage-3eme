@@ -11,7 +11,7 @@ exports.getAllQuestions = async (req, res) => {
 }
 
 exports.getQuestionsByQuestionnaire = async (req, res) => {
-    const {questionnaire} = req.body
+    const questionnaire = req.params.questionnaire
     try {
         const questions = await QuestionServices.getQuestionsByQuestionnaire(questionnaire);
         res.status(200).json(questions)
