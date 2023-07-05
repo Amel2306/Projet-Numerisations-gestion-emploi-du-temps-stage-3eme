@@ -85,8 +85,9 @@ exports.sendPassword = async (req, res) => {
 
 exports.asignParcours = async (req, res ) => {
   const eleveId = req.params.id
+  const {nbEleveMax} = req.body
   try {
-    const eleve = await EleveService.assignParcours(eleveId)
+    const eleve = await EleveService.assignParcours(eleveId,nbEleveMax)
     res.status(201).json(eleve)
   }catch (error) {
     res.status(500).json({ message: "Error lors de l'attribution d'un emploi du temps à un élève'" });

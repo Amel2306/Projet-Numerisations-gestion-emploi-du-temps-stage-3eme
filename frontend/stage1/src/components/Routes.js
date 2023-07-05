@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import '../style/App.css';
 import Home from "./Home/Home"
 import Login from "./Authentification/Login"
@@ -25,6 +27,19 @@ function Rootes (props) {
     const semaine = props.semaine
     const setSemaine = props.setSemaine
 
+    const [nbEleveMax, setNbEleveMax] = useState(() => {
+        const storedValue = localStorage.getItem('nbEleveMax');
+        return storedValue ? parseInt(storedValue) : 0;
+    });
+
+    const updateNbEleveMax = (newNbEleveMax) => {
+        setNbEleveMax(newNbEleveMax);
+    };
+
+    useEffect(() => {
+        localStorage.setItem('nbEleveMax', nbEleveMax.toString());
+    }, [nbEleveMax]);
+
     return (
         <Routes>
             <Route exact path="/" element={<Home user={user}/>} />
@@ -37,14 +52,21 @@ function Rootes (props) {
             <Route path='/eleveForm' element= {<EleveForm/>} />        
             <Route exact path='/eleves' element= {<Eleves/>} />
             <Route path="/eleveCreation" element= {<EleveCreation/>} />
-            <Route path='/eleve/:id' element={<Eleve/>} />
+            <Route path='/eleve/:id' element={<Eleve nbEleveMax = {nbEleveMax}/>} />
 
             <Route path= '/activiteForm' element= {<ActiviteForm semaine={semaine}/>} />
             <Route path='/activite/:id' element={<Activite/>} />
             <Route path='/activites' element={<Activtes/>} />
             <Route path='/activiteCreation' element={<ActiviteCreation/>} />
-            
-            <Route path='/parcoursGeneration' element={<ParcoursGeneration semain={semaine} setSemaine={setSemaine} />} />
+
+            <Route path='/parcoursGeneration' element={
+                <ParcoursGeneration 
+                    semain={semaine} 
+                    setSemaine={setSemaine} 
+                    nbEleveMax = {nbEleveMax}
+                    setNbEleveMax = {updateNbEleveMax}
+                />} 
+            />
             <Route path='/parcours' element={<Parcours semaine={semaine}/>} />
 
             <Route path='/questionForm' element={<QuestionForm/>} />

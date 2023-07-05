@@ -55,6 +55,9 @@ const Reponse = db.define('Reponse', {
           model: 'Activites', 
           key: 'id',
         },
+    },
+    indexMoment: {
+        type: DataTypes.INTEGER
     }
 })
 

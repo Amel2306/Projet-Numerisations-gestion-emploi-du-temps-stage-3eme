@@ -9,6 +9,7 @@ router.get("/activite/:activiteId", ReponseControllers.getReponsesForActivie);
 router.get("/tuteur/:profId", ReponseControllers.getReponsesByTuteur);
 router.get("/encadrant/:profId", ReponseControllers.getResponsesByEncadrant);
 router.get("/eleve/:eleveId", ReponseControllers.getResponsesByEleve);
+router.get("/unique", ReponseControllers.getUniqueReponse);
 router.post("/", ReponseControllers.addReponse);
 router.put("/:id", ReponseControllers.updateReponse);
 router.delete("/", ReponseControllers.deleteAllReponses);

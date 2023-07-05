@@ -6,6 +6,8 @@ function ParcoursGeneration (props) {
 
     const semaine = props.semaine
     const setSemaine = props.setSemaine
+    const nbEleveMax = props.nbEleveMax
+    const setNbEleveMax = props.setNbEleveMax
 
     const [nbParcours, setNbParcours] = useState(0)
 
@@ -15,7 +17,8 @@ function ParcoursGeneration (props) {
         e.preventDefault();
 
         const data = {
-            nbParcours
+            nbParcours,
+            nbEleveMax
         }
 
         axiosInstance.post("/parcours",data)
@@ -38,6 +41,15 @@ function ParcoursGeneration (props) {
                         type="number"
                         value={nbParcours}
                         onChange={(e)=> setNbParcours(e.target.value)}
+                    />
+                </div>
+
+                <div className="label-form">
+                    <label>Combien souhaitez vous générer d'élèves par groupe ?</label>
+                    <input
+                        type="number"
+                        value={nbEleveMax}
+                        onChange={(e)=> setNbEleveMax(e.target.value)}
                     />
                 </div>
 

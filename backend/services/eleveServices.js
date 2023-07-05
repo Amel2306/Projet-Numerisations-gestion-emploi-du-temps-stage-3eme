@@ -45,11 +45,13 @@ exports.getElevesByActMoment = async (activiteId, indexMoment) => {
 exports.getBinome = async (eleveId) => {
   const eleve = await Eleve.findByPk(eleveId)
   const parcours_commun = eleve.parcoursId
-  const binome = await Eleve.findOne({
+  const binome = await Eleve.findAll({
     where: {
-      parcoursId: parcours_commun,
-      id: {
-        [Op.ne]: eleveId
+      [Op.and]: {
+        parcoursId: parcours_commun,
+        id: {
+          [Op.ne]: eleveId
+        }        
       }
     }
   })
@@ -117,9 +119,8 @@ exports.assignTuteur = async (eleve) => {
     }
 };
 
-exports.assignParcours = async (eleveId) => {
+exports.assignParcours = async (eleveId, nb_eleve_max) => {
   const eleve = await Eleve.findByPk(eleveId);
-
   // Comptage des parcours
   const counts = await Eleve.findAndCountAll({
     attributes: ['parcoursId'],
@@ -128,13 +129,13 @@ exports.assignParcours = async (eleveId) => {
 
   const all_parcours = await Parcours.findAll();
 
-  // les parcours ayant été attribué à 2 personnes
+  // les parcours ayant été attribué à  nb_eleve_max personnes
   const parc_not_available = [];
 
   for (let i = 0; i < counts.rows.length; i++) {
     const count = counts.count[i].count; // récupère le count pour le parcoursId d'indice i
     const parcoursId = counts.rows[i].parcoursId;// récupère le parcoursId d'indice i
-    if (count >= 2 ) {
+    if (count >= nb_eleve_max ) {
       parc_not_available.push(parcoursId);
     }
   }

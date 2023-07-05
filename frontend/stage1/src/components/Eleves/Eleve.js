@@ -4,8 +4,11 @@ import axiosInstance from "../../config/axiosConfig";
 import {Link, useParams} from 'react-router-dom'
 import Parc from "../Parcours/Parc";
 import EleveDescr from "./EleveDescr";
+import EleveGroupe from "./EleveGroupe";
 
 function Eleve (props) {
+
+    const nbEleveMax = props.nbEleveMax
 
     let {id} = useParams()
     if (props.id) {
@@ -13,6 +16,7 @@ function Eleve (props) {
     }
 
     const [eleve, setEleve] = useState(null)
+
 
     useEffect (() => {
 
@@ -65,7 +69,14 @@ function Eleve (props) {
       const confirmation = window.confirm("Êtes-vous sûr de vouloir attribuer un parcours à cet élève ?");
 
       if (confirmation) {
-          axiosInstance.put(`eleves/parcours/${id}`)
+
+        console.log("nbr eleve max" + nbEleveMax)
+
+        const data = {
+            nbEleveMax: parseInt(nbEleveMax)
+        }
+
+          axiosInstance.put(`eleves/parcours/${id}`,data)
           .then((res) => {
               console.log("parcours attribué");
               window.location.reload();
@@ -115,6 +126,11 @@ function Eleve (props) {
                   > 
                       Attribuer un parcours
                   </button>
+              )}
+              {( eleve.parcoursId && (
+                <EleveGroupe id={id} />
+              )
+
               )}
 
         </div>

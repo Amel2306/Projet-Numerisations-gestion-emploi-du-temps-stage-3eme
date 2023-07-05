@@ -1,6 +1,7 @@
 
 class Moment {
-    constructor() {
+    constructor(nb_eleve_max) {
+      this.nb_eleve_max = nb_eleve_max
       this.activite_dispo = new Map();
     }
   
@@ -22,10 +23,10 @@ class Moment {
         if (!found) {
           activitePrise = activite;
           const valeurActuelle = this.activite_dispo.get(activitePrise);
-          if (valeurActuelle !== undefined) {
-            this.activite_dispo.set(activitePrise, valeurActuelle - 2);
+          if (valeurActuelle !== undefined && valeurActuelle >= this.nb_eleve_max) {
+            this.activite_dispo.set(activitePrise, valeurActuelle - this.nb_eleve_max);
           }
-          if (this.activite_dispo.get(activitePrise) < 2) {
+          if (this.activite_dispo.get(activitePrise) < this.nb_eleve_max) {
             this.activite_dispo.delete(activitePrise);
             break;
           }

@@ -15,10 +15,9 @@ exports.getAllActivitesByAllParcours = async (req, res) => {
 }
 
 exports.generateParcours = async  (req, res) => {
-    console.log("on rentre")
-    const {nbParcours} = req.body
+    const {nbParcours, nbEleveMax} = req.body
     try {
-        await parcoursServices.generateParcours(nbParcours)
+        await parcoursServices.generateParcours(nbParcours, nbEleveMax)
         res.status(200).json({message: "Génération des emplois du temps a été un succés"})
     } catch (err) {
         res.status(500).json({message: "Error lors de la génération de parcours"})

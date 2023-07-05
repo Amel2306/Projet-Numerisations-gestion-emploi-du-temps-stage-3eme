@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {Link, useParams } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
+import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
 import ActiviteDescr from "./ActiviteDescr";
 import EleveActivite from "./EleveActivite";
 
@@ -44,7 +45,7 @@ function Activite (props) {
                     </div>
                     {Array.from({ length: 10 }, (_, i) => (
                         <div className="elevesActivite" key={i}>
-                            <EleveActivite activiteId={id} indexMoment={i}/>
+                            <EleveActivite activiteId={id} indexMoment={i} professeurId={activite.professeurId}/>
                         </div>
                     ))}
                     <button 
@@ -52,7 +53,8 @@ function Activite (props) {
                         onClick={() => handleSupprime(id)}
                     >
                         Supprimer
-                    </button>      
+                    </button> 
+   
                 </div>       
             )
     )

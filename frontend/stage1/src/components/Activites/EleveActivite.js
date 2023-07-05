@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import axiosInstance from "../../config/axiosConfig"
 import EleveDescr from "../Eleves/EleveDescr"
+import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire"
 
 function EleveActivite (props) {
 
@@ -20,6 +21,7 @@ function EleveActivite (props) {
 
     const indexMoment = props.indexMoment
     const activiteId = props.activiteId
+    const professeurId = props.professeurId
 
     const [etat, setEtat] = useState(false)
     const [eleves, setEleves] = useState(null)    
@@ -48,14 +50,23 @@ function EleveActivite (props) {
                     <i class="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
                     <i class="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
             </button>        
-            {(etat && eleves) && Object.values(eleves).map((eleve) => (
-                <div key={eleve.id}>
-                    <EleveDescr id={eleve.id}/>
-                    {console.log(eleve)}
-                </div>
-                ))    
-            }       
-        </div>
+            {etat &&
+        eleves &&
+        Object.values(eleves).map((eleve) => (
+          <div key={eleve.id}>
+            <EleveDescr id={eleve.id} />
+            {console.log(eleve)}
+          </div>
+        ))}
+      {etat && (
+        <QuestionQuestionnaire
+          questionnaire="Encadrant"
+          repondantProfId={professeurId}
+          activiteId={activiteId}
+          indexMoment={indexMoment}
+        />
+      )}
+    </div>
     )
 }
 

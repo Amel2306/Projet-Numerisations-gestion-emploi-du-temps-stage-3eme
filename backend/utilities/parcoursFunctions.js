@@ -7,7 +7,7 @@ const {activiteByMoment, minMom} = require ('./momentFunctions');
 
 //paramètre : nombre de parcours souhaité à indiquer par l'admin
 //permet de créer des parcours en récupérant des activtiés pour chaque moment de la semaine si cela est possible
-async function associeParcoursActivite(nb_parcours) {
+async function associeParcoursActivite(nb_parcours,nb_eleve_max) {
     try {
       // Création des parcours
       var tableau_parcours = [];
@@ -17,7 +17,7 @@ async function associeParcoursActivite(nb_parcours) {
       }
   
       // Récupère les moments et leurs activités
-      const moments_pleins = await activiteByMoment();  
+      const moments_pleins = await activiteByMoment(nb_eleve_max);  
       for (let j = 0; j < moments_pleins.length; j++) {
         for (let j_parcours = 0; j_parcours < tableau_parcours.length; j_parcours++) {
           const parcoursId = tableau_parcours[j_parcours].id;

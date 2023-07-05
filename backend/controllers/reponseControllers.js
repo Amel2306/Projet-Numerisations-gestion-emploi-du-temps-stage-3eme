@@ -72,8 +72,27 @@ exports.getResponsesByEleve = async (req, res) => {
     }
 }
 
+exports.getUniqueReponse = async (req, res) => {
+    const { repondantEleveId, repondantProfId, eleveConcerneId, questionId, activiteId,indexMoment} = req.query
+    try {
+        const reponseData = {
+            repondantEleveId: repondantEleveId ?? null,
+            repondantProfId: repondantProfId ?? null,
+            eleveConcerneId: eleveConcerneId ?? null,
+            questionId: questionId ?? null,
+            activiteId: activiteId ?? null,
+            indexMoment: indexMoment ?? null
+        }
+
+        const reponse = await ReponseServices.getUniqueReponse(reponseData)
+        res.status(200).json(reponse)
+    } catch(error){
+        res.status(404).json({message: "Error aucune réponse trouvée", error})
+    }
+}
+
 exports.addReponse = async (req, res) => {
-    const {contenu, repondantEleveId, repondantProfId, eleveConcerneId, questionId, activiteId} = req.body
+    const {contenu, repondantEleveId, repondantProfId, eleveConcerneId, questionId, activiteId,indexMoment} = req.body
     try {
         const reponseData = {
             contenu,
@@ -82,6 +101,7 @@ exports.addReponse = async (req, res) => {
             eleveConcerneId,
             questionId,
             activiteId,
+            indexMoment
         }
 
         const new_reponse = await ReponseServices.addReponse(reponseData)

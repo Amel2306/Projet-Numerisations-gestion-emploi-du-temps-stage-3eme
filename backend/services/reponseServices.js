@@ -130,6 +130,14 @@ exports.getReponsesByEleve = async (eleveId) => {
     return eleve_question_reponse;
 }
 
+exports.getUniqueReponse = async (reponseDate) => {
+    const reponse = await Reponse.findOne({
+        where: reponseDate
+    })
+
+    return reponse 
+}
+
 exports.addReponse = async (reponseData) => {
     const new_reponse = await Reponse.create(reponseData)
     return new_reponse

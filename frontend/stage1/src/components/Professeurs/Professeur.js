@@ -3,6 +3,8 @@ import {useParams} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
 import EleveDescr from "../Eleves/EleveDescr";
 import ParcProf from "../Parcours/ParcProf";
+import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
+import QuestionRep from "../Questions/QuestionRep";
 
 function Professeur () {
 
@@ -58,14 +60,14 @@ function Professeur () {
         professeur && 
         <div>
             <h1>{professeur.nom} {professeur.prenom}</h1>
-            <h4>Email : {professeur.mail} </h4>
+            <h4>Email : {professeur.email} </h4>
             <h4>Numéro de téléphone : {professeur.numero_tel}</h4>
             <h4>Métier : {professeur.metier}</h4>
             <h4>Établissement : {professeur.etablissement}</h4>
             <h4>Rôle : {professeur.role}</h4>
             <h4>Identifiant : {professeur.id}</h4>
             {(professeur.role === "Tuteur" || professeur.role === "Encadrant et Tuteur") && (
-                    eleves && eleves.lenght > 0 && (
+                    eleves && eleves.length > 0 && (
                     <>                        
                         <h3>Mes élèves</h3>
                         <button className="btn" onClick={() => handleAfficherParc()}> 
@@ -75,12 +77,16 @@ function Professeur () {
                         </button>
                         {eleves && etat && Object.values(eleves).map((eleve) => (
                             <div key={eleve.id}>
-                                <EleveDescr id={eleve.id} />                            
+                                <EleveDescr id={eleve.id} /> 
+                                <QuestionQuestionnaire 
+                                    questionnaire="Tuteur" 
+                                    repondantProfId={id}
+                                    eleveConcerneId={eleve.id}
+                                />                           
                             </div>
                         ))} 
                     </>
                     )
-   
             )}
 
             {(professeur.role === "Encadrant" || professeur.role === "Encadrant et Tuteur") && (

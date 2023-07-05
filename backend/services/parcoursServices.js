@@ -19,10 +19,10 @@ exports.getActivitesByParcours = async (parcoursId) => {
 
 //supprime les parcours déja existant et retourne nbParcours parcours 
 //nombre de parcours voulu par l'admin
-exports.generateParcours = async  (nbParcours) => {
+exports.generateParcours = async  (nbParcours, nb_eleve_max) => {
     try {
         await Parcours.destroy({where: {}});
-        await associeParcoursActivite(nbParcours);
+        await associeParcoursActivite(nbParcours, nb_eleve_max);
     } catch (err) {
         throw new Error("Error Parcours non réalisé");
     }
