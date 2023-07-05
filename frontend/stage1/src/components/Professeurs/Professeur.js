@@ -4,7 +4,6 @@ import axiosInstance from "../../config/axiosConfig";
 import EleveDescr from "../Eleves/EleveDescr";
 import ParcProf from "../Parcours/ParcProf";
 import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
-import QuestionRep from "../Questions/QuestionRep";
 
 function Professeur () {
 

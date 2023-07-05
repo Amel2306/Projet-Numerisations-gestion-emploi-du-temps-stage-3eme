@@ -14,6 +14,7 @@ function QuestionQuestionnaire (props) {
 
 
     const [questions, setQuestions] = useState(null)
+    const [etat, setEtat] = useState(false)
 
     useEffect(() => {
         axiosInstance.get(`/questions/questionnaire/${questionnaire}`)
@@ -26,12 +27,21 @@ function QuestionQuestionnaire (props) {
 
     }, [])
 
+    const handleAfficherQuestionnaire = () => {
+        setEtat(!etat);
+    }
+
     return (
         questions && (
             <div>
                 <h2>Questionnaire pour {questionnaire}</h2>
+                <button className="btn" onClick={() => handleAfficherQuestionnaire()}> 
+                {etat ? 
+                    <i class="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
+                    <i class="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
+                </button>
                 <ul>
-                    {questions.map((question)=> (
+                    {etat && questions && questions.map((question)=> (
                         <QuestionRep
                             key={question.id}
                             question={question}

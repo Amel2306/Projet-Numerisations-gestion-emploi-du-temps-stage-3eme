@@ -5,6 +5,7 @@ import {Link, useParams} from 'react-router-dom'
 import Parc from "../Parcours/Parc";
 import EleveDescr from "./EleveDescr";
 import EleveGroupe from "./EleveGroupe";
+import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
 
 function Eleve (props) {
 
@@ -94,7 +95,6 @@ function Eleve (props) {
             <EleveDescr id={id} />
                 {eleve.parcoursId &&
                     <div>
-
                         <h1>Mon parcours :</h1>
                         <Parc parcoursId={eleve.parcoursId} />                    
                     </div> 
@@ -128,7 +128,15 @@ function Eleve (props) {
                   </button>
               )}
               {( eleve.parcoursId && (
-                <EleveGroupe id={id} />
+                <div>
+                    <EleveGroupe id={id} />
+                    <QuestionQuestionnaire 
+                        questionnaire="Eleve"
+                        repondantEleveId={id}
+                    />                 
+                </div>
+
+                
               )
 
               )}

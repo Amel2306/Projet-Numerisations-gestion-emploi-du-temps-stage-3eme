@@ -20,14 +20,15 @@ function EleveGroupe (props)  {
         })
     }, [])
 
-    const handleAfficherParc = () => {
+    const handleAfficherGroupe = () => {
         setEtat(!etat);
     }
 
-    return (   
+    return (  
+        groupe && groupe.length>0 && 
         <div>
             <h1 className="groupe">Mon groupe</h1>
-            <button className="btn" onClick={() => handleAfficherParc()}> 
+            <button className="btn" onClick={() => handleAfficherGroupe()}> 
               {etat ? 
                 <i class="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
                 <i class="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
