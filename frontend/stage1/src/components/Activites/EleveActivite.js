@@ -2,7 +2,9 @@ import { useState } from "react"
 import { useEffect } from "react"
 import axiosInstance from "../../config/axiosConfig"
 import EleveDescr from "../Eleves/EleveDescr"
+import ListeEleves from "../Eleves/ListeElevesPdf"
 import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire"
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 function EleveActivite (props) {
 
@@ -55,9 +57,18 @@ function EleveActivite (props) {
         Object.values(eleves).map((eleve) => (
           <div key={eleve.id}>
             <EleveDescr id={eleve.id} />
-            {console.log(eleve)}
           </div>
         ))}
+       
+       {etat && (
+            <PDFDownloadLink document={<ListeEleves eleves={eleves} moment={moment[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
+                {({ blob, url, loading, error }) =>
+                    loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
+                }
+            </PDFDownloadLink>        
+       )}
+
+
       {etat && (
         <QuestionQuestionnaire
           questionnaire="Encadrant"

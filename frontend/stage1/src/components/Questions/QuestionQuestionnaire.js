@@ -2,6 +2,8 @@ import { useEffect } from "react"
 import { useState } from "react"
 import axiosInstance from "../../config/axiosConfig"
 import QuestionRep from "./QuestionRep"
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import QuestionPdf from "./QuestionPdf";
 
 function QuestionQuestionnaire (props) {
 
@@ -57,6 +59,11 @@ function QuestionQuestionnaire (props) {
                     ))}
                     
                 </ul>
+                <PDFDownloadLink document={<QuestionPdf questionnaire={questionnaire} />} fileName={"questions"+questionnaire+".pdf"}>
+                            {({ blob, url, loading, error }) =>
+                                loading ? 'Téléchargement en cours...' : 'Télécharger les questions'
+                            }
+                </PDFDownloadLink>
             </div>
         )
     )

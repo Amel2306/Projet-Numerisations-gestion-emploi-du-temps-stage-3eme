@@ -17,6 +17,21 @@ function Eleves () {
         });
     }, [])
 
+    const handleSupprimeAll = () => {
+
+      const confirmation = window.confirm("Êtes-vous sûr de vouloir tout supprimer ?");
+
+      if (confirmation) {
+        axiosInstance.delete("/eleves")
+        .then((res) => {
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+      }
+    }
+
     const handleClick = ( id) => {
 
       /*e.preventDefault()*/
@@ -37,6 +52,8 @@ function Eleves () {
 
           ))}
           <Link to='/eleveForm'> Ajouter un élève</Link>
+
+          <button className="btn" onClick={handleSupprimeAll}>Supprimer tous les élèves</button>
         </div>
       );
 }

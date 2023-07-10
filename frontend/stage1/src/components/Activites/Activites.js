@@ -19,6 +19,21 @@ function Activtes () {
         })
     }, [])
 
+    const handleSupprimeAll = () => {
+
+        const confirmation = window.confirm("Êtes-vous sûr de vouloir tout supprimer ?");
+  
+        if (confirmation) {
+          axiosInstance.delete("/activites")
+          .then((res) => {
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+        }
+    }
+
     const navigate = useNavigate()
 
     const handleClick = (id) => {
@@ -43,6 +58,9 @@ function Activtes () {
 
             <button className="btn">
                 <Link to="/activiteForm">Ajouter une activité</Link>
+            </button>
+            <button className="btn" onClick={handleSupprimeAll}>
+                Supprimer les activités
             </button>
         </div>
     )

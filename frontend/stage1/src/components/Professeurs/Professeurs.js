@@ -16,6 +16,21 @@ function Professeurs() {
           });
     }, []);
 
+    const handleSupprimeAll = () => {
+
+        const confirmation = window.confirm("Êtes-vous sûr de vouloir tout supprimer ?");
+  
+        if (confirmation) {
+          axiosInstance.delete("/professeurs")
+          .then((res) => {
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+        }
+    }
+
     const navigate = useNavigate()
 
     const handleClick = (id) => {
@@ -36,7 +51,14 @@ function Professeurs() {
                     </div>
                 )) }                
             </div>
-            <Link to="/profForm">Ajouter un professeur</Link>
+
+            <button className="btn">
+                <Link to="/profForm">Ajouter un professeur</Link>
+            </button>
+            <button className="btn" onClick={handleSupprimeAll}>
+                Supprimer les professeurs
+            </button>
+
         </div>
     )
 }

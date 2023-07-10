@@ -4,6 +4,8 @@ import axiosInstance from "../../config/axiosConfig";
 import EleveDescr from "../Eleves/EleveDescr";
 import ParcProf from "../Parcours/ParcProf";
 import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
+import ListeEleves from "../Eleves/ListeElevesPdf"
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 function Professeur () {
 
@@ -84,19 +86,22 @@ function Professeur () {
                                 />                           
                             </div>
                         ))} 
+                        <PDFDownloadLink document={<ListeEleves eleves={eleves} professeur={professeur}/>} fileName={"professeur"+professeur.id+".pdf"}>
+                            {({ blob, url, loading, error }) =>
+                                loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
+                            }
+                        </PDFDownloadLink>
                     </>
                     )
             )}
 
             {(professeur.role === "Encadrant" || professeur.role === "Encadrant et Tuteur") && (
                 <>
+                    <h2>Mes parcours</h2>
+                    <ParcProf profId={id} professeur={professeur}/>
 
                 </>
             )}
-            <>
-                <h5>Mes parcours</h5>
-                <ParcProf profId={id} />
-            </>
 
             <button 
                 className="btn"

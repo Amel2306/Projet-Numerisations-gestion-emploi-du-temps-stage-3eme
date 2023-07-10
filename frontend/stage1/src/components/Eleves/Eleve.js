@@ -96,7 +96,7 @@ function Eleve (props) {
                 {eleve.parcoursId &&
                     <div>
                         <h1>Mon parcours :</h1>
-                        <Parc parcoursId={eleve.parcoursId} />                    
+                        <Parc parcoursId={eleve.parcoursId} eleve={eleve}/>                    
                     </div> 
                 }
                 <button

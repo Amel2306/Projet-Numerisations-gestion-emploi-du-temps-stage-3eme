@@ -125,7 +125,9 @@ function ProfForm () {
                     </button>
                 )}
             </form>
+
             <ProfesseurFichier />
+
         </div>
     )
 }

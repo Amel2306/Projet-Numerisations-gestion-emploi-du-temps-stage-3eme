@@ -22,6 +22,17 @@ exports.getProfesseur = async (req, res) => {
   }
 }
 
+exports.getProfByRole = async (req, res) => {
+  const role = req.params.role
+  try {
+    const profRole = await professeurService.getProfByRole(role)
+    res.json(profRole)
+  }
+  catch(error) {
+    res.status(404).json({message: "Aucun professeur trouvé pour ce role", error})
+  }
+}
+
 exports.getEleveByTuteur = async (req, res) => {
   const tuteurId = req.params.tuteurId;
 

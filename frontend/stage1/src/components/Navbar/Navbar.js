@@ -52,6 +52,15 @@ function Navbar(props) {
                                 <li>
                                     <Link to="/questions">Questions</Link>
                                 </li>
+                                <li>
+                                    <Link to="/reponsesEleves">Réponses élèves</Link>
+                                </li>
+                                <li>
+                                    <Link to="/reponses/Encadrant">Réponses encadrants</Link>
+                                </li>
+                                <li>
+                                    <Link to="/reponses/Tuteur">Réponses Tuteur</Link>
+                                </li>
                             </>
                         ) : (
                             <>

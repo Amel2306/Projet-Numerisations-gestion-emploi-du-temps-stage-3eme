@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {Link, useParams } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
-import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
 import ActiviteDescr from "./ActiviteDescr";
 import EleveActivite from "./EleveActivite";
 
@@ -21,7 +20,7 @@ function Activite (props) {
             })
             .catch((err) => {
                 console.log(err);
-            });  
+            });
         }
     }
 
@@ -54,7 +53,6 @@ function Activite (props) {
                     >
                         Supprimer
                     </button> 
-   
                 </div>       
             )
     )

@@ -1,13 +1,15 @@
 import axiosInstance from "../../config/axiosConfig";
 import { useEffect, useState } from "react";
 import ActiviteDescr from "../Activites/ActiviteDescr";
+import ParcoursPdf from "./ParcoursPdf";
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 
 function Parc (props) {
 
     const parcoursId = props.parcoursId
-
     const prof = props.profId
+    const eleve = props.eleve
 
     const moment = [
         "Lundi Matin",
@@ -65,6 +67,11 @@ function Parc (props) {
                 </li>
               ))}
             </ul>
+            {<PDFDownloadLink document={<ParcoursPdf activites={activites} moment={moment} eleve={eleve}/>} fileName={"parcours"+parcoursId+".pdf"}>
+                {({ blob, url, loading, error }) =>
+                    loading ? 'Téléchargement en cours...' : 'Télécharger le parcours'
+                }
+            </PDFDownloadLink>}
         </div>
     )
 }

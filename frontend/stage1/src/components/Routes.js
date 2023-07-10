@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import '../style/App.css';
-import Home from "./Home/Home"
+import Home from "./Accueil/Home"
 import Login from "./Authentification/Login"
 import ProfForm from './Professeurs/ProfForm';
 import Eleve from './Eleves/Eleve'
@@ -19,6 +19,8 @@ import Activite from './Activites/Activite';
 import Professeur from './Professeurs/Professeur'
 import QuestionForm from './Questions/QuestionForm';
 import Questions from './Questions/Questions';
+import ReponsesEleves from './Reponses/ReponsesEleves';
+import ReponsesProfesseurs from './Reponses/ReponsesProfesseurs';
 
 function Rootes (props) {
 
@@ -71,6 +73,9 @@ function Rootes (props) {
 
             <Route path='/questionForm' element={<QuestionForm/>} />
             <Route path='/questions' element={<Questions />} />
+
+            <Route path='/reponsesEleves' element={<ReponsesEleves />} />
+            <Route exact path='/reponses/:role' element={<ReponsesProfesseurs />} />
         </Routes>
     )
 }

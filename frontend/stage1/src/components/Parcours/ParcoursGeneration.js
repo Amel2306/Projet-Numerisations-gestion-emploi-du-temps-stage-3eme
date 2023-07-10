@@ -23,9 +23,7 @@ function ParcoursGeneration (props) {
 
         axiosInstance.post("/parcours",data)
         .then(response => {
-            console.log("ok")
             navigate("/parcours")
-
         })
         .catch(error => {
             console.error(error);

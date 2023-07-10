@@ -12,29 +12,31 @@ ainsi lundi matin = 0, lundi aprés-midi = 1...
 //permet de déterminer le moment ou il a le moins d'activité pour permettre de créer des parcours plein
 //retourn l'indice du moment ayant le plus besoin d'activtié
 function minMom(ar_m, tableau_moments) {
+    let min_mom = -1;
+    let min_nb_act = Infinity // on sait qu'il y aura toujours - d'activité;
 
-    //va stocker index du moment
-    let min_mom = null
-    let min_nb_act = null
-    for (let i = 0; i < ar_m.length; i++) {
-        //le cas ou l'activité est dispo à ce moment
+    for (let i = 0; i < tableau_moments.length; i++) {
         if (ar_m[i] === 1) {
-            //détermine le min des moment
             const m = tableau_moments[i];
-            if (min_mom !== null) {
-                if (m.occupeParcours() < min_nb_act) {
-                    min_mom = i;
-                    min_nb_act = m.occupeParcours();
-                }
-            }
-            // dans le cas ou avant ça min_mom est null on attribue l'activité au premier moment car on ne peut faire de comparaison
-            else {
-                min_mom = i
+            if (min_mom === -1 || m.occupeParcours() < min_nb_act) {
+                min_mom = i;
                 min_nb_act = m.occupeParcours();
             }
         }
     }
+
+    console.log(min_mom); // Affiche la valeur finale de min_mom
     return min_mom;
+}
+
+function compteZero(ar_m) {
+    let compt = 0;
+    for (let i=0;i<ar_m.length; i++) {
+        if (ar_m[i] === 0) {
+            compt+=1
+        } 
+    }
+    return compt
 }
 
 //prend en paramètre le nombre maximum d'élève dans un groupe
@@ -58,11 +60,15 @@ async function activiteByMoment (nb_eleve_max) {
         //détermination du tableau de moment de chaque activite
         let moment_of_act = await momentsActivite(act.id)
         console.log(moment_of_act);
-        while (nb_realisations !== 0 && act.nb_eleve_max >= nb_eleve_max) {
+        let compt = compteZero(moment_of_act)
+        while (nb_realisations !== 0 && act.nb_eleve_max >= nb_eleve_max && compt < 10) {
             let id_min_mom = minMom(moment_of_act, tableau_moments)
-            tableau_moments[id_min_mom].addActivite(act.id, act.nb_eleve_max)
-            moment_of_act[id_min_mom] = 0;
-            nb_realisations--;
+            if (id_min_mom !== -1 ) {
+                tableau_moments[id_min_mom].addActivite(act.id, act.nb_eleve_max)
+                moment_of_act[id_min_mom] = 0;
+                nb_realisations--;
+                compt+= 1
+            }
         }
     }
     return tableau_moments

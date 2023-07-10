@@ -1,5 +1,6 @@
 const Professeur = require('../models/Professeur');
 const Eleve = require('../models/Eleve');
+const { Op } = require('sequelize');
 
 exports.getAllProfesseurs = async () =>{
   return await Professeur.findAll();
@@ -7,6 +8,21 @@ exports.getAllProfesseurs = async () =>{
 
 exports.getProfesseur = async (eleveId) => {
   return await Professeur.findByPk(eleveId)
+}
+
+exports.getProfByRole = async (role) => {
+  try {
+    return await Professeur.findAll({ 
+      where: { 
+        [Op.or]: [
+          { role: role },
+          { role: "Encadrant et Tuteur" }
+        ]
+      } 
+    });
+  } catch (err) {
+    throw new Error('Aucun élève trouvé ayant ce tuteur.');
+  }
 }
 
 exports.getEleveByTuteur= async (tuteurId) =>{
@@ -19,8 +35,18 @@ exports.getEleveByTuteur= async (tuteurId) =>{
 
 exports.addProfesseur = async (profData) => {
   try {
-    const newProfesseur = await Professeur.create(profData);
-    return newProfesseur
+    const profExiste = await Professeur.findOne({
+      where: {
+        email: profData.email
+      }
+    })
+    if (profExiste) {
+      return profExiste
+    }
+    else {
+      const newProfesseur = await Professeur.create(profData);
+      return newProfesseur      
+    }
   } catch (error) {
     throw new Error('Erreur lors de la création du professeur dans services.');
   }
