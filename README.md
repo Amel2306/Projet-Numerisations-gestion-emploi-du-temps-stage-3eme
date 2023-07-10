@@ -4,12 +4,12 @@ Cette application a pour objectif de numériser la gestion stage de 3eme effectu
 
 ## Les utilisateurs 
 
-Les utilisateurs seront classés selon leur rôle et il y aura au total 4 rôle distincts : 
+Les utilisateurs seront classés selon leur rôle et il y aura au total 4 rôles distincts : 
 
 | Rôle | Description                |
 | :-------- |  :------------------------- |
 | Encadrant | Encadre une activité |
-| Tuteur | Tuteur d'un élève, il responsable de l'élève, reste à disposition de l'élève, répond à ses questions rempli fiche d'évalation finale|
+| Tuteur | Tuteur d'un élève, il est responsable de l'élève, reste à disposition de l'élève, répond à ses questions rempli fiche d'évalation finale|
 |Élève| l'élève qui effectuera le stage|
 |Admin|Administrateur permet de générer les emplois du temps, valider les élèves, générer des questions...|
 
