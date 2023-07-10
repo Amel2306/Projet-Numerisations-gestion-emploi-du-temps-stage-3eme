@@ -13,7 +13,7 @@ Les utilisateurs seront classés selon leur rôle et il y aura au total 4 rôle 
 |Élève| l'élève qui effectuera le stage|
 |Admin|Administrateur permet de générer les emplois du temps, valider les élèves, générer des questions...|
 
->> 📝 un utilisateur peut être à la fois encadrant et tuteur
+> 📝 un utilisateur peut être à la fois encadrant et tuteur
 
 ## Les fonctionnalités
 
