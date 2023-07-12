@@ -12,6 +12,7 @@ exports.getReponsesByQuestions = async (req, res) => {
     }
 }
 
+//permet d'avoir les réponses qu'ont été formulées par le tuteur de l'élève
 exports.getReponsesForEleve = async (req, res) => {
     const eleveId = req.params.eleveId;
     const {questionnaire} = req.body;
@@ -25,6 +26,7 @@ exports.getReponsesForEleve = async (req, res) => {
     }
 }
 
+// les réponses qu'ont été formulées pour une activité par son encadrant (comportement des élèves)
 exports.getReponsesForActivie = async (req, res) => {
     const activiteId = req.params.activiteId;
     try {
@@ -36,6 +38,7 @@ exports.getReponsesForActivie = async (req, res) => {
     }
 }
 
+//les réponses d'un tuteur pour tous ses élèves
 exports.getReponsesByTuteur = async (req, res) => {
     const profId = req.params.profId;
 
@@ -48,6 +51,7 @@ exports.getReponsesByTuteur = async (req, res) => {
     }
 }
 
+// réponses d'un encadrants pour toutes ses activités
 exports.getResponsesByEncadrant = async (req, res) => {
     const profId = req.params.profId;
 
@@ -60,6 +64,7 @@ exports.getResponsesByEncadrant = async (req, res) => {
     }
 }
 
+// réponses questionnaire de satisfaction élève
 exports.getResponsesByEleve = async (req, res) => {
     const eleveId = req.params.eleveId
 
@@ -72,6 +77,8 @@ exports.getResponsesByEleve = async (req, res) => {
     }
 }
 
+// permet de savoir si réponses a déjà été formulée en fonction de facteur d'unicité 
+// si tuteur répond : ensemble (tuteurId-questionId-eleveConcerneId) doit être unique...
 exports.getUniqueReponse = async (req, res) => {
     const { repondantEleveId, repondantProfId, eleveConcerneId, questionId, activiteId,indexMoment} = req.query
     try {

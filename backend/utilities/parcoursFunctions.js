@@ -1,7 +1,6 @@
 const Activite = require ('../models/Activite');
 const Parcours = require('../models/Parcours');
 const ActiviteParcours = require ("../models/ActiviteParcours");
-const Moment = require ('../models/classes/Moment');
 const {activiteByMoment, minMom} = require ('./momentFunctions');
 
 
@@ -34,7 +33,7 @@ async function associeParcoursActivite(nb_parcours,nb_eleve_max) {
             idActivites.push(act.activiteId);
           }
   
-          //permet récupération d'une activité pour un moment donné
+          //permet récupération d'une activité pour un moment donné s'il y en a de dispo encore pour ce moment
           const newActParcours = moments_pleins[j].giveActivite(idActivites);
   
           if (newActParcours !== null) {

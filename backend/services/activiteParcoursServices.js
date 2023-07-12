@@ -20,32 +20,9 @@ exports.getActiviteByParcours = async (parcoursId) => {
     return actOfParc
 }
 
-exports.getActiviteParcByProf = async (profId) => {
-    //on recherche premièrement les activités du prof
-    const activites = await Activite.findAll({
-        where: {
-            professeurId: profId
-        }
-    })
-
-    // on recherche ces activités dans ActiviteParcours pour obtenir l'index du moment
-    const act_of_prof = [];
-    for (const act of activites) {
-        const all_act_parc = await ActiviteParcours.findAll({
-            where: {
-                activiteId: act.id
-            },
-            order: [
-                [Sequelize.literal('indexMoment'), 'ASC']
-            ]
-        })
-        act_of_prof.push(...all_act_parc); // on rajoute toutes les activité-indexMoment-parcours associé à chaque activité
-    }
-    return act_of_prof;
-}
-
 exports.getActParcByProf = async (profId) => {
 
+    //on commence par chercher les activités dont le prof est tuteur
     const activites = await Activite.findAll({
         where: {
             professeurId: profId
@@ -55,15 +32,16 @@ exports.getActParcByProf = async (profId) => {
     const tab_moments = {}
 
     for (let i = 0; i<10; i++) {
-        tab_moments[i] = [];
-        for (const act of activites ) {
+        tab_moments[i] = []; // tableau de moment avec chaque case = {activités avec l'id du moment = i}
+        // pour toutes les activités du prof on les cherche dans ActiviteParcours en fonction de l'index du moment
+        for (const act of activites ) { 
             const act_present = await ActiviteParcours.findAll({
                 where: {
                     activiteId: act.id,
                     indexMoment: i
                 }
             })
-            if (act_present.length > 0) {
+            if (act_present.length > 0) { // si cette activité et ce moment existe on les retourne
                 tab_moments[i].push(act_present)                
             }
         }
@@ -71,9 +49,11 @@ exports.getActParcByProf = async (profId) => {
     return tab_moments
 }
 
+
 exports.getActiviteParcByEleve = async (eleveId) => {
     const eleve = await Eleve.findByPk(eleveId)
     const parc_of_el = eleve.parcoursId
+    // on recherche uniquement les activiteParcours du parcoursId associé à l'élève
     const activite_parc = await ActiviteParcours.findAll({
         where: {
             parcoursId: parc_of_el

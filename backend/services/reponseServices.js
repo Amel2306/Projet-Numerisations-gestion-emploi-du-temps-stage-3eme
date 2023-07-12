@@ -85,7 +85,7 @@ exports.getReponsesByTuteur = async (profId) => {
     return tuteur_questions_reponse
 }
 
-//permet à un encadrant de récupérer les réponses qu'il a effectué sur chaque activite
+//permet de récupérer les réponses qu'un encadrant a effectué sur chacune de ses activités
 exports.getReponsesByEncadrant = async (profId) => {
     const encadrant_questions_reponses = {}
 

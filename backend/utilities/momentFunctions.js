@@ -58,12 +58,13 @@ async function activiteByMoment (nb_eleve_max) {
     for (act of activites) {
         let nb_realisations = act.nb_realisations;
 
-        //détermination du tableau de moment de chaque activite
+        //détermination du tableau de moment de chaque activite (le moments ou l'activité peut être réalisée)
         let moment_of_act = await momentsActivite(act.id)
-        let compt = compteZero(moment_of_act)
+        let compt = compteZero(moment_of_act) // le nombre de fois dans la semaine ou l'activité n'est pas dispo
         while (nb_realisations !== 0 && act.nb_eleve_max >= nb_eleve_max && compt < 10) {
             let id_min_mom = minMom(moment_of_act, tableau_moments)
             if (id_min_mom !== -1 ) {
+                //ajoute l'activité dans le moment qui en a le plus besoin (=> a le moins d'occupation)
                 tableau_moments[id_min_mom].addActivite(act.id, act.nb_eleve_max)
                 moment_of_act[id_min_mom] = 0;
                 nb_realisations--;
