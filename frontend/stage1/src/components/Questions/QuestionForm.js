@@ -4,11 +4,13 @@ import axiosInstance from "../../config/axiosConfig";
 
 function QuestionForm () {
     const [contenu, setContenu] = useState("")
-    const [questionnaire, setQuestionnaire] = useState("")
+    const [questionnaire, setQuestionnaire] = useState("Eleve") // je met Eleve par défaut car ça sera le choix par défaut de l'utilisateur
 
     const navigate = useNavigate()
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
         const data = {
             contenu,
             questionnaire
@@ -30,7 +32,7 @@ function QuestionForm () {
     return (
         <div>
             <h1>Formulaire question</h1>
-            <form onSubmit={() => handleSubmit()}>
+            <form onSubmit={(e) => handleSubmit(e)}>
 
 
                 <div>

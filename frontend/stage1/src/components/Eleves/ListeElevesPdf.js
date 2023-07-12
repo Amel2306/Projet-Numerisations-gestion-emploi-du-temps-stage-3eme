@@ -29,21 +29,21 @@ const styles = StyleSheet.create({
 function ListeEleves(props) {
 
 
-    const moment = props.moment;
     const eleves = props.eleves;
     const activiteId = props.activiteId
     const professeur = props.professeur
+    const eleve = props.eleve
 
     return (
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.header}>
-                    <Text>{professeur ? "Liste des élèves de " + professeur.nom + " " + professeur.prenom : " "}</Text>
+                    <Text>{
+                    professeur ?  "Liste des élèves de " +  professeur.nom + " " + professeur.prenom 
+                    : eleve ? "Liste des élèves du groupe de  " + eleve.nom + " " + eleve.prenom 
+                    : activiteId ? "Liste des élèves pour l'activité " + activiteId : ""}</Text>
                 </View>
                 <View style={styles.section}>
-                    <Text style={{fontSize: "20px"}}> Liste des élèves pour {activiteId ? "l'activité " + activiteId : 
-                        "le scientifique "
-                    }</Text>
                     {eleves &&
                         eleves.map((eleve) => (
                             <View key={eleve.id} style={styles.section}>

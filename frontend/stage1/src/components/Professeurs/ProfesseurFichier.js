@@ -88,7 +88,7 @@ function ProfesseurFichier () {
         <div>
             <label>Veuillez joindre votre fichier </label>
             <input type="file" onChange={handleFileChange} />
-            <button onClick={handleFileUpload} className="btn">Ajouter les professeurs</button>
+            <button onClick={handleFileUpload} className="btn">Ajouter les Scientifiques</button>
         </div>
     )
 }

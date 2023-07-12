@@ -1,11 +1,13 @@
 const transporter = require('../config/mailer');
 
+//pour envoyer les identifiants de connexion 
 const sendPasswordEmail = (recipientEmail, password) => {
   const mailOptions = {
     from: 'Une Semaine à l\'UM <ameladdou123@gmail.com>',
     to: recipientEmail,
     subject: 'Vos identifiants pour vous connecter',
-    text: `Bonjour voici Votre mot de passe pour vous connecter: ${password} 
+    text: `
+    Bonjour voici Votre mot de passe pour vous connecter: ${password} 
     Veuillez ne pas le divulguer.
     Vous pourrez vous connecter avec le mail sur lequel vous recevait ce mail
     

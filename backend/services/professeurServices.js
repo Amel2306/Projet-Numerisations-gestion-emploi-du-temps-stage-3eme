@@ -16,7 +16,7 @@ exports.getProfByRole = async (role) => {
       where: { 
         [Op.or]: [
           { role: role },
-          { role: "Encadrant et Tuteur" }
+          { role: "Encadrant et Tuteur" } // dans tous les cas les professeurs ayant pour rôle 'Encadrant et Tuteur' seront toujours retournés
         ]
       } 
     });
@@ -25,6 +25,7 @@ exports.getProfByRole = async (role) => {
   }
 }
 
+//permet de récupérer les élèves dont le tuteur est passé en paramètre
 exports.getEleveByTuteur= async (tuteurId) =>{
   try {
     return await Eleve.findAll({ where: { professeurId: tuteurId } });
@@ -63,6 +64,7 @@ exports.deleteProfesseur = async (professeurId) => {
     throw new Error('Une erreur s\'est produite lors de la suppression du professeur.');
   }
 }
+
 exports.deleteAllProfesseurs = async() =>{
   try {
     return await Professeur.destroy({

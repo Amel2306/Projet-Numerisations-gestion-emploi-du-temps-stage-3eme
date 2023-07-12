@@ -83,14 +83,22 @@ function Professeur () {
                                     questionnaire="Tuteur" 
                                     repondantProfId={id}
                                     eleveConcerneId={eleve.id}
-                                />                           
+                                />
+                                                        
                             </div>
                         ))} 
-                        <PDFDownloadLink document={<ListeEleves eleves={eleves} professeur={professeur}/>} fileName={"professeur"+professeur.id+".pdf"}>
-                            {({ blob, url, loading, error }) =>
-                                loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
-                            }
-                        </PDFDownloadLink>
+                        {etat && 
+                                <PDFDownloadLink 
+                                document={<ListeEleves 
+                                eleves={eleves} 
+                                professeur={professeur}/>} 
+                                fileName={"professeur"+professeur.id+".pdf"}
+                                >
+                                    {({ blob, url, loading, error }) =>
+                                        loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
+                                    }
+                                </PDFDownloadLink>                          
+                        }
                     </>
                     )
             )}

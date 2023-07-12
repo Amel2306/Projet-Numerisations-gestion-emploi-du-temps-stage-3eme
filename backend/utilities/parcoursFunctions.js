@@ -18,7 +18,7 @@ async function associeParcoursActivite(nb_parcours,nb_eleve_max) {
   
       // Récupère les moments et leurs activités
       const moments_pleins = await activiteByMoment(nb_eleve_max);  
-      for (let j = 0; j < moments_pleins.length; j++) {
+      for (let j = 0; j < moments_pleins.length; j++) { //on parcours les moments de la semaine
         for (let j_parcours = 0; j_parcours < tableau_parcours.length; j_parcours++) {
           const parcoursId = tableau_parcours[j_parcours].id;
           const activites = await ActiviteParcours.findAll({
@@ -28,7 +28,7 @@ async function associeParcoursActivite(nb_parcours,nb_eleve_max) {
           });
 
           //Permet d'avoir toutes les id d'activité d'un parcours
-          // utile pour la fonction giveActivite de Moment
+          //utile pour la fonction giveActivite de Moment
           const idActivites = [];
           for (const act of activites) {
             idActivites.push(act.activiteId);

@@ -7,6 +7,7 @@ import EleveDescr from "./EleveDescr";
 import EleveGroupe from "./EleveGroupe";
 import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
 
+
 function Eleve (props) {
 
     const nbEleveMax = props.nbEleveMax
@@ -17,7 +18,6 @@ function Eleve (props) {
     }
 
     const [eleve, setEleve] = useState(null)
-
 
     useEffect (() => {
 
@@ -115,7 +115,7 @@ function Eleve (props) {
               ):
               (
                 <button className="btn">
-                    <Link to={`/professeur/${eleve.professeurId}`}> Voir professeur </Link>
+                    <Link to={`/professeur/${eleve.professeurId}`}> Voir Tuteur </Link>
                 </button>
               )}
 
@@ -129,18 +129,13 @@ function Eleve (props) {
               )}
               {( eleve.parcoursId && (
                 <div>
-                    <EleveGroupe id={id} />
+                    <EleveGroupe id={id} eleve={eleve}/>
                     <QuestionQuestionnaire 
                         questionnaire="Eleve"
                         repondantEleveId={id}
                     />                 
-                </div>
-
-                
-              )
-
-              )}
-
+                </div>    
+              ))}
         </div>
     )
 
