@@ -53,10 +53,10 @@ function Professeurs() {
             </div>
 
             <button className="btn">
-                <Link to="/profForm">Ajouter un professeur</Link>
+                <Link to="/profForm">Ajouter un scientifique</Link>
             </button>
             <button className="btn" onClick={handleSupprimeAll}>
-                Supprimer les professeurs
+                Supprimer les scientifiques
             </button>
 
         </div>

@@ -35,7 +35,7 @@ function Navbar(props) {
                                     <Link to="/eleves">Liste élèves</Link>
                                 </li>
                                 <li>
-                                    <Link to="/professeurs">Liste professeurs</Link>
+                                    <Link to="/professeurs">Liste Des Scientifiques</Link>
                                 </li>
                                 <li>
                                     <Link to="/activites">Liste Activités</Link>

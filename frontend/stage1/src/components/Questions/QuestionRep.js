@@ -21,8 +21,8 @@ function QuestionRep(props) {
             repondantProfId,
             eleveConcerneId,
             questionId: question.id,
-            activiteId: parseInt(activiteId),
-            indexMoment: parseInt(indexMoment)
+            activiteId: activiteId,
+            indexMoment: indexMoment
         };
         console.log(params)
         axiosInstance.get(`/reponses/unique`, {params})
@@ -33,7 +33,10 @@ function QuestionRep(props) {
                 setContenuRep(res.data.contenu) 
                 setRepId(res.data.id)              
             }
-        })        
+        })
+        .catch((err) => {
+            console.error(err)
+        })   
         
     }, [])
 

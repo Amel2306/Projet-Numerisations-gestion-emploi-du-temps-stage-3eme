@@ -10,6 +10,7 @@ exports.getAllActivitesParcours = async (req, res) => {
     }
 }
 
+//pour chaque parcours retourne la liste de ses activité et l'index du moment de celle-ci
 exports.getActivitesByAllParcours = async (req, res) => {
     try {
         const actAllParc = {}
@@ -24,6 +25,7 @@ exports.getActivitesByAllParcours = async (req, res) => {
     }
 }
 
+// retourne activités d'un pracours passé en paramètre
 exports.getActiviteByParcours = async (req, res) => {
     const parcoursId = req.params.parcoursId
     try {
@@ -34,6 +36,7 @@ exports.getActiviteByParcours = async (req, res) => {
     }
 }
 
+// retourne le parcours pour un prof, les activités qu'il encadre et l'index du moment durant lequel il les encadre
 exports.getActiviteParcByProf = async (req, res) => {
     const prof_id = req.params.profId
     try {
@@ -44,6 +47,7 @@ exports.getActiviteParcByProf = async (req, res) => {
     }
 }
 
+//retourne l'emploi du temps d'un élève passé en paramètre
 exports.getActiviteParcByEleve = async (req, res) => {
     const eleve_id = req.params.eleveId
     try {
@@ -54,6 +58,7 @@ exports.getActiviteParcByEleve = async (req, res) => {
     }
 }
 
+// on peut créer une activité à un moment précis si on le souhaite quand les parcours sont déjà créés
 exports.associateActiviteParcours= async (req, res) => {
     const { parcoursId, activiteId, indexMoment} = req.body
     try {

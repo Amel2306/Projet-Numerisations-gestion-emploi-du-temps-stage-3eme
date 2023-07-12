@@ -22,6 +22,7 @@ exports.getProfesseur = async (req, res) => {
   }
 }
 
+//permet d'obtenir les professeurs en fonction de leur rôle
 exports.getProfByRole = async (req, res) => {
   const role = req.params.role
   try {
@@ -33,6 +34,7 @@ exports.getProfByRole = async (req, res) => {
   }
 }
 
+//permet de retourner tous les élèves ayant le tuteur passé en paramètre
 exports.getEleveByTuteur = async (req, res) => {
   const tuteurId = req.params.tuteurId;
 

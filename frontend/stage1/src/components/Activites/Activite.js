@@ -39,8 +39,8 @@ function Activite (props) {
                 <div>
                     <ActiviteDescr id={id}/>
                     <div> 
-                        <p>Professeur respo: {activite.professeurId}</p>
-                        <Link to={`/professeur/${activite.professeurId}` } >Voir professeur</Link>                     
+                        <p>Encadrant respo: {activite.professeurId}</p>
+                        <Link to={`/professeur/${activite.professeurId}` } >Voir Scientifique</Link>                     
                     </div>
                     {Array.from({ length: 10 }, (_, i) => (
                         <div className="elevesActivite" key={i}>

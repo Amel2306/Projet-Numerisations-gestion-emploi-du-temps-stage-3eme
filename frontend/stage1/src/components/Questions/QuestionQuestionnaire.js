@@ -39,8 +39,8 @@ function QuestionQuestionnaire (props) {
                 <h2>Questionnaire pour {questionnaire}</h2>
                 <button className="btn" onClick={() => handleAfficherQuestionnaire()}> 
                 {etat ? 
-                    <i class="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
-                    <i class="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
+                    <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
+                    <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
                 </button>
                 <ul>
                     {etat && questions && questions.map((question)=> (

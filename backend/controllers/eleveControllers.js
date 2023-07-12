@@ -30,10 +30,10 @@ exports.getElevesByActMoment = async (req, res) => {
   }
 }
 
-exports.getBinome = async (req, res) => {
+exports.getGroupe = async (req, res) => {
   const eleveId = req.params.id
   try {
-    const binome = await EleveService.getBinome(eleveId)
+    const binome = await EleveService.getGroupe(eleveId)
     res.json(binome);
   }catch(err) {
     res.status(404).json({message: "Aucun binôme n'a été trouvé pour cet élève"})
@@ -59,9 +59,10 @@ exports.addEleve = async (req, res) => {
   }
 };
 
+//fonction permettant d'attribuer un tuteur à un élève
 exports.confirmeEleve = async (req, res) => {
+  const eleveId = req.params.id;
   try {
-    const eleveId = req.params.id;
     const eleve = await EleveService.getEleveById(eleveId);
     if (!eleve) {
        res.status(404).json({ message: 'Eleve not found' });
@@ -73,6 +74,7 @@ exports.confirmeEleve = async (req, res) => {
   }
 };
 
+//permet d'envoyer les identifiants de l'élève par mail
 exports.sendPassword = async (req, res) => {
   const eleveId = req.params.id;
   try {
@@ -83,6 +85,7 @@ exports.sendPassword = async (req, res) => {
   }
 };
 
+//permet d'assigner un parcours à un élève
 exports.asignParcours = async (req, res ) => {
   const eleveId = req.params.id
   const {nbEleveMax} = req.body

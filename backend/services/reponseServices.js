@@ -76,12 +76,9 @@ exports.getReponsesByTuteur = async (profId) => {
     const tuteur_questions_reponse = {}
 
     const eleves_respo = await ProfesseurServices.getEleveByTuteur(profId);
-    console.log(eleves_respo);
     for (const eleve of eleves_respo) {
         const eleveId = eleve.id 
-        console.log(eleveId);
         const reponse_for_el = await this.getReponsesForEleve(eleveId, "Tuteur")
-        console.log(reponse_for_el)
         tuteur_questions_reponse[eleveId] = reponse_for_el;
     }
 

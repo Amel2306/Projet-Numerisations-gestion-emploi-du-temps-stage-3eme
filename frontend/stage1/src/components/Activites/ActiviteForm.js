@@ -181,7 +181,7 @@ function ActiviteForm (props) {
             </div>
     
             <div className="label-form">
-                <label>Professeur ID :</label>
+                <label>Encadrant ID :</label>
                 <input
                 type="number"
                 value={professeurId}

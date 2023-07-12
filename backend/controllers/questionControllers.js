@@ -32,7 +32,7 @@ exports.addQuestion = async (req, res) => {
 
         res.status(201).json(newQuestion)
     }catch (error) {
-        res.status(500).json({message: "Error impossible de rajouter une activté"}, error)
+        res.status(500).json({message: "Error impossible de rajouter une question", error})
     }
 }
 

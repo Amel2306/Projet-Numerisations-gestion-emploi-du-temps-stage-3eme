@@ -17,7 +17,14 @@ exports.getEleveById = async (eleveId) => {
   return eleve;
 };
 
+// permet de faire la liste des élèves pour une activité à un moment donné
+// activiteId : l'id de l'activité en question 
+// indexMoment : le moment dans la semaine : 0 = lundi matin, 1 lundi après-midi...
 exports.getElevesByActMoment = async (activiteId, indexMoment) => {
+
+  //commence par récupérer les parcours ayant cette activité à ce moment
+  // il peut y en avoir plusieurs car une meme activité peut apparaitre au meme moment sur plusieurs parcours
+  //cas ou l'activité peut accueillir plusieurs élèves en même temps
   const parcours = await ActiviteParcours.findAll({
     attributes: ['parcoursId'],
     where: {
@@ -26,31 +33,33 @@ exports.getElevesByActMoment = async (activiteId, indexMoment) => {
     }
   });
 
-  console.log(parcours);
-
+  //ensuite on récupère les élèves qui ont un parcoursId appartenant aux parcours trouvé precedemment
   const eleves = [];
   for (const parc of parcours) {
-    console.log(parc.dataValues);
     const eleve_found = await Eleve.findAll({
       where: {
         parcoursId: parc.dataValues.parcoursId,
       }
     });
-    eleves.push(...eleve_found);
+    eleves.push(...eleve_found); // on rajoute tous les élèves trouvés
   }
-  console.log(eleves);
   return eleves;
 };
 
-exports.getBinome = async (eleveId) => {
+//permet de récupérer les élèves ayant le même parcours que l'élève passé en paramètre
+exports.getGroupe = async (eleveId) => {
+
+  //on récupère le parcours de l'élève
   const eleve = await Eleve.findByPk(eleveId)
   const parcours_commun = eleve.parcoursId
+
+  //on récupère les élèves ayant le même
   const binome = await Eleve.findAll({
     where: {
       [Op.and]: {
         parcoursId: parcours_commun,
         id: {
-          [Op.ne]: eleveId
+          [Op.ne]: eleveId // on ne récupère pas l'élève lui même
         }        
       }
     }
@@ -59,6 +68,7 @@ exports.getBinome = async (eleveId) => {
   return binome
 }
 
+//création d'un nouvel élève
 exports.createEleve = async (eleveData) => {
   const nouvelEleve = await Eleve.create(eleveData);
   return nouvelEleve;
@@ -67,6 +77,9 @@ exports.createEleve = async (eleveData) => {
 // Fonction pour attribuer un tuteur à un élève 
 //au moment ou celui-ci est confirmé par l'admin
 exports.assignTuteur = async (eleve) => {
+
+  // chercher les professeur qui ont déjà des élèves et retourne le professeurId 
+  //ainsi que le nombre d'élèves dont il est déjà tuteur
     try {
       const counts = await Eleve.findAndCountAll({
         attributes: ['professeurId'],
@@ -76,6 +89,10 @@ exports.assignTuteur = async (eleve) => {
       const avaibleProfs = [];
       const notAvaibleProfs = [];
   
+      //pour tous les professesseur étant déjà tuteur d'au moins un èléve
+      // on regard le nombre d'élèves max qu'ils peuvent avoir 
+      // si il est supèrieur au nombre d'élèves dont ils sont déjà tuteur, on le rajoute dans avaibleProfs
+      // sinon on l'ajoute dans notAvaibleProfs
       for (let i = 0; i < counts.rows.length; i++) {
         const professeurId = counts.rows[i].professeurId;
   
@@ -90,6 +107,7 @@ exports.assignTuteur = async (eleve) => {
         }
       }
   
+      //on récupère tous les profs (même les encadrants car ils ont 0 comme nb_eleve_tuteur)
       const allProfs = await Professeur.findAll();
       for (const item of allProfs) {
         if (item.nb_eleve_tuteur > 0) {
@@ -99,19 +117,18 @@ exports.assignTuteur = async (eleve) => {
               indicateur++;
             }
           }
-          if (indicateur === 0) {
-            avaibleProfs.push(item.id);
+          if (indicateur === 0) { // si le tuteur n'apparait pas au moins une fois dans notAvaibleProfs
+            avaibleProfs.push(item.id); // on le rajoute dans allProfs
           }
         }
       }
-      console.log (avaibleProfs);
       if (avaibleProfs.length === 0) {
         return false; // Retourne false si aucun tuteur disponible
       }
   
       const selectedProfesseur = avaibleProfs[0];
   
-      await eleve.update({ professeurId: selectedProfesseur });
+      await eleve.update({ professeurId: selectedProfesseur }); // on modifie l'élève pour lui attribuer un tuteur
   
       return true; // Retourne true si l'attribution du tuteur est réussi
     } catch (error) {
@@ -119,8 +136,10 @@ exports.assignTuteur = async (eleve) => {
     }
 };
 
+//Assigner un parcours disponible à un élève
 exports.assignParcours = async (eleveId, nb_eleve_max) => {
   const eleve = await Eleve.findByPk(eleveId);
+
   // Comptage des parcours
   const counts = await Eleve.findAndCountAll({
     attributes: ['parcoursId'],
@@ -129,7 +148,7 @@ exports.assignParcours = async (eleveId, nb_eleve_max) => {
 
   const all_parcours = await Parcours.findAll();
 
-  // les parcours ayant été attribué à  nb_eleve_max personnes
+  // les parcours ayant été attribué à nb_eleve_max élèves
   const parc_not_available = [];
 
   for (let i = 0; i < counts.rows.length; i++) {
@@ -151,7 +170,7 @@ exports.assignParcours = async (eleveId, nb_eleve_max) => {
 
     if (indicateur === 0) {
       await eleve.update({
-        parcoursId: parc.id,
+        parcoursId: parc.id, // on attribut ce parcours à l'élève
       });
       break;
     }
@@ -159,23 +178,26 @@ exports.assignParcours = async (eleveId, nb_eleve_max) => {
   return eleve;
 };
 
+//envoi mdp à l'élève pour lui permettre de se connecter
 exports.sendPassword = async (eleveId) => {
   try {
     const eleve = await Eleve.findByPk(eleveId);
-    const password = generatedPassword;
+    const password = generatedPassword; // on généère un mot de passe au hazard 
     const recipientEmail = eleve.email;
 
+    //on envoie le mail avec le mot de passe
     await emailTemplates.sendPasswordEmail(recipientEmail, password);
 
+    // on hash ensuite le mot de passe pour l'enregistrer dans la base de données
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    //on modifie le mot de passe de l'élève
     await eleve.update({
       password: hashedPassword
     });
 
     return { message: "Mot de passe envoyé à l'élève avec succès" };
   } catch (error) {
-    console.error('Erreur lors de l\'envoi de mot de passe à l\'élève', error);
     throw new Error("Erreur lors de l'envoi de mot de passe à l'élève");
   }
 };

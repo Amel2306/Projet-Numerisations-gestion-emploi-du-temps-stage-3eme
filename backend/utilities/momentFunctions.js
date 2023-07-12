@@ -25,10 +25,11 @@ function minMom(ar_m, tableau_moments) {
         }
     }
 
-    console.log(min_mom); // Affiche la valeur finale de min_mom
     return min_mom;
 }
 
+// compte le nombre de fois ou l'activité n'est pas dispo dans la semaine
+// si elle n'est plus disponible dans aucun moment alors compt === 0
 function compteZero(ar_m) {
     let compt = 0;
     for (let i=0;i<ar_m.length; i++) {
@@ -59,7 +60,6 @@ async function activiteByMoment (nb_eleve_max) {
 
         //détermination du tableau de moment de chaque activite
         let moment_of_act = await momentsActivite(act.id)
-        console.log(moment_of_act);
         let compt = compteZero(moment_of_act)
         while (nb_realisations !== 0 && act.nb_eleve_max >= nb_eleve_max && compt < 10) {
             let id_min_mom = minMom(moment_of_act, tableau_moments)

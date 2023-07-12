@@ -21,12 +21,14 @@ exports.getActiviteByParcours = async (parcoursId) => {
 }
 
 exports.getActiviteParcByProf = async (profId) => {
+    //on recherche premièrement les activités du prof
     const activites = await Activite.findAll({
         where: {
             professeurId: profId
         }
     })
 
+    // on recherche ces activités dans ActiviteParcours pour obtenir l'index du moment
     const act_of_prof = [];
     for (const act of activites) {
         const all_act_parc = await ActiviteParcours.findAll({
@@ -37,9 +39,7 @@ exports.getActiviteParcByProf = async (profId) => {
                 [Sequelize.literal('indexMoment'), 'ASC']
             ]
         })
-        for (const act_parc of all_act_parc) {
-            act_of_prof.push(act_parc)
-        }
+        act_of_prof.push(...all_act_parc); // on rajoute toutes les activité-indexMoment-parcours associé à chaque activité
     }
     return act_of_prof;
 }
