@@ -3,6 +3,7 @@ const Eleve = require('../models/Eleve')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+//permet l'authentification
 exports.loginEleve = async (email, password) => {
     const eleve = await Eleve.findOne({
         where: {

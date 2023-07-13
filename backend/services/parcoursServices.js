@@ -18,7 +18,8 @@ exports.getActivitesByParcours = async (parcoursId) => {
 }
 
 //supprime les parcours déja existant et retourne nbParcours parcours 
-//nombre de parcours voulu par l'admin
+//nbParcours : nombre de parcours voulu par l'admin
+//nb_eleve_max : nombre d'élèves au minimum par parcours
 exports.generateParcours = async  (nbParcours, nb_eleve_max) => {
     try {
         await Parcours.destroy({where: {}}); //on supprime tous les parcours

@@ -36,16 +36,6 @@ exports.addQuestion = async (req, res) => {
     }
 }
 
-exports.deleteQuestion = async (req, res) => {
-    const questionId = req.params.id
-    try {
-        await QuestionServices.deleteQuestion(questionId)
-        res.status(200).json({message: "Question supprimée avec succés"})
-    }catch (error) {
-        res.status(500).json({message: "Impossible de supprimer une question", error})
-    }
-}
-
 exports.updateQuestion = async (req, res) => {
     const questionId = req.params.id
     const {contenu, questionnaire} = req.body
@@ -63,3 +53,14 @@ exports.updateQuestion = async (req, res) => {
         res.status(500).json({message: "Impossible de mettre à jour cette question", error})
     }
 }
+
+exports.deleteQuestion = async (req, res) => {
+    const questionId = req.params.id
+    try {
+        await QuestionServices.deleteQuestion(questionId)
+        res.status(200).json({message: "Question supprimée avec succés"})
+    }catch (error) {
+        res.status(500).json({message: "Impossible de supprimer une question", error})
+    }
+}
+

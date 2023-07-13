@@ -54,7 +54,7 @@ exports.getGroupe = async (eleveId) => {
   const parcours_commun = eleve.parcoursId
 
   //on récupère les élèves ayant le même
-  const binome = await Eleve.findAll({
+  const groupe = await Eleve.findAll({
     where: {
       [Op.and]: {
         parcoursId: parcours_commun,
@@ -65,11 +65,22 @@ exports.getGroupe = async (eleveId) => {
     }
   })
 
-  return binome
+  return groupe
 }
 
 //création d'un nouvel élève
 exports.createEleve = async (eleveData) => {
+  //dans le cas ou l'email ajouté est déjà dans la base de données on ne crée pas de nouvel élève
+  const eleveExistant = await Eleve.findOne({
+    where: {
+      email: eleveData.email
+    }
+  })
+
+  if (eleveExistant) {
+    return eleveExistant
+  }
+
   const nouvelEleve = await Eleve.create(eleveData);
   return nouvelEleve;
 };

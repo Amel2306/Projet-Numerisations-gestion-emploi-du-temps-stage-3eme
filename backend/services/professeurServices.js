@@ -36,6 +36,7 @@ exports.getEleveByTuteur= async (tuteurId) =>{
 
 exports.addProfesseur = async (profData) => {
   try {
+    //dans le cas ou le professeur existe déja (=> son email est déjà enregistré), on le retourne lui sans en créer un nouveau
     const profExiste = await Professeur.findOne({
       where: {
         email: profData.email

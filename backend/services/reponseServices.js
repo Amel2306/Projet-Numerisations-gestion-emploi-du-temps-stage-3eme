@@ -20,8 +20,8 @@ exports.getReponsesByQuestions = async (questionId) => {
 
 // le questionnaire à passer en paramètre est soit tuteur pour avoir les réponses du tuteur 
 // soit Encadrant pour avoir les réponses des encadrants concernant l'élève passé en params
-exports.getReponsesForEleve = async (eleveId, questionnaire) => {
-    const questions_questionnaire = await QuestionServices.getQuestionsByQuestionnaire(questionnaire);
+exports.getReponsesForEleve = async (eleveId) => {
+    const questions_questionnaire = await QuestionServices.getQuestionsByQuestionnaire("Tuteur");
     const questions_reponses = {}
 
     for (const quest_questionnaire of questions_questionnaire) {
@@ -85,7 +85,7 @@ exports.getReponsesByTuteur = async (profId) => {
     return tuteur_questions_reponse
 }
 
-//permet à un encadrant de récupérer les réponses qu'il a effectué sur chaque activite
+//permet de récupérer les réponses qu'un encadrant a effectué sur chacune de ses activités
 exports.getReponsesByEncadrant = async (profId) => {
     const encadrant_questions_reponses = {}
 
