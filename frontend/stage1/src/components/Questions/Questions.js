@@ -1,16 +1,16 @@
-import QuestionQuestionnaire from "./QuestionQuestionnaire"
+import QuestionAffiche from "./QuestionsAffiche"
 
 function Questions () {
     return (
         <div>
             <div className="questionnaire">
-                <QuestionQuestionnaire questionnaire="Eleve"/>
+                <QuestionAffiche questionnaire="Eleve"/>
             </div>
             <div className="questionnaire">
-                <QuestionQuestionnaire questionnaire="Tuteur"/>
+                <QuestionAffiche questionnaire="Tuteur"/>
             </div>
             <div className="questionnaire">
-                <QuestionQuestionnaire questionnaire="Encadrant"/>
+                <QuestionAffiche questionnaire="Encadrant"/>
             </div>
         </div>
     )

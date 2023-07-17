@@ -1,6 +1,6 @@
 const Parcours = require ("../models/Parcours");
 const Activite = require ("../models/Activite");
-const associeParcoursActivite = require ("../utilities/parcoursFunctions");
+const associeParcoursActivite = require ("../utilities/GénérationParcours/parcoursFunctions");
 
 exports.getAllParcours = async () => {
     const allParcours = await Parcours.findAll();

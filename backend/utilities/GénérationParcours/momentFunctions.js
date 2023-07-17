@@ -1,5 +1,5 @@
-const Moment = require ("../models/classes/Moment");
-const Activite = require ("../models/Activite");
+const Moment = require ("../../models/classes/Moment");
+const Activite = require ("../../models/Activite");
 const {momentsActivite} = require ("./activitesFunctions");
 
 /*

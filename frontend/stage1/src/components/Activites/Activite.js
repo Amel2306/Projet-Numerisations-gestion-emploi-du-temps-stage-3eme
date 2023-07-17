@@ -4,11 +4,11 @@ import axiosInstance from "../../config/axiosConfig";
 import ActiviteDescr from "./ActiviteDescr";
 import EleveActivite from "./EleveActivite";
 
-function Activite (props) {
-
-    const [activite, setActivite] = useState(null)
+function Activite () {
 
     let {id} = useParams()
+    
+    const [activite, setActivite] = useState(null)
 
     const handleSupprime = (id) => {
         const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer cette activité ?");
