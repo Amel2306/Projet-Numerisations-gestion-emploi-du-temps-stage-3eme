@@ -1,4 +1,4 @@
-const Activite = require("../models/Activite")
+const Activite = require("../../models/Activite")
 
 
 //prend en paramètre une activiteID

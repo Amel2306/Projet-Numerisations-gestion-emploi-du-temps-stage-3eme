@@ -1,5 +1,7 @@
 .parcours {
     background: white;
+    border-radius: 20px;
+    border-color: #5B2B2A solid;
     margin-top: 40px;
 }
 

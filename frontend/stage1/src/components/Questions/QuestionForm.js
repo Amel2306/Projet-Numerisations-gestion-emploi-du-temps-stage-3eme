@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
+import "./Questions.css"
 
 function QuestionForm () {
     const [contenu, setContenu] = useState("")
@@ -30,7 +31,7 @@ function QuestionForm () {
     }
 
     return (
-        <div>
+        <div className="container-form">
             <h1>Formulaire question</h1>
             <form onSubmit={(e) => handleSubmit(e)}>
 
@@ -38,7 +39,8 @@ function QuestionForm () {
                 <div>
                     <label>Contenu de la question</label>
                     <input 
-                        type="textarea" 
+                        className="question-input"
+                        type="text" 
                         value={contenu}
                         onChange={(e) => setContenu(e.target.value)}
                         placeholder="Contenu de la question"
@@ -49,6 +51,7 @@ function QuestionForm () {
                 <div>
                     <label>Type de questionnaire ou sera ajouté la question</label>  
                     <select 
+                        className="question-input"
                         value={questionnaire} 
                         onChange={(e) => setQuestionnaire(e.target.value)}
                         required

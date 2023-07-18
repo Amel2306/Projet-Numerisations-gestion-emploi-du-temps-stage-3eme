@@ -6,6 +6,8 @@ import Parc from "../Parcours/Parc";
 import EleveDescr from "./EleveDescr";
 import EleveGroupe from "./EleveGroupe";
 import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
+import ElevePdf from "./ElevePdf";
+import {PDFDownloadLink} from "@react-pdf/renderer"
 
 
 function Eleve (props) {
@@ -35,10 +37,10 @@ function Eleve (props) {
 
     const handleValide = (id) => {
 
-        const confirmation = window.confirm("Êtes-vous sûr de vouloir valider cet élève ?");
+        const confirm = window.confirm("Êtes-vous sûr de vouloir valider cet élève ?");
 
-        if (confirmation) {
-            axiosInstance.post (`/eleves/confirmation/${id}`)
+        if (confirm) {
+            axiosInstance.put(`eleves/confirmation/${id}`)
             .then((res) => {
                 console.log(res);
                 window.location.reload();
@@ -136,6 +138,12 @@ function Eleve (props) {
                     />                 
                 </div>    
               ))}
+
+            <PDFDownloadLink document={<ElevePdf eleve={eleve} />} fileName={"eleve"+eleve.id+".pdf"}>
+                {({ blob, url, loading, error }) =>
+                    loading ? 'Téléchargement en cours...' : 'Télécharger la fiche élève'
+                }
+            </PDFDownloadLink>    
         </div>
     )
 

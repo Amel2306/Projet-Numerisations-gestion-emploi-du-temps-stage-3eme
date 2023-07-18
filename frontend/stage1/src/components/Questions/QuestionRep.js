@@ -92,11 +92,11 @@ function QuestionRep(props) {
           />
             {repondu ? (
             <button className="btn" onClick={(e) => updateReponse(e)}>
-                {repondu} <i className="fa-solid fa-pen"></i>
+                <i className="fa-solid fa-pen"></i>
             </button>
             ) : (
             <button className="btn" onClick={(e) => handleReponse(question.id,e)}>
-                {repondu} <i className="fa-solid fa-check"></i>
+                <i className="fa-solid fa-check"></i>
             </button>
             )}
         </form>

@@ -1120,7 +1120,7 @@ La liste des élèves dont le professeur est tuteur
   - #### Request 
 
 ```http
-  GET /api/activites
+  GET /api/activiteparcours/555
 ```
 
   - #### Response
@@ -1184,7 +1184,7 @@ La liste des élèves dont le professeur est tuteur
 
 - #### Request
 ```http
-  GET /api/activiteparcours/54
+  GET /api/activiteparcours/eleve/54
 ```
 
 - #### Response
@@ -1372,6 +1372,42 @@ La liste des élèves dont le professeur est tuteur
     }
 ```
 </details>
+
+### Ajouter une activité à tous les parcours à un moment particulier
+> il va falloir créer l'activité avant et récupérer son identifiant pour l'utiliser ici 
+
+```http
+  POST /api/activiteparcours/parcours
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `activiteId`      | `int` | **Required**. id de l'activité qu'on souhaite rajouter dans le parcours |
+| `indexMoment`      | `int` | **Required**. idex du moment durant lequel on veut ajouter l'activité |
+
+<details>
+<summary>Exemple</summary>
+<br>
+
+- #### Request
+```
+    
+    {
+        "activiteId": 57,
+        "indexMoment": 7
+    }
+
+```
+
+- #### Response 
+
+```
+  {
+    "message": "L'activité à été ajoutée à tous les parcours avec succés"
+  }
+```
+</details>
+
 </details>
 
 <details>

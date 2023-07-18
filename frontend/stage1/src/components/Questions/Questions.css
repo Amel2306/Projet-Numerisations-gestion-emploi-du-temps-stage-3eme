@@ -1,0 +1,33 @@
+.question-input {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    font-weight: 500px;
+    font-size: .8vw;
+    color: #5B2B2A ;
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    background-color: transparent;
+    box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
+    border-radius: 15px ;
+    border: #CC7D7C 2px;
+    outline: none;
+    padding: 0.4vw;
+    transition: .4s;
+    margin: 10px;
+  }
+  
+  .question-input:hover {
+    box-shadow: 0 0 0 .15vw rgba(135, 207, 235, 0.186);
+  }
+  
+  .question-input:focus {
+    box-shadow: 0 0 0 .15vw #CC7D7C;
+  }
+
+.container-form {
+    border-radius: 20px;
+    border-style: solid; /* Définir le style de la bordure (par exemple, "solid") */
+    border-color: #5B2B2A; /* Remplacez cette couleur par celle de votre choix */
+    max-width: 700px;
+    margin-top: 30px;
+}

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import {Link, useParams } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
 import ActiviteDescr from "./ActiviteDescr";
+import AjoutActAllPar from "./AjoutActAllParc";
+import AjoutActPar from "./AjoutActParc";
 import EleveActivite from "./EleveActivite";
 
-function Activite (props) {
-
-    const [activite, setActivite] = useState(null)
+function Activite () {
 
     let {id} = useParams()
+    
+    const [activite, setActivite] = useState(null)
 
     const handleSupprime = (id) => {
         const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer cette activité ?");
@@ -47,6 +49,9 @@ function Activite (props) {
                             <EleveActivite activiteId={id} indexMoment={i} professeurId={activite.professeurId}/>
                         </div>
                     ))}
+
+                    <AjoutActPar activiteId= {id} />
+                    <AjoutActAllPar activiteId= {id} />
                     <button 
                         className="btn"
                         onClick={() => handleSupprime(id)}

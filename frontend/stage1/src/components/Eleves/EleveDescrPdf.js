@@ -18,6 +18,7 @@ const stylesAct = StyleSheet.create({
 });
 
 function EleveDescrPdf(props) {
+    
     const id= props.id
 
     const [eleve, setEleve] = useState(null)

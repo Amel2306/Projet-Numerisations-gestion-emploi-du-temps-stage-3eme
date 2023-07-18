@@ -14,7 +14,7 @@ function EleveGroupe (props)  {
     const [etat, setEtat] = useState(false)
 
     useEffect(() =>{
-        axiosInstance.get(`/eleves/binome/${id}`)
+        axiosInstance.get(`/eleves/groupe/${id}`)
         .then((res) => {
             setGroupe(res.data)
         })

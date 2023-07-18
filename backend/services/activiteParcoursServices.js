@@ -2,6 +2,7 @@ const ActiviteParcours = require ("../models/ActiviteParcours");
 const Activite = require ("../models/Activite");
 const Eleve = require("../models/Eleve");
 const { Sequelize } = require('sequelize');
+const Parcours = require("../models/Parcours");
 
 exports.getAllActivitesParcours = async () => {
     const allActivitesParcours = await ActiviteParcours.findAll();
@@ -66,10 +67,53 @@ exports.getActiviteParcByEleve = async (eleveId) => {
 }
 
 exports.associateActiviteParcours = async (parcoursId, activiteId, indexMoment) => {
+    await ActiviteParcours.destroy({
+        where: {
+            parcoursId,
+            indexMoment
+        }
+    })
+
+    await ActiviteParcours.destroy({
+        where: {
+            parcoursId,
+            activiteId
+        }
+    })
+
     const newAssociation = await ActiviteParcours.create({
         parcoursId,
         activiteId,
         indexMoment
     })
     return newAssociation;
+}
+
+exports.associateActToAllParc = async (activiteId, indexMoment) => {
+    const all_parcs = await Parcours.findAll({})
+
+    for (const parc of all_parcs) {
+
+        // on supprime l'activité du parcours de ce moment la 
+        await ActiviteParcours.destroy({
+            where: {
+                parcoursId: parc.id,
+                indexMoment
+            }
+        })
+
+        await ActiviteParcours.destroy({
+            where: {
+                parcoursId: parc.id,
+                activiteId
+            }
+        })
+
+        await ActiviteParcours.create({
+            parcoursId: parc.id,
+            activiteId,
+            indexMoment
+        })
+    }
+    return true
 }

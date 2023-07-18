@@ -1,6 +1,6 @@
-const Activite = require ('../models/Activite');
-const Parcours = require('../models/Parcours');
-const ActiviteParcours = require ("../models/ActiviteParcours");
+const Activite = require ('../../models/Activite');
+const Parcours = require('../../models/Parcours');
+const ActiviteParcours = require ("../../models/ActiviteParcours");
 const {activiteByMoment, minMom} = require ('./momentFunctions');
 
 
