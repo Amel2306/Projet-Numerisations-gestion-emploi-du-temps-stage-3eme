@@ -7,6 +7,7 @@ import QuestionQuestionnaire from '../Questions/QuestionQuestionnaire'
 import ActiviteDescrPdf from '../Activites/ActiviteDescrPdf'
 
 const styles = StyleSheet.create({
+
     page: {
         flexDirection: 'column',
         backgroundColor: 'white',
@@ -65,7 +66,7 @@ function ElevePdf (props) {
     }, [])
 
     useEffect(() =>{
-        axiosInstance.get(`/eleves/binome/${eleve.id}`)
+        axiosInstance.get(`/eleves/groupe/${eleve.id}`)
         .then((res) => {
             setGroupe(res.data)
         })

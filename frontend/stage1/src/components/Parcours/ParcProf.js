@@ -56,7 +56,7 @@ function ParcProf(props) {
                 <ul key={momentIndex}>
                 {moment && moment.map((activite, activiteIndex) => (
                     <div>
-                        <ActiviteDescr key={activiteIndex} id={activite.activiteId} />
+                        <ActiviteDescr key={activiteIndex} id={activite.activiteId}/>
                         <h3> Parcours : {activite.parcoursId}</h3>                      
                     </div>
                 ))}

@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     }
 });
 
+
 function ParcProfPdf(props) {
 
     const activites = props.activites;
@@ -46,12 +47,11 @@ function ParcProfPdf(props) {
                         <Text> {moments.length > 0  && tab_moment[index]} </Text>
                         {moments.length > 0 && moments.map((moment, momentIndex) => (
                             <ul key={momentIndex}>
-                            {moment && moment.map((activite, activiteIndex) => (
+                            {moment && moment[0] && (
                                 <View style={styles.section}>
-                                    <ActiviteDescrPdf key={activiteIndex} id={activite.activiteId} />
-                                    <Text> Parcours : {activite.parcoursId}</Text>                      
+                                    <ActiviteDescrPdf id={moment[0].activiteId} indexMoment = {moment[0].indexMoment} role={"prof"}/>                    
                                 </View>
-                            ))}
+                            )}
                             </ul>
                         ))}
                     </div>
