@@ -67,6 +67,20 @@ exports.getActiviteParcByEleve = async (eleveId) => {
 }
 
 exports.associateActiviteParcours = async (parcoursId, activiteId, indexMoment) => {
+    await ActiviteParcours.destroy({
+        where: {
+            parcoursId,
+            indexMoment
+        }
+    })
+
+    await ActiviteParcours.destroy({
+        where: {
+            parcoursId,
+            activiteId
+        }
+    })
+
     const newAssociation = await ActiviteParcours.create({
         parcoursId,
         activiteId,

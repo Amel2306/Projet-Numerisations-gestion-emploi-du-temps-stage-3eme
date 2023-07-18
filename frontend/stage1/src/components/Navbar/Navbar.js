@@ -15,7 +15,7 @@ function Navbar(props) {
     }
 
     return (
-        <nav>
+        <nav className='nav'>
             <Link to="/" className='logo'>
                 Acceuil
             </Link>

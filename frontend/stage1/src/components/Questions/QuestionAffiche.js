@@ -25,7 +25,7 @@ function QuestionAffiche (props) {
                         <div> {
                             modification ? 
                             <div> 
-                                <input
+                                <textarea
                                     className="question-input"
                                     defaultValue= {contenu}
                                     onChange={(e) => setContenu(e.target.value)}

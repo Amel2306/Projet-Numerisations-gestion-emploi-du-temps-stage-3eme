@@ -14,7 +14,7 @@ function ActiviteForm (props) {
     const [description, setDescription] = useState("")
     const [nb_realisations, setNbReal] = useState(0)
     const [nb_eleve_max, setNbEleve] = useState(0)
-    const [l1, setL1] = useState(0)    
+    const [l1, setL1] = useState(0)
     const [l2, setL2] = useState(0)
     const [ma1, setMa1] = useState(0)
     const [ma2, setMa2] = useState(0)

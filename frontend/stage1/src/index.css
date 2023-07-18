@@ -6,7 +6,7 @@
 
 body {
   background: rgb(225,199,199);
-  background: linear-gradient(90deg, rgba(225,199,199,1) 50%, rgba(248,239,217,1) 100%);
+  background: linear-gradient(90deg, #e1c7c7 50%, rgba(248,239,217,1) 100%);
   min-height: 100vh;
   display: flex;
   justify-content: center;

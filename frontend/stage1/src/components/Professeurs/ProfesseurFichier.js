@@ -49,10 +49,10 @@ function ProfesseurFichier () {
                     console.log(formattedData)
 
                     try {
-                        for (const rowData of formattedData) {
+                        for (let rowData of formattedData) {
                           const reponse = await axiosInstance.post('/professeurs', rowData);
                           const professeurId = reponse.data.id                          
-                          if (rowData.nom_act && rowData.description && rowData.j1) {
+                          if (rowData.nom_act && rowData.description) {
                             const activiteData = {
                                 nom: rowData.nom_act,
                                 description: rowData.description,
@@ -70,7 +70,7 @@ function ProfesseurFichier () {
                                 v2: rowData.v2, 
                                 professeurId
                             }
-                            await axiosInstance.post('/activites', activiteData)                            
+                            axiosInstance.post('/activites', activiteData)                            
                           }
                         }
                         console.log('Toutes les requêtes POST ont été effectuées.');
@@ -83,7 +83,6 @@ function ProfesseurFichier () {
             })
         }
     }
-
     return (
         <div>
             <label>Veuillez joindre votre fichier </label>

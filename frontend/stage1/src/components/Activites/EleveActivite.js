@@ -36,7 +36,6 @@ function EleveActivite (props) {
         axiosInstance.get(`/eleves/activite/${activiteId}/${indexMoment}`)
         .then ((res) => {
             setEleves(res.data)
-            console.log(res.data)
         })
         .catch((err) => {
             console.error(err)
