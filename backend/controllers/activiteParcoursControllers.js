@@ -68,3 +68,16 @@ exports.associateActiviteParcours= async (req, res) => {
         res.status(500).json({message: "Impossible de créer une nouvelle association", err})
     }
 }
+
+exports.associateActToAllParc = async (req, res) => {
+    const { activiteId, indexMoment} = req.body 
+    try {
+        const reponse = await ActiviteParcoursServices.associateActToAllParc(activiteId, indexMoment)
+        if (reponse) {
+            res.json({message: "L'activité à été ajoutée à tous les parcours avec succés"})
+        }
+    }
+    catch (error) {
+        res.status(500).json({message: "Un problème est survenu lors de l'ajout de l'activité dans les parcours", error})
+    }
+}

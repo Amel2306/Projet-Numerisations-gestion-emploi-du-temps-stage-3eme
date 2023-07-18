@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import {Document, Page, View, StyleSheet, Text} from '@react-pdf/renderer'
 import axiosInstance from '../../config/axiosConfig'
 import EleveDescrPdf from './EleveDescrPdf'
-import ListeEleves from './ListeElevesPdf'
-import QuestionQuestionnaire from '../Questions/QuestionQuestionnaire'
 import ActiviteDescrPdf from '../Activites/ActiviteDescrPdf'
 
 const styles = StyleSheet.create({
@@ -29,7 +27,13 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         break: 'after',
         fontSize: 15,
-    }
+    },
+    title: {
+        margin: 10,
+        paddingBottom: 10,
+        textAlign: 'center',
+        fontSize: '20px'
+    },
 });
 
 
@@ -52,6 +56,7 @@ function ElevePdf (props) {
 
     const [activites, setActivites] = useState(null)
     const [groupe, setGroupe] = useState(null)
+    const [tuteur, setTuteur] = useState(null)
 
     useEffect (() => {
 
@@ -75,27 +80,51 @@ function ElevePdf (props) {
         })
     }, [])
 
+    useEffect(() =>{
+        axiosInstance.get(`/professeurs/${eleve.professeurId}`)
+        .then((res) => {
+            setTuteur(res.data)
+        })
+        .then((err) => {
+            console.error(err)
+        })
+    }, [])
+
+
     return (
         <Document>
             <Page>
-                <View>
+                <Text style={styles.header}>{eleve.nom + " " + eleve.prenom}</Text>
+                <View style={styles.section}>
                     <EleveDescrPdf id={eleve.id}/>
                 </View>
                 <View style={styles.section}>
                     {activites &&
-                        activites.map((act) => (
-                            <View key={act.activiteId} style={styles.section}>
-                                <Text style={{ color: 'green', paddingBottom: "12px" }}>{moment[act.indexMoment]}</Text>
-                                <ActiviteDescrPdf id={act.activiteId} style={{backgroundColor: '#cfbba5'}} />
-                            </View>
-                        ))}
+                        <>
+                            <Text style={styles.title}>Mon parcours : </Text>
+                            {activites.map((act) => (
+                                <View key={act.activiteId} style={styles.section}>
+                                    <Text style={{ color: 'green', paddingBottom: "12px" }}>{moment[act.indexMoment]}</Text>
+                                    <ActiviteDescrPdf id={act.activiteId} style={{backgroundColor: '#cfbba5'}} />
+                                </View>
+                            ))}                  
+                        </>
+                    }
                 </View>    
-                <View>
-                    <ListeEleves eleves={groupe} />               
+                <View style={styles.section}>
+                    <Text style={styles.title}>Mon groupe : </Text>
+                    {groupe && groupe.map((eleve) => (
+                        <EleveDescrPdf id={eleve.id} />
+                    ))}              
                 </View>
-                <View>
-                    <QuestionQuestionnaire questionnaire="Eleve" />                     
-                </View>  
+                {tuteur && (
+                    <View style={styles.section}>
+                        <Text style={styles.title}>Mon tuteur {tuteur.nom + " " + tuteur.prenom + " :" }</Text>
+                        <Text> email : {tuteur.email}</Text>
+                        <Text> metier : {tuteur.metier}</Text>
+                        <Text> etablissement : {tuteur.etablissement}</Text>
+                    </View>
+                )}
             </Page>
         </Document>
     )

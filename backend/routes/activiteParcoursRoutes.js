@@ -9,5 +9,6 @@ router.get("/:parcoursId", ActiviteParcoursControllers.getActiviteByParcours);
 router.get("/eleve/:eleveId", ActiviteParcoursControllers.getActiviteParcByEleve);
 router.get("/professeur/:profId", ActiviteParcoursControllers.getActiviteParcByProf);
 router.post ("/", ActiviteParcoursControllers.associateActiviteParcours);
+router.post("/parcours", ActiviteParcoursControllers.associateActToAllParc);
 
 module.exports = router;
