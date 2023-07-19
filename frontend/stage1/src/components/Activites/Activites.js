@@ -57,7 +57,7 @@ function Activtes () {
             </div>
 
             <button className="btn">
-                <Link to="/activiteForm">Ajouter une activité</Link>
+                <Link className="link" to="/activiteForm">Ajouter une activité</Link>
             </button>
             <button className="btn" onClick={handleSupprimeAll}>
                 Supprimer les activités

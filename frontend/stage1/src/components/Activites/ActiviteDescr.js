@@ -26,7 +26,7 @@ function ActiviteDescr (props) {
                 <p>Nombre de réalisation: {activite.nb_realisations}</p>
                 <p>Nombre d'élèves au maximum: {activite.nb_eleve_max}</p>
                 <p>id : {activite.id}</p>
-                <Link to={`/activite/${id}`}>Voir activité</Link>
+                <Link className="link" to={`/activite/${id}`}>Voir activité</Link>
             </div>
         )
     )

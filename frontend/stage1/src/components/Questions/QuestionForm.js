@@ -31,14 +31,13 @@ function QuestionForm () {
     }
 
     return (
-        <div className="container-form">
+        <div className="container-question-form">
+
+            <form className="container-form" onSubmit={(e) => handleSubmit(e)}>
             <h1>Formulaire question</h1>
-            <form onSubmit={(e) => handleSubmit(e)}>
-
-
-                <div>
+                <div className="question-reponse">
                     <label>Contenu de la question</label>
-                    <input 
+                    <textarea 
                         className="question-input"
                         type="text" 
                         value={contenu}

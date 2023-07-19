@@ -88,7 +88,7 @@ function Professeur () {
                             </div>
                         ))} 
                         {etat && 
-                                <PDFDownloadLink 
+                                <PDFDownloadLink className="link"  
                                 document={<ListeEleves 
                                 eleves={eleves} 
                                 professeur={professeur}/>} 

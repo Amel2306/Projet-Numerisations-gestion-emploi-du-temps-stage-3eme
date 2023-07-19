@@ -60,7 +60,7 @@ function EleveActivite (props) {
         ))}
        
        {etat && (
-            <PDFDownloadLink document={<ListeEleves eleves={eleves} moment={moment[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
+            <PDFDownloadLink className="link"  document={<ListeEleves eleves={eleves} moment={moment[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
                 }
