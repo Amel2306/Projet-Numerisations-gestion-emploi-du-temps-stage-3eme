@@ -42,7 +42,7 @@ function Activite () {
                     <ActiviteDescr id={id}/>
                     <div> 
                         <p>Encadrant respo: {activite.professeurId}</p>
-                        <Link to={`/professeur/${activite.professeurId}` } >Voir Scientifique</Link>                     
+                        <Link className="link" to={`/professeur/${activite.professeurId}` } >Voir Scientifique</Link>                     
                     </div>
                     {Array.from({ length: 10 }, (_, i) => (
                         <div className="elevesActivite" key={i}>

@@ -6,10 +6,16 @@
 }
 
 .element {
-    background: white;
-    width: 400px;
-    height: 300px;
+    background: rgb(255, 255, 255, 0.4);
+    width: 300px;
+    height: 150px;
     margin: 20px;
     border-radius: 15px;
-    position: center;
+    border: 2px solid #5B2B2A;
+    cursor: pointer;
+}
+
+.element:hover {
+    transform: rotate(360deg);
+    transition: 0.4s;
 }

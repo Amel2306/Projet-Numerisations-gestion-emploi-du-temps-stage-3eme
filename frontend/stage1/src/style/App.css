@@ -48,7 +48,7 @@
 input {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   font-weight: 500px;
-  font-size: .8vw;
+  font-size: 15px;
   color: #5B2B2A ;
   width: 100%;
   height: 100%;
@@ -73,7 +73,7 @@ input:focus {
 
 textarea {
   font-weight: 500px;
-  font-size: .8vw;
+  font-size: 15px;
   color: #5B2B2A ;
   width: 100%;
   height: 100%;
@@ -102,4 +102,9 @@ textarea:focus {
 .container-form {
   border-radius: 20px;
   border-color: #5B2B2A;
+}
+
+.link {
+  text-decoration: none;
+  color: #CC7D7C;
 }

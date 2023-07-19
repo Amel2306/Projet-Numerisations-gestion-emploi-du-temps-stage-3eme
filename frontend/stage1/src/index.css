@@ -85,4 +85,15 @@ body, html, App, #root, .auth-wrapper {
   margin: 10px;
   cursor: pointer;
   color: #5B2B2A;
+  border-color: #5B2B2A;
+  border: 10px;
+  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+}
+
+.btn:hover {
+  background: #5B2B2A;
+  color:#CC7D7C ;
+  border: #5B2B2A;
+  transition: .4s;
+  box-shadow: 0 0 0 .15vw #5B2B2A;
 }

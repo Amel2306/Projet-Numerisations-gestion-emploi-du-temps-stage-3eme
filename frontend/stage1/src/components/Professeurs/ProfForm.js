@@ -117,11 +117,11 @@ function ProfForm () {
                 )}
 
                 {role === "Tuteur" ? (
-                    <button>Valider</button>
+                    <button className="btn">Valider</button>
                 ) :
                 (
-                    <button>
-                        <Link to="/activiteForm">Ajouter une activité</Link>
+                    <button className="btn">
+                        <Link className="link" to="/activiteForm">Ajouter une activité</Link>
                     </button>
                 )}
             </form>

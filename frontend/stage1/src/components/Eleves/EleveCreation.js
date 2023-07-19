@@ -6,7 +6,7 @@ function EleveCreation () {
             <h1>Vous avez ajouté un nouvel élève, félicitation ! </h1>
 
             <button className="btn">
-                <Link to="/eleveForm">En créer une autre</Link>
+                <Link className="link" to="/eleveForm">En créer une autre</Link>
             </button>
         </div>
     )

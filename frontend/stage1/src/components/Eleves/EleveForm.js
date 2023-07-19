@@ -122,7 +122,7 @@ function EleveForm () {
                     />                    
                 </div>
 
-                <button>Valider</button>
+                <button className='btn'>Valider</button>
 
             </form>
             <EleveFichier/>

@@ -33,8 +33,6 @@ function Eleves () {
     }
 
     const handleClick = ( id) => {
-
-      /*e.preventDefault()*/
       navigate(`/eleve/${id}`)
 
     }
@@ -51,7 +49,7 @@ function Eleves () {
             </div>
 
           ))}
-          <Link to='/eleveForm'> Ajouter un élève</Link>
+          <Link className="link" to='/eleveForm'> Ajouter un élève</Link>
 
           <button className="btn" onClick={handleSupprimeAll}>Supprimer tous les élèves</button>
         </div>

@@ -16,7 +16,7 @@ function Navbar(props) {
 
     return (
         <nav className='nav'>
-            <Link to="/" className='logo'>
+            <Link className="link" to="/" className='logo'>
                 Acceuil
             </Link>
 
@@ -26,40 +26,40 @@ function Navbar(props) {
                         !user ?(
                             <>
                                 <li>
-                                    <Link to="/login/professeurs">Encadrant-tuteur</Link>
+                                    <Link className="link" to="/login/professeurs">Encadrant-tuteur</Link>
                                 </li>
                                 <li>
-                                    <Link to="/login/eleves">Élève</Link>
+                                    <Link className="link" to="/login/eleves">Élève</Link>
                                 </li>
                                 <li>
-                                    <Link to="/eleves">Liste élèves</Link>
+                                    <Link className="link" to="/eleves">Liste élèves</Link>
                                 </li>
                                 <li>
-                                    <Link to="/professeurs">Liste Des Scientifiques</Link>
+                                    <Link className="link" to="/professeurs">Liste Des Scientifiques</Link>
                                 </li>
                                 <li>
-                                    <Link to="/activites">Liste Activités</Link>
+                                    <Link className="link" to="/activites">Liste Activités</Link>
                                 </li>
                                 <li>
-                                    <Link to="/parcoursGeneration">Générer des parcours</Link>
+                                    <Link className="link" to="/parcoursGeneration">Générer des parcours</Link>
                                 </li>
                                 <li>
-                                    <Link to="/parcours">Parcours</Link>
+                                    <Link className="link" to="/parcours">Parcours</Link>
                                 </li>
                                 <li>
-                                    <Link to="/questionForm">Ajout question</Link>
+                                    <Link className="link" to="/questionForm">Ajout question</Link>
                                 </li>
                                 <li>
-                                    <Link to="/questions">Questions</Link>
+                                    <Link className="link" to="/questions">Questions</Link>
                                 </li>
                                 <li>
-                                    <Link to="/reponsesEleves">Réponses élèves</Link>
+                                    <Link className="link" to="/reponsesEleves">Réponses élèves</Link>
                                 </li>
                                 <li>
-                                    <Link to="/reponses/Encadrant">Réponses encadrants</Link>
+                                    <Link className="link" to="/reponses/Encadrant">Réponses encadrants</Link>
                                 </li>
                                 <li>
-                                    <Link to="/reponses/Tuteur">Réponses Tuteur</Link>
+                                    <Link className="link" to="/reponses/Tuteur">Réponses Tuteur</Link>
                                 </li>
                             </>
                         ) : (

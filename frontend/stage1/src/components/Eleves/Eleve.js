@@ -117,7 +117,7 @@ function Eleve (props) {
               ):
               (
                 <button className="btn">
-                    <Link to={`/professeur/${eleve.professeurId}`}> Voir Tuteur </Link>
+                    <Link className="link" to={`/professeur/${eleve.professeurId}`}> Voir Tuteur </Link>
                 </button>
               )}
 
