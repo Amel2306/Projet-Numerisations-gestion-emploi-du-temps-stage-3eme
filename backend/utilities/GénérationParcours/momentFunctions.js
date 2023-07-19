@@ -1,6 +1,6 @@
 const Moment = require ("../../models/classes/Moment");
 const Activite = require ("../../models/Activite");
-const {momentsActivite} = require ("./activitesFunctions");
+const {compteZero,momentsActivite,triActivite} =  require ("./activitesFunctions");
 
 /*
 Les Moments : sont indexé de 0 à 9 en fonction de leur période dans le semaine 
@@ -28,18 +28,6 @@ function minMom(ar_m, tableau_moments) {
     return min_mom;
 }
 
-// compte le nombre de fois ou l'activité n'est pas dispo dans la semaine
-// si elle n'est plus disponible dans aucun moment alors compt === 0
-function compteZero(ar_m) {
-    let compt = 0;
-    for (let i=0;i<ar_m.length; i++) {
-        if (ar_m[i] === 0) {
-            compt+=1
-        } 
-    }
-    return compt
-}
-
 //prend en paramètre le nombre maximum d'élève dans un groupe
 //permet d'attribué une activité à un moment précis 
 //en prenant en compte le fait qu'elle ne peut apparaitre dans un même moment 
@@ -58,18 +46,26 @@ async function activiteByMoment (nb_eleve_max) {
 
     // ajouter fonction tri activités
 
+    const activites_triees = await triActivite(activites)
 
-    for (act of activites) {
-        let nb_realisations = act.nb_realisations;
+    for (let i = 0; i< activites_triees.length; i++) {
+        let act = activites_triees[i]
+        console.log(act)
+        let nb_realisations = act.activite.nb_realisations;
 
         //détermination du tableau de moment de chaque activite (le moments ou l'activité peut être réalisée)
-        let moment_of_act = await momentsActivite(act.id)
-        let compt = compteZero(moment_of_act) // le nombre de fois dans la semaine ou l'activité n'est pas dispo
-        while (nb_realisations !== 0 && act.nb_eleve_max >= nb_eleve_max && compt < 10) {
+        let moment_of_act = act.momentsActivite
+
+        let compt = act.nbrZero // le nombre de fois dans la semaine ou l'activité n'est pas dispo
+
+        while (nb_realisations !== 0 && act.activite.nb_eleve_max >= nb_eleve_max && compt < 10) {
+
             let id_min_mom = minMom(moment_of_act, tableau_moments)
+
             if (id_min_mom !== -1 ) {
                 //ajoute l'activité dans le moment qui en a le plus besoin (=> a le moins d'occupation)
-                tableau_moments[id_min_mom].addActivite(act.id, act.nb_eleve_max)
+                tableau_moments[id_min_mom].addActivite(act.activite.id, act.activite.nb_eleve_max)
+
                 moment_of_act[id_min_mom] = 0;
                 nb_realisations--;
                 compt += 1

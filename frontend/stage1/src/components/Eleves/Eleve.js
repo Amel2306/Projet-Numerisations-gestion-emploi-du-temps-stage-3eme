@@ -139,7 +139,7 @@ function Eleve (props) {
                 </div>    
               ))}
 
-            <PDFDownloadLink document={<ElevePdf eleve={eleve} />} fileName={"eleve"+eleve.id+".pdf"}>
+            <PDFDownloadLink className="link"  document={<ElevePdf eleve={eleve} />} fileName={"eleve"+eleve.id+".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Téléchargement en cours...' : 'Télécharger la fiche élève'
                 }

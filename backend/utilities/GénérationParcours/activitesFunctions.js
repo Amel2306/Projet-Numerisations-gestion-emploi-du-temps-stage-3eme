@@ -40,15 +40,46 @@ async function momentsActivite(activiteId) {
 }
 
 // tab_activite : tableau de toutes les activités disponibles
+//retourne tableau d'objet {activite, nbrZero, momentActivite} trié en fonction de nbrZero
 async function triActivite (tab_activite) {
 
-    // tableau qui va stocker le nombre de zéro de chaque activité
-    const nb_zero_acttivite = new Array(tab_activite.length)
+    // tableau qui va stocker des objet {activite, nbrZero, momentActivite}
+    const tab_tri_activite = new Array(tab_activite.length)
 
-    // tableau qui va stocker les activité de façon ordonnés 
-    const tab_tri = new Array(tab_activite.length)
+    // on crée les objet dans le tableau
+    for (let i = 0; i<tab_activite.length; i++) {
+        const moment_act = await momentsActivite(tab_activite[i].id)
+        const new_obj = {
+            activite: tab_activite[i],
+            nbrZero: compteZero(moment_act),
+            momentsActivite: moment_act
+        }
+
+        tab_tri_activite[i] = new_obj
+    }
+
+    // on trie les activité en fonction de leur nbrZero (ceux ayant le plus de 0 se retrouvent en début de tableau)
+    for (let i = 0; i< tab_tri_activite.length; i++) {
+
+        let element_courant = tab_tri_activite[i]
+        let j = i-1
+
+        while (j>=0 && tab_tri_activite[j].nbrZero < element_courant.nbrZero) {
+            tab_tri_activite[j+1] = tab_tri_activite[j]
+            j--;
+        }
+
+        tab_tri_activite[j+1] = element_courant
+
+    }
+
+    //on retourne le tableau trié 
+    return tab_tri_activite;
+
 }
 
 module.exports = {
+    compteZero,
     momentsActivite,
+    triActivite
 }

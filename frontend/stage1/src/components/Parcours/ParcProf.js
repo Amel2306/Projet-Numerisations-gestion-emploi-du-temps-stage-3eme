@@ -64,7 +64,7 @@ function ParcProf(props) {
             ))}
             </div>
         ))}
-            <PDFDownloadLink document={<ParcProfPdf 
+            <PDFDownloadLink className="link"  document={<ParcProfPdf 
                 activites={activites} 
                 tab_moment={tab_moment} 
                 nom={professeur.nom} 

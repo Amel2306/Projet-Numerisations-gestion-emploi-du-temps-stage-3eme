@@ -42,7 +42,7 @@ function EleveGroupe (props)  {
 
                 </div>
           ))}
-                <PDFDownloadLink 
+                <PDFDownloadLink className="link"  
                     document={<ListeEleves 
                         eleves={groupe}
                         eleve= {eleveP}

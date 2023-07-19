@@ -67,7 +67,7 @@ function Parc (props) {
                 </li>
               ))}
             </ul>
-            {<PDFDownloadLink document={<ParcoursPdf activites={activites} moment={moment} eleve={eleve}/>} fileName={"parcours"+parcoursId+".pdf"}>
+            {<PDFDownloadLink className="link"  document={<ParcoursPdf activites={activites} moment={moment} eleve={eleve}/>} fileName={"parcours"+parcoursId+".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Téléchargement en cours...' : 'Télécharger le parcours'
                 }
