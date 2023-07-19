@@ -55,6 +55,10 @@ async function activiteByMoment (nb_eleve_max) {
     }
 
     const activites = await Activite.findAll();
+
+    // ajouter fonction tri activités
+
+
     for (act of activites) {
         let nb_realisations = act.nb_realisations;
 
@@ -68,7 +72,7 @@ async function activiteByMoment (nb_eleve_max) {
                 tableau_moments[id_min_mom].addActivite(act.id, act.nb_eleve_max)
                 moment_of_act[id_min_mom] = 0;
                 nb_realisations--;
-                compt+= 1
+                compt += 1
             }
         }
     }

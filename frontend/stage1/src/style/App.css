@@ -82,9 +82,9 @@ textarea {
   min-width: 400px;
   min-height: 70px;
   background-color: transparent;
-  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  box-shadow: 2px 2px 2px 2px rgb(91, 43, 42, 0.5);
   border-radius: 15px ;
-  border: #CC7D7C 2px;
+  border: rgb(91, 43, 42, 0.5) 1px solid;
   outline: none;
   padding: 0.4vw;
   transition: .4s;
@@ -99,6 +99,30 @@ textarea:focus {
   box-shadow: 0 0 0 .15vw #CC7D7C;
 }
 
+
+select {
+  font-weight: 500px;
+  font-size: 15px;
+  color: #5B2B2A ;
+  width: 300px;
+  background-color: transparent;
+  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  border-radius: 15px ;
+  border: #CC7D7C 2px;
+  outline: none;
+  padding: 0.4vw;
+  transition: .4s;
+  margin: 10px;
+}
+
+select:hover {
+  box-shadow: 0 0 0 .15vw #5B2B2A;
+}
+
+select:focus {
+  box-shadow: 0 0 0 .15vw #CC7D7C;
+}
+
 .container-form {
   border-radius: 20px;
   border-color: #5B2B2A;
@@ -106,5 +130,9 @@ textarea:focus {
 
 .link {
   text-decoration: none;
-  color: #CC7D7C;
+  color: #5B2B2A
+}
+
+.link:hover {
+  color:#CC7D7C; 
 }

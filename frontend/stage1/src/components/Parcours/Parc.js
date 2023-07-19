@@ -57,7 +57,7 @@ function Parc (props) {
             <button className="btn" onClick={() => handleAfficherParc()}> 
               {etat ? 
                 <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
-                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
+                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}  Afficher le parcours
             </button>
             <ul className="container">
               {(activites && etat) && activites.map((act) => (
