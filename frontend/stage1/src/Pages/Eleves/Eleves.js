@@ -38,17 +38,20 @@ function Eleves () {
     }
 
     return (
-        <div className="container">
-          <h2>Liste des élèves</h2>
-          {eleves && eleves.map((eleve) => (
-            <div className="element" key={eleve.id}
-              onClick={() => handleClick(eleve.id)}
-            >
-              <h3>{eleve.nom} {eleve.prenom}</h3>
-              <p>Identifiant : {eleve.id}</p>            
-            </div>
+        <div>
+          <h2>Liste des élèves</h2>          
+          <div className="container">
+            {eleves && eleves.map((eleve) => (
+              <div className="element" key={eleve.id}
+                onClick={() => handleClick(eleve.id)}
+              >
+                <h3>{eleve.nom} {eleve.prenom}</h3>
+                <p>Identifiant : {eleve.id}</p>            
+              </div>
 
-          ))}
+            ))}            
+          </div>
+
           <Link className="link" to='/eleveForm'> Ajouter un élève</Link>
 
           <button className="btn" onClick={handleSupprimeAll}>Supprimer tous les élèves</button>

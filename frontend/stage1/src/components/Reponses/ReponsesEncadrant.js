@@ -50,7 +50,7 @@ function ReponsesEncadrant (props) {
                           questionRep[activiteId][questionId].reponses.length > 0 && (
                             questionRep[activiteId][questionId].reponses.map((reponse) => (
                               <div>
-                                <h4>{tab_moments[reponse.indexMoment]}, Activite : {activiteId}</h4>
+                                <h4>{tab_moments && tab_moments[reponse.indexMoment]}, Activite : {activiteId}</h4>
                                 <h4> Réponse : {reponse.contenu}</h4>
                               </div>
                             ))

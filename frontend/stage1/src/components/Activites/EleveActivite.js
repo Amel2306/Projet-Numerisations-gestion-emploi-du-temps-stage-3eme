@@ -34,7 +34,7 @@ function EleveActivite (props) {
     return (
         eleves && eleves.length > 0 && 
         <div> 
-        <h3>{tab_moments[indexMoment]}</h3>
+        <h3>{tab_moments && tab_moments[indexMoment]}</h3>
            <button className="btn" onClick={() => handleAfficherParc()}> 
                 {etat ? 
                     <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
@@ -48,8 +48,8 @@ function EleveActivite (props) {
           </div>
         ))}
        
-       {etat && (
-            <PDFDownloadLink className="link"  document={<ListeEleves eleves={eleves} moment={tab_moments[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
+       {etat && tab_moments && (
+            <PDFDownloadLink className="link"  document={<ListeEleves eleves={eleves} moment={tab_moments && tab_moments[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
                 }

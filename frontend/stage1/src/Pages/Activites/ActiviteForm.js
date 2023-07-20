@@ -1,6 +1,6 @@
 import axiosInstance from "../../config/axiosConfig";
 import { useState } from "react";
-import ActiviteFichier from "./ActiviteFichier";
+import ActiviteFichier from "../../components/Activites/ActiviteFichier";
 import {useNavigate} from "react-router-dom"
 
 function ActiviteForm (props) {

@@ -1,9 +1,8 @@
-import './style/App.css';
-import Navbar from "./components/Navbar/Navbar"
-import axiosInstance from './config/axiosConfig';
+import '../style/App.css';
+import Navbar from "./Navbar/Navbar"
+import axiosInstance from '../config/axiosConfig';
 import { useState, useEffect } from "react"
-import "./components/Activites/Activites.css"
-import Rootes from './components/Routes';
+import Rootes from './Routes';
 
 function App() {
 
@@ -29,7 +28,7 @@ function App() {
     <div className="App">
       <Navbar user={user} setUser = {setUser}/>
       <Rootes user={user} setUser = {setUser} semaine={semaine} setSemaine = {setSemaine}/>
-      <img src="/fleurs.png" alt="fleurs" className="image-fixed" />
+      <img src="/fleurs.png" alt="fleurs" className="image-fixed-bottom" />
     </div>
   );
 }

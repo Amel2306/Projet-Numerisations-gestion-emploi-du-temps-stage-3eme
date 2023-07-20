@@ -1,7 +1,7 @@
 import axiosInstance from "../../config/axiosConfig";
 import { useEffect, useState } from "react";
-import "./Parcours.css"
-import Parc from "./Parc";
+import "../../style/Parcours/Parcours.css"
+import Parc from "../../components/Parcours/Parc";
 
 
 function Parcours(props) {

@@ -1,7 +1,7 @@
 import axiosInstance from "../../config/axiosConfig";
 import { useState } from "react";
 import {Link} from "react-router-dom"
-import ProfesseurFichier from "./ProfesseurFichier";
+import ProfesseurFichier from "../../components/Professeurs/ProfesseurFichier";
 
 function ProfForm () {
 

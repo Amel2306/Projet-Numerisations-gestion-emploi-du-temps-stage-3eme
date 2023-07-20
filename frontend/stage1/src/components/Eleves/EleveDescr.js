@@ -23,7 +23,7 @@ function EleveDescr (props) {
 
     return (
         eleve &&
-        <div className="container-descr">
+        <div className="eleve-descr">
             <ul className="descr">
                 <li>
                     <h1>{eleve.nom} {eleve.prenom} </h1>

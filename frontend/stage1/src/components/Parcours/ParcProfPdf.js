@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import  ActiviteDescrPdf from '../Activites/ActiviteDescrPdf';
-import {MomentsContext} from "../../utils/tabMoments"
 
 
 const styles = StyleSheet.create({
@@ -32,10 +31,9 @@ const styles = StyleSheet.create({
 function ParcProfPdf(props) {
 
     const activites = props.activites;
+    const tab_moments = props.tab_moments;
     const nom = props.nom
     const prenom = props.prenom
-
-    const {tab_moments} = useContext(MomentsContext);
 
     return (
         <Document>
@@ -46,7 +44,7 @@ function ParcProfPdf(props) {
                 <View style={styles.section}>
                 {activites && Object.entries(activites).map(([index, moments]) => (
                     <div key={index}>
-                        <Text> {moments.length > 0  && tab_moments[index]} </Text>
+                        <Text> {moments.length > 0  && tab_moments && tab_moments[index]} </Text>
                         {moments.length > 0 && moments.map((moment, momentIndex) => (
                             <ul key={momentIndex}>
                             {moment && moment[0] && (

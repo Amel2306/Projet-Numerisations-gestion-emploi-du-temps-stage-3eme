@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import {Link, useNavigate} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
-import './Activites.css'
-import Activite from './Activite'
-
+import '../../style/Activites/Activites.css'
 
 function Activtes () {
     const [activites, setActivites] = useState(null)
@@ -43,18 +41,16 @@ function Activtes () {
     return (
         <div>
             <h2>Liste des activtiés</h2>
-            <div className="container">
-                {activites && activites.map((activite) => (
-                    <div key={activite.id} className="element"
-                        onClick={() => handleClick(activite.id)}
-                    >
-                        <h1> {activite.nom}</h1>
-                        {activite && (
-                            <Activite activiteId={activite.id} />
-                        )}                        
-                    </div>
-                ))}
-            </div>
+                <div className="container">
+                    {activites && activites.map((activite) => (
+                        <div key={activite.id} className="element"
+                            onClick={() => handleClick(activite.id)}
+                        >
+                            <h1> {activite.nom}</h1>                   
+                        </div>
+                    ))}               
+                </div>
+
 
             <button className="btn">
                 <Link className="link" to="/activiteForm">Ajouter une activité</Link>

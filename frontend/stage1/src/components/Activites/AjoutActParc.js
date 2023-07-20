@@ -32,7 +32,7 @@ function AjoutActPar (props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const confirmation = window.confirm("Êtes-vous sûr de vouloir ajouter cette activité au parcours " + parcoursId + " le " + tab_moments[indexMoment] + " ?");
+        const confirmation = tab_moments ? window.confirm("Êtes-vous sûr de vouloir ajouter cette activité au parcours " + parcoursId + " le " + tab_moments[indexMoment] + " ?") : false;
 
         if (confirmation) {
 

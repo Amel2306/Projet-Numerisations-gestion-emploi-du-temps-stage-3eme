@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import {Link, useParams } from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
-import ActiviteDescr from "./ActiviteDescr";
-import AjoutActAllPar from "./AjoutActAllParc";
-import AjoutActPar from "./AjoutActParc";
-import EleveActivite from "./EleveActivite";
+import ActiviteDescr from "../../components/Activites/ActiviteDescr";
+import AjoutActAllPar from "../../components/Activites/AjoutActAllParc";
+import AjoutActPar from "../../components/Activites/AjoutActParc";
+import EleveActivite from "../../components/Activites/EleveActivite";
 
 
 function Activite () {

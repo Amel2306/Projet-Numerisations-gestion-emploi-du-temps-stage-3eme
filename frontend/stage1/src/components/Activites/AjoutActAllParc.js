@@ -19,7 +19,7 @@ function AjoutActAllPar (props) {
     }
 
     const handleSubmit = () => {
-        const confirmation = window.confirm("Êtes-vous sûr de ajouter cette activité à tous les parcours le " + tab_moments[indexMoment] + " ?");
+        const confirmation = tab_moments ? window.confirm("Êtes-vous sûr de ajouter cette activité à tous les parcours le " + tab_moments[indexMoment] + " ?") : false;
 
         if (confirmation) {
             const data = {

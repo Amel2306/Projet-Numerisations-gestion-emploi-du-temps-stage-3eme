@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import {useParams} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
-import EleveDescr from "../Eleves/EleveDescr";
-import ParcProf from "../Parcours/ParcProf";
-import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
-import ListeEleves from "../Eleves/ListeElevesPdf"
+import EleveDescr from "../../components/Eleves/EleveDescr";
+import ParcProf from "../../components/Parcours/ParcProf";
+import QuestionQuestionnaire from "../../components/Questions/QuestionQuestionnaire";
+import ListeEleves from "../../components/Eleves/ListeElevesPdf"
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
 function Professeur () {

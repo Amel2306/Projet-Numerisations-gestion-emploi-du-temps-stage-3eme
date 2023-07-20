@@ -1,6 +1,5 @@
 import {useState} from "react"
 import axiosInstance from "../../config/axiosConfig"
-import "./Questions.css"
 
 function QuestionAffiche (props) {
 

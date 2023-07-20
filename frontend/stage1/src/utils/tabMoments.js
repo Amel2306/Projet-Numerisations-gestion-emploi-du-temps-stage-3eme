@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
 
-export const MomentsContext = createContext()
+export const MomentsContext = createContext("")
 
 export const MomentProvider = ({children}) => {
     const tab_moments = [

@@ -1,4 +1,5 @@
-import QuestionAffiche from "./QuestionsAffiche"
+import QuestionAffiche from "../../components/Questions/QuestionsAffiche"
+import "../../style/Questions/Questions.css"
 
 function Questions () {
     return (

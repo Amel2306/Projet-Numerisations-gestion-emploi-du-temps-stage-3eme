@@ -49,9 +49,9 @@ function Parc (props) {
                 <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}  Afficher le parcours
             </button>
             <ul className="container">
-              {(activites && etat) && activites.map((act) => (
+              {(activites && etat && tab_moments) && activites.map((act) => (
                 <li key={act.activiteId}>
-                    <h3>{tab_moments[act.indexMoment]} :</h3>
+                    <h3>{tab_moments && tab_moments[act.indexMoment]} :</h3>
                     <ActiviteDescr id={act.activiteId} />
                 </li>
               ))}

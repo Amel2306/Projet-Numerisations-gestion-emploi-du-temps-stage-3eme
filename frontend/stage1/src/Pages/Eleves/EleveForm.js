@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom"
 import axiosInstance from '../../config/axiosConfig';
-import EleveFichier from './EleveFichier';
+import EleveFichier from '../../components/Eleves/EleveFichier';
 
 function EleveForm () {
 

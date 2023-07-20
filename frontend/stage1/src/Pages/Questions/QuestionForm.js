@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {useNavigate} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
-import "./Questions.css"
+import "../../style/Questions/Questions.css"
 
 function QuestionForm () {
     const [contenu, setContenu] = useState("")

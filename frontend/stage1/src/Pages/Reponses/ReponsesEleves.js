@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useEffect } from "react"
 import axiosInstance from "../../config/axiosConfig"
-import ReponsesEleve from "./ReponsesEleve"
+import ReponsesEleve from "../../components/Reponses/ReponsesEleve"
 
 function ReponsesEleves() {
 

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import {useParams} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig"
-import ReponsesEncadrant from "./ReponsesEncadrant"
-import ReponsesTuteur from "./ReponsesTuteur"
+import ReponsesEncadrant from "../../components/Reponses/ReponsesEncadrant"
+import ReponsesTuteur from "../../components/Reponses/ReponsesTuteur"
 
 function ReponsesProfesseurs() { 
 

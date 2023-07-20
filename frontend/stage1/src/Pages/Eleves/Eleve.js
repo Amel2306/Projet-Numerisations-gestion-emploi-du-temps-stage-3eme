@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axiosInstance from "../../config/axiosConfig";
 import {Link, useParams} from 'react-router-dom'
-import Parc from "../Parcours/Parc";
-import EleveDescr from "./EleveDescr";
-import EleveGroupe from "./EleveGroupe";
-import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
-import ElevePdf from "./ElevePdf";
+import Parc from "../../components/Parcours/Parc";
+import EleveDescr from "../../components/Eleves/EleveDescr";
+import EleveGroupe from "../../components/Eleves/EleveGroupe";
+import QuestionQuestionnaire from "../../components/Questions/QuestionQuestionnaire";
+import ElevePdf from "../../components/Eleves/ElevePdf";
 import {PDFDownloadLink} from "@react-pdf/renderer"
-import "./Eleve.css"
+import "../../style/Eleves/Eleves.css"
 
 
 function Eleve (props) {
@@ -82,7 +82,6 @@ function Eleve (props) {
 
           axiosInstance.put(`eleves/parcours/${id}`,data)
           .then((res) => {
-              console.log("parcours attribué");
               window.location.reload();
           })
           .catch((err) => {
@@ -93,7 +92,7 @@ function Eleve (props) {
 
     return eleve && (
 
-        <div className="eleve">
+        <div className="contain-eleve">
 
             <EleveDescr id={id} />
                 {eleve.parcoursId &&

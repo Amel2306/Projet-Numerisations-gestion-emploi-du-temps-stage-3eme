@@ -5,7 +5,6 @@ import ParcProfPdf from "./ParcProfPdf";
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import {MomentsContext} from "../../utils/tabMoments"
 
-
 function ParcProf(props) {
 
     const id = props.profId;
@@ -42,7 +41,7 @@ function ParcProf(props) {
             </button>
             {activites && etat && Object.entries(activites).map(([index, moments]) => (
             <div key={index}>
-            <h3> {moments.length > 0  && tab_moments[index]} </h3>
+            <h3> {moments.length > 0  && tab_moments && tab_moments[index]} </h3>
             {moments.length > 0 && moments.map((moment, momentIndex) => (
                 <ul key={momentIndex}>
                 {moment && moment.map((activite, activiteIndex) => (
@@ -58,6 +57,7 @@ function ParcProf(props) {
             <PDFDownloadLink className="link"  document={<ParcProfPdf 
                 activites={activites} 
                 nom={professeur.nom} 
+                tab_moments= {tab_moments}
                 prenom={professeur.prenom}/>} 
                 fileName={"parcours"+id+".pdf"} 
             >

@@ -96,7 +96,7 @@ function ElevePdf (props) {
                             <Text style={styles.title}>Mon parcours : </Text>
                             {activites.map((act) => (
                                 <View key={act.activiteId} style={styles.section}>
-                                    <Text style={{ color: 'green', paddingBottom: "12px" }}>{tab_moments[act.indexMoment]}</Text>
+                                    <Text style={{ color: 'green', paddingBottom: "12px" }}>{tab_moments && tab_moments[act.indexMoment]}</Text>
                                     <ActiviteDescrPdf id={act.activiteId} style={{backgroundColor: '#cfbba5'}} />
                                 </View>
                             ))}                  
