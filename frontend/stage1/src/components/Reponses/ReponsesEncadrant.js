@@ -1,21 +1,10 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import axiosInstance from "../../config/axiosConfig"
+import {MomentsContext} from "../../utils/tabMoments"
 
 function ReponsesEncadrant (props) {
 
-    const tab_moment = [
-        "Lundi Matin",
-        "Lundi Aprés-midi",
-        "Mardi Matin",
-        "Mardi Aprés-midi",
-        "Mercredi Matin",
-        "Mercredi Aprés-midi",
-        "Jeudi Matin",
-        "Jeudi Aprés-midi",
-        "Vendredi Matin",
-        "Vendredi Aprés-midi"
-    ]
+    const {tab_moments} = useContext(MomentsContext);
 
     const encadrantId = props.encadrantId
 
@@ -61,7 +50,7 @@ function ReponsesEncadrant (props) {
                           questionRep[activiteId][questionId].reponses.length > 0 && (
                             questionRep[activiteId][questionId].reponses.map((reponse) => (
                               <div>
-                                <h4>{tab_moment[reponse.indexMoment]}, Activite : {activiteId}</h4>
+                                <h4>{tab_moments[reponse.indexMoment]}, Activite : {activiteId}</h4>
                                 <h4> Réponse : {reponse.contenu}</h4>
                               </div>
                             ))

@@ -23,18 +23,21 @@ function EleveDescr (props) {
 
     return (
         eleve &&
-        <ul>
-            <li>
-                <h1>{eleve.nom} {eleve.prenom} </h1>
-            </li>
-            <li> Email de l'élève : {eleve.email}</li>
-            <li> Numéro de téléphone de l'élève : {eleve.numero_tel}</li>
-            <li> Numéro de téléphone d'un parent de l'élève : {eleve.email}</li>
-            <li> adresse de l'élève : {eleve.adress}</li>
-            <li> établissement de l'élève : {eleve.etablissement}</li>
-            <li> tuteur de l'élève : {eleve.professeurId}</li>
-            <li> parcours de l'élève : {eleve.parcoursId} </li>
-        </ul>
+        <div className="container-descr">
+            <ul className="descr">
+                <li>
+                    <h1>{eleve.nom} {eleve.prenom} </h1>
+                </li>
+                <li> Email de l'élève : {eleve.email}</li>
+                <li> Numéro de téléphone de l'élève : {eleve.numero_tel}</li>
+                <li> Numéro de téléphone d'un parent de l'élève : {eleve.email}</li>
+                <li> adresse de l'élève : {eleve.adress}</li>
+                <li> établissement de l'élève : {eleve.etablissement}</li>
+                <li> tuteur de l'élève : {eleve.professeurId}</li>
+                <li> parcours de l'élève : {eleve.parcoursId} </li>
+            </ul>            
+        </div>
+
     )
 }
 

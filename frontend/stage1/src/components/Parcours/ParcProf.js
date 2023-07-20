@@ -1,26 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axiosInstance from "../../config/axiosConfig";
 import ActiviteDescr from "../Activites/ActiviteDescr";
 import ParcProfPdf from "./ParcProfPdf";
 import { PDFDownloadLink } from '@react-pdf/renderer';
+import {MomentsContext} from "../../utils/tabMoments"
+
 
 function ParcProf(props) {
 
     const id = props.profId;
     const professeur = props.professeur
 
-    const tab_moment = [
-        "Lundi Matin",
-        "Lundi Aprés-midi",
-        "Mardi Matin",
-        "Mardi Aprés-midi",
-        "Mercredi Matin",
-        "Mercredi Aprés-midi",
-        "Jeudi Matin",
-        "Jeudi Aprés-midi",
-        "Vendredi Matin",
-        "Vendredi Aprés-midi"
-    ]
+    const {tab_moments} = useContext(MomentsContext);
 
     const [etat, setEtat] = useState(false)
 
@@ -51,7 +42,7 @@ function ParcProf(props) {
             </button>
             {activites && etat && Object.entries(activites).map(([index, moments]) => (
             <div key={index}>
-            <h3> {moments.length > 0  && tab_moment[index]} </h3>
+            <h3> {moments.length > 0  && tab_moments[index]} </h3>
             {moments.length > 0 && moments.map((moment, momentIndex) => (
                 <ul key={momentIndex}>
                 {moment && moment.map((activite, activiteIndex) => (
@@ -66,7 +57,6 @@ function ParcProf(props) {
         ))}
             <PDFDownloadLink className="link"  document={<ParcProfPdf 
                 activites={activites} 
-                tab_moment={tab_moment} 
                 nom={professeur.nom} 
                 prenom={professeur.prenom}/>} 
                 fileName={"parcours"+id+".pdf"} 

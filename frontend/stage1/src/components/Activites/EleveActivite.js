@@ -1,25 +1,14 @@
-import { useState } from "react"
-import { useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import axiosInstance from "../../config/axiosConfig"
 import EleveDescr from "../Eleves/EleveDescr"
 import ListeEleves from "../Eleves/ListeElevesPdf"
 import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire"
 import { PDFDownloadLink } from '@react-pdf/renderer';
+import {MomentsContext} from "../../utils/tabMoments"
 
 function EleveActivite (props) {
 
-    const moment = [
-        "Lundi Matin",
-        "Lundi Aprés-midi",
-        "Mardi Matin",
-        "Mardi Aprés-midi",
-        "Mercredi Matin",
-        "Mercredi Aprés-midi",
-        "Jeudi Matin",
-        "Jeudi Aprés-midi",
-        "Vendredi Matin",
-        "Vendredi Aprés-midi"
-    ]
+  const {tab_moments} = useContext(MomentsContext);
 
     const indexMoment = props.indexMoment
     const activiteId = props.activiteId
@@ -45,12 +34,12 @@ function EleveActivite (props) {
     return (
         eleves && eleves.length > 0 && 
         <div> 
-        <h3>{moment[indexMoment]}</h3>
+        <h3>{tab_moments[indexMoment]}</h3>
            <button className="btn" onClick={() => handleAfficherParc()}> 
                 {etat ? 
                     <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
-                    <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
-            </button>        
+                    <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>} Liste des élèves
+            </button>
             {etat &&
         eleves &&
         Object.values(eleves).map((eleve) => (
@@ -60,13 +49,12 @@ function EleveActivite (props) {
         ))}
        
        {etat && (
-            <PDFDownloadLink className="link"  document={<ListeEleves eleves={eleves} moment={moment[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
+            <PDFDownloadLink className="link"  document={<ListeEleves eleves={eleves} moment={tab_moments[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
                 }
             </PDFDownloadLink>        
        )}
-
 
       {etat && (
         <QuestionQuestionnaire

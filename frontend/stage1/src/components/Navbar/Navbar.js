@@ -16,7 +16,7 @@ function Navbar(props) {
 
     return (
         <nav className='nav'>
-            <Link className="link" to="/" className='logo'>
+            <Link className="link logo" to="/" >
                 Acceuil
             </Link>
 

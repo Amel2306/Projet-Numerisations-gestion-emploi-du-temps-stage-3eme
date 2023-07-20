@@ -11,8 +11,6 @@ function QuestionsAffiche (props) {
 
     const [questions, setQuestions] = useState(null)
     const [etat, setEtat] = useState(false)
-    const [modification, setModif] = useState(false)
-    const [contenu, setContenu] = useState("")
 
     useEffect(() => {
         axiosInstance.get(`/questions/questionnaire/${questionnaire}`)
@@ -27,13 +25,6 @@ function QuestionsAffiche (props) {
 
     const handleAfficherQuestionnaire = () => {
         setEtat(!etat);
-    }
-
-    const handleModifContenu = (id, pcontenu) => {
-        axiosInstance.put(`/questions/${id}`, pcontenu)
-        .then((res) => {
-            setModif(false)
-        })
     }
 
     return (

@@ -8,9 +8,6 @@ body {
   background: rgb(225,199,199);
   background: linear-gradient(90deg, #e1c7c7 50%, rgba(248,239,217,1) 100%);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: 400;
   font-family: 'Fira sans', sans-serif;
   color: #5B2B2A;
@@ -85,6 +82,7 @@ body, html, App, #root, .auth-wrapper {
   margin: 10px;
   cursor: pointer;
   color: #5B2B2A;
+  max-height: 50px;
   border-color: #5B2B2A;
   border: 10px;
   box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;

@@ -1,0 +1,20 @@
+.container-descr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+
+}
+
+.descr {
+    text-align: left;
+    list-style: none;
+    border-radius: 15px;
+    border: 2px solid rgb(91, 43, 42, 0.4);
+    padding: 10px;
+}
+
+.descr li {
+    text-decoration: none;
+}

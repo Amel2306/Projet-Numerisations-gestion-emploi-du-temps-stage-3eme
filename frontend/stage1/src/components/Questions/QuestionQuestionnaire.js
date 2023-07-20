@@ -36,11 +36,11 @@ function QuestionQuestionnaire (props) {
     return (
         questions && (
             <div>
-                <h2>Questionnaire pour {questionnaire}</h2>
+
                 <button className="btn" onClick={() => handleAfficherQuestionnaire()}> 
                 {etat ? 
                     <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
-                    <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
+                    <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>} Questionnaire pour {questionnaire}
                 </button>
                 <ul>
                     {etat && questions && questions.map((question)=> (

@@ -1,9 +1,9 @@
+import { useEffect, useState, useContext } from "react";
 import axiosInstance from "../../config/axiosConfig";
-import { useEffect, useState } from "react";
 import ActiviteDescr from "../Activites/ActiviteDescr";
 import ParcoursPdf from "./ParcoursPdf";
 import { PDFDownloadLink } from '@react-pdf/renderer';
-
+import {MomentsContext} from "../../utils/tabMoments"
 
 function Parc (props) {
 
@@ -11,18 +11,7 @@ function Parc (props) {
     const prof = props.profId
     const eleve = props.eleve
 
-    const moment = [
-        "Lundi Matin",
-        "Lundi Aprés-midi",
-        "Mardi Matin",
-        "Mardi Aprés-midi",
-        "Mercredi Matin",
-        "Mercredi Aprés-midi",
-        "Jeudi Matin",
-        "Jeudi Aprés-midi",
-        "Vendredi Matin",
-        "Vendredi Aprés-midi"
-    ]
+    const {tab_moments} = useContext(MomentsContext);
 
     const [etat, setEtat] = useState(false)
 
@@ -62,12 +51,12 @@ function Parc (props) {
             <ul className="container">
               {(activites && etat) && activites.map((act) => (
                 <li key={act.activiteId}>
-                    <h3>{moment[act.indexMoment]} :</h3>
+                    <h3>{tab_moments[act.indexMoment]} :</h3>
                     <ActiviteDescr id={act.activiteId} />
                 </li>
               ))}
             </ul>
-            {<PDFDownloadLink className="link"  document={<ParcoursPdf activites={activites} moment={moment} eleve={eleve}/>} fileName={"parcours"+parcoursId+".pdf"}>
+            {<PDFDownloadLink className="link"  document={<ParcoursPdf activites={activites} eleve={eleve}/>} fileName={"parcours"+parcoursId+".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Téléchargement en cours...' : 'Télécharger le parcours'
                 }

@@ -1,23 +1,13 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import axiosInstance from "../../config/axiosConfig"
 import {useNavigate} from 'react-router-dom'
+import {MomentsContext} from "../../utils/tabMoments"
 
 function AjoutActPar (props) {
     
     const activiteId = props.activiteId
 
-    const moment = [
-        "Lundi Matin",
-        "Lundi Aprés-midi",
-        "Mardi Matin",
-        "Mardi Aprés-midi",
-        "Mercredi Matin",
-        "Mercredi Aprés-midi",
-        "Jeudi Matin",
-        "Jeudi Aprés-midi",
-        "Vendredi Matin",
-        "Vendredi Aprés-midi"
-    ]
+    const {tab_moments} = useContext(MomentsContext);
     
     const [indexMoment, setIndexMoment] = useState(0)
     const [parcoursId, setParcoursId] = useState(0)
@@ -42,7 +32,7 @@ function AjoutActPar (props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const confirmation = window.confirm("Êtes-vous sûr de vouloir ajouter cette activité au parcours " + parcoursId + " le " + moment[indexMoment] + " ?");
+        const confirmation = window.confirm("Êtes-vous sûr de vouloir ajouter cette activité au parcours " + parcoursId + " le " + tab_moments[indexMoment] + " ?");
 
         if (confirmation) {
 
@@ -63,7 +53,7 @@ function AjoutActPar (props) {
     }
 
     return (
-        <div>
+        <div className="ajout-act-parc">
             <button className="btn" onClick={() => handleAfficherParc()}> 
                 {etat ? 
                     <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
@@ -74,7 +64,7 @@ function AjoutActPar (props) {
                     <div>
                         <label>Entrez le moment de la semaine durant lequel vous souhaitez ajouter cette activité</label>
                         <select value= {indexMoment} onChange={(e) => setIndexMoment(e.target.value)}>
-                            {moment && moment.map((mom, index) => (
+                            {tab_moments && tab_moments.map((mom, index) => (
                                 <option key={index} value={index}>{mom}</option>
                             ))}                     
                         </select>

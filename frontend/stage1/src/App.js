@@ -29,7 +29,7 @@ function App() {
     <div className="App">
       <Navbar user={user} setUser = {setUser}/>
       <Rootes user={user} setUser = {setUser} semaine={semaine} setSemaine = {setSemaine}/>
-      <img src="/fleurs.png" alt="Image fleurs" className="image-fixed" />
+      <img src="/fleurs.png" alt="fleurs" className="image-fixed" />
     </div>
   );
 }

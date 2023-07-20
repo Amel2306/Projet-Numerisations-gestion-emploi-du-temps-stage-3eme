@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import  ActiviteDescrPdf from '../Activites/ActiviteDescrPdf';
+import {MomentsContext} from "../../utils/tabMoments"
+
 
 const styles = StyleSheet.create({
     page: {
@@ -30,8 +32,8 @@ const styles = StyleSheet.create({
 function ParcoursPdf(props) {
 
     const activites = props.activites;
-    const moment = props.moment;
-    const eleve= props.eleve 
+
+    const {tab_moments} = useContext(MomentsContext);
 
     return (
         <Document>
@@ -40,7 +42,7 @@ function ParcoursPdf(props) {
                     {activites &&
                         activites.map((act) => (
                             <View key={act.activiteId} style={styles.section}>
-                                <Text style={{ color: 'green', paddingBottom: "12px" }}>{moment[act.indexMoment]}</Text>
+                                <Text style={{ color: 'green', paddingBottom: "12px" }}>{tab_moments[act.indexMoment]}</Text>
                                 <ActiviteDescrPdf id={act.activiteId} style={{backgroundColor: '#cfbba5'}} />
                             </View>
                         ))}

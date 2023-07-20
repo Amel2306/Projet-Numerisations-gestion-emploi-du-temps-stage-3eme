@@ -8,6 +8,7 @@ import EleveGroupe from "./EleveGroupe";
 import QuestionQuestionnaire from "../Questions/QuestionQuestionnaire";
 import ElevePdf from "./ElevePdf";
 import {PDFDownloadLink} from "@react-pdf/renderer"
+import "./Eleve.css"
 
 
 function Eleve (props) {

@@ -6,6 +6,7 @@ import AjoutActAllPar from "./AjoutActAllParc";
 import AjoutActPar from "./AjoutActParc";
 import EleveActivite from "./EleveActivite";
 
+
 function Activite () {
 
     let {id} = useParams()
@@ -38,26 +39,31 @@ function Activite () {
 
     return (
             activite && (
-                <div>
-                    <ActiviteDescr id={id}/>
-                    <div> 
-                        <p>Encadrant respo: {activite.professeurId}</p>
-                        <Link className="link" to={`/professeur/${activite.professeurId}` } >Voir Scientifique</Link>                     
+                <div className="contain-activite">
+                    <div className="contain-act-descr">
+                        <ActiviteDescr className="contain-act-descr" id={id}/>   
+                        <button 
+                            className="btn supp-act"
+                            onClick={() => handleSupprime(id)}
+                        >
+                            Supprimer l'activité
+                        </button> 
+                        
                     </div>
-                    {Array.from({ length: 10 }, (_, i) => (
-                        <div className="elevesActivite" key={i}>
-                            <EleveActivite activiteId={id} indexMoment={i} professeurId={activite.professeurId}/>
-                        </div>
-                    ))}
 
-                    <AjoutActPar activiteId= {id} />
-                    <AjoutActAllPar activiteId= {id} />
-                    <button 
-                        className="btn"
-                        onClick={() => handleSupprime(id)}
-                    >
-                        Supprimer
-                    </button> 
+                    <div className="elevesActivite">
+                        <h2>Parcours de l'activité</h2>
+                        {Array.from({ length: 10 }, (_, i) => (
+                            <div  key={i}>
+                                <EleveActivite activiteId={id} indexMoment={i} professeurId={activite.professeurId}/>
+                            </div>
+                        ))}                        
+                    </div>
+                    <div className="ajout-activite">
+                        <h2> Ajouter l'activité </h2>
+                        <AjoutActPar className="ajout-act-parc" activiteId= {id} />
+                        <AjoutActAllPar className="ajout-act-parc" activiteId= {id} />                   
+                     </div>
                 </div>       
             )
     )
