@@ -39,14 +39,14 @@ nav {
 }
 
 .navbar li a:hover {
-    color: #5B2B2A;
+    color: rgb(204, 125, 124, 0.5);
 }
 
 .navbar li a:hover::after {
     content: "";
     width: 30%;
     height: 2px;
-    background: #5B2B2A;
+    background: rgb(204, 125, 124, 0.5);
     position: absolute ;
     bottom: -4px;
     left: 20px;
@@ -60,7 +60,7 @@ nav {
     color: #5B2B2A;
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 2000px) {
     .navbar {
         display: flex;
         flex-direction: column;

@@ -29,12 +29,12 @@ function EleveGroupe (props)  {
 
     return (  
         groupe && groupe.length>0 && 
-        <div>
+        <div className="ensemble-groupe">
             <h1 className="groupe">Mon groupe</h1>
             <button className="btn" onClick={() => handleAfficherGroupe()}> 
               {etat ? 
                 <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
-                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
+                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>} Groupe
             </button>
           {groupe && etat && groupe.map((eleve) => (
                 <div>

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import axiosInstance from "../../config/axiosConfig";
-import {Link, useParams} from 'react-router-dom'
+import { useParams} from 'react-router-dom'
 import Parc from "../../components/Parcours/Parc";
 import EleveDescr from "../../components/Eleves/EleveDescr";
 import EleveGroupe from "../../components/Eleves/EleveGroupe";
@@ -92,58 +92,77 @@ function Eleve (props) {
 
     return eleve && (
 
-        <div className="contain-eleve">
+        <div className="global-eleve">
 
-            <EleveDescr id={id} />
-                {eleve.parcoursId &&
-                    <div>
+            <div className="contain-eleve">
+
+            <div className="contain-eleve-descr">
+                <EleveDescr id={id} />
+                    <button
+                        className="btn"
+                        onClick={() => handleSupprime(eleve.id)}
+                    >  
+                        Supprimer 
+                    </button> 
+
+                    <PDFDownloadLink className="link pdf"  document={<ElevePdf eleve={eleve} />} fileName={"eleve"+eleve.id+".pdf"}>
+                        {({ blob, url, loading, error }) =>
+                            loading ? 'Téléchargement en cours...' : (
+                                <>
+                                    <i className="fa-solid fa-circle-down fa-xl"></i> Télécharger la fiche élève
+                                </>
+                            )
+                        }
+                    </PDFDownloadLink>    
+
+            </div >
+  
+
+                {( eleve.parcoursId && (
+                    <div className="groupe-questions">
+                        <div className="contain-groupe"> 
+                            <EleveGroupe id={id} eleve={eleve}/>                            
+                        </div>
+                        <div className="contain-questionnaire">
+                            <h1>Questionnaire</h1>
+                            <QuestionQuestionnaire 
+                                questionnaire="Eleve"
+                                repondantEleveId={id}
+                            />                               
+                        </div>
+                    </div>    
+                ))}
+
+
+                <div className="all-btn">
+                    {!eleve.professeurId && (
+                    <button 
+                        className="btn"
+                        onClick={() => handleValide(eleve.id)}
+                    > 
+                        Valider 
+                    </button>
+                    )}
+
+                    {(!eleve.parcoursId && eleve.professeurId)  &&(
+                        <button 
+                            className="btn"
+                            onClick={() => handleParcours(eleve.id)}
+                        > 
+                            Attribuer un parcours
+                        </button>
+                    )}                                  
+                </div>
+
+
+
+            </div>
+              {eleve.parcoursId &&
+                    <div className="contain-parcours">
                         <h1>Mon parcours :</h1>
                         <Parc parcoursId={eleve.parcoursId} eleve={eleve}/>                    
                     </div> 
-                }
-                <button
-                    className="btn"
-                    onClick={() => handleSupprime(eleve.id)}
-                > 
-                    Supprimer 
-                </button>
-                {!eleve.professeurId ? (
-                <button 
-                    className="btn"
-                    onClick={() => handleValide(eleve.id)}
-                > 
-                    Valider 
-                </button>
-              ):
-              (
-                <button className="btn">
-                    <Link className="link" to={`/professeur/${eleve.professeurId}`}> Voir Tuteur </Link>
-                </button>
-              )}
-
-              {(!eleve.parcoursId && eleve.professeurId)  &&(
-                  <button 
-                      className="btn"
-                      onClick={() => handleParcours(eleve.id)}
-                  > 
-                      Attribuer un parcours
-                  </button>
-              )}
-              {( eleve.parcoursId && (
-                <div>
-                    <EleveGroupe id={id} eleve={eleve}/>
-                    <QuestionQuestionnaire 
-                        questionnaire="Eleve"
-                        repondantEleveId={id}
-                    />                 
-                </div>    
-              ))}
-
-            <PDFDownloadLink className="link"  document={<ElevePdf eleve={eleve} />} fileName={"eleve"+eleve.id+".pdf"}>
-                {({ blob, url, loading, error }) =>
-                    loading ? 'Téléchargement en cours...' : 'Télécharger la fiche élève'
-                }
-            </PDFDownloadLink>    
+                }            
         </div>
     )
 

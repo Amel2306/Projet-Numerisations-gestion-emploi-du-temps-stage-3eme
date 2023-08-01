@@ -37,7 +37,7 @@ function AjoutActAllPar (props) {
     }
 
     return (
-        <div className="ajout-act-parc">
+        <div>
             <button className="btn" onClick={() => handleAfficherParc()}> 
                 {etat ? 
                     <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:

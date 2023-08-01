@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axiosInstance from "../../config/axiosConfig.js";
 import { useParams } from 'react-router-dom'
+import "../../style/Authentification/Authentification.css"
 
 function Login() {
 
@@ -44,34 +45,36 @@ function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h3>Connexion {personne === "eleves" ? "Élève" : "Encadrant-Tuteur"}</h3>
+        <div className="contain-form-auth">
+            <h1>Connexion {personne === "eleves" ? "Élève" : "Encadrant-Tuteur"}</h1>            
+            <form onSubmit={handleSubmit} className="contain-auth">
+                <div className="form-group">
+                    <label>Email</label>
+                    <input 
+                        type="email" 
+                        className="form-control" 
+                        value={email}
+                        onChange= {handleEmailChange}
+                        placeholder="Email" 
+                    />
+                </div>
 
-            <div className="form-group">
-                <label>Email</label>
-                <input 
-                    type="email" 
-                    className="form-control" 
-                    value={email}
-                    onChange= {handleEmailChange}
-                    placeholder="Email" 
-                />
-            </div>
+                <div className="form-group">
+                    <label>Mot de passe</label>
+                    <input 
+                        type="password" 
+                        className="form-control" 
+                        value={password}
+                        onChange={handlePasswordChange}
+                        placeholder="Mot de passe" 
+                    />
+                </div>
 
-            <div className="form-group">
-                <label>Mot de passe</label>
-                <input 
-                    type="password" 
-                    className="form-control" 
-                    value={password}
-                    onChange={handlePasswordChange}
-                    placeholder="Mot de passe" 
-                />
-            </div>
+                <button className="btn" >Se connecter</button>
+            
+            </form>            
+        </div>
 
-            <button className="btn" >Se connecter</button>
-        
-        </form>
     )
 }
 

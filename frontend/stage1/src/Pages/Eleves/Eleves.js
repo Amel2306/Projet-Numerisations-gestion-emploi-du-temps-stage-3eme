@@ -34,7 +34,6 @@ function Eleves () {
 
     const handleClick = ( id) => {
       navigate(`/eleve/${id}`)
-
     }
 
     return (
@@ -51,10 +50,12 @@ function Eleves () {
 
             ))}            
           </div>
+            <button className="btn">
+              <Link className="link" to='/eleveForm'>Ajouter un élève</Link>              
+            </button>
 
-          <Link className="link" to='/eleveForm'> Ajouter un élève</Link>
 
-          <button className="btn" onClick={handleSupprimeAll}>Supprimer tous les élèves</button>
+          <button className="btn" onClick={handleSupprimeAll}>Supprimer les élèves</button>
         </div>
       );
 }

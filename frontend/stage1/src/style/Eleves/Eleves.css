@@ -1,25 +1,41 @@
+.global-eleve {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .contain-eleve {
-    border: red 10px solid;
+
     display: flex; 
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     align-content: center;
-    margin-left: 7%;
-    margin-right: 7%;
+    margin-top: 60px;
+    margin-left: 10%;
+    margin-right: 10%;
     width: auto;
     min-width: 500px;
-    max-width: 1500px;
+    max-width: 1300px;
+}
+
+.contain-eleve-descr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }
 
 .eleve-descr {
-    width: 450px;
+    max-width: 380px;
     height: auto;
     text-align: left;
     padding: 15px;
     border-radius: 25px;
     box-shadow: 5px 5px 2px 2px rgb(204, 125, 124, 0.4);
     background: rgb(204, 125, 124);
+    margin: 20px;
 }
 
 .descr {
@@ -31,4 +47,122 @@
 
 .descr li {
     text-decoration: none;
+}
+
+li button {
+    border-radius: 10px;
+    padding: 4px;
+    margin: 10px;
+    margin-left: 20px;
+    background: transparent;
+    border: none;
+    border: #5B2B2A 1px solid;
+}
+
+.all-btn {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.contain-parcours {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    border-radius: 30px;
+    margin: 10px;
+    width:auto;
+    padding: 10px;
+    max-width: 1300px;
+    min-width: 400px;
+    height: auto;
+}
+
+.contain-parcours .activite-descr  {
+    max-width: 400px;
+}
+
+.groupe-questions {
+    display: flex;
+}
+
+.contain-groupe {
+    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    border-radius: 30px;
+    margin: 10px;
+    padding: 10px;
+    width: 390px;
+    max-width: 390px;
+    height: auto;
+}   
+
+.contain-questionnaire {
+    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    border-radius: 30px;
+    margin: 10px;
+    padding: 10px;
+    width: 350px;
+    max-width: 350px;
+    height: auto;
+}
+
+@media screen and (max-width: 830px) {
+
+    .groupe-questions {
+        max-width: 310px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        min-width: auto;
+        height: auto; 
+    }
+}
+
+@media screen and (max-width: 420px)  {
+
+    .contain-eleve {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        min-width: auto; 
+    }
+
+    .eleve-descr {
+        max-width: 310px;
+        height: auto;
+        text-align: left;
+        padding: 15px;
+        border-radius: 25px;
+        box-shadow: 5px 5px 2px 2px rgb(204, 125, 124, 0.4);
+        background: rgb(204, 125, 124);
+        margin: 20px;
+    }
+
+    .contain-groupe {
+        width: auto;
+        min-width: auto; 
+    } 
+
+    .ensemble-groupe {
+        display: flex;
+        flex-direction: column; 
+    }
+
+    .contain-questionnaire {
+        width: auto;
+        min-width: auto; 
+    }
+
+    .contain-parcours {
+        width: auto;
+        min-width: auto; 
+    }
+
 }

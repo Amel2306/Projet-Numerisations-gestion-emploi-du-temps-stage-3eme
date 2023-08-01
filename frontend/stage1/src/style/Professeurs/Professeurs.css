@@ -1,0 +1,54 @@
+.contain-professeur {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prof-descr {
+    max-width: 380px;
+    height: auto;
+    text-align: left;
+    padding: 15px;
+    border-radius: 25px;
+    box-shadow: 5px 5px 2px 2px rgb(204, 125, 124, 0.4);
+    background: rgb(204, 125, 124);
+    margin: 20px;
+    list-style: none;
+}
+
+.contain-eleves{
+    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    border-radius: 30px;
+    margin: 10px;
+    padding: 10px;
+    min-width: 390px;
+    width: auto;
+    max-width: auto;
+    height: auto;
+}
+
+.eleves-prof {
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.parcours-prof {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    border-radius: 30px;
+    margin: 10px;
+    padding: 10px;
+    min-width: auto;
+    width: auto;
+    max-width: auto;
+    height: auto;
+}
+
+@media screen and (max-width: 1220px) {
+    .contain-professeur {
+        flex-direction: column;
+    }
+}

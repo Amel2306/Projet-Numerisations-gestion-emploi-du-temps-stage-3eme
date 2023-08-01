@@ -3,6 +3,33 @@
     border-radius: 20px;
     border-color: #5B2B2A solid;
     margin-top: 40px;
+    padding: 20px;
+    min-width: 80px;
+}
+
+.global-generate-parc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contain-generation-parc {
+    border-radius: 20px;
+    border: rgba(91, 43, 42, 0.4) 2px solid;
+    box-shadow: 8px 8px 8px 1px rgba(91, 43, 42, 0.4);
+    max-width: 700px;
+    min-width: auto;
+    width: auto; 
+    margin: 5px;
+    margin-top: 30px;
+    padding: 5px; 
+    display: flex;
+    flex-direction: column;
+}
+
+.label-form {
+    margin-top: 15px;
 }
 
 i {

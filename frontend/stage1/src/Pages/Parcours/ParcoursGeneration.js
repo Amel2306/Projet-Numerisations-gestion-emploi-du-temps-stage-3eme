@@ -31,8 +31,8 @@ function ParcoursGeneration (props) {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="global-generate-parc">
+            <form onSubmit={handleSubmit} className="contain-generation-parc">
                 <div className="label-form">
                     <label>Combien souhaitez vous générer de parcours ?</label>
                     <input

@@ -33,20 +33,24 @@ function EleveActivite (props) {
 
     return (
         eleves && eleves.length > 0 && 
-        <div> 
+        <div > 
         <h3>{tab_moments && tab_moments[indexMoment]}</h3>
            <button className="btn" onClick={() => handleAfficherParc()}> 
                 {etat ? 
                     <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
                     <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>} Liste des élèves
             </button>
+
+          <div className="liste-eleves">
             {etat &&
-        eleves &&
-        Object.values(eleves).map((eleve) => (
-          <div key={eleve.id}>
-            <EleveDescr id={eleve.id} />
+              eleves &&
+              Object.values(eleves).map((eleve) => (
+                <div key={eleve.id}>
+                  <EleveDescr id={eleve.id} />
+                </div>
+            ))}            
           </div>
-        ))}
+
        
        {etat && tab_moments && (
             <PDFDownloadLink className="link"  document={<ListeEleves eleves={eleves} moment={tab_moments && tab_moments[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>

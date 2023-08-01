@@ -1,4 +1,4 @@
-import './Navbar.css'
+import '../../style/Navbar/Navbar.css'
 import '@fortawesome/fontawesome-svg-core'
 import {Link} from "react-router-dom"
 import { useState } from 'react'
