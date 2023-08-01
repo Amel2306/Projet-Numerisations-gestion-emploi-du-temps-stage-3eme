@@ -12,8 +12,8 @@ function EleveDescr (props) {
         axiosInstance.get(`/eleves/${id}`)
         .then ((res) =>{
             setEleve(res.data)
-            console.log(res)
-            console.log(id)
+            (res)
+            (id)
         })
         .catch ((err) => {
             console.error(err)
@@ -34,13 +34,13 @@ function EleveDescr (props) {
                 <li> adresse de l'élève : {eleve.adress}</li>
                 <li> établissement de l'élève : {eleve.etablissement}</li>
                 <li> tuteur de l'élève : {eleve.professeurId}
-                        <button >
+                        <button>
                             <Link className="link" to={`/professeur/${eleve.professeurId}`}> Voir Tuteur </Link>
-                        </button></li>
+                        </button>
+                </li>
                 <li> parcours de l'élève : {eleve.parcoursId} </li>
             </ul>            
         </div>
-
     )
 }
 

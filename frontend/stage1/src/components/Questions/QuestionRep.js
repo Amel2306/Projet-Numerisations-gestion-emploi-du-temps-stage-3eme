@@ -24,10 +24,8 @@ function QuestionRep(props) {
             activiteId: activiteId,
             indexMoment: indexMoment
         };
-        console.log(params)
         axiosInstance.get(`/reponses/unique`, {params})
         .then((res) => {
-            console.log(res)
             if (res.data) {
                 setRepondu(true)
                 setContenuRep(res.data.contenu) 
@@ -73,7 +71,7 @@ function QuestionRep(props) {
 
         axiosInstance.put(`/reponses/${reponseId}`, data)
         .then((res) => {
-            console.log("modifié")
+            ("modifié")
             setContenuRep(res.data.contenu)
         })
         .catch((err) =>{

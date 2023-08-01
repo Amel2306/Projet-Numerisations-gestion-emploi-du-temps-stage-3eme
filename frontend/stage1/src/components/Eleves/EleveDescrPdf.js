@@ -29,7 +29,7 @@ function EleveDescrPdf(props) {
             setEleve(res.data);
         })
         .catch((err) => {
-            console.log(err);
+            console.error(err);
         });  
     }, [])
 

@@ -13,7 +13,7 @@ function Eleves () {
           setEleves(res.data);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     }, [])
 

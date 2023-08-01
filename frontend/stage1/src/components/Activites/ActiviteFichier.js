@@ -39,14 +39,12 @@ function ActiviteFichier () {
                         professeurId: parseInt(item.professeurId)
                     }))
 
-                    console.log(formattedData)
+                    (formattedData)
 
                     try {
                         for (const rowData of formattedData) {
                           await axiosInstance.post('/activites', rowData);
-                          console.log('Requête POST réussie pour:', rowData);
                         }
-                        console.log('Toutes les requêtes POST ont été effectuées.');
                         history("/activites")
                         window.location.reload();
                       } catch (error) {

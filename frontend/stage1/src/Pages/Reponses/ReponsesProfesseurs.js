@@ -14,7 +14,7 @@ function ReponsesProfesseurs() {
         axiosInstance.get(`/professeurs/role/${role}`)
         .then((res) =>{
             setprofesseurs(res.data)
-            console.log(role)
+            (role)
         })
         .catch((err) => {
             console.error(err)

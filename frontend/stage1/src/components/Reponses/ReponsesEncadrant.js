@@ -19,7 +19,6 @@ function ReponsesEncadrant (props) {
 
         axiosInstance.get(`/reponses/encadrant/${encadrantId}`)
         .then((res) => {
-            console.log(res.data)
             setQuestionRep(res.data)
         })
         .catch((err) => {

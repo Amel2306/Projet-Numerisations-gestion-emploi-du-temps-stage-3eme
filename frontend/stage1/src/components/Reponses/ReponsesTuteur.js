@@ -16,7 +16,6 @@ function ReponsesTuteur (props) {
     useEffect(() => {
         axiosInstance.get(`/reponses/tuteur/${tuteurId}`)
         .then((res) => {
-            console.log(res.data)
             setQuestionRep(res.data)
         })
         .catch((err) => {

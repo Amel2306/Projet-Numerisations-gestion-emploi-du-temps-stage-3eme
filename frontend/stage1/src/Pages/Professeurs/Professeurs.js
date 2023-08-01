@@ -12,7 +12,7 @@ function Professeurs() {
             setProfesseurs(res.data);
           })
           .catch((err) => {
-            console.log(err);
+            console.error(err);
           });
     }, []);
 
@@ -53,10 +53,10 @@ function Professeurs() {
             </div>
 
             <button className="btn">
-                <Link className="link" to="/profForm">Ajouter un scientifique</Link>
+                <Link className="link" to="/profForm">Ajouter un accueillant</Link>
             </button>
             <button className="btn" onClick={handleSupprimeAll}>
-                Supprimer les scientifiques
+                Supprimer les accueillants
             </button>
 
         </div>

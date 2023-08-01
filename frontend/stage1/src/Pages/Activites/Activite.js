@@ -18,11 +18,10 @@ function Activite () {
         if (confirmation) {
             axiosInstance.delete(`activites/${id}`)
             .then((res) => {
-                console.log(res);
                 window.location.reload();
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });
         }
     }
@@ -33,7 +32,7 @@ function Activite () {
             setActivite(res.data);
         })
         .catch((err) => {
-            console.log(err);
+            console.error(err);
         });  
     }, [])
 

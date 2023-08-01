@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import  ActiviteDescrPdf from '../Activites/ActiviteDescrPdf';
-import {MomentsContext} from "../../utils/tabMoments"
 
 
 const styles = StyleSheet.create({
@@ -32,7 +31,18 @@ const styles = StyleSheet.create({
 function ParcoursPdf(props) {
 
     const activites = props.activites;
-    const tab_moments = props.tab_moments
+    const tab_moments = [
+        "Lundi Matin",
+        "Lundi Aprés-midi",
+        "Mardi Matin",
+        "Mardi Aprés-midi",
+        "Mercredi Matin",
+        "Mercredi Aprés-midi",
+        "Jeudi Matin",
+        "Jeudi Aprés-midi",
+        "Vendredi Matin",
+        "Vendredi Aprés-midi"
+    ];
 
     return (
         <Document>

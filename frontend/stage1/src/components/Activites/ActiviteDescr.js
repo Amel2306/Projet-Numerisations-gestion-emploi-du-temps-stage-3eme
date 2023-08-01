@@ -14,7 +14,7 @@ function ActiviteDescr (props) {
             setActivite(res.data);
         })
         .catch((err) => {
-            console.log(err);
+            console.error(err);
         });  
     }, [])
 
@@ -31,7 +31,9 @@ function ActiviteDescr (props) {
                     <Link className="link" to={`/activite/${id}`}>Voir activité</Link>
                     <div>
                         <p>Encadrant respo: {activite.professeurId}</p>
-                        <Link className="link" to={`/professeur/${activite.professeurId}` } >Voir Scientifique</Link>                     
+                        <button>
+                            <Link className="link" to={`/professeur/${activite.professeurId}` } >Voir accueillant</Link>                        
+                        </button>
                     </div>
                 </div>            
             </div>

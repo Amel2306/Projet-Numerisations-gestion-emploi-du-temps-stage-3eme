@@ -31,14 +31,12 @@ function EleveFichier () {
                         etablissement: item.etablissement,
                     }))
 
-                    console.log(formattedData)
+                    (formattedData)
 
                     try {
                         for (const rowData of formattedData) {
                           await axiosInstance.post('/eleves', rowData);
-                          console.log('Requête POST réussie pour:', rowData);
                         }
-                        console.log('Toutes les requêtes POST ont été effectuées.');
                         history("/eleves")
                         window.location.reload();
                       } catch (error) {

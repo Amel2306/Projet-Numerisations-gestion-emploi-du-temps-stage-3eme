@@ -40,7 +40,7 @@ function ProfForm () {
 
     return (
         <div>
-            <h3>Formulaire scientifique</h3>
+            <h3>Formulaire accueillant</h3>
             <form onSubmit={handleSubmit}>
                 <div className="label-form" >
                     <label>Nom</label>

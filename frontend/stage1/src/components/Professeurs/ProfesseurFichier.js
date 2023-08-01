@@ -46,7 +46,7 @@ function ProfesseurFichier () {
                         v2: parseInt(item.v2),                        
                     }))
 
-                    console.log(formattedData)
+                    (formattedData)
 
                     try {
                         for (let rowData of formattedData) {
@@ -73,7 +73,6 @@ function ProfesseurFichier () {
                             axiosInstance.post('/activites', activiteData)                            
                           }
                         }
-                        console.log('Toutes les requêtes POST ont été effectuées.');
                         history("/professeurs")
                         window.location.reload();
                       } catch (error) {
@@ -87,7 +86,7 @@ function ProfesseurFichier () {
         <div>
             <label>Veuillez joindre votre fichier </label>
             <input type="file" onChange={handleFileChange} />
-            <button onClick={handleFileUpload} className="btn">Ajouter les Scientifiques</button>
+            <button onClick={handleFileUpload} className="btn">Ajouter les accueillants</button>
         </div>
     )
 }

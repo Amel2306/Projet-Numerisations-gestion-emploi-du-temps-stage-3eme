@@ -17,10 +17,9 @@ function App() {
       .get(`/${personne}/${userId}`)
       .then((res) => {
         setUser(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }, []);
 

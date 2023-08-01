@@ -3,7 +3,6 @@ import {Document, Page, View, StyleSheet, Text} from '@react-pdf/renderer'
 import axiosInstance from '../../config/axiosConfig'
 import EleveDescrPdf from './EleveDescrPdf'
 import ActiviteDescrPdf from '../Activites/ActiviteDescrPdf'
-import {MomentsContext} from "../../utils/tabMoments"
 
 
 const styles = StyleSheet.create({
@@ -44,7 +43,18 @@ function ElevePdf (props) {
 
     const eleve = props.eleve
 
-    const {tab_moments} = useContext(MomentsContext);
+    const tab_moments = [
+        "Lundi Matin",
+        "Lundi Aprés-midi",
+        "Mardi Matin",
+        "Mardi Aprés-midi",
+        "Mercredi Matin",
+        "Mercredi Aprés-midi",
+        "Jeudi Matin",
+        "Jeudi Aprés-midi",
+        "Vendredi Matin",
+        "Vendredi Aprés-midi"
+    ]; 
 
     const [activites, setActivites] = useState(null)
     const [groupe, setGroupe] = useState(null)
@@ -96,7 +106,9 @@ function ElevePdf (props) {
                             <Text style={styles.title}>Mon parcours : </Text>
                             {activites.map((act) => (
                                 <View key={act.activiteId} style={styles.section}>
-                                    <Text style={{ color: 'green', paddingBottom: "12px" }}>{tab_moments && tab_moments[act.indexMoment]}</Text>
+                                    <View>
+                                        <Text style={{ color: 'green', paddingBottom: "12px" }}>{tab_moments && tab_moments[act.indexMoment]}</Text>
+                                    </View>
                                     <ActiviteDescrPdf id={act.activiteId} style={{backgroundColor: '#cfbba5'}} />
                                 </View>
                             ))}                  

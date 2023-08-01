@@ -17,7 +17,6 @@ function ReponsesEleve (props) {
 
         axiosInstance.get(`/reponses/eleve/${eleveId}`)
         .then((res) => {
-            console.log(res)
             setQuestionRep(res.data)
         })
         .catch((err) => {

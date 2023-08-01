@@ -2,6 +2,7 @@ import '../../style/Navbar/Navbar.css'
 import '@fortawesome/fontawesome-svg-core'
 import {Link} from "react-router-dom"
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 function Navbar(props) {
     const user = props.user
@@ -13,6 +14,16 @@ function Navbar(props) {
         localStorage.removeItem('personne');
         setUser(null);
     }
+
+    useEffect(() => {
+        // Ajoute un écouteur d'événement de clic sur l'ensemble du document
+        document.addEventListener('click', setEtat(false));
+
+        // Supprime l'écouteur d'événement lorsque le composant est démonté
+        return () => {
+        document.removeEventListener('click', setEtat(false));
+    };
+    }, [])
 
     return (
         <nav className='nav'>
@@ -35,7 +46,7 @@ function Navbar(props) {
                                     <Link className="link" to="/eleves">Liste élèves</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/professeurs">Liste Des Scientifiques</Link>
+                                    <Link className="link" to="/professeurs">Liste Des accueillants</Link>
                                 </li>
                                 <li>
                                     <Link className="link" to="/activites">Liste Activités</Link>

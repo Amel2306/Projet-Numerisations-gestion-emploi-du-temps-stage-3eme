@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect,  useState } from "react";
 import axiosInstance from "../../config/axiosConfig";
-import { useParams} from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Parc from "../../components/Parcours/Parc";
 import EleveDescr from "../../components/Eleves/EleveDescr";
 import EleveGroupe from "../../components/Eleves/EleveGroupe";
@@ -27,8 +26,6 @@ function Eleve (props) {
         axiosInstance.get(`/eleves/${id}`)
         .then ((res) =>{
             setEleve(res.data)
-            console.log(res)
-            console.log(id)
         })
         .catch ((err) => {
             console.error(err)
@@ -43,11 +40,10 @@ function Eleve (props) {
         if (confirm) {
             axiosInstance.put(`eleves/confirmation/${id}`)
             .then((res) => {
-                console.log(res);
                 window.location.reload();
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });            
         }
 
@@ -60,11 +56,10 @@ function Eleve (props) {
         if (confirmation) {
             axiosInstance.delete(`eleves/${id}`)
             .then((res) => {
-                console.log(res);
                 window.location.reload();
             })
             .catch((err) => {
-                console.log(err);
+                console.error(err);
             });            
         }
     }
@@ -73,8 +68,6 @@ function Eleve (props) {
       const confirmation = window.confirm("Êtes-vous sûr de vouloir attribuer un parcours à cet élève ?");
 
       if (confirmation) {
-
-        console.log("nbr eleve max" + nbEleveMax)
 
         const data = {
             nbEleveMax: parseInt(nbEleveMax)
@@ -85,7 +78,7 @@ function Eleve (props) {
               window.location.reload();
           })
           .catch((err) => {
-              console.log(err);
+              console.error(err);
           });            
       }
     }
@@ -117,7 +110,6 @@ function Eleve (props) {
 
             </div >
   
-
                 {( eleve.parcoursId && (
                     <div className="groupe-questions">
                         <div className="contain-groupe"> 
