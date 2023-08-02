@@ -30,16 +30,13 @@ function EleveFichier () {
                         adress: item.adresse,
                         etablissement: item.etablissement,
                     }))
-
-                    (formattedData)
-
                     try {
                         for (const rowData of formattedData) {
                           await axiosInstance.post('/eleves', rowData);
                         }
                         history("/eleves")
                         window.location.reload();
-                      } catch (error) {
+                    } catch (error) {
                         console.error('Une erreur s\'est produite lors de l\'envoi des données:', error);
                     }
                 }

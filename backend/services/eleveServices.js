@@ -186,6 +186,7 @@ exports.assignParcours = async (eleveId, nb_eleve_max) => {
       break;
     }
   }
+  await this.sendPassword(eleve.id)
   return eleve;
 };
 

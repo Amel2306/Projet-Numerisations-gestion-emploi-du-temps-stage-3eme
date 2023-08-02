@@ -1,6 +1,8 @@
 const Professeur = require('../models/Professeur');
 const Eleve = require('../models/Eleve');
 const { Op } = require('sequelize');
+const { generateRandomPassword, generatedPassword } = require ("../utilities/passwordFunctions");
+const emailTemplates = require('../utilities/emailTemplates');
 
 exports.getAllProfesseurs = async () =>{
   return await Professeur.findAll();
@@ -34,6 +36,30 @@ exports.getEleveByTuteur= async (tuteurId) =>{
   }
 }
 
+//envoi mdp à l'élève pour lui permettre de se connecter
+exports.sendPassword = async (profId) => {
+  try {
+    const prof = await Eleve.findByPk(profId);
+    const password = generatedPassword; // on généère un mot de passe au hazard 
+    const recipientEmail = prof.email;
+
+    //on envoie le mail avec le mot de passe
+    await emailTemplates.sendPasswordEmail(recipientEmail, password);
+
+    // on hash ensuite le mot de passe pour l'enregistrer dans la base de données
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    //on modifie le mot de passe de l'élève
+    await prof.update({
+      password: hashedPassword
+    });
+
+    return { message: "Mot de passe envoyé au professeur avec succès" };
+  } catch (error) {
+    throw new Error("Erreur lors de l'envoi de mot de passe au professeur");
+  }
+};
+
 exports.addProfesseur = async (profData) => {
   try {
     //dans le cas ou le professeur existe déja (=> son email est déjà enregistré), on le retourne lui sans en créer un nouveau
@@ -47,7 +73,8 @@ exports.addProfesseur = async (profData) => {
     }
     else {
       const newProfesseur = await Professeur.create(profData);
-      return newProfesseur      
+      this.sendPassword(newProfesseur.id)
+      return newProfesseur
     }
   } catch (error) {
     throw new Error('Erreur lors de la création du professeur dans services.');

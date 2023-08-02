@@ -57,8 +57,6 @@ exports.addProfesseur = async (req, res) => {
     role, 
     nb_eleve_tuteur} = req.body;
   try {
-    const password = generatedPassword; 
-    const hashedPassword = await bcrypt.hash(password, 10);
     const profData = {
       nom,
       prenom,
@@ -68,7 +66,6 @@ exports.addProfesseur = async (req, res) => {
       etablissement,
       role,
       nb_eleve_tuteur,
-      password: hashedPassword,
     }
     const nouveauProfesseur = await professeurService.addProfesseur(profData);
     res.status(201).json(nouveauProfesseur);
