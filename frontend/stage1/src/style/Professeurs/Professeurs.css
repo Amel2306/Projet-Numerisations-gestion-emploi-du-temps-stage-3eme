@@ -20,6 +20,7 @@
     box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
     border-radius: 30px;
     margin: 10px;
+    margin-top: 40px;
     padding: 10px;
     min-width: 390px;
     width: auto;
@@ -50,5 +51,10 @@
 @media screen and (max-width: 1220px) {
     .contain-professeur {
         flex-direction: column;
+
+    }
+
+    .contain-eleves {
+        min-width: auto;   
     }
 }

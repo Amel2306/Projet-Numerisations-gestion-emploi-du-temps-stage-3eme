@@ -1,8 +1,7 @@
 import '../../style/Navbar/Navbar.css'
 import '@fortawesome/fontawesome-svg-core'
 import {Link} from "react-router-dom"
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function Navbar(props) {
     const user = props.user
@@ -14,16 +13,6 @@ function Navbar(props) {
         localStorage.removeItem('personne');
         setUser(null);
     }
-
-    useEffect(() => {
-        // Ajoute un écouteur d'événement de clic sur l'ensemble du document
-        document.addEventListener('click', setEtat(false));
-
-        // Supprime l'écouteur d'événement lorsque le composant est démonté
-        return () => {
-        document.removeEventListener('click', setEtat(false));
-    };
-    }, [])
 
     return (
         <nav className='nav'>

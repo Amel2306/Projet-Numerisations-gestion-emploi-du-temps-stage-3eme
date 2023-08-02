@@ -25,9 +25,9 @@ function EleveFichier () {
                         nom: item.nom,
                         prenom: item.prenom,
                         email: item.email,
-                        numero_tel: item.num_tel,
-                        numero_tel_parent: item.num_tel_par,
-                        adress: item.adress,
+                        numero_tel: item.numTel,
+                        numero_tel_parent: item.numTelPar,
+                        adress: item.adresse,
                         etablissement: item.etablissement,
                     }))
 

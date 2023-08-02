@@ -14,45 +14,55 @@ function ProfesseurFichier () {
         setFile(file);
     }
 
+    const analyseMoment = (mom) => {
+        return mom === "Oui" ? 1 : 0
+    }
+
+    const analyseNbEleveTuteur = (nbEleveTuteur) => {
+        return nbEleveTuteur  || nbEleveTuteur=== "" ? 0 : parseInt(nbEleveTuteur)
+    }
+
     const handleFileUpload = () => {
         if (selectFile) {
             Papa.parse(selectFile, {
                 header: true,
                 complete: async (results) => {
                     const data = results.data
-
+                    console.log(data)
                     const formattedData = data.map((item) => ({
-                        nom: item.nom,
-                        prenom: item.prenom,
-                        email: item.email,
-                        numero_tel: item.numero_tel,
-                        metier: item.metier,
-                        etablissement: item.etablissement,
-                        role: item.role,
-                        nb_eleve_tuteur: parseInt(item.nb_eleve_tuteur),
-                        nom_act: item.nomActivite,
-                        description: item.description,
-                        nb_realisations: parseInt(item.nb_realisations),
-                        nb_eleve_max: parseInt(item.nb_eleve_max),
-                        l1: parseInt(item.l1),
-                        l2: parseInt(item.l2),
-                        ma1: parseInt(item.ma1),
-                        ma2: parseInt(item.ma2),
-                        me1: parseInt(item.me1),
-                        me2: parseInt(item.me2),
-                        j1: parseInt(item.j1),
-                        j2: parseInt(item.j2),
-                        v1: parseInt(item.v1),
-                        v2: parseInt(item.v2),                        
+
+                            nom: item.nom,
+                            prenom: item.prenom,
+                            email: item.email,
+                            numero_tel: item.numeroTel,
+                            metier: item.metier,
+                            etablissement: item.etablissement,
+                            role: item.role,
+                            nb_eleve_tuteur: analyseNbEleveTuteur(item.nbEleveTuteur),
+                            nom_act: item.nomActivite,
+                            description: item.description,
+                            nb_realisations: parseInt(item.nbRealisations),
+                            nb_eleve_max: parseInt(item.nbEleveMax),
+                            l1: analyseMoment("Non"),
+                            l2: analyseMoment(item.crenau_l2),
+                            ma1: analyseMoment(item.crenau_ma1),
+                            ma2: analyseMoment(item.crenau_ma2),
+                            me1: analyseMoment(item.crenau_me1),
+                            me2: analyseMoment(item.crenau_me2),
+                            j1: analyseMoment(item.crenau_j1),
+                            j2: analyseMoment(item.crenau_j2),
+                            v1: analyseMoment(item.crenau_v1),
+                            v2: analyseMoment("Non"),
+               
                     }))
 
-                    (formattedData)
+                    console.log(formattedData)
 
                     try {
                         for (let rowData of formattedData) {
                           const reponse = await axiosInstance.post('/professeurs', rowData);
                           const professeurId = reponse.data.id                          
-                          if (rowData.nom_act && rowData.description) {
+                          if (rowData.nom_act && rowData.description && rowData.nom_act !== "") {
                             const activiteData = {
                                 nom: rowData.nom_act,
                                 description: rowData.description,

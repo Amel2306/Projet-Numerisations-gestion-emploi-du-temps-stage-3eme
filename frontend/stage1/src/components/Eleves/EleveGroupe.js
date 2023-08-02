@@ -50,7 +50,11 @@ function EleveGroupe (props)  {
                     fileName={"groupe"+id+".pdf"}
                 >
                     {({ blob, url, loading, error }) =>
-                        loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
+                        loading ? 'Téléchargement en cours...' : (
+                            <>
+                                <i className="fa-solid fa-circle-down fa-xl"></i> Télécharger la liste des élèves
+                            </>
+                        )
                     }
                 </PDFDownloadLink>  
         </div>

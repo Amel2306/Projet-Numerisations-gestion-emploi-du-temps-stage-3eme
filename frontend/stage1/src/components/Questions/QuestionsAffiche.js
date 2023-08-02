@@ -45,8 +45,12 @@ function QuestionsAffiche (props) {
                 </ul>
                 <PDFDownloadLink className="link"  document={<QuestionPdf questionnaire={questionnaire} />} fileName={"questions"+questionnaire+".pdf"}>
                             {({ blob, url, loading, error }) =>
-                                loading ? 'Téléchargement en cours...' : 'Télécharger les questions'
-                            }
+                                loading ? 'Téléchargement en cours...' : (
+                                    <>
+                                        <i className="fa-solid fa-circle-down fa-xl"></i> Télécharger les questions
+                                    </>
+                                )                            
+                        }
                 </PDFDownloadLink>
             </div>
         )

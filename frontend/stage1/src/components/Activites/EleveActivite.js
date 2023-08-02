@@ -55,7 +55,11 @@ function EleveActivite (props) {
        {etat && tab_moments && (
             <PDFDownloadLink className="link"  document={<ListeEleves eleves={eleves} moment={tab_moments && tab_moments[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
                 {({ blob, url, loading, error }) =>
-                    loading ? 'Téléchargement en cours...' : 'Télécharger la liste des élèves'
+                    loading ? 'Téléchargement en cours...' : (
+                      <>
+                          <i className="fa-solid fa-circle-down fa-xl"></i> Télécharger la liste des élèves
+                      </>
+                  )
                 }
             </PDFDownloadLink>        
        )}
