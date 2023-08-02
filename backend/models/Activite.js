@@ -65,6 +65,14 @@ const Activite = db.define('activites', {
         type: DataTypes.INTEGER, // 1 si dispo 0 sinon
         allowNull: false
     },
+    lieu: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    lieu_rdv: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     professeurId: {
         type: DataTypes.INTEGER,
         allowNull: false,

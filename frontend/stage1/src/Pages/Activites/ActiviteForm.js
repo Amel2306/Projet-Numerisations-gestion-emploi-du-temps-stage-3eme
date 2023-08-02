@@ -24,6 +24,8 @@ function ActiviteForm (props) {
     const [j2, setJ2] = useState(0)
     const [v1, setV1] = useState(0)
     const [v2, setV2] = useState(0)
+    const [lieu, setLieu] = useState("");
+    const [lieu_rdv, setRdv] = useState("");
     const [professeurId, setProf] = useState(0)
 
     const handleSubmit = (e) => {
@@ -44,6 +46,8 @@ function ActiviteForm (props) {
             j2,
             v1,
             v2,
+            lieu,
+            lieu_rdv,
             professeurId
         }
 
@@ -179,6 +183,22 @@ function ActiviteForm (props) {
                 <option value={1}>Oui</option>
                 </select>
             </div>
+
+            <div className="label-form">
+                <label>Lieu exact du déroulement de l'activité</label>
+                <textarea 
+                    value={lieu} 
+                    onChange={(e) => setLieu(e.target.value)}
+                ></textarea>
+            </div>
+
+            <div className="label-form">
+                <label>Lieu de rendez-vous avec les stagiaire</label>
+                <textarea 
+                    value={lieu_rdv} 
+                    onChange={(e) => setRdv(e.target.value)}
+                ></textarea>
+            </div>
     
             <div className="label-form">
                 <label>Encadrant ID :</label>
@@ -189,7 +209,7 @@ function ActiviteForm (props) {
                 />
             </div>
     
-            <button type="submit">Valider</button>
+            <button className='btn' type="submit">Valider</button>
           </form>
           <ActiviteFichier />
         </div>

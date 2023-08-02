@@ -55,6 +55,8 @@ function ActiviteDescrPdf(props) {
                     <Text style={{backgroundColor: "#f5dfc8"}}>Description : {activite.description}</Text>
                     <Text style={{backgroundColor: "#f5dfc8"}}>Nombre de réalisation: {activite.nb_realisations}</Text>
                     <Text style={{backgroundColor: "#f5dfc8"}}>Nombre d'élèves au maximum: {activite.nb_eleve_max}</Text>
+                    <Text style={{backgroundColor: "#f5dfc8"}}>Lieu du déroulement de l'activité: {activite.lieu}</Text>
+                    <Text style={{backgroundColor: "#f5dfc8"}}>Lieu de rendez-vous (là où on doit se rendre): {activite.lieu_rdv}</Text>
                     <Text style={{backgroundColor: "#f5dfc8"}}>id : {activite.id}</Text>                      
                 </View>
                 {role === "prof" && eleves && (

@@ -20,7 +20,7 @@ exports.getActivite = async (req, res) => {
 };
 
 exports.addActivite = async (req, res) => {
-  const { nom, description, nb_realisations, nb_eleve_max, l1, l2, ma1, ma2, me1, me2, j1, j2, v1, v2, professeurId } = req.body;
+  const { nom, description, nb_realisations, nb_eleve_max, l1, l2, ma1, ma2, me1, me2, j1, j2, v1, v2,lieu, lieu_rdv, professeurId } = req.body;
   try {
     const activiteData = {
       nom,
@@ -37,6 +37,8 @@ exports.addActivite = async (req, res) => {
       j2,
       v1,
       v2,
+      lieu,
+      lieu_rdv,
       professeurId,
     };
     const activite = await activiteService.createActivite(activiteData);

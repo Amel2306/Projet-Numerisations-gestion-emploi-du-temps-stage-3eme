@@ -27,6 +27,8 @@ function ActiviteDescr (props) {
                     <p>Description: {activite.description}</p>
                     <p>Nombre de réalisation: {activite.nb_realisations}</p>
                     <p>Nombre d'élèves au maximum: {activite.nb_eleve_max}</p>
+                    <p>Lieu du déroulement de l'activité : {activite.lieu}</p>
+                    <p>Lieu de rendez-vous (là ou je dois me rendre): {activite.lieu_rdv}</p>
                     <p>id : {activite.id}</p>
                     <Link className="link" to={`/activite/${id}`}>Voir activité</Link>
                     <div>
