@@ -12,29 +12,34 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
         alignItems: 'left',
-        justifyContent: 'space-between',
         paddingBottom: 50,
-        paddingTom: 50
+        paddingTop: 50
     },
     header: {
         marginTop: 20,
         marginBottom: 20,
         textAlign: 'center',
-        fontSize: 30,
-        color: 'red'
+        fontSize: 25,
+        backgroundColor: '#E3D3E4',
+        padding: 15,
+        marginLeft: 100,
+        marginRight: 100,
+        borderRadius: 20,
     },
     section: {
-        marginBottom: 10,
+        margin: 20,
         padding: 10,
-        flexGrow: 1,
-        break: 'after',
         fontSize: 15,
+        borderRadius: 10,
+        backgroundColor: "#E3D3E4"
     },
     title: {
         margin: 10,
         paddingBottom: 10,
         textAlign: 'center',
-        fontSize: '20px'
+        fontSize: '20px',
+        borderTop: 3,
+        paddingTop: 20,
     },
 });
 
@@ -55,6 +60,19 @@ function ElevePdf (props) {
         "Vendredi Matin",
         "Vendredi Aprés-midi"
     ]; 
+
+    const moments_colors = [
+        "#D0FCB3",
+        "#9EC9A8",
+        "#85B0A3",
+        "#6C969D",
+        "#6A7780",
+        "#685762",
+        "#826F75",
+        "#9B8787",
+        "#B59F99",
+        "#CEB6AB"
+    ]
 
     const [activites, setActivites] = useState(null)
     const [groupe, setGroupe] = useState(null)
@@ -100,33 +118,38 @@ function ElevePdf (props) {
                 <View style={styles.section}>
                     <EleveDescrPdf id={eleve.id}/>
                 </View>
-                <View style={styles.section}>
+                <View>
                     {activites &&
                         <>
                             <Text style={styles.title}>Mon parcours : </Text>
                             {activites.map((act) => (
-                                <View key={act.activiteId} style={styles.section}>
+                                <View key={act.activiteId} style={{margin: "20"}}>
                                     <View>
-                                        <Text style={{ color: 'green', paddingBottom: "12px" }}>{tab_moments && tab_moments[act.indexMoment]}</Text>
+                                        <Text style={{ color: moments_colors[act.indexMoment], paddingBottom: "12px" }}>{tab_moments && tab_moments[act.indexMoment]}</Text>
                                     </View>
-                                    <ActiviteDescrPdf id={act.activiteId} style={{backgroundColor: '#cfbba5'}} />
+                                    <ActiviteDescrPdf id={act.activiteId} couleur= {moments_colors[act.indexMoment]} style={{backgroundColor: '#cfbba5'}} />
                                 </View>
                             ))}                  
                         </>
                     }
                 </View>    
-                <View style={styles.section}>
+                <View>
                     <Text style={styles.title}>Mon groupe : </Text>
                     {groupe && groupe.map((eleve) => (
-                        <EleveDescrPdf id={eleve.id} />
+                        <View style={styles.section}>
+                            <EleveDescrPdf id={eleve.id} />
+                        </View>
                     ))}              
                 </View>
                 {tuteur && (
-                    <View style={styles.section}>
+                    <View>
                         <Text style={styles.title}>Mon tuteur {tuteur.nom + " " + tuteur.prenom + " :" }</Text>
-                        <Text> email : {tuteur.email}</Text>
-                        <Text> metier : {tuteur.metier}</Text>
-                        <Text> etablissement : {tuteur.etablissement}</Text>
+                        <View style={styles.section}>
+                            <Text> email : {tuteur.email}</Text>
+                            <Text> numéro de téléphone: {tuteur.numero_tel}</Text>
+                            <Text> metier : {tuteur.metier}</Text>
+                            <Text> etablissement : {tuteur.etablissement}</Text>                            
+                        </View>
                     </View>
                 )}
             </Page>

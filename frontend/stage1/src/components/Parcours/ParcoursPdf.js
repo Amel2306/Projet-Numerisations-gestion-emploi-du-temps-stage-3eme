@@ -8,9 +8,8 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
         alignItems: 'left',
-        justifyContent: 'space-between',
         paddingBottom: 50,
-        paddingTom: 50
+        paddingTop: 50
     },
     header: {
         marginTop: 20,
@@ -44,6 +43,19 @@ function ParcoursPdf(props) {
         "Vendredi Aprés-midi"
     ];
 
+    const moments_colors = [
+        "#D0FCB3",
+        "#9EC9A8",
+        "#85B0A3",
+        "#6C969D",
+        "#6A7780",
+        "#685762",
+        "#826F75",
+        "#9B8787",
+        "#B59F99",
+        "#CEB6AB"
+    ]
+
     return (
         <Document>
             <Page size="A4" style={styles.page}>
@@ -52,7 +64,7 @@ function ParcoursPdf(props) {
                         activites.map((act) => (
                             <View key={act.activiteId} style={styles.section}>
                                 <Text style={{ color: 'green', paddingBottom: "12px" }}>{tab_moments && tab_moments[act.indexMoment]}</Text>
-                                <ActiviteDescrPdf id={act.activiteId} style={{backgroundColor: '#cfbba5'}} />
+                                <ActiviteDescrPdf id={act.activiteId} couleur = {moments_colors[act.indexMoment]} style={{backgroundColor: moments_colors[act.indexMoment]}} />
                             </View>
                         ))}
                 </View>

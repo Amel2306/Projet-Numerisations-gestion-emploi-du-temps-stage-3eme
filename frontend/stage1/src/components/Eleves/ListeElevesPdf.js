@@ -7,8 +7,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
         alignItems: 'left',
-        justifyContent: 'space-between',
-        paddingBottom: 50
+        paddingBottom: 50,
+        paddingTop: 50
+
     },
     header: {
         marginTop: 20,
@@ -18,12 +19,12 @@ const styles = StyleSheet.create({
         color: 'red'
     },
     section: {
-        marginBottom: 10,
+        margin: 20,
         padding: 10,
-        flexGrow: 1,
-        break: 'after',
         fontSize: 15,
-    }
+        borderRadius: 10,
+        backgroundColor: "#E3D3E4"
+    },
 });
 
 function ListeEleves(props) {
@@ -39,11 +40,11 @@ function ListeEleves(props) {
             <Page size="A4" style={styles.page}>
                 <View style={styles.header}>
                     <Text>{
-                    professeur ?  "Liste des élèves de " +  professeur.nom + " " + professeur.prenom 
+                    professeur ?  "Liste des élèves dont " +  professeur.nom + " " + professeur.prenom  + " est tuteur : "
                     : eleve ? "Liste des élèves du groupe de  " + eleve.nom + " " + eleve.prenom 
                     : activiteId ? "Liste des élèves pour l'activité " + activiteId : ""}</Text>
                 </View>
-                <View style={styles.section}>
+                <View>
                     {eleves &&
                         eleves.map((eleve) => (
                             <View key={eleve.id} style={styles.section}>

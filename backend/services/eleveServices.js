@@ -57,10 +57,13 @@ exports.getGroupe = async (eleveId) => {
   const groupe = await Eleve.findAll({
     where: {
       [Op.and]: {
-        parcoursId: parcours_commun,
+        parcoursId: {
+          parcours_commun,
+          [Op.ne]: null
+        },
         id: {
           [Op.ne]: eleveId // on ne récupère pas l'élève lui même
-        }        
+        }      
       }
     }
   })

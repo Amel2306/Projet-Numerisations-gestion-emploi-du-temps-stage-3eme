@@ -10,8 +10,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
         alignItems: 'left',
-        justifyContent: 'space-between',
-        paddingBottom: 50
+        paddingBottom: 50,
+        paddingTop: 50
+
     },
     header: {
         marginTop: 20,

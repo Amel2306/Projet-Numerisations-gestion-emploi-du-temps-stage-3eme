@@ -8,8 +8,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: 'white',
         alignItems: 'left',
-        justifyContent: 'space-between',
-        paddingBottom: 50
+        paddingBottom: 50,
+        paddingTop: 50
+
     },
     header: {
         marginTop: 20,
@@ -35,6 +36,19 @@ function ParcProfPdf(props) {
     const nom = props.nom
     const prenom = props.prenom
 
+    const moments_colors = [
+        "#D0FCB3",
+        "#9EC9A8",
+        "#85B0A3",
+        "#6C969D",
+        "#6A7780",
+        "#685762",
+        "#826F75",
+        "#9B8787",
+        "#B59F99",
+        "#CEB6AB"
+    ]
+
     return (
         <Document>
             <Page size="A4" style={styles.page}>
@@ -44,12 +58,12 @@ function ParcProfPdf(props) {
                 <View style={styles.section}>
                 {activites && Object.entries(activites).map(([index, moments]) => (
                     <div key={index}>
-                        <Text> {moments.length > 0  && tab_moments && tab_moments[index]} </Text>
+                        <Text style={{fontSize: "20", color: moments_colors[index]}}> {moments.length > 0  && tab_moments && tab_moments[index]} </Text>
                         {moments.length > 0 && moments.map((moment, momentIndex) => (
                             <ul key={momentIndex}>
                             {moment && moment[0] && (
                                 <View style={styles.section}>
-                                    <ActiviteDescrPdf id={moment[0].activiteId} indexMoment = {moment[0].indexMoment} role={"prof"}/>                    
+                                    <ActiviteDescrPdf id={moment[0].activiteId} couleur={moments_colors[moment[0].indexMoment]} indexMoment = {moment[0].indexMoment} role={"prof"}/>                    
                                 </View>
                             )}
                             </ul>

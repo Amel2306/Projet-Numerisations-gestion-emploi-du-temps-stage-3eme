@@ -23,6 +23,8 @@ function EleveDescrPdf(props) {
 
     const [eleve, setEleve] = useState(null)
 
+    const couleur = props.couleur ? props.couleur : "#F2D1C9"
+
     useEffect (()=> {
         axiosInstance.get(`/eleves/${id}`)
         .then((res) => {
@@ -37,12 +39,11 @@ function EleveDescrPdf(props) {
     return (
         eleve &&
             <div>
-                <View style={{backgroundColor: "#f5dfc8"}}>
+                <View style={{background: couleur}}>
                     <Text>{eleve.nom} {eleve.prenom}</Text>
                     <Text>Numéro de téléphone de l'élève : {eleve.numero_tel}</Text>
                     <Text>Email de l'élève : {eleve.email}</Text>
-                    <Text>établissement de l'élève : {eleve.etablissement}</Text>
-                    <Text>id : {eleve.id}</Text>                                  
+                    <Text>numéro de parcours : {eleve.parcoursId}</Text>                                  
                 </View>
             </div>
 
