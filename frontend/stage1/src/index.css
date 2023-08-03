@@ -98,3 +98,8 @@ body, html, App, #root, .auth-wrapper {
   transition: .4s;
   box-shadow: 0 0 0 .15vw #5B2B2A;
 }
+
+.btn:hover .link{
+  color: #CC7D7C;
+  transition: .4s;
+}

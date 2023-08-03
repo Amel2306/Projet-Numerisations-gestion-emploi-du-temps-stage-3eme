@@ -859,7 +859,8 @@ La liste des élèves dont le professeur est tuteur
 | `nb_eleve_max`| `int` | **Required**. nombre d'élèves que peut accepter au maximum l'encadrant durant l'activité|
 | `l1`, `l2`, `ma1`, `ma2`, `me1`, `me2`, `j1`, `j2`, `v1`, `v2`| `0`, `1` | **Required**. disponibilité de l'activité à ce moment : 1 disponible, 0 pas disponible|
 | `professeurId`| `int` | **Required**. **clé étrangère ref : professeur** l'identifiant de l'encadrant de l'activité|
-
+| `lieu`| `string` | **Required** le lieu du déroulement de l'activité|
+| `lieu_rdv`| `string` | **Required**. lieu où doivent se rendre les stagiaires pour rencontrer leur encadrant|
 
 
 <details>
@@ -920,6 +921,79 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
+### Modifier une activité
+
+```http
+  PUT /api/activites
+```
+
+| Parameters | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`| `int` |**Required**. Identifiant de l'activité à modifier|
+
+
+| Body | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `nom`| `string` |nom de l'activité|
+| `description`| `string` | déscription du déroulement de l'activité|
+| `nb_realisations`| `int` | nombre de fois que l'encadrant peut réaliser l'activité dans la semaine|
+| `nb_eleve_max`| `int` |  nombre d'élèves que peut accepter au maximum l'encadrant durant l'activité|
+| `l1`, `l2`, `ma1`, `ma2`, `me1`, `me2`, `j1`, `j2`, `v1`, `v2`| `0`, `1` | disponibilité de l'activité à ce moment : 1 disponible, 0 pas disponible|
+| `professeurId`| `int` | **clé étrangère ref : professeur** l'identifiant de l'encadrant de l'activité|
+| `lieu`| `string` | le lieu du déroulement de l'activité|
+| `lieu_rdv`| `string` |. lieu où doivent se rendre les stagiaires pour rencontrer leur encadrant|
+
+
+
+
+<details>
+<summary>Exemple</summary>
+<br>
+
+- #### Request
+```http
+  PUT /api/activites/129
+```
+
+```
+    {
+        "nom": "Activite 10",
+        "descriptions": "finalement c'est l'activité 10",
+        "lieu": "Place Eugène bataillon",
+        "lieu_rdv": "à l'entrée de la fac devant le grand batiment blanc"
+    }
+```
+
+- #### Response 
+```
+    {
+        "message": "Activité modifiée avec succès",
+        "activite": {
+            "id": 129,
+            "nom": "Activite 10",
+            "description": "description",
+            "nb_realisations": 2,
+            "nb_eleve_max": 6,
+            "l1": 0,
+            "l2": 0,
+            "ma1": 1,
+            "ma2": 0,
+            "me1": 0,
+            "me2": 1,
+            "j1": 0,
+            "j2": 1,
+            "v1": 0,
+            "v2": 0,
+            "lieu": "Place Eugène bataillon",
+            "lieu_rdv": "à l'entrée de la fac devant le grand batiment blanc",
+            "professeurId": 77,
+            "createdAt": "2023-08-02T06:10:11.000Z",
+            "updatedAt": "2023-08-03T06:16:28.253Z"
+        }
+    }
+```
+
+</details>
 
 ### Supprimer une activité
 
