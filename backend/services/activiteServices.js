@@ -17,9 +17,14 @@ exports.getActiviteById = async (activiteId) => {
 
 exports.createActivite = async (activiteData) => {
     const newActivite = await Activite.create(activiteData);
-    console.log(newActivite.json)
     return newActivite;
 };
+
+exports.updateActivite = async (activiteData, activiteId) => {
+  const activite = await Activite.findByPk(activiteId)
+  const updatedAct = await activite.update(activiteData);
+  return updatedAct;
+}
 
 exports.deleteActiviteById = async (activiteId) => {
   try {

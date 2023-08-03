@@ -48,6 +48,36 @@ exports.addActivite = async (req, res) => {
   }
 };
 
+exports.updateActivite = async (req, res) => {
+  const activiteId = req.params.id
+  const { nom, description, nb_realisations, nb_eleve_max, l1, l2, ma1, ma2, me1, me2, j1, j2, v1, v2,lieu, lieu_rdv, professeurId } = req.body;
+  try {
+    const activiteData = {
+      nom,
+      description,
+      nb_realisations,
+      nb_eleve_max,
+      l1,
+      l2,
+      ma1,
+      ma2,
+      me1,
+      me2,
+      j1,
+      j2,
+      v1,
+      v2,
+      lieu,
+      lieu_rdv,
+      professeurId,
+    };
+    const activite = await activiteService.updateActivite(activiteData, activiteId);
+    res.status(201).json({ message: 'Activité modifiée avec succès', activite });
+  } catch (error) {
+    res.status(500).json({ message: "Erreur lors de la modification de l'activité", error });
+  }
+};
+
 exports.deleteActivite = async (req, res) => {
   const activiteId = req.params.id;
 

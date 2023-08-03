@@ -9,10 +9,14 @@ function Home(props) {
           <div>
             <h1>Vous n'êtes pas connecté</h1>
             <div>
-                <Link className="link" to="/profForm"> Tuteur ou encadrant</Link>    
+              <button className="btn">
+                <Link className="link" to="/profForm"> Tuteur ou encadrant</Link> 
+              </button>   
             </div>
             <div>
-                <Link className="link" to="eleveForm" >Eleve</Link>
+              <button className="btn">
+                <Link className="link" to="eleveForm" >Eleve</Link>                
+              </button>
             </div>
           </div>
         );
