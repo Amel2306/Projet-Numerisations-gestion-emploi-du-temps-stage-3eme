@@ -55,7 +55,8 @@ exports.addProfesseur = async (req, res) => {
     metier,
     etablissement, 
     role, 
-    nb_eleve_tuteur} = req.body;
+    nb_eleve_tuteur,
+    password} = req.body;
   try {
     const profData = {
       nom,
@@ -67,7 +68,7 @@ exports.addProfesseur = async (req, res) => {
       role,
       nb_eleve_tuteur,
     }
-    const nouveauProfesseur = await professeurService.addProfesseur(profData);
+    const nouveauProfesseur = await professeurService.addProfesseur(profData, password);
     res.status(201).json(nouveauProfesseur);
   } catch (error) {
     res.status(400).json({ message: 'Erreur lors de la création du professeur.', error });

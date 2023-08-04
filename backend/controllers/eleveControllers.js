@@ -42,7 +42,7 @@ exports.getGroupe = async (req, res) => {
 
 exports.addEleve = async (req, res) => {
   try {
-    const { nom, prenom, email, numero_tel, numero_tel_parent, adress, etablissement } = req.body;
+    const { nom, prenom, email, numero_tel, numero_tel_parent, adress, etablissement, password } = req.body;
     const eleveData = {
       nom,
       prenom,
@@ -52,7 +52,7 @@ exports.addEleve = async (req, res) => {
       adress,
       etablissement,
     }
-    const nouvelEleve = await EleveService.createEleve(eleveData);
+    const nouvelEleve = await EleveService.createEleve(eleveData, password);
     res.status(201).json(nouvelEleve);
   } catch (error) {
     res.status(400).json({ message: 'Error creation eleve dans controllers', error });

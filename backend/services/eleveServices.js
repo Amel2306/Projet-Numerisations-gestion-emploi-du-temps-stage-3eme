@@ -71,8 +71,32 @@ exports.getGroupe = async (eleveId) => {
   return groupe
 }
 
+//envoi mdp à l'élève pour lui permettre de se connecter
+exports.sendPassword = async (eleveId) => {
+  try {
+    const eleve = await Eleve.findByPk(eleveId);
+    const password = generatedPassword; // on généère un mot de passe au hazard 
+    const recipientEmail = eleve.email;
+
+    //on envoie le mail avec le mot de passe
+    await emailTemplates.sendPasswordEmail(recipientEmail, password);
+
+    // on hash ensuite le mot de passe pour l'enregistrer dans la base de données
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    //on modifie le mot de passe de l'élève
+    await eleve.update({
+      password: hashedPassword
+    });
+
+    return { message: "Mot de passe envoyé à l'élève avec succès" };
+  } catch (error) {
+    throw new Error("Erreur lors de l'envoi de mot de passe à l'élève");
+  }
+};
+
 //création d'un nouvel élève
-exports.createEleve = async (eleveData) => {
+exports.createEleve = async (eleveData, password) => {
   //dans le cas ou l'email ajouté est déjà dans la base de données on ne crée pas de nouvel élève
   const eleveExistant = await Eleve.findOne({
     where: {
@@ -85,6 +109,12 @@ exports.createEleve = async (eleveData) => {
   }
 
   const nouvelEleve = await Eleve.create(eleveData);
+  if (password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    nouvelEleve.update({
+      password: hashedPassword
+    })
+  }
   return nouvelEleve;
 };
 
@@ -189,33 +219,13 @@ exports.assignParcours = async (eleveId, nb_eleve_max) => {
       break;
     }
   }
-  await this.sendPassword(eleve.id)
+  if (eleve.password) {
+    await this.sendPassword(eleve.id)
+  }
   return eleve;
 };
 
-//envoi mdp à l'élève pour lui permettre de se connecter
-exports.sendPassword = async (eleveId) => {
-  try {
-    const eleve = await Eleve.findByPk(eleveId);
-    const password = generatedPassword; // on généère un mot de passe au hazard 
-    const recipientEmail = eleve.email;
 
-    //on envoie le mail avec le mot de passe
-    await emailTemplates.sendPasswordEmail(recipientEmail, password);
-
-    // on hash ensuite le mot de passe pour l'enregistrer dans la base de données
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    //on modifie le mot de passe de l'élève
-    await eleve.update({
-      password: hashedPassword
-    });
-
-    return { message: "Mot de passe envoyé à l'élève avec succès" };
-  } catch (error) {
-    throw new Error("Erreur lors de l'envoi de mot de passe à l'élève");
-  }
-};
 
 exports.deleteEleve = async (eleveId) => {
   const eleve = await Eleve.findByPk(eleveId);

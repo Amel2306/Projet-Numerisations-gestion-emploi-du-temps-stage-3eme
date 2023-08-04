@@ -60,7 +60,7 @@ exports.sendPassword = async (profId) => {
   }
 };
 
-exports.addProfesseur = async (profData) => {
+exports.addProfesseur = async (profData, password) => {
   try {
     //dans le cas ou le professeur existe déja (=> son email est déjà enregistré), on le retourne lui sans en créer un nouveau
     const profExiste = await Professeur.findOne({
@@ -73,7 +73,15 @@ exports.addProfesseur = async (profData) => {
     }
     else {
       const newProfesseur = await Professeur.create(profData);
-      this.sendPassword(newProfesseur.id)
+      if (password) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        newProfesseur.update({
+          password: hashedPassword
+        })
+      }
+      else  {
+        this.sendPassword(newProfesseur.id)
+      }
       return newProfesseur
     }
   } catch (error) {
