@@ -3,6 +3,7 @@ const Eleve = require('../models/Eleve');
 const { Op } = require('sequelize');
 const { generateRandomPassword, generatedPassword } = require ("../utilities/passwordFunctions");
 const emailTemplates = require('../utilities/emailTemplates');
+const bcrypt = require('bcrypt');
 
 exports.getAllProfesseurs = async () =>{
   return await Professeur.findAll();
@@ -67,23 +68,27 @@ exports.addProfesseur = async (profData, password) => {
       where: {
         email: profData.email
       }
-    })
+    })      
     if (profExiste) {
       return profExiste
     }
-    else {
+      console.log(profData)
       const newProfesseur = await Professeur.create(profData);
+      console.log(newProfesseur)
       if (password) {
+        console.log("a psw")
         const hashedPassword = await bcrypt.hash(password, 10);
+        console.log("ok")
         newProfesseur.update({
           password: hashedPassword
         })
       }
+
       else  {
+        console.log("n'a rien")
         this.sendPassword(newProfesseur.id)
       }
       return newProfesseur
-    }
   } catch (error) {
     throw new Error('Erreur lors de la création du professeur dans services.');
   }
@@ -104,7 +109,11 @@ exports.deleteProfesseur = async (professeurId) => {
 exports.deleteAllProfesseurs = async() =>{
   try {
     return await Professeur.destroy({
-      where: {}
+      where: {
+        role: {
+          [Op.ne]: "Admin"
+        }
+      }
     });
   } catch (error) {
     throw new Error('Erreur lors de la suppression de tous les professeurs.');

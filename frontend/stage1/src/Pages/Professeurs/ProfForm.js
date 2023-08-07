@@ -1,5 +1,5 @@
 import axiosInstance from "../../config/axiosConfig";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Link} from "react-router-dom"
 import ProfesseurFichier from "../../components/Professeurs/ProfesseurFichier";
 
@@ -13,6 +13,20 @@ function ProfForm () {
     const [etablissement, setEtablissement] = useState("")
     const [role, setRole] = useState("")
     const [nb_eleve_tuteur, setNombre] =useState(0)
+    const [user, setUser] = useState(null)
+
+    const userId = localStorage.getItem("userId")
+
+    useEffect(() => {
+        userId &&
+        axiosInstance.get(`/professeurs/${userId}`)
+        .then ((res) => {
+            setUser(res.data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -102,17 +116,20 @@ function ProfForm () {
                         <option value="Encadrant">Encadrant d'une activité</option>                        
                         <option value="Tuteur">Tuteur d'un élève</option>
                         <option value="Encadrant et Tuteur">Tuteur et encadrant</option>
-                    </select>                    
+                        {user && user.role==="Admin" && (
+                            <option value="Admin" >Admin</option>                            
+                        )}
+                    </select>        
                 </div>
 
-                {(role === "Tuteur" || role === "Encadrant et Tuteur") && (
-                    <div className="label-form">
+                {(role === "Tuteur" || role === "Encadrant et Tuteur" || role === "Admin") && (
+                <div className="label-form">
                     <label>Je souhaite être tuteur de combien d'élève ?</label>   
                     <input type="number"
                     value = {nb_eleve_tuteur}
                     onChange={(e) => setNombre(e.target.value)}
                     required
-                    />                                 
+                    />
                 </div>
                 )}
 

@@ -52,14 +52,14 @@ exports.getGroupe = async (eleveId) => {
   //on récupère le parcours de l'élève
   const eleve = await Eleve.findByPk(eleveId)
   const parcours_commun = eleve.parcoursId
-
+  
   //on récupère les élèves ayant le même
   const groupe = await Eleve.findAll({
     where: {
       [Op.and]: {
         parcoursId: {
-          parcours_commun,
-          [Op.ne]: null
+          [Op.ne]: null,
+          [Op.eq]: parcours_commun
         },
         id: {
           [Op.ne]: eleveId // on ne récupère pas l'élève lui même
@@ -67,6 +67,8 @@ exports.getGroupe = async (eleveId) => {
       }
     }
   })
+
+  console.log(groupe)
 
   return groupe
 }
@@ -118,7 +120,7 @@ exports.createEleve = async (eleveData, password) => {
   return nouvelEleve;
 };
 
-// Fonction pour attribuer un tuteur à un élève 
+//Fonction pour attribuer un tuteur à un élève 
 //au moment ou celui-ci est confirmé par l'admin
 exports.assignTuteur = async (eleve) => {
 
@@ -225,6 +227,15 @@ exports.assignParcours = async (eleveId, nb_eleve_max) => {
   return eleve;
 };
 
+exports.updateEleve = async (eleveId, eleveData) => {
+  const eleve = await Eleve.findByPk(eleveId)
+  if (!eleve) {
+    throw new Error("L'élève que vous souhaitez modifier n'existe pas");
+  }
+  console.log("*************************" + eleve.professeurId)
+  await eleve.update(eleveData)
+  return eleve
+}
 
 
 exports.deleteEleve = async (eleveId) => {

@@ -4,8 +4,11 @@ import {Link} from "react-router-dom"
 import { useState, useEffect, useRef } from 'react'
 
 function Navbar(props) {
+
     const user = props.user
     const setUser = props.setUser
+    const personne = props.personne
+
     const [open, setEtat] = useState(true) //Pour l'ouverture de la navbar
 
     const handleSignOut = () => {
@@ -26,31 +29,37 @@ function Navbar(props) {
                         !user ?(
                             <>
                                 <li>
-                                    <Link className="link" to="/login/professeurs">Encadrant-tuteur</Link>
+                                    <Link className="link" to="/login/professeurs">Se connecter : Encadrant-tuteur</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/login/eleves">Élève</Link>
+                                    <Link className="link" to="/login/eleves">Se connecter : Élève</Link>
+                                </li>
+                            </>
+                        ) : personne === "professeurs" ?
+
+                        user && user.role && user.role === "Admin" ? 
+                        (
+                            <>
+                                <li>
+                                    <Link className="link" to="/eleves">Liste des élèves</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/eleves">Liste élèves</Link>
+                                    <Link className="link" to="/professeurs">Liste des accueillants</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/professeurs">Liste Des accueillants</Link>
-                                </li>
-                                <li>
-                                    <Link className="link" to="/activites">Liste Activités</Link>
+                                    <Link className="link" to="/activites">Liste des Activités</Link>
                                 </li>
                                 <li>
                                     <Link className="link" to="/parcoursGeneration">Générer des parcours</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/parcours">Parcours</Link>
+                                    <Link className="link" to="/parcours">Liste des Parcours</Link>
                                 </li>
                                 <li>
                                     <Link className="link" to="/questionForm">Ajout question</Link>
                                 </li>
                                 <li>
-                                    <Link className="link" to="/questions">Questions</Link>
+                                    <Link className="link" to="/questions">liste des Questions</Link>
                                 </li>
                                 <li>
                                     <Link className="link" to="/reponsesEleves">Réponses élèves</Link>
@@ -61,12 +70,29 @@ function Navbar(props) {
                                 <li>
                                     <Link className="link" to="/reponses/Tuteur">Réponses Tuteur</Link>
                                 </li>
+                                <li>
+                                    <button onClick={handleSignOut}>Se déconnecter</button>
+                                </li>                            
                             </>
                         ) : (
                             <>
                                 <li>
-                                    <button onClick={handleSignOut}>Se déconnecter</button>
-                                </li>                            
+                                    <Link className='link' to={`/professeur/${user.id}`} >Profil</Link>
+                                </li> 
+                                <li>
+                                    {(user.role === "Tuteur" || user.role==="Encadrant et Tuteur" )&& (
+                                        <Link className='link' to= {`/reponses/foreleves/${user.id}`}>Évaluation de mes élèves</Link>                                  
+                                    )}                                    
+                                </li>
+
+
+                                <li>
+                                    <button className="btn" onClick={handleSignOut}>Se déconnecter</button>
+                                </li>
+
+                            </>
+                        ) : (
+                            <>
                             </>
                         )
                     }

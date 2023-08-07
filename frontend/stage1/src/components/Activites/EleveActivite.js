@@ -47,6 +47,15 @@ function EleveActivite (props) {
               Object.values(eleves).map((eleve) => (
                 <div key={eleve.id}>
                   <EleveDescr id={eleve.id} />
+                  {etat && (
+                    <QuestionQuestionnaire
+                      questionnaire="Encadrant"
+                      repondantProfId={professeurId}
+                      activiteId={activiteId}
+                      indexMoment={indexMoment}
+                      eleveConcerneId={eleve.id}
+                    />
+                  )}
                 </div>
             ))}            
           </div>
@@ -63,15 +72,6 @@ function EleveActivite (props) {
                 }
             </PDFDownloadLink>        
        )}
-
-      {etat && (
-        <QuestionQuestionnaire
-          questionnaire="Encadrant"
-          repondantProfId={professeurId}
-          activiteId={activiteId}
-          indexMoment={indexMoment}
-        />
-      )}
     </div>
     )
 }

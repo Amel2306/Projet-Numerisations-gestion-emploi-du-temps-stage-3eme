@@ -11,6 +11,7 @@ router.post("/", EleveControllers.addEleve);
 router.put("/confirmation/:id", EleveControllers.confirmeEleve);
 router.put("/password/:id", EleveControllers.sendPassword);
 router.put("/parcours/:id", EleveControllers.asignParcours);
+router.put("/:id", EleveControllers.updateEleve);
 router.delete("/:id", EleveControllers.deleteEleve);
 router.delete("/", EleveControllers.deleteAllEleve);
 

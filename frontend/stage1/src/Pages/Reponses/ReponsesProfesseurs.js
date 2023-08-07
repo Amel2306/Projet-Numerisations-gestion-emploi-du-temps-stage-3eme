@@ -7,18 +7,29 @@ import ReponsesTuteur from "../../components/Reponses/ReponsesTuteur"
 function ReponsesProfesseurs() { 
 
     const {role} = useParams()
+    const {profId} = useParams()
 
-    const [professeurs, setprofesseurs] = useState(null)
+    const [professeurs, setProfesseurs] = useState(null)
 
     useEffect(() => {
-        axiosInstance.get(`/professeurs/role/${role}`)
-        .then((res) =>{
-            setprofesseurs(res.data)
-            (role)
-        })
-        .catch((err) => {
-            console.error(err)
-        })
+        if (profId) {
+            axiosInstance.get(`/professeurs/${profId}`)
+            .then((res) =>{
+                setProfesseurs(res.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            }) 
+        }
+        else {
+            axiosInstance.get(`/professeurs/role/${role}`)
+            .then((res) =>{
+                setProfesseurs(res.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })            
+        }
     }, [])
 
     return (

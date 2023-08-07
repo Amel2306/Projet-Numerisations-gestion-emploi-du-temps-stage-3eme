@@ -80,7 +80,7 @@ function Professeur () {
                     Supprimer
                 </button>              
             </div>
-                {(professeur.role === "Tuteur" || professeur.role === "Encadrant et Tuteur") && (
+                {(professeur.role === "Tuteur" || professeur.role === "Encadrant et Tuteur" || professeur.role==="Admin") && (
                         eleves && eleves.length > 0 && (
                             <div className="contain-eleves"> 
                                 <h3>Mes élèves</h3> 
@@ -125,7 +125,7 @@ function Professeur () {
                         )
                 )}
 
-                {(professeur.role === "Encadrant" || professeur.role === "Encadrant et Tuteur") && (
+                {(professeur.role === "Encadrant" || professeur.role === "Encadrant et Tuteur" || professeur.role === "Admin") && (
                     <div className="parcours-prof">
                         <h2>Mes parcours</h2>
                         <ParcProf profId={id} professeur={professeur}/>

@@ -26,7 +26,7 @@ function QuestionRep(props) {
         };
         axiosInstance.get(`/reponses/unique`, {params})
         .then((res) => {
-            if (res.data) {
+            if (res.data){
                 setRepondu(true)
                 setContenuRep(res.data.contenu) 
                 setRepId(res.data.id)              
@@ -71,7 +71,6 @@ function QuestionRep(props) {
 
         axiosInstance.put(`/reponses/${reponseId}`, data)
         .then((res) => {
-            ("modifié")
             setContenuRep(res.data.contenu)
         })
         .catch((err) =>{

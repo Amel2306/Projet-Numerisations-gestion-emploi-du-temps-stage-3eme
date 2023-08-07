@@ -25,6 +25,7 @@ import Questions from '../Pages/Questions/Questions';
 
 import ReponsesEleves from '../Pages/Reponses/ReponsesEleves';
 import ReponsesProfesseurs from '../Pages/Reponses/ReponsesProfesseurs';
+import ReponsesForAllEleves from '../Pages/Reponses/ReponsesForAllEleves'
 
 function Rootes (props) {
 
@@ -76,7 +77,9 @@ function Rootes (props) {
             <Route path='/questions' element={<Questions />} />
 
             <Route path='/reponsesEleves' element={<ReponsesEleves />} />
-            <Route exact path='/reponses/:role' element={<ReponsesProfesseurs />} />
+            <Route exact path='/reponses/:role/' element={<ReponsesProfesseurs />} />
+            <Route exact path='/reponses/:profId' element={<ReponsesProfesseurs />} />
+            <Route path='/reponses/foreleves/:profId' element={<ReponsesForAllEleves />} />
         </Routes>
     )
 }

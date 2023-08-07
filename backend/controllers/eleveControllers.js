@@ -97,6 +97,29 @@ exports.asignParcours = async (req, res ) => {
   }
 }
 
+exports.updateEleve = async (req, res) => {
+  const eleveId = req.params.id
+  const { nom, prenom, email, numero_tel, numero_tel_parent, adress, etablissement, professeurId, parcoursId } = req.body;
+  const eleveData = {
+    nom,
+    prenom,
+    email,
+    numero_tel,
+    numero_tel_parent,
+    adress,
+    etablissement,
+    professeurId,
+    parcoursId
+  }
+  try {
+    const eleveUpd = await EleveService.updateEleve(eleveId, eleveData);
+    res.status(201).json({message: "Eleve modifié avec succès", eleveUpd})
+  }
+  catch(error) {
+    res.status(500).json({message: "Error lors de la modification de l'élève"})
+  }
+}
+
 exports.deleteEleve = async (req, res) => {
   try {
     const eleveId = req.params.id;

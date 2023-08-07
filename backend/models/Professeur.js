@@ -33,7 +33,7 @@ const Professeur = db.define('Professeur', {
     },
     role: {
         type: DataTypes.ENUM,
-        values: ['Tuteur', 'Encadrant', 'Encadrant et Tuteur'],
+        values: ['Tuteur', 'Encadrant', 'Encadrant et Tuteur', 'Admin'],
         allowNull: false
     },
     nb_eleve_tuteur: {
@@ -42,7 +42,7 @@ const Professeur = db.define('Professeur', {
     },  
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     }
 });
 

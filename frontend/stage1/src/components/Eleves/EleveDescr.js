@@ -12,8 +12,6 @@ function EleveDescr (props) {
         axiosInstance.get(`/eleves/${id}`)
         .then ((res) =>{
             setEleve(res.data)
-            (res)
-            (id)
         })
         .catch ((err) => {
             console.error(err)

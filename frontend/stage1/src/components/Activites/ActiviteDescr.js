@@ -22,22 +22,27 @@ function ActiviteDescr (props) {
         activite && (
 
             <div className='contain-act-descr'> 
-                <div className="activite-descr">
-                    <h3>{activite.nom}</h3>
-                    <p>Description: {activite.description}</p>
-                    <p>Nombre de réalisation: {activite.nb_realisations}</p>
-                    <p>Nombre d'élèves au maximum: {activite.nb_eleve_max}</p>
-                    <p>Lieu du déroulement de l'activité : {activite.lieu}</p>
-                    <p>Lieu de rendez-vous (là ou je dois me rendre): {activite.lieu_rdv}</p>
-                    <p>id : {activite.id}</p>
-                    <Link className="link" to={`/activite/${id}`}>Voir activité</Link>
+                <ul className="activite-descr">
+                    <li><h3>{activite.nom}</h3></li>
+                    <li>Description: {activite.description}</li>
+                    <li>Nombre de réalisation: {activite.nb_realisations}</li>
+                    <li>Nombre d'élèves au maximum: {activite.nb_eleve_max}</li>
+                    <li>Lieu du déroulement de l'activité : {activite.lieu}</li>
+                    <li>Lieu de rendez-vous (là ou je dois me rendre): {activite.lieu_rdv}</li>
+                    <li>id : {activite.id}</li>
+                    <li>
+                        <button><Link className="link" to={`/activite/${id}`}>Voir activité</Link></button>
+                    </li>
                     <div>
                         <p>Encadrant respo: {activite.professeurId}</p>
-                        <button>
-                            <Link className="link" to={`/professeur/${activite.professeurId}` } >Voir accueillant</Link>                        
-                        </button>
+                        <li>
+                            <button>
+                                <Link className="link" to={`/professeur/${activite.professeurId}` } >Voir accueillant</Link>                        
+                            </button>                            
+                        </li>
+
                     </div>
-                </div>            
+                </ul>            
             </div>
         )
     )

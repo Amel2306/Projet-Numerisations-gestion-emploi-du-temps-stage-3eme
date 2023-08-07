@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "../../config/axiosConfig.js";
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import "../../style/Authentification/Authentification.css"
 
 function Login() {
@@ -9,6 +9,8 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+
+    const navigate = useNavigate();
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
@@ -33,6 +35,7 @@ function Login() {
             localStorage.setItem('token', token)
             localStorage.setItem('userId', userId)
             localStorage.setItem('personne', personne)
+            navigate('/')            
             window.location.reload();
         })
         .catch(error => {
@@ -74,7 +77,6 @@ function Login() {
             
             </form>            
         </div>
-
     )
 }
 

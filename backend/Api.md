@@ -1772,7 +1772,7 @@ La liste des élèves dont le professeur est tuteur
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `eleveId`| `int` | **Required**. Id de l'élève sur lequel on veut récupérer les réponses de son tuteur
+| `eleveId`| `int` | **Required**. Id de l'élève sur lequel on veut récupérer les réponses de ses activités
 
   <details>
   <summary> Exemple </summary>
@@ -1781,31 +1781,31 @@ La liste des élèves dont le professeur est tuteur
   - #### Request
 
   ```http
-    GET /api/reponses/foreleve/54
+    GET /api/reponses/foreleve/68
   ```   
 
  -  #### Response
 
 ```
-{
-    "2": {
-        "contenu": "Sur 10, comment jugeriez vous la ponctualité de l'élève ?",
+[
+    {
+        "contenu": "Comment jugeriez vous la ponctualité de l'élève ?",
         "reponses": [
             {
-                "id": 178,
-                "contenu": "élève très ponctuel",
+                "id": 192,
+                "contenu": "élève trés ponctuel super !",
                 "repondantEleveId": null,
-                "repondantProfId": 51,
-                "eleveConcerneId": 54,
-                "questionId": 2,
-                "activiteId": null,
-                "indexMoment": null,
-                "createdAt": "2023-07-10T06:43:44.000Z",
-                "updatedAt": "2023-07-10T06:43:44.000Z"
+                "repondantProfId": 62,
+                "eleveConcerneId": 68,
+                "questionId": 1,
+                "activiteId": 117,
+                "indexMoment": 0,
+                "createdAt": "2023-08-04T09:47:58.000Z",
+                "updatedAt": "2023-08-04T09:47:58.000Z"
             }
         ]
     }
-}
+]
 
 ```
   </details>

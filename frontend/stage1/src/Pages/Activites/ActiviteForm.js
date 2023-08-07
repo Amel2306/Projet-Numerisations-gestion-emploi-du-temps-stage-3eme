@@ -1,5 +1,5 @@
 import axiosInstance from "../../config/axiosConfig";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ActiviteFichier from "../../components/Activites/ActiviteFichier";
 import {useNavigate} from "react-router-dom"
 
@@ -27,6 +27,18 @@ function ActiviteForm (props) {
     const [lieu, setLieu] = useState("");
     const [lieu_rdv, setRdv] = useState("");
     const [professeurId, setProf] = useState(0)
+
+    const [allProfs, setProfs] = useState(null)
+
+    useEffect(() => {
+        axiosInstance.get(`/professeurs`)
+        .then ((res) => {
+            setProfs(res.data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -202,11 +214,15 @@ function ActiviteForm (props) {
     
             <div className="label-form">
                 <label>Encadrant ID :</label>
-                <input
+                <select
                 type="number"
                 value={professeurId}
                 onChange={(e) => setProf(parseInt(e.target.value))}
-                />
+                >
+                    {allProfs && allProfs.map((prof) => (
+                        <option key={prof.id} value={prof.id}>{prof.nom} {prof.prenom}</option>
+                    ))} 
+                </select>
             </div>
     
             <button className='btn' type="submit">Valider</button>

@@ -49,7 +49,7 @@ function ReponsesTuteur (props) {
                                 activite.reponses.length > 0 && (
                                 activite.reponses.map((reponse) => (
                                     <div>
-                                    <h4> Réponse : {reponse.contenu}</h4>
+                                      <h4> Réponse : {reponse.contenu}</h4>
                                     </div>
                                 ))
                                 )}

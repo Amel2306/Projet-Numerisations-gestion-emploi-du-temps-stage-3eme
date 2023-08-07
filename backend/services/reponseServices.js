@@ -22,7 +22,7 @@ exports.getReponsesByQuestions = async (questionId) => {
 // soit Encadrant pour avoir les réponses des encadrants concernant l'élève passé en params
 exports.getReponsesForEleve = async (eleveId) => {
     const questions_questionnaire = await QuestionServices.getQuestionsByQuestionnaire("Encadrant");
-    const questions_reponses = {}
+    const questions_reponses = []
 
     for (const quest_questionnaire of questions_questionnaire) {
 
@@ -37,10 +37,11 @@ exports.getReponsesForEleve = async (eleveId) => {
         })
 
         if (reponses !== null && reponses !== undefined && reponses.length > 0) {
-            questions_reponses[questionId] = {
-                contenu: contenu,
-                reponses: reponses
+            const new_ques_rep = {
+                contenu,
+                reponses
             }
+            questions_reponses.push(new_ques_rep)
         }
     }
     return questions_reponses;

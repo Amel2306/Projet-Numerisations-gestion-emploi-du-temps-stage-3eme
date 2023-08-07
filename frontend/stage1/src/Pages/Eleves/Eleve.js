@@ -8,6 +8,7 @@ import QuestionQuestionnaire from "../../components/Questions/QuestionQuestionna
 import ElevePdf from "../../components/Eleves/ElevePdf";
 import {PDFDownloadLink} from "@react-pdf/renderer"
 import "../../style/Eleves/Eleves.css"
+import EleveTuteur from "../../components/Eleves/EleveTuteur";
 
 
 function Eleve (props) {
@@ -20,6 +21,21 @@ function Eleve (props) {
     }
 
     const [eleve, setEleve] = useState(null)
+    const [user, setUser] = useState(null)
+
+    const userId = localStorage.getItem("userId")
+    const personne = localStorage.getItem("personne")
+
+    useEffect(() => {
+        userId && personne==="professeurs" &&
+        axiosInstance.get(`/professeurs/${userId}`)
+        .then ((res) => {
+            setUser(res.data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+    }, [])
 
     useEffect (() => {
 
@@ -96,7 +112,7 @@ function Eleve (props) {
                         onClick={() => handleSupprime(eleve.id)}
                     >  
                         Supprimer 
-                    </button> 
+                    </button>
 
                     <PDFDownloadLink className="link pdf"  document={<ElevePdf eleve={eleve} />} fileName={"eleve"+eleve.id+".pdf"}>
                         {({ blob, url, loading, error }) =>
@@ -109,10 +125,16 @@ function Eleve (props) {
                     </PDFDownloadLink>    
 
             </div >
-  
+
+            {user && user.role==="Admin" && (
+                <div className="contain-parcours">
+                    <h1>Choisir ou modifier le tuteur de l'élève</h1>
+                    <EleveTuteur id= {id} />
+                </div>                
+            )}
                 {( eleve.parcoursId && (
                     <div className="groupe-questions">
-                        <div className="contain-groupe"> 
+                        <div > 
                             <EleveGroupe id={id} eleve={eleve}/>                            
                         </div>
                         <div className="contain-questionnaire">

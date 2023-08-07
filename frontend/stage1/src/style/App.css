@@ -46,6 +46,9 @@
   z-index: -900; 
 }
 
+ul {
+  list-style: none;
+}
 
 .container {
   display: flex;
