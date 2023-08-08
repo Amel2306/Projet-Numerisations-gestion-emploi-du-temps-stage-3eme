@@ -26,8 +26,8 @@
     margin: 15px;
     padding: 15px;
     border-radius: 25px;
-    box-shadow: 5px 5px 2px 2px rgb(204, 125, 124, 0.4);
-    background: rgb(204, 125, 124);
+    box-shadow: 5px 5px 2px 2px rgb(201, 173, 166, 0.4);
+    background: rgb(201, 173, 166);
 }
 
 .elevesActivite {
@@ -40,8 +40,9 @@
     min-width: 300px;
     max-width: 1200px;
     height: auto;
-    border-radius: 25px;
-    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    border-radius: 40px;
+    box-shadow: 0px 187px 75px rgba(201, 173, 166, 0.01), 0px 105px 63px rgba(201, 173, 166, 0.05), 0px 47px 47px rgba(201, 173, 166, 0.09), 0px 12px 26px rgba(201, 173, 166, 0.1), 0px 0px 0px rgba(201, 173, 166, 0.1);
+    background: rgba(108, 88, 76, 0.2);
 }
 
 .liste-eleves {
@@ -58,7 +59,8 @@
     margin: 20px;   
     max-width: 450px;
     border-radius: 25px;
-    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    background: rgba(108, 88, 76, 0.2);
     padding: 10px;
     height: auto;
 }

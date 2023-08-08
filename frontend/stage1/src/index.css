@@ -7,13 +7,13 @@
 }
 
 body {
-  background: #e1c7c7;
-  background: linear-gradient(90deg, #e1c7c7 50%, rgba(248,239,217,1) 100%);
+  background: #f2e9e4;
+  background: linear-gradient(90deg, #f2e9e4 50%, rgba(248,239,217,1) 100%);
   background-size: 200% 100%;
   min-height: 100vh;
   font-weight: 400;
   font-family: 'Quicksand', serif;
-  color: #5B2B2A;
+  color: #6c584c;
 }
 
 h1,h2,h3,h4,h5,h6,label, span{
@@ -79,28 +79,28 @@ body, html, App, #root, .auth-wrapper {
 
 .btn {
   border-radius: 15px;
-  background: #CC7D7C;
+  background: rgb(201, 173, 166);
   padding: 10px;
   font-size: 15px;
   margin: 10px;
   cursor: pointer;
-  color: #5B2B2A;
+  color: #6c584c;
   max-height: 50px;
-  border-color: #5B2B2A;
-  border: 10px;
-  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  border-color: #6c584c;
+  border: none;
+  box-shadow: 0 0 .4vw rgb(107, 88, 76, 0.2), 0 0 0 .15vw transparent;
 }
 
 .btn:hover {
-  background: #5B2B2A;
-  color:#CC7D7C ;
-  border: #5B2B2A;
+  background: #6c584c;
+  color:#c9ada7 ;
+  border: #6c584c;
   transition: .4s;
-  box-shadow: 0 0 0 .15vw #5B2B2A;
+  box-shadow: 0 0 0 .15vw #6c584c;
 }
 
 .btn:hover .link{
-  color: #CC7D7C;
+  color: #c9ada7;
   transition: .4s;
   cursor: pointer;
 }

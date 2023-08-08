@@ -69,15 +69,15 @@ ul {
   min-height: 150px;
   margin: 20px;
   border-radius: 15px;
-  border: 2px solid #5B2B2A;
-  box-shadow: 2px 2px 2px 2px rgb(91, 43, 42, 0.4);
+  border: 2px solid #6c584c;
+  box-shadow: 2px 2px 2px 2px rgb(108, 88, 76, 0.4);
   cursor: pointer;
 }
 
 .element:hover {
   transform: translateY(-20px);
   transition: 0.4s;
-  box-shadow: 12px 12px 2px 1px rgb(91, 43, 42, 0.4);
+  box-shadow: 12px 12px 2px 1px rgb(108, 88, 76, 0.4);
 }
 
 @media (min-width: 40rem) {
@@ -95,14 +95,14 @@ ul {
 input {
   font-weight: 500px;
   font-size: 15px;
-  color: #5B2B2A ;
+  color: #6c584c ;
   width: 100%;
   height: 100%;
   max-width: 300px;
   background-color: transparent;
-  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
   border-radius: 15px ;
-  border: #CC7D7C 2px;
+  border: #c9ada7 2px;
   outline: none;
   padding: 0.4vw;
   transition: .4s;
@@ -110,24 +110,24 @@ input {
 }
 
 input:hover {
-  box-shadow: 0 0 0 .15vw #5B2B2A;
+  box-shadow: 0 0 0 .15vw #6c584c;
 }
 
 input:focus {
-  box-shadow: 0 0 0 .15vw #CC7D7C;
+  box-shadow: 0 0 0 .15vw #c9ada7;
 }
 
 textarea {
   font-weight: 500px;
   font-size: 15px;
-  color: #5B2B2A ;
+  color: #6c584c ;
   min-height: 60px;
   min-width: 250px;
   resize: none;
   background-color: transparent;
-  box-shadow: 2px 2px 2px 2px rgb(91, 43, 42, 0.5);
+  box-shadow: 2px 2px 2px 2px rgb(108, 88, 76, 0.5);
   border-radius: 15px ;
-  border: rgb(91, 43, 42, 0.5) 1px solid;
+  border: rgb(108, 88, 76, 0.5) 1px solid;
   outline: none;
   padding: 0.4vw;
   transition: .4s;
@@ -135,22 +135,22 @@ textarea {
 }
 
 textarea:hover {
-  box-shadow: 0 0 0 .15vw #5B2B2A;
+  box-shadow: 0 0 0 .15vw #6c584c;
 }
 
 textarea:focus {
-  box-shadow: 0 0 0 .15vw #CC7D7C;
+  box-shadow: 0 0 0 .15vw #c9ada7;
 }
 
 
 select {
   font-weight: 500px;
   font-size: 15px;
-  color: #5B2B2A ;
+  color: #6c584c ;
   background-color: transparent;
-  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
   border-radius: 15px ;
-  border: #CC7D7C 2px;
+  border: #c9ada7 2px;
   outline: none;
   padding: 0.4vw;
   transition: .4s;
@@ -158,21 +158,21 @@ select {
 }
 
 select:hover {
-  box-shadow: 0 0 0 .15vw #5B2B2A;
+  box-shadow: 0 0 0 .15vw #6c584c;
 }
 
 select:focus {
-  box-shadow: 0 0 0 .15vw #CC7D7C;
+  box-shadow: 0 0 0 .15vw #c9ada7;
 }
 
 .container-form {
   border-radius: 20px;
-  border-color: #5B2B2A;
+  border-color: #6c584c;
 }
 
 .link {
   text-decoration: none;
-  color: #5B2B2A;
+  color: #6c584c;
   margin-top: 10px;
 }
 
@@ -183,10 +183,10 @@ select:focus {
 }
 
 .pdf {
-  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
   border-radius: 30px;
   padding: 7px;
-  color:#5B2B2A; 
+  color:#6c584c; 
   margin: 10px;
   height: auto;
   width: auto;
@@ -194,13 +194,13 @@ select:focus {
 }
 
 .pdf:hover {
-  color:#5B2B2A;
-  background-color: rgb(204, 125, 124, 0.4);
+  color:#6c584c;
+  background-color: rgb(201, 173, 166, 0.4);
   transition: 0.3s;
 }
 
 form {
-  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
   border-radius: 30px;
   margin: 10px;
   margin-top: 40px;

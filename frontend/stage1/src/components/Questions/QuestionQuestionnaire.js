@@ -59,7 +59,7 @@ function QuestionQuestionnaire (props) {
                     ))}
                     
                 </ul>
-                <PDFDownloadLink className="link"  document={<QuestionPdf questionnaire={questionnaire} />} fileName={"questions"+questionnaire+".pdf"}>
+                {/*<PDFDownloadLink className="link"  document={<QuestionPdf questionnaire={questionnaire} />} fileName={"questions"+questionnaire+".pdf"}>
                             {({ blob, url, loading, error }) =>
                                 loading ? 'Téléchargement en cours...' : (
                                     <>
@@ -67,7 +67,7 @@ function QuestionQuestionnaire (props) {
                                     </>
                                 )                            
                             }
-                </PDFDownloadLink>
+                </PDFDownloadLink>*/}
             </div>
         )
     )

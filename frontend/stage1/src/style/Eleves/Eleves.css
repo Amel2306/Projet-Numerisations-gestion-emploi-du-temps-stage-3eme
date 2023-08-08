@@ -33,8 +33,8 @@
     text-align: left;
     padding: 15px;
     border-radius: 25px;
-    box-shadow: 5px 5px 2px 2px rgb(204, 125, 124, 0.4);
-    background: rgb(204, 125, 124);
+    box-shadow: 5px 5px 2px 2px rgb(201, 173, 166, 0.4);
+    background: rgb(201, 173, 166);
     margin: 20px;
 }
 
@@ -56,7 +56,7 @@ li button {
     margin-left: 20px;
     background: transparent;
     border: none;
-    border: #5B2B2A 1px solid;
+    border: #6c584c 1px solid;
 }
 
 .all-btn {
@@ -71,7 +71,7 @@ li button {
     justify-content: center;
     align-items: center;
     align-content: center;
-    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    box-shadow: 0 0 .4vw rgb(108, 88, 76), 0 0 0 .15vw transparent;
     border-radius: 30px;
     margin: 10px;
     width:auto;
@@ -92,7 +92,7 @@ li button {
 }
 
 .contain-groupe {
-    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
     border-radius: 30px;
     margin: 10px;
     padding: 10px;
@@ -101,7 +101,7 @@ li button {
 }   
 
 .contain-questionnaire {
-    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
     border-radius: 30px;
     margin: 10px;
     padding: 10px;
@@ -140,8 +140,8 @@ li button {
         text-align: left;
         padding: 15px;
         border-radius: 25px;
-        box-shadow: 5px 5px 2px 2px rgb(204, 125, 124, 0.4);
-        background: rgb(204, 125, 124);
+        box-shadow: 5px 5px 2px 2px rgb(201, 173, 166, 0.4);
+        background: rgb(201, 173, 166);
         margin: 20px;
     }
 

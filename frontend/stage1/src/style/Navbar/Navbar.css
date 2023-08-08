@@ -33,20 +33,20 @@ nav {
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 600px;
-    color: #5B2B2A;
+    color: #6c584c;
     opacity: 1;
     transition: 0.3s ease-in-out;
 }
 
 .navbar li a:hover {
-    color: rgb(204, 125, 124, 0.5);
+    color: rgb(201, 173, 166, 0.5);
 }
 
 .navbar li a:hover::after {
     content: "";
     width: 30%;
     height: 2px;
-    background: rgb(204, 125, 124, 0.5);
+    background: rgb(201, 173, 166, 0.5);
     position: absolute ;
     bottom: -4px;
     left: 20px;
@@ -57,7 +57,7 @@ nav {
 }
 
 .mobile i {
-    color: #5B2B2A;
+    color: #6c584c;
 }
 
 @media screen and (max-width: 800px) {
@@ -75,7 +75,7 @@ nav {
         opacity: 1;
         transition: 0.3s ease-in-out;
         background: rgb(225,199,199);
-        background: linear-gradient(90deg, #e1c7c7 50%, rgba(248,239,217,1) 100%);
+        background: linear-gradient(90deg, #f2e9e4 50%, rgba(248,239,217,1) 100%);
         background-size: 200% 100%;
         z-index: 1000;
         position: fixed;

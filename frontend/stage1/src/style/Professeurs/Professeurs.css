@@ -10,14 +10,14 @@
     text-align: left;
     padding: 15px;
     border-radius: 25px;
-    box-shadow: 5px 5px 2px 2px rgb(204, 125, 124, 0.4);
-    background: #cc7d7c;
+    box-shadow: 5px 5px 2px 2px rgb(201, 173, 166, 0.4);
+    background: #c9ada7;
     margin: 20px;
     list-style: none;
 }
 
 .contain-eleves{
-    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
     border-radius: 30px;
     margin: 10px;
     margin-top: 40px;
@@ -38,7 +38,7 @@
 .parcours-prof {
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+    box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
     border-radius: 30px;
     margin: 10px;
     padding: 10px;
