@@ -94,6 +94,16 @@ exports.addProfesseur = async (profData, password) => {
   }
 }
 
+exports.updateProf = async (profId, profData) => {
+  const prof = await Professeur.findByPk(profId)
+  if (!prof) {
+    throw new Error("Le professeur que vous souhaitez modifier n'existe pas");
+  }
+  await prof.update(profData)
+  return prof
+}
+
+
 exports.deleteProfesseur = async (professeurId) => {
   try {
     const prof = await Professeur.findByPk(professeurId);

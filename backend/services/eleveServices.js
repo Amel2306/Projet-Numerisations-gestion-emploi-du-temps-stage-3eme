@@ -232,7 +232,6 @@ exports.updateEleve = async (eleveId, eleveData) => {
   if (!eleve) {
     throw new Error("L'élève que vous souhaitez modifier n'existe pas");
   }
-  console.log("*************************" + eleve.professeurId)
   await eleve.update(eleveData)
   return eleve
 }

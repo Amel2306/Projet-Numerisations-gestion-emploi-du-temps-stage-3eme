@@ -87,6 +87,8 @@ li button {
 
 .groupe-questions {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contain-groupe {
@@ -94,9 +96,8 @@ li button {
     border-radius: 30px;
     margin: 10px;
     padding: 10px;
-    width: 390px;
-    max-width: 390px;
     height: auto;
+    min-width: 390px;
 }   
 
 .contain-questionnaire {
@@ -104,9 +105,8 @@ li button {
     border-radius: 30px;
     margin: 10px;
     padding: 10px;
-    width: 350px;
-    max-width: 350px;
     height: auto;
+    min-width: 390px;
 }
 
 @media screen and (max-width: 830px) {

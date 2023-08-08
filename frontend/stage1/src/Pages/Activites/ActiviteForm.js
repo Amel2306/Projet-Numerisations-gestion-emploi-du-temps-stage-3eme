@@ -227,6 +227,7 @@ function ActiviteForm (props) {
     
             <button className='btn' type="submit">Valider</button>
           </form>
+          
           <ActiviteFichier />
         </div>
     );

@@ -75,6 +75,35 @@ exports.addProfesseur = async (req, res) => {
   }
 };
 
+exports.updateProf = async (req, res) => {
+  const id = req.params.id
+  const { 
+    nom, 
+    prenom, 
+    numero_tel,
+    metier,
+    etablissement, 
+    role, 
+    nb_eleve_tuteur,
+    password} = req.body;
+  try {
+    const profData = {
+      nom,
+      prenom,
+      numero_tel,
+      metier,
+      etablissement,
+      role,
+      nb_eleve_tuteur,
+      password
+    }
+    const profUpd = await professeurService.updateProf(id, profData);
+    res.status(201).json(profUpd);
+  } catch (error) {
+    res.status(400).json({ message: 'Erreur lors de la création du professeur.', error });
+  }
+};
+
 exports.deleteProfesseur = async (req, res) => {
   const professeurId = req.params.id;
 

@@ -107,13 +107,14 @@ function Eleve (props) {
 
             <div className="contain-eleve-descr">
                 <EleveDescr id={id} />
+                {user && user.role === "Admin" &&(
                     <button
                         className="btn"
                         onClick={() => handleSupprime(eleve.id)}
                     >  
                         Supprimer 
-                    </button>
-
+                    </button>                    
+                )}
                     <PDFDownloadLink className="link pdf"  document={<ElevePdf eleve={eleve} />} fileName={"eleve"+eleve.id+".pdf"}>
                         {({ blob, url, loading, error }) =>
                             loading ? 'Téléchargement en cours...' : (
@@ -147,28 +148,28 @@ function Eleve (props) {
                     </div>    
                 ))}
 
-
-                <div className="all-btn">
-                    {!eleve.professeurId && (
-                    <button 
-                        className="btn"
-                        onClick={() => handleValide(eleve.id)}
-                    > 
-                        Valider 
-                    </button>
-                    )}
-
-                    {(!eleve.parcoursId && eleve.professeurId)  &&(
+                {user && user.role==="Admin" &&(
+                    <div className="all-btn">
+                        {!eleve.professeurId && (
                         <button 
                             className="btn"
-                            onClick={() => handleParcours(eleve.id)}
+                            onClick={() => handleValide(eleve.id)}
                         > 
-                            Attribuer un parcours
+                            Valider 
                         </button>
-                    )}                                  
-                </div>
+                        )}
 
-
+                        {(!eleve.parcoursId && eleve.professeurId)  &&(
+                            <button 
+                                className="btn"
+                                onClick={() => handleParcours(eleve.id)}
+                            > 
+                                Attribuer un parcours
+                            </button>
+                        )}                                  
+                    </div>
+                )}
+                 
 
             </div>
               {eleve.parcoursId &&

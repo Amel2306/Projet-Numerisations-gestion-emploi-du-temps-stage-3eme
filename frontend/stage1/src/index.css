@@ -7,7 +7,7 @@
 }
 
 body {
-  background: rgb(225,199,199);
+  background: #e1c7c7;
   background: linear-gradient(90deg, #e1c7c7 50%, rgba(248,239,217,1) 100%);
   background-size: 200% 100%;
   min-height: 100vh;
@@ -102,4 +102,5 @@ body, html, App, #root, .auth-wrapper {
 .btn:hover .link{
   color: #CC7D7C;
   transition: .4s;
+  cursor: pointer;
 }

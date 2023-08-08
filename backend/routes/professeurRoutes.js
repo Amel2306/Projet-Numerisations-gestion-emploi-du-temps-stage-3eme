@@ -7,6 +7,7 @@ router.get('/:id', ProfesseurControllers.getProfesseur)
 router.get('/role/:role', ProfesseurControllers.getProfByRole);
 router.get ('/tuteur/:tuteurId', ProfesseurControllers.getEleveByTuteur)
 router.post('/', ProfesseurControllers.addProfesseur);
+router.put('/:id', ProfesseurControllers.updateProf);
 router.delete('/:id', ProfesseurControllers.deleteProfesseur);
 router.delete('/', ProfesseurControllers.deleteAllProfesseurs)
 

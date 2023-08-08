@@ -215,6 +215,62 @@ La liste des élèves dont le professeur est tuteur
 </details>
 
 
+### Modifier un professeur
+
+```http
+  PUT /api/professeurs/ {id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`| `int` | **Required**. identifiant du professeur à modifier|
+
+| Body | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `nom`| `string` |nom du professeur|
+| `prenom`| `string` |prenom du professeur|
+| `numero_tel`| `string` |numéro de téléphone du professeur|
+| `metier`| `string` | métier du professeur|
+| `etablissement`| `string` | établissement dans lequel le professeur exerce|
+| `role`| `Tuteur`, `Encadrant`,`Encadrant et Tuteur` | role que souhaite avoir le professeur|
+| `nb_eleve_tuteur`| `int` |nombre d'élèves dont le professeur souhaite être tuteur, 0 si encadrant uniquement|
+
+
+<details>
+<summary>Exemple</summary>
+<br>
+
+- #### Request
+```http
+  PUT /api/professeurs/62
+```
+
+```
+      {
+          "nom": "nom aa"
+      }
+```
+
+- #### Response 
+```
+      {
+          "id": 62,
+          "nom": "nom aa",
+          "prenom": "bb",
+          "email": "aa@bb.fr",
+          "numero_tel": "92830982390",
+          "metier": "prof",
+          "etablissement": "polytech",
+          "role": "Encadrant",
+          "nb_eleve_tuteur": 0,
+          "password": "$2b$10$n3crbsRZ4UHrAlpafeYene8zuxIwrKg.TtkXctQqlpiork4IRW7VC",
+          "createdAt": "2023-07-17T12:13:50.000Z",
+          "updatedAt": "2023-08-07T11:41:38.834Z"
+      }
+```
+
+</details>
+
 ### Créer un professeur
 
 ```http
@@ -549,7 +605,7 @@ La liste des élèves dont le professeur est tuteur
 | `numero_tel`| `string` | **Required**. numéro de téléphone de l'élève|
 | `numero_tel_parent`| `string` | **Required**. numéro de téléphone d'un responsable légal de l'élève|
 | `etablissement`| `string` | **Required**. collège ou étudie l'élève|
-| `adresse`| `string` | **Required**. adress de l'élève|
+| `adress`| `string` | **Required**. adress de l'élève|
 
 
 <details>
@@ -593,6 +649,74 @@ La liste des élèves dont le professeur est tuteur
 ```
 
 </details>
+
+</details>
+
+### Modifier un élève
+
+
+```http
+  PUT /api/eleves/{id}
+```
+
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `int` | **Required**. id de l'élève à modifier |
+
+
+| Body | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `nom`| `string` |  nom de l'élève|
+| `prenom`| `string` |prenom de l'élève|
+| `numero_tel`| `string` | numéro de téléphone de l'élève|
+| `numero_tel_parent`| `string` | numéro de téléphone d'un responsable légal de l'élève|
+| `etablissement`| `string` | collège ou étudie l'élève|
+| `adress`| `string` | adresse de l'élève|
+
+
+<details>
+  <summary> Exemple</summary>
+  <br>
+
+  - #### Request
+
+  ```http
+    PUT /api/eleves/68
+  ```
+
+```
+    {
+        "parcoursId": 573
+    }
+
+```
+
+  - #### Response
+
+```
+{
+    "message": "Eleve modifié avec succès",
+    "eleveUpd": {
+        "id": 68,
+        "nom": "a",
+        "prenom": "b",
+        "email": "a@b.fr",
+        "numero_tel": "987654321",
+        "numero_tel_parent": "1234567890",
+        "adress": "montpellier",
+        "etablissement": "college",
+        "password": null,
+        "professeurId": 83,
+        "parcoursId": 573,
+        "createdAt": "2023-07-17T12:12:03.000Z",
+        "updatedAt": "2023-08-07T07:27:43.000Z"
+    }
+}
+```
+
+</details>
+
 
 ### Confirmer un élève
 > confirmer un élève revient à lui attribuer un tuteur disponible

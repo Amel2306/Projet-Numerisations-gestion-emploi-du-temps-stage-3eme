@@ -22,8 +22,8 @@ function ReponsesForAllEleves () {
         <div>
             {eleves && eleves.map((eleve) => (
                 <div>
-                    <h3>Réponses des encadrants sur le stagiaire {eleve && eleve.non} {eleve && eleve.prenom}</h3>
-                    <ReponsesForEleves/>
+                    <h3>Réponses des encadrants sur le stagiaire {eleve && eleve.nom} {eleve && eleve.prenom}</h3>
+                    <ReponsesForEleves id= {eleve && eleve.id}/>
                 </div>
             ))}
         </div>

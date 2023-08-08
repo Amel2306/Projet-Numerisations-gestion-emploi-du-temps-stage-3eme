@@ -13,14 +13,16 @@ function App() {
   const [semaine, setSemaine] = useState("")
 
   useEffect(() => {
-    axiosInstance
-      .get(`/${personne}/${userId}`)
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (personne && userId) {
+      axiosInstance
+        .get(`/${personne}/${userId}`)
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });      
+    }
   }, []);
 
   return (

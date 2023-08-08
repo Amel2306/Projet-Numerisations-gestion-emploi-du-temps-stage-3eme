@@ -101,13 +101,15 @@ function ElevePdf (props) {
     }, [])
 
     useEffect(() =>{
-        axiosInstance.get(`/professeurs/${eleve.professeurId}`)
-        .then((res) => {
-            setTuteur(res.data)
-        })
-        .then((err) => {
-            console.error(err)
-        })
+        if (eleve && eleve.professeurId) {
+            axiosInstance.get(`/professeurs/${eleve.professeurId}`)
+            .then((res) => {
+                setTuteur(res.data)
+            })
+            .then((err) => {
+                console.error(err)
+            })            
+        }
     }, [])
 
 

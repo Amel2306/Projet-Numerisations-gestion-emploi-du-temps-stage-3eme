@@ -51,7 +51,6 @@ function Activtes () {
                     ))}               
                 </div>
 
-
             <button className="btn">
                 <Link className="link" to="/activiteForm">Ajouter une activité</Link>
             </button>

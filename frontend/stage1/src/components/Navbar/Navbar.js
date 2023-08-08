@@ -1,6 +1,6 @@
 import '../../style/Navbar/Navbar.css'
 import '@fortawesome/fontawesome-svg-core'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { useState, useEffect, useRef } from 'react'
 
 function Navbar(props) {
@@ -9,12 +9,16 @@ function Navbar(props) {
     const setUser = props.setUser
     const personne = props.personne
 
+    const navigate = useNavigate();
+
     const [open, setEtat] = useState(true) //Pour l'ouverture de la navbar
 
     const handleSignOut = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('personne');
+        localStorage.removeItem('userId');
         setUser(null);
+        navigate('/')
     }
 
     return (
@@ -70,9 +74,7 @@ function Navbar(props) {
                                 <li>
                                     <Link className="link" to="/reponses/Tuteur">Réponses Tuteur</Link>
                                 </li>
-                                <li>
-                                    <button onClick={handleSignOut}>Se déconnecter</button>
-                                </li>                            
+                                <button className="btn" onClick={handleSignOut}>Se déconnecter</button>                        
                             </>
                         ) : (
                             <>
@@ -84,15 +86,14 @@ function Navbar(props) {
                                         <Link className='link' to= {`/reponses/foreleves/${user.id}`}>Évaluation de mes élèves</Link>                                  
                                     )}                                    
                                 </li>
-
-
-                                <li>
-                                    <button className="btn" onClick={handleSignOut}>Se déconnecter</button>
-                                </li>
-
+                                <button className="btn" onClick={handleSignOut}>Se déconnecter</button>
                             </>
                         ) : (
                             <>
+                                <li>
+                                    <Link className='link' to={`/eleve/${user.id}`} >Profil</Link>
+                                </li>
+                                <button className="btn" onClick={handleSignOut}>Se déconnecter</button>
                             </>
                         )
                     }
