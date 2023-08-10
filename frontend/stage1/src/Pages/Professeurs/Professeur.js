@@ -12,6 +12,9 @@ function Professeur () {
 
     const {id}= useParams()
 
+    const userRole = localStorage.getItem('userRole')
+    const userId = localStorage.getItem("userId")
+
     const [professeur, setProfesseur] = useState(null)
     const [eleves, setEleves] = useState(null)
 
@@ -73,14 +76,17 @@ function Professeur () {
                     <li>Identifiant : {professeur.id}</li>
                 </ul>
 
-                <button 
-                    className="btn"
-                    onClick={() => handleSupprime()}
-                >
-                    Supprimer
-                </button>              
+                {userRole && userRole === "Admin" && (
+                    <button 
+                        className="btn"
+                        onClick={() => handleSupprime()}
+                    >
+                        Supprimer
+                    </button>                          
+                )}
+
             </div>
-                {(professeur.role === "Tuteur" || professeur.role === "Encadrant et Tuteur" || professeur.role==="Admin") && (
+                {(((professeur.role === "Tuteur" || professeur.role === "Encadrant et Tuteur" ) && (userId === id) ) || (userRole==="Admin")) && (
                         eleves && eleves.length > 0 && (
                             <div className="contain-eleves"> 
                                 <h3>Mes élèves</h3> 
@@ -89,7 +95,7 @@ function Professeur () {
                                         <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
                                         <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
                                 </button>
-                                <div className="eleves-prof">                        
+                                <div className="liste-eleves-prof">                        
                                     {eleves && etat && Object.values(eleves).map((eleve) => (
                                         <div key={eleve.id}>
                                             <EleveDescr id={eleve.id} /> 
@@ -103,7 +109,7 @@ function Professeur () {
                                     ))} 
 
                                 </div>
-                                    {etat && 
+                                    {(etat && (userId && userId === professeur.id) || userRole=== "Admin") && 
                                             <PDFDownloadLink className="link"  
                                             document={<ListeEleves 
                                             eleves={eleves} 
@@ -125,15 +131,13 @@ function Professeur () {
                         )
                 )}
 
-                {(professeur.role === "Encadrant" || professeur.role === "Encadrant et Tuteur" || professeur.role === "Admin") && (
+                {((userRole !== "Tuteur" && userId === id) || userRole==="Admin") &&  
                     <div className="parcours-prof">
                         <h2>Mes parcours</h2>
                         <ParcProf profId={id} professeur={professeur}/>
-
                     </div>
-                )}        
+                }        
         </div>
-
     )
 }
 

@@ -36,6 +36,12 @@ function EleveDescr (props) {
                             <Link className="link" to={`/professeur/${eleve.professeurId}`}> Voir Tuteur </Link>
                         </button>
                 </li>
+                <li> identifiant : {eleve.id}
+                    <button><Link className="link" to={`/eleve/${eleve.id}`}>Voir élève</Link></button>
+                </li>
+
+                <li>
+                </li>
                 <li> parcours de l'élève : {eleve.parcoursId} </li>
             </ul>            
         </div>

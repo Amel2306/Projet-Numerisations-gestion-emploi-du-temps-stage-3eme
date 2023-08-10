@@ -81,17 +81,33 @@ function Navbar(props) {
                                 <li>
                                     <Link className='link' to={`/professeur/${user.id}`} >Profil</Link>
                                 </li> 
-                                <li>
-                                    {(user.role === "Tuteur" || user.role==="Encadrant et Tuteur" )&& (
-                                        <Link className='link' to= {`/reponses/foreleves/${user.id}`}>Évaluation de mes élèves</Link>                                  
-                                    )}                                    
-                                </li>
+                                    {(user.role!=="Encadrant" )&& (
+                                        <>
+                                            <li>
+                                                <Link className="link" to={"/eleves"}>Mes élèves</Link>
+                                            </li>                                          
+                                            <li> 
+                                                <Link className='link' to= {`/reponses/foreleves/${user.id}`}>Évaluation de mes élèves</Link>                                  
+                                            </li>
+                                          
+                                        </>
+                                    )}
+                                    {user.role !=='Tuteur' && (
+                                        <> 
+                                            <li>
+                                                Mes activités 
+                                            </li>
+                                        </>
+                                    )}
                                 <button className="btn" onClick={handleSignOut}>Se déconnecter</button>
                             </>
-                        ) : (
+                         ) : (
                             <>
                                 <li>
                                     <Link className='link' to={`/eleve/${user.id}`} >Profil</Link>
+                                </li>
+                                <li>
+                                    <Link className="link" to={`/professeur/${user.professeurId}`}>Mon tuteur</Link>
                                 </li>
                                 <button className="btn" onClick={handleSignOut}>Se déconnecter</button>
                             </>

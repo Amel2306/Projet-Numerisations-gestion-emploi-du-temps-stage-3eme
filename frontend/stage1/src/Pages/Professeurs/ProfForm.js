@@ -5,6 +5,8 @@ import ProfesseurFichier from "../../components/Professeurs/ProfesseurFichier";
 
 function ProfForm () {
 
+    const userRole = localStorage.getItem("userRole")
+
     const [nom, setNom] = useState("")
     const [prenom, setPrenom] = useState("")
     const [email, setEmail] = useState("")
@@ -13,20 +15,6 @@ function ProfForm () {
     const [etablissement, setEtablissement] = useState("")
     const [role, setRole] = useState("")
     const [nb_eleve_tuteur, setNombre] =useState(0)
-    const [user, setUser] = useState(null)
-
-    const userId = localStorage.getItem("userId")
-
-    useEffect(() => {
-        userId &&
-        axiosInstance.get(`/professeurs/${userId}`)
-        .then ((res) => {
-            setUser(res.data)
-        })
-        .catch((err) => {
-            console.error(err)
-        })
-    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -116,10 +104,10 @@ function ProfForm () {
                         <option value="Encadrant">Encadrant d'une activité</option>                        
                         <option value="Tuteur">Tuteur d'un élève</option>
                         <option value="Encadrant et Tuteur">Tuteur et encadrant</option>
-                        {user && user.role==="Admin" && (
+                        {userRole && userRole==="Admin" && (
                             <option value="Admin" >Admin</option>                            
-                        )}
-                    </select>        
+                        )} {/* uniquement l'admin peut créer de nouveaux admin*/ }
+                    </select>
                 </div>
 
                 {(role === "Tuteur" || role === "Encadrant et Tuteur" || role === "Admin") && (
@@ -142,9 +130,9 @@ function ProfForm () {
                     </button>
                 )}
             </form>
-
-            <ProfesseurFichier />
-
+            {userRole && userRole==="Admin" &&  (
+                <ProfesseurFichier />                
+            )}
         </div>
     )
 }

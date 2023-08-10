@@ -18,6 +18,7 @@ function App() {
         .get(`/${personne}/${userId}`)
         .then((res) => {
           setUser(res.data);
+          localStorage.setItem('userRole', res.data.role)
         })
         .catch((err) => {
           console.error(err);

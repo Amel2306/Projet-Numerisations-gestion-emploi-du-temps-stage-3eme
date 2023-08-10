@@ -10,16 +10,19 @@ function EleveActivite (props) {
 
   const {tab_moments} = useContext(MomentsContext);
 
-    const indexMoment = props.indexMoment
-    const activiteId = props.activiteId
-    const professeurId = props.professeurId
+  const userId = localStorage.getItem("userId")
+  const userRole = localStorage.getItem("userRole")
 
-    const [etat, setEtat] = useState(false)
-    const [eleves, setEleves] = useState(null)    
+  const indexMoment = props.indexMoment
+  const activiteId = props.activiteId
+  const professeurId = props.professeurId
 
-    const handleAfficherParc = () => {
-      setEtat(!etat);
-    }
+  const [etat, setEtat] = useState(false)
+  const [eleves, setEleves] = useState(null)    
+
+  const handleAfficherParc = () => {
+    setEtat(!etat);
+  }
 
     useEffect(() => {
         axiosInstance.get(`/eleves/activite/${activiteId}/${indexMoment}`)
@@ -47,7 +50,7 @@ function EleveActivite (props) {
               Object.values(eleves).map((eleve) => (
                 <div key={eleve.id}>
                   <EleveDescr id={eleve.id} />
-                  {etat && (
+                  {etat && userId && professeurId===userId &&(
                     <QuestionQuestionnaire
                       questionnaire="Encadrant"
                       repondantProfId={professeurId}
@@ -57,11 +60,9 @@ function EleveActivite (props) {
                     />
                   )}
                 </div>
-            ))}            
+            ))}
           </div>
-
-       
-       {etat && tab_moments && (
+       {etat && tab_moments && (userId=== professeurId || userRole==="Admin") && (
             <PDFDownloadLink className="link"  document={<ListeEleves eleves={eleves} moment={tab_moments && tab_moments[indexMoment]} activiteId={activiteId}/>} fileName={"activite"+activiteId+".pdf"}>
                 {({ blob, url, loading, error }) =>
                     loading ? 'Téléchargement en cours...' : (

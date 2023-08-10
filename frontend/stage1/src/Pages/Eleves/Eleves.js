@@ -3,18 +3,35 @@ import {Link, useNavigate} from "react-router-dom"
 import axiosInstance from "../../config/axiosConfig";
 
 function Eleves () {
+
+  const userRole = localStorage.getItem("userRole");
+  const userId = localStorage.getItem("userId")
+
     const [eleves, setEleves] = useState(null)
 
     const navigate = useNavigate()
 
     useEffect(() => {
+      if (userRole === "Admin") {
         axiosInstance.get("/eleves")
         .then((res) => {
           setEleves(res.data);
         })
         .catch((err) => {
           console.error(err);
-        });
+        });        
+      }
+      else if (userRole === "Tuteur" || userRole === "Encadrant et Tuteur")
+      {
+        axiosInstance.get(`/professeurs/tuteur/${userId}`)
+        .then((res) => {
+          setEleves(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });           
+      }
+
     }, [])
 
     const handleSupprimeAll = () => {

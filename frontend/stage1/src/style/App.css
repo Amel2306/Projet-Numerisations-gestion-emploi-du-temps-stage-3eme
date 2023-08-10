@@ -50,6 +50,16 @@ ul {
   list-style: none;
 }
 
+li button {
+  border-radius: 10px;
+  padding: 4px;
+  margin: 10px;
+  margin-left: 20px;
+  background: transparent;
+  border: none;
+  border: #6c584c 1px solid;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -183,14 +193,14 @@ select:focus {
 }
 
 .pdf {
+  display: block;
   box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
   border-radius: 30px;
   padding: 7px;
   color:#6c584c; 
-  margin: 10px;
+  margin: 20px;
   height: auto;
   width: auto;
-
 }
 
 .pdf:hover {

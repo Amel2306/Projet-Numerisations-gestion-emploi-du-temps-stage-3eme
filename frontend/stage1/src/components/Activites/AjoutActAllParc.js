@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import {MomentsContext} from "../../utils/tabMoments"
 
 
-function AjoutActAllPar (props) {
+function AjoutActAllParc (props) {
     
     const activiteId = props.activiteId
 
@@ -61,4 +61,4 @@ function AjoutActAllPar (props) {
     )
 }
 
-export default AjoutActAllPar
+export default AjoutActAllParc

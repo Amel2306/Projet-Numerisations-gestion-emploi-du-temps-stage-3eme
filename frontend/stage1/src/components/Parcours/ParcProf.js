@@ -40,12 +40,12 @@ function ParcProf(props) {
                 <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}
             </button>
             {activites && etat && Object.entries(activites).map(([index, moments]) => (
-            <div key={index}>
+            <div key={index} >
             <h3> {moments.length > 0  && tab_moments && tab_moments[index]} </h3>
             {moments.length > 0 && moments.map((moment, momentIndex) => (
-                <ul key={momentIndex}>
+                <ul key={momentIndex} className= "contain-activite-prof">
                 {moment && moment.map((activite, activiteIndex) => (
-                    <div>
+                    <div className="activite-prof">
                         <ActiviteDescr key={activiteIndex} id={activite.activiteId}/>
                         <h3> Parcours : {activite.parcoursId}</h3>                      
                     </div>

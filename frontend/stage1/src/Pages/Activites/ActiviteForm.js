@@ -5,10 +5,10 @@ import {useNavigate} from "react-router-dom"
 
 function ActiviteForm (props) {
 
+    const userRole = localStorage.getItem("userRole");
     const semaine = props.semaine
 
     const navigate = useNavigate()
-
 
     const [nom, setNom] = useState("")
     const [description, setDescription] = useState("")
@@ -227,8 +227,10 @@ function ActiviteForm (props) {
     
             <button className='btn' type="submit">Valider</button>
           </form>
-          
-          <ActiviteFichier />
+
+          {userRole && userRole==="Admin" && (
+            <ActiviteFichier />   
+          )}
         </div>
     );
 }

@@ -77,19 +77,24 @@ exports.getGroupe = async (eleveId) => {
 exports.sendPassword = async (eleveId) => {
   try {
     const eleve = await Eleve.findByPk(eleveId);
-    const password = generatedPassword; // on généère un mot de passe au hazard 
-    const recipientEmail = eleve.email;
 
-    //on envoie le mail avec le mot de passe
-    await emailTemplates.sendPasswordEmail(recipientEmail, password);
+    // dans le cas ou l'élève n'a pas entré son mot de passe lui même (seul cas possible actuellement)
+    //si l'élève choisi son mot de passe (cas test) il ne recevra pas de mot de passe
+    if (!eleve.password) {
+      const password = generatedPassword; // on généère un mot de passe au hazard 
+      const recipientEmail = eleve.email;
 
-    // on hash ensuite le mot de passe pour l'enregistrer dans la base de données
-    const hashedPassword = await bcrypt.hash(password, 10);
+      //on envoie le mail avec le mot de passe
+      await emailTemplates.sendPasswordEmail(recipientEmail, password);
 
-    //on modifie le mot de passe de l'élève
-    await eleve.update({
-      password: hashedPassword
-    });
+      // on hash ensuite le mot de passe pour l'enregistrer dans la base de données
+      const hashedPassword = await bcrypt.hash(password, 10);
+      //on modifie le mot de passe de l'élève
+      await eleve.update({
+        password: hashedPassword
+      });
+    }
+
 
     return { message: "Mot de passe envoyé à l'élève avec succès" };
   } catch (error) {

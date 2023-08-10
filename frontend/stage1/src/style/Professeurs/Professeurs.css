@@ -1,5 +1,6 @@
 .contain-professeur {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -17,36 +18,46 @@
 }
 
 .contain-eleves{
-    box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
-    border-radius: 30px;
-    margin: 10px;
-    margin-top: 40px;
-    padding: 10px;
-    min-width: 390px;
-    width: auto;
-    max-width: auto;
-    height: auto;
-}
-
-.eleves-prof {
+    margin: 20px;
+    padding: 40px;
     display: flex;
-    flex-wrap:wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-width: 300px;
+    max-width: 1200px;
+    height: auto;
+    border-radius: 40px;
+    box-shadow: 0px 187px 75px rgba(201, 173, 166, 0.01), 0px 105px 63px rgba(201, 173, 166, 0.05), 0px 47px 47px rgba(201, 173, 166, 0.09), 0px 12px 26px rgba(201, 173, 166, 0.1), 0px 0px 0px rgba(201, 173, 166, 0.1);
+    background: #D7CCC6;
+}
+
+.liste-eleves-prof {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .parcours-prof {
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
+    box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    background: #D7CCC6;
     border-radius: 30px;
     margin: 10px;
     padding: 10px;
-    min-width: auto;
+    min-width: 390px;
     width: auto;
-    max-width: auto;
+    max-width: 1000px;
     height: auto;
 }
+
+.contain-activite-prof {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 
 @media screen and (max-width: 1220px) {
     .contain-professeur {
@@ -56,5 +67,9 @@
 
     .contain-eleves {
         min-width: auto;   
+    }
+    
+    .parcours-prof {
+        min-width: auto;
     }
 }

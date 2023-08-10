@@ -129,7 +129,7 @@ function ElevePdf (props) {
                                     <View>
                                         <Text style={{ color: moments_colors[act.indexMoment], paddingBottom: "12px" }}>{tab_moments && tab_moments[act.indexMoment]}</Text>
                                     </View>
-                                    <ActiviteDescrPdf id={act.activiteId} couleur= {moments_colors[act.indexMoment]} style={{backgroundColor: '#cfbba5'}} />
+                                    <ActiviteDescrPdf key={act.activiteId} id={act.activiteId} couleur= {moments_colors[act.indexMoment]} style={{backgroundColor: '#cfbba5'}} />
                                 </View>
                             ))}                  
                         </>
@@ -139,7 +139,7 @@ function ElevePdf (props) {
                     <Text style={styles.title}>Mon groupe : </Text>
                     {groupe && groupe.map((eleve) => (
                         <View style={styles.section}>
-                            <EleveDescrPdf id={eleve.id} />
+                            <EleveDescrPdf key= {eleve.id} id={eleve.id} />
                         </View>
                     ))}              
                 </View>

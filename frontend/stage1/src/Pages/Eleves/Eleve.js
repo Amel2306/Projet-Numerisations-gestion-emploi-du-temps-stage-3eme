@@ -13,6 +13,10 @@ import EleveTuteur from "../../components/Eleves/EleveTuteur";
 
 function Eleve (props) {
 
+    const userId = localStorage.getItem("userId")
+    const userRole = localStorage.getItem("userRole")
+    const personne = localStorage.getItem("personne")
+
     const nbEleveMax = props.nbEleveMax
 
     let {id} = useParams()
@@ -21,26 +25,12 @@ function Eleve (props) {
     }
 
     const [eleve, setEleve] = useState(null)
-    const [user, setUser] = useState(null)
 
-    const userId = localStorage.getItem("userId")
-    const personne = localStorage.getItem("personne")
-
-    useEffect(() => {
-        userId && personne==="professeurs" &&
-        axiosInstance.get(`/professeurs/${userId}`)
-        .then ((res) => {
-            setUser(res.data)
-        })
-        .catch((err) => {
-            console.error(err)
-        })
-    }, [])
 
     useEffect (() => {
 
         axiosInstance.get(`/eleves/${id}`)
-        .then ((res) =>{
+        .then ( async (res) =>{
             setEleve(res.data)
         })
         .catch ((err) => {
@@ -48,6 +38,13 @@ function Eleve (props) {
         })
 
     }, [])
+
+    const profLien = () => {
+        if (eleve && eleve.professeurId) {
+            return eleve.professeurId === userId
+        }
+        return false
+    }
 
     const handleValide = (id) => {
 
@@ -62,7 +59,6 @@ function Eleve (props) {
                 console.error(err);
             });            
         }
-
     }
 
     const handleSupprime = (id) => {
@@ -107,7 +103,7 @@ function Eleve (props) {
 
             <div className="contain-eleve-descr">
                 <EleveDescr id={id} />
-                {user && user.role === "Admin" &&(
+                {userRole === "Admin" &&(
                     <button
                         className="btn"
                         onClick={() => handleSupprime(eleve.id)}
@@ -115,6 +111,7 @@ function Eleve (props) {
                         Supprimer 
                     </button>                    
                 )}
+                { ((personne === "eleves" && userId === id) || userRole === "Admin" || parseInt(userId) === eleve.professeurId) && (
                     <PDFDownloadLink className="link pdf"  document={<ElevePdf eleve={eleve} />} fileName={"eleve"+eleve.id+".pdf"}>
                         {({ blob, url, loading, error }) =>
                             loading ? 'Téléchargement en cours...' : (
@@ -123,32 +120,36 @@ function Eleve (props) {
                                 </>
                             )
                         }
-                    </PDFDownloadLink>    
-
+                    </PDFDownloadLink>                      
+                )}
             </div >
 
-            {user && user.role==="Admin" && (
+            {userRole==="Admin" && (
                 <div className="contain-parcours">
                     <h1>Choisir ou modifier le tuteur de l'élève</h1>
                     <EleveTuteur id= {id} />
                 </div>                
             )}
-                {( eleve.parcoursId && (
+
+            {((personne === "eleves" && userId === id) || userRole === "Admin" || parseInt(userId) === eleve.professeurId) && 
+                eleve.parcoursId && 
                     <div className="groupe-questions">
                         <div > 
                             <EleveGroupe id={id} eleve={eleve}/>                            
                         </div>
-                        <div className="contain-questionnaire">
-                            <h1>Questionnaire</h1>
-                            <QuestionQuestionnaire 
-                                questionnaire="Eleve"
-                                repondantEleveId={id}
-                            />                               
-                        </div>
+                        {(userId === id  && personne === "eleves")  && 
+                            <div className="contain-questionnaire">
+                                <h1>Questionnaire</h1>
+                                <QuestionQuestionnaire 
+                                    questionnaire="Eleve"
+                                    repondantEleveId={id}
+                                />                               
+                            </div>                            
+                        }
                     </div>    
-                ))}
+                }
 
-                {user && user.role==="Admin" &&(
+                {userRole==="Admin" &&(
                     <div className="all-btn">
                         {!eleve.professeurId && (
                         <button 
@@ -169,18 +170,15 @@ function Eleve (props) {
                         )}                                  
                     </div>
                 )}
-                 
-
             </div>
-              {eleve.parcoursId &&
-                    <div className="contain-parcours">
-                        <h1>Mon parcours :</h1>
-                        <Parc parcoursId={eleve.parcoursId} eleve={eleve}/>                    
-                    </div> 
-                }            
+            {eleve.parcoursId &&
+                <div className="contain-parcours">
+                    <h1>Mon parcours :</h1>
+                    <Parc parcoursId={eleve.parcoursId} eleve={eleve}/>                    
+                </div> 
+            }            
         </div>
     )
-
 }
 
 export default Eleve

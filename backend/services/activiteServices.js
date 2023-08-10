@@ -15,6 +15,20 @@ exports.getActiviteById = async (activiteId) => {
   }
 };
 
+exports.getActiviteByEncadrant = async (professeurId) => {
+  try {
+    const activites = await Activite.findAll({
+      where: {
+        professeurId
+      }
+    })
+    return activites
+  } catch (err) {
+    throw new Error("Error Activite non trouvée");
+  }
+
+}
+
 exports.createActivite = async (activiteData) => {
     const newActivite = await Activite.create(activiteData);
     return newActivite;

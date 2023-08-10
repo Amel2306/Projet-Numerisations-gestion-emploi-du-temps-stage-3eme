@@ -108,7 +108,7 @@ par ce qui va apparaitre dans les cases grisées en fonction de votre besoin
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `role`      | `Tuteur`, `Encadrant` | **Required**. role du professeur|
+| `role`      | `Tuteur`, `Encadrant`, `Admin` | **Required**. role du professeur|
 
 > 📝 les professeurs qui sont à la foi encadrant et tuteur seront retourné par défaut 
 
@@ -232,7 +232,7 @@ La liste des élèves dont le professeur est tuteur
 | `numero_tel`| `string` |numéro de téléphone du professeur|
 | `metier`| `string` | métier du professeur|
 | `etablissement`| `string` | établissement dans lequel le professeur exerce|
-| `role`| `Tuteur`, `Encadrant`,`Encadrant et Tuteur` | role que souhaite avoir le professeur|
+| `role`| `Tuteur`, `Encadrant`,`Encadrant et Tuteur`, `Admin` | role que souhaite avoir le professeur|
 | `nb_eleve_tuteur`| `int` |nombre d'élèves dont le professeur souhaite être tuteur, 0 si encadrant uniquement|
 
 
@@ -285,7 +285,7 @@ La liste des élèves dont le professeur est tuteur
 | `numero_tel`| `string` | **Required**. numéro de téléphone du professeur|
 | `metier`| `string` | **Required**. métier du professeur|
 | `etablissement`| `string` | **Required**. établissement dans lequel le professeur exerce|
-| `role`| `Tuteur`, `Encadrant`,`Encadrant et Tuteur` | **Required**. role que souhaite avoir le professeur|
+| `role`| `Tuteur`, `Encadrant`,`Encadrant et Tuteur`, `Admin` | **Required**. role que souhaite avoir le professeur|
 | `nb_eleve_tuteur`| `int` | **Required**. nombre d'élèves dont le professeur souhaite être tuteur, 0 si encadrant uniquement|
 
 
@@ -647,8 +647,6 @@ La liste des élèves dont le professeur est tuteur
         "createdAt": "2023-07-11T10:36:53.196Z"
     }
 ```
-
-</details>
 
 </details>
 

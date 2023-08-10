@@ -3,7 +3,7 @@ import axiosInstance from "../../config/axiosConfig"
 import {useNavigate} from 'react-router-dom'
 import {MomentsContext} from "../../utils/tabMoments"
 
-function AjoutActPar (props) {
+function AjoutActParc (props) {
     
     const activiteId = props.activiteId
 
@@ -85,4 +85,4 @@ function AjoutActPar (props) {
     )
 }
 
-export default AjoutActPar
+export default AjoutActParc

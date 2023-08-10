@@ -42,13 +42,12 @@ function Parc (props) {
 
     return (
         <div>
-            <h1 className="parcours">Parcours {parcoursId}</h1>
             <button className="btn" onClick={() => handleAfficherParc()}> 
               {etat ? 
                 <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
-                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}  Afficher le parcours
+                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}  Parcours {parcoursId}
             </button>
-            <ul className="container">
+            <ul className="container liste-activite">
               {(activites && etat && tab_moments) && activites.map((act) => (
                 <li key={act.activiteId}>
                     <h3>{tab_moments && tab_moments[act.indexMoment]} :</h3>
@@ -56,7 +55,7 @@ function Parc (props) {
                 </li>
               ))}
             </ul>
-            {<PDFDownloadLink className="link"  document={<ParcoursPdf activites={activites} eleve={eleve}/>} fileName={"parcours"+parcoursId+".pdf"}>
+            {<PDFDownloadLink className="link pdf" document={<ParcoursPdf activites={activites} eleve={eleve}/>} fileName={"parcours"+parcoursId+".pdf"}>
                 {({ blob, url, loading, error }) =>
                         loading ? 'Téléchargement en cours...' : (
                             <>

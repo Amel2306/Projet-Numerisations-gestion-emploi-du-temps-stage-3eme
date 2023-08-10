@@ -4,17 +4,33 @@ import axiosInstance from "../../config/axiosConfig";
 import '../../style/Activites/Activites.css'
 
 function Activtes () {
+
+    const userRole = localStorage.getItem('userRole')
+    const userId = localStorage.getItem('userId')
+
     const [activites, setActivites] = useState(null)
 
     useEffect(() => {
+        if (userRole === "Admin") {
+            axiosInstance.get('/activites') 
+            .then((res) => {
+                setActivites(res.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })            
+        }
 
-        axiosInstance.get('/activites') 
-        .then((res) => {
-            setActivites(res.data)
-        })
-        .catch((err) => {
-            console.error(err)
-        })
+        else if (userRole !== "Tuteur") {
+            axiosInstance.get(`/activites/encadrant/${userId}`) 
+            .then((res) => {
+                setActivites(res.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })  
+        }
+
     }, [])
 
     const handleSupprimeAll = () => {
@@ -51,12 +67,18 @@ function Activtes () {
                     ))}               
                 </div>
 
-            <button className="btn">
-                <Link className="link" to="/activiteForm">Ajouter une activité</Link>
-            </button>
-            <button className="btn" onClick={handleSupprimeAll}>
-                Supprimer les activités
-            </button>
+            {userRole === "Admin" && (
+            <>
+                <button className="btn">
+                    <Link className="link" to="/activiteForm">Ajouter une activité</Link>
+                </button>
+                <button className="btn" onClick={handleSupprimeAll}>
+                    Supprimer les activités
+                </button>              
+            </>
+              
+            )}
+
         </div>
     )
 }

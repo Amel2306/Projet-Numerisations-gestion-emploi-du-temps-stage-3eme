@@ -1,5 +1,5 @@
 .parcours {
-    background: rgba(108, 88, 76);
+    background: #D7CCC6;
     border-radius: 20px;
     border-color: #6c584c solid;
     margin-top: 40px;
@@ -17,9 +17,8 @@
 
 .contain-generation-parc {
     border-radius: 20px;
-    --border: rgba(108, 88, 76, 0.4) 2px solid;
-    background: rgba(108, 88, 76, 0.2);
-    box-shadow: 8px 8px 8px 1px rgba(108, 88, 76, 0.4);
+    background: #D7CCC6;;
+    box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
     max-width: 700px;
     min-width: auto;
     width: auto; 

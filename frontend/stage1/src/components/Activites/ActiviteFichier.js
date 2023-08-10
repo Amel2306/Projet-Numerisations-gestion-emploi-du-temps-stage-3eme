@@ -22,7 +22,7 @@ function ActiviteFichier () {
                     const data = results.data
 
                     const formattedData = data.map((item) => ({
-                        nom: item.nom,
+                        nom: item.nomActivite,
                         description: item.description,
                         nb_realisations: parseInt(item.nb_realisations),
                         nb_eleve_max: parseInt(item.nb_eleve_max),

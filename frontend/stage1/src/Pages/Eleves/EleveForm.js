@@ -5,6 +5,8 @@ import EleveFichier from '../../components/Eleves/EleveFichier';
 
 function EleveForm () {
 
+    const userRole = localStorage.getItem("userRole")
+
     const [eleve, setEleve] = useState(null)
     const [nom, setNom] = useState("")
     const [prenom, setPrenom] = useState("")
@@ -125,7 +127,10 @@ function EleveForm () {
                 <button className='btn'>Valider</button>
 
             </form>
-            <EleveFichier/>
+            {userRole && userRole === "Admin" && (
+                <EleveFichier/>                
+            )}
+
         </div>
     )
 }
