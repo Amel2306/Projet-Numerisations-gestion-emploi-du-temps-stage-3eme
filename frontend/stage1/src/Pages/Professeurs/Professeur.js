@@ -7,6 +7,7 @@ import QuestionQuestionnaire from "../../components/Questions/QuestionQuestionna
 import ListeEleves from "../../components/Eleves/ListeElevesPdf";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import "../../style/Professeurs/Professeurs.css";
+import ProfesseurDescr from "../../components/Professeurs/ProfesseurDescr";
 
 function Professeur() {
   const { id } = useParams();
@@ -65,20 +66,7 @@ function Professeur() {
     professeur && (
       <div className="contain-professeur">
         <div>
-          <ul className="prof-descr">
-            <li>
-              {" "}
-              <h1>
-                {professeur.nom} {professeur.prenom}
-              </h1>{" "}
-            </li>
-            <li>Email : {professeur.email} </li>
-            <li>Numéro de téléphone : {professeur.numero_tel}</li>
-            <li>Métier : {professeur.metier}</li>
-            <li>Établissement : {professeur.etablissement}</li>
-            <li>Rôle : {professeur.role}</li>
-            <li>Identifiant : {professeur.id}</li>
-          </ul>
+            <ProfesseurDescr id={id} />
 
           {userRole && userRole === "Admin" && (
             <button className="btn" onClick={() => handleSupprime()}>
