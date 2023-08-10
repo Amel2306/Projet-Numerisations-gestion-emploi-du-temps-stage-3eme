@@ -1,12 +1,15 @@
-const express = require('express');
-const EleveControllers = require('../controllers/eleveControllers');
+const express = require("express");
+const EleveControllers = require("../controllers/eleveControllers");
 
 const router = express.Router();
 
 router.get("/", EleveControllers.getAllEleves);
-router.get("/groupe/:id",EleveControllers.getGroupe);
+router.get("/groupe/:id", EleveControllers.getGroupe);
 router.get("/:id", EleveControllers.getEleve);
-router.get("/activite/:activiteId/:indexMoment", EleveControllers.getElevesByActMoment);
+router.get(
+  "/activite/:activiteId/:indexMoment",
+  EleveControllers.getElevesByActMoment
+);
 router.post("/", EleveControllers.addEleve);
 router.put("/confirmation/:id", EleveControllers.confirmeEleve);
 router.put("/password/:id", EleveControllers.sendPassword);

@@ -1,11 +1,11 @@
-const transporter = require('../config/mailer');
+const transporter = require("../config/mailer");
 
-//pour envoyer les identifiants de connexion 
+//pour envoyer les identifiants de connexion
 const sendPasswordEmail = (recipientEmail, password) => {
   const mailOptions = {
-    from: 'Une Semaine à l\'UM <ameladdou123@gmail.com>',
+    from: "Une Semaine à l'UM <ameladdou123@gmail.com>",
     to: recipientEmail,
-    subject: 'Vos identifiants pour vous connecter',
+    subject: "Vos identifiants pour vous connecter",
     text: `
     Bonjour voici Votre mot de passe pour vous connecter: ${password} 
     Veuillez ne pas le divulguer.
@@ -13,18 +13,18 @@ const sendPasswordEmail = (recipientEmail, password) => {
     
     Bien à vous.
     
-    `
+    `,
   };
 
-  transporter.sendMail(mailOptions, function(error, info) {
+  transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log('Erreur lors de l\'envoi de l\'e-mail :', error);
+      console.log("Erreur lors de l'envoi de l'e-mail :", error);
     } else {
-      console.log('E-mail envoyé avec succès :', info.response);
+      console.log("E-mail envoyé avec succès :", info.response);
     }
   });
 };
 
 module.exports = {
-  sendPasswordEmail
+  sendPasswordEmail,
 };

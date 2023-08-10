@@ -1,15 +1,15 @@
-const { DataTypes } = require('sequelize');
-const db = require('../config/dbConfig');
-const Parcours = require('./Parcours');
-const Activite = require('./Activite');
+const { DataTypes } = require("sequelize");
+const db = require("../config/dbConfig");
+const Parcours = require("./Parcours");
+const Activite = require("./Activite");
 
-const ActiviteParcours = db.define('activiteParcours', {
+const ActiviteParcours = db.define("activiteParcours", {
   parcoursId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     references: {
-      model: Parcours, 
-      key: 'id', 
+      model: Parcours,
+      key: "id",
     },
   },
   activiteId: {
@@ -17,25 +17,25 @@ const ActiviteParcours = db.define('activiteParcours', {
     primaryKey: true,
     references: {
       model: Activite,
-      key: 'id', 
+      key: "id",
     },
   },
   indexMoment: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
 Parcours.belongsToMany(Activite, {
-    through: ActiviteParcours,
-    foreignKey: 'parcoursId',
-    otherKey: 'activiteId'
+  through: ActiviteParcours,
+  foreignKey: "parcoursId",
+  otherKey: "activiteId",
 });
 
 Activite.belongsToMany(Parcours, {
-    through: ActiviteParcours,
-    foreignKey: 'activiteId',
-    otherKey: 'parcoursId'
+  through: ActiviteParcours,
+  foreignKey: "activiteId",
+  otherKey: "parcoursId",
 });
 
 module.exports = ActiviteParcours;
