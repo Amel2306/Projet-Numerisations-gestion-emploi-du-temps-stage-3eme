@@ -18,9 +18,6 @@ function Eleve(props) {
   const nbEleveMax = props.nbEleveMax;
 
   let { id } = useParams();
-  if (props.id) {
-    id = props.id;
-  }
 
   const [eleve, setEleve] = useState(null);
 
@@ -113,7 +110,7 @@ function Eleve(props) {
               parseInt(userId) === eleve.professeurId) && (
               <PDFDownloadLink
                 className="link pdf"
-                document={<ElevePdf eleve={eleve} />}
+                document={<ElevePdf id={eleve.id} />}
                 fileName={"eleve" + eleve.id + ".pdf"}
               >
                 {({ blob, url, loading, error }) =>

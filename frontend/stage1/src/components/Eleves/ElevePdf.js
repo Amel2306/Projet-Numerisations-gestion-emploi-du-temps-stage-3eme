@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Document, Page, View, StyleSheet, Text } from "@react-pdf/renderer";
 import axiosInstance from "../../config/axiosConfig";
 import EleveDescrPdf from "./EleveDescrPdf";
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 });
 
 function ElevePdf(props) {
-  const eleve = props.eleve;
+  const id = props.id;
 
   const tab_moments = [
     "Lundi Matin",
@@ -69,15 +69,16 @@ function ElevePdf(props) {
     "#CEB6AB",
   ];
 
+  const [eleve, setEleve] = useState(null);
   const [activites, setActivites] = useState(null);
   const [groupe, setGroupe] = useState(null);
   const [tuteur, setTuteur] = useState(null);
 
   useEffect(() => {
     axiosInstance
-      .get(`/activiteparcours/${eleve.parcoursId}`)
+      .get(`/eleves/${id}`)
       .then((res) => {
-        setActivites(res.data);
+        setEleve(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -85,8 +86,21 @@ function ElevePdf(props) {
   }, []);
 
   useEffect(() => {
+    if (eleve && eleve.parcoursId) {
+      axiosInstance
+        .get(`/activiteparcours/${eleve.parcoursId}`)
+        .then((res) => {
+          setActivites(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, [!eleve]);
+
+  useEffect(() => {
     axiosInstance
-      .get(`/eleves/groupe/${eleve.id}`)
+      .get(`/eleves/groupe/${id}`)
       .then((res) => {
         setGroupe(res.data);
       })
@@ -96,9 +110,9 @@ function ElevePdf(props) {
   }, []);
 
   useEffect(() => {
-    if (eleve && eleve.professeurId) {
+    if (eleve && parseInt(eleve.professeurId)) {
       axiosInstance
-        .get(`/professeurs/${eleve.professeurId}`)
+        .get(`/professeurs/${parseInt(eleve.professeurId)}`)
         .then((res) => {
           setTuteur(res.data);
         })
@@ -106,66 +120,68 @@ function ElevePdf(props) {
           console.error(err);
         });
     }
-  }, []);
+  }, [!eleve]);
 
   return (
-    <Document>
-      <Page>
-        <Text style={styles.header}>{eleve.nom + " " + eleve.prenom}</Text>
-        <View style={styles.section}>
-          <EleveDescrPdf id={eleve.id} />
-        </View>
-        <View>
-          {activites && (
-            <>
-              <Text style={styles.title}>Mon parcours : </Text>
-              {activites.map((act) => (
-                <View key={act.activiteId} style={{ margin: "20" }}>
-                  <View>
-                    <Text
-                      style={{
-                        color: moments_colors[act.indexMoment],
-                        paddingBottom: "12px",
-                      }}
-                    >
-                      {tab_moments && tab_moments[act.indexMoment]}
-                    </Text>
+    eleve && (
+      <Document>
+        <Page>
+          <Text style={styles.header}>{eleve.nom + " " + eleve.prenom}</Text>
+          <View style={styles.section}>
+            <EleveDescrPdf id={eleve.id} />
+          </View>
+          <View>
+            {activites && (
+              <>
+                <Text style={styles.title}>Mon parcours : </Text>
+                {activites.map((act) => (
+                  <View key={act.activiteId} style={{ margin: "20" }}>
+                    <View>
+                      <Text
+                        style={{
+                          color: moments_colors[act.indexMoment],
+                          paddingBottom: "12px",
+                        }}
+                      >
+                        {tab_moments && tab_moments[act.indexMoment]}
+                      </Text>
+                    </View>
+                    <ActiviteDescrPdf
+                      key={act.activiteId}
+                      id={act.activiteId}
+                      couleur={moments_colors[act.indexMoment]}
+                      style={{ backgroundColor: "#cfbba5" }}
+                    />
                   </View>
-                  <ActiviteDescrPdf
-                    key={act.activiteId}
-                    id={act.activiteId}
-                    couleur={moments_colors[act.indexMoment]}
-                    style={{ backgroundColor: "#cfbba5" }}
-                  />
+                ))}
+              </>
+            )}
+          </View>
+          <View>
+            <Text style={styles.title}>Mon groupe : </Text>
+            {groupe &&
+              groupe.map((eleve) => (
+                <View style={styles.section}>
+                  <EleveDescrPdf key={eleve.id} id={eleve.id} />
                 </View>
               ))}
-            </>
-          )}
-        </View>
-        <View>
-          <Text style={styles.title}>Mon groupe : </Text>
-          {groupe &&
-            groupe.map((eleve) => (
-              <View style={styles.section}>
-                <EleveDescrPdf key={eleve.id} id={eleve.id} />
-              </View>
-            ))}
-        </View>
-        {tuteur && (
-          <View>
-            <Text style={styles.title}>
-              Mon tuteur {tuteur.nom + " " + tuteur.prenom + " :"}
-            </Text>
-            <View style={styles.section}>
-              <Text> email : {tuteur.email}</Text>
-              <Text> numéro de téléphone: {tuteur.numero_tel}</Text>
-              <Text> metier : {tuteur.metier}</Text>
-              <Text> etablissement : {tuteur.etablissement}</Text>
-            </View>
           </View>
-        )}
-      </Page>
-    </Document>
+          {tuteur && (
+            <View>
+              <Text style={styles.title}>
+                Mon tuteur {tuteur.nom + " " + tuteur.prenom + " :"}
+              </Text>
+              <View style={styles.section}>
+                <Text> email : {tuteur.email}</Text>
+                <Text> numéro de téléphone: {tuteur.numero_tel}</Text>
+                <Text> metier : {tuteur.metier}</Text>
+                <Text> etablissement : {tuteur.etablissement}</Text>
+              </View>
+            </View>
+          )}
+        </Page>
+      </Document>
+    )
   );
 }
 
