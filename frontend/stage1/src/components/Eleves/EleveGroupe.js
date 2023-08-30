@@ -7,7 +7,7 @@ import ListeEleves from "./ListeElevesPdf";
 
 function EleveGroupe(props) {
   const id = props.id;
-  const eleveP = props.eleve;
+  const eleveP = props.eleve;e
 
   const [groupe, setGroupe] = useState(null);
   const [etat, setEtat] = useState(false);

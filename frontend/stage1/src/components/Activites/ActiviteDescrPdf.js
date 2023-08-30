@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import { Text, View } from "@react-pdf/renderer";
 import { useState, useEffect } from "react";
 import axiosInstance from "../../config/axiosConfig";
 import EleveDescrPdf from "../Eleves/EleveDescrPdf";
