@@ -14,6 +14,7 @@ function ProfForm() {
   const [etablissement, setEtablissement] = useState("");
   const [role, setRole] = useState("");
   const [nb_eleve_tuteur, setNombre] = useState(0);
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ function ProfForm() {
       etablissement,
       role,
       nb_eleve_tuteur,
+      password
     };
 
     axiosInstance
@@ -70,6 +72,16 @@ function ProfForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
+            required
+          />
+        </div>
+        <div className="label-form">
+          <label>Mot de passe</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Mot de passe"
             required
           />
         </div>
