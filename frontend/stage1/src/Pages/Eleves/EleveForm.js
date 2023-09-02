@@ -14,6 +14,7 @@ function EleveForm() {
   const [numero_tel_parent, setNumParent] = useState("");
   const [adress, setAdress] = useState("");
   const [etablissement, setEtablissement] = useState("");
+  const [password, setPassword] = useState("");
 
   const history = useNavigate();
 
@@ -28,6 +29,7 @@ function EleveForm() {
       numero_tel_parent,
       adress,
       etablissement,
+      password
     };
 
     axiosInstance
@@ -40,6 +42,7 @@ function EleveForm() {
         setNumParent("");
         setAdress("");
         setEtablissement("");
+        setPassword("");
 
         setEleve(response.data);
 
@@ -81,6 +84,16 @@ function EleveForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
+            required
+          />
+        </div>
+        <div className="label-form">
+          <label>Mot de passe </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Mot de passe"
             required
           />
         </div>
