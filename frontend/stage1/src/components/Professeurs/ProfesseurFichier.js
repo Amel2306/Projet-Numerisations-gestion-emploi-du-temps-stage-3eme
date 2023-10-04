@@ -51,6 +51,8 @@ function ProfesseurFichier() {
             j2: analyseMoment(item.crenau_j2),
             v1: analyseMoment(item.crenau_v1),
             v2: analyseMoment("Non"),
+            lieu: (item.lieu),
+            lieuRdv: (item.lieuRdv)
           }));
 
           console.log(formattedData);
@@ -79,6 +81,8 @@ function ProfesseurFichier() {
                   j2: rowData.j2,
                   v1: rowData.v1,
                   v2: rowData.v2,
+                  lieu: rowData.lieu,
+                  lieu_rdv: rowData.lieuRdv,
                   professeurId,
                 };
                 axiosInstance.post("/activites", activiteData);

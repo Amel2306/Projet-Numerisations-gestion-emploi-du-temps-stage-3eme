@@ -52,6 +52,39 @@ function ActiviteDescr(props) {
                 </Link>
               </button>
             </li>
+            <li>
+              <h3>Disponibilités</h3>
+              {activite.l1 === 1 && (
+                <p>Lundi matin</p>
+              )}
+              {activite.l2 === 1  && (
+                <p>Lundi après-midi</p>
+              )}
+              {activite.ma1 === 1  && (
+                <p>Mardi matin</p>
+              )}
+              {activite.ma2 === 1  && (
+                <p>Mardi après-midi</p>
+              )}
+              {activite.me1 === 1  && (
+                <p>Mercredi matin</p>
+              )}
+              {activite.me2  === 1 && (
+                <p>Mercredi après-midi</p>
+              )}
+              {activite.j1  === 1 && (
+                <p>Jeudi matin</p>
+              )}
+              {activite.j2  === 1 && (
+                <p>Jeudi après-midi</p>
+              )}
+              {activite.v1  === 1 && (
+                <p>Vendredi matin</p>
+              )}
+              {activite.v2  === 1 && (
+                <p>Vendredi après-midi</p>
+              )}
+            </li>
           </div>
         </ul>
       </div>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import ElevesPdf from "../../components/Eleves/ElevesPdf";
 import axiosInstance from "../../config/axiosConfig";
 
 function Eleves() {

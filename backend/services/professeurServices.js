@@ -72,7 +72,7 @@ exports.addProfesseur = async (profData, password) => {
         email: profData.email,
       },
     });
-    if (profExiste) {
+    if (profExiste !== null) {
       return profExiste;
     }
     console.log(profData);
