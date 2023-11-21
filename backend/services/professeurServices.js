@@ -85,10 +85,10 @@ exports.addProfesseur = async (profData, password) => {
       newProfesseur.update({
         password: hashedPassword,
       });
-    } else {
+    } /*else {
       console.log("n'a rien");
       this.sendPassword(newProfesseur.id);
-    }
+    }*/
     return newProfesseur;
   } catch (error) {
     throw new Error("Erreur lors de la création du professeur dans services.");

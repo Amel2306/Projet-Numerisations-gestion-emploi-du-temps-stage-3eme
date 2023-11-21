@@ -35,7 +35,7 @@ function ProfesseurFichier() {
             numero_tel: item.numeroTel,
             metier: item.metier,
             etablissement: item.etablissement,
-            role: item.role,
+            role: item.role=== "Encadrant·e" ? "Encadrant" : "Tuteur·rice" ? "Tuteur" : "Encadrant et Tuteur",
             nb_eleve_tuteur: analyseNbEleveTuteur(item.nbEleveTuteur),
             nom_act: item.nomActivite,
             description: item.description,

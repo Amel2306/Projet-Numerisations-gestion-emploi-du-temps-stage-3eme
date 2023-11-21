@@ -1,7 +1,6 @@
 const Activite = require("../models/Activite");
 
 exports.getAllActivites = async () => {
-  console.log("j'arrive ici t'as capté");
   const activites = await Activite.findAll();
   return activites;
 };
