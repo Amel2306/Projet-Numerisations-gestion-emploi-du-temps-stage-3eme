@@ -1,0 +1,26 @@
+.contain-form-auth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.contain-auth {
+    box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
+    border-radius: 30px;
+    margin: 10px;
+    margin-top: 40px;
+    padding: 10px;
+    min-width: 390px;
+    width: auto;
+    max-width: 600px;
+    height: auto;
+}
+
+
+@media screen and (max-width: 400px) {
+    .contain-auth{
+        min-width: auto;
+    }
+}

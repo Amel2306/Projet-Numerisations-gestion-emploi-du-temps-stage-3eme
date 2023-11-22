@@ -1,9 +1,8 @@
-const Activite = require('../models/Activite');
+const Activite = require("../models/Activite");
 
 exports.getAllActivites = async () => {
-    console.log("j'arrive ici t'as capté")
-    const activites = await Activite.findAll();
-    return activites;
+  const activites = await Activite.findAll();
+  return activites;
 };
 
 exports.getActiviteById = async (activiteId) => {
@@ -15,10 +14,28 @@ exports.getActiviteById = async (activiteId) => {
   }
 };
 
+exports.getActiviteByEncadrant = async (professeurId) => {
+  try {
+    const activites = await Activite.findAll({
+      where: {
+        professeurId,
+      },
+    });
+    return activites;
+  } catch (err) {
+    throw new Error("Error Activite non trouvée");
+  }
+};
+
 exports.createActivite = async (activiteData) => {
-    const newActivite = await Activite.create(activiteData);
-    console.log(newActivite.json)
-    return newActivite;
+  const newActivite = await Activite.create(activiteData);
+  return newActivite;
+};
+
+exports.updateActivite = async (activiteData, activiteId) => {
+  const activite = await Activite.findByPk(activiteId);
+  const updatedAct = await activite.update(activiteData);
+  return updatedAct;
 };
 
 exports.deleteActiviteById = async (activiteId) => {

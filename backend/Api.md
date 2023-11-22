@@ -1,18 +1,17 @@
-
 ## API Reference
 
-L'API rest vous permettra de répondre à la majorité des besoins dont vous avez besoins 
+L'API rest vous permettra de répondre à la majorité des besoins dont vous avez besoins
 
-Faire suivre   ```http://localhost:3000 ``` 
+Faire suivre `http://localhost:3000 `
 
-par ce qui va apparaitre dans les cases grisées en fonction de votre besoin 
-
+par ce qui va apparaitre dans les cases grisées en fonction de votre besoin
 
 <details>
 <summary> <h1> Professeurs </h1> </summary>
 <br>
 
 ### récupérer tous les professeurs
+
 > 📝 les professeurs ici sont l'ensemble des encadrants et des tuteurs
 
 ```http
@@ -23,7 +22,7 @@ par ce qui va apparaitre dans les cases grisées en fonction de votre besoin
   <summary> Exemple </summary>
   <br>
 
- -  #### Response
+- #### Response
 
 ```
         {
@@ -56,47 +55,49 @@ par ce qui va apparaitre dans les cases grisées en fonction de votre besoin
         }
 
 ```
+
   </details>
 
 ### récupérer un professeur
-> 
+
+>
 
 ```http
   GET /api/professeurs/{id}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                              |
+| :-------- | :---- | :--------------------------------------- |
 | `id`      | `int` | **Required**. Id du professeur à trouver |
-
 
 <details>
   <summary> Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/professeur/50
-  ``` 
-  - #### Response
+```http
+  GET /api/professeur/50
+```
 
-          {
-            "id": 50,
-            "nom": "aa",
-            "prenom": "bb",
-            "email": "aa@bb.fr",
-            "numero_tel": "92830982390",
-            "metier": "prof",
-            "etablissement": "polytech",
-            "role": "Encadrant",
-            "nb_eleve_tuteur": 0,
-            "password": "$2b$10$BRtzEE1.SAPk5i3AVFIl8OiWJ0iUB.NayJnhWJMlhibzv09/7kmAu",
-            "createdAt": "2023-07-06T11:42:17.000Z",
-            "updatedAt": "2023-07-06T11:42:17.000Z"
-        },
+- #### Response
+
+        {
+          "id": 50,
+          "nom": "aa",
+          "prenom": "bb",
+          "email": "aa@bb.fr",
+          "numero_tel": "92830982390",
+          "metier": "prof",
+          "etablissement": "polytech",
+          "role": "Encadrant",
+          "nb_eleve_tuteur": 0,
+          "password": "$2b$10$BRtzEE1.SAPk5i3AVFIl8OiWJ0iUB.NayJnhWJMlhibzv09/7kmAu",
+          "createdAt": "2023-07-06T11:42:17.000Z",
+          "updatedAt": "2023-07-06T11:42:17.000Z"
+      },
 
 </details>
 
@@ -106,22 +107,23 @@ par ce qui va apparaitre dans les cases grisées en fonction de votre besoin
   GET /api/professeurs/role/{role}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `role`      | `Tuteur`, `Encadrant` | **Required**. role du professeur|
+| Parameter | Type                           | Description                      |
+| :-------- | :----------------------------- | :------------------------------- |
+| `role`    | `Tuteur`, `Encadrant`, `Admin` | **Required**. role du professeur |
 
-> 📝 les professeurs qui sont à la foi encadrant et tuteur seront retourné par défaut 
+> 📝 les professeurs qui sont à la foi encadrant et tuteur seront retourné par défaut
 
 <details>
 <summary>Exemple </summary>
 <br>
 
 - #### Request
+
 ```http
   GET /api/professeurs/role/Tuteur
 ```
 
-- #### Response 
+- #### Response
 
 ```
     {
@@ -153,6 +155,7 @@ par ce qui va apparaitre dans les cases grisées en fonction de votre besoin
         "updatedAt": "2023-07-06T11:42:17.000Z"
     },
 ```
+
 </details>
 
 ### récupérer tous les élèves en fonctions de leur tuteur
@@ -161,9 +164,9 @@ par ce qui va apparaitre dans les cases grisées en fonction de votre besoin
   GET /api/professeurs/tuteur/{tuteurID}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `tuteurId`| `int` | **Required**. identifiant du tuteur|
+| Parameter  | Type  | Description                         |
+| :--------- | :---- | :---------------------------------- |
+| `tuteurId` | `int` | **Required**. identifiant du tuteur |
 
 > 📝 les les professeurs qui ne sont pas tuteur, auront aucune réponse à cette requête
 
@@ -172,13 +175,15 @@ par ce qui va apparaitre dans les cases grisées en fonction de votre besoin
 <br>
 
 - #### Request
+
 ```http
   GET /api/professeurs/tuteur/51
 ```
 
-- #### Response 
+- #### Response
 
 La liste des élèves dont le professeur est tuteur
+
 ```
     {
         "id": 54,
@@ -214,6 +219,62 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
+### Modifier un professeur
+
+```http
+  PUT /api/professeurs/ {id}
+```
+
+| Parameter | Type  | Description                                        |
+| :-------- | :---- | :------------------------------------------------- |
+| `id`      | `int` | **Required**. identifiant du professeur à modifier |
+
+| Body              | Type                                                 | Description                                                                        |
+| :---------------- | :--------------------------------------------------- | :--------------------------------------------------------------------------------- |
+| `nom`             | `string`                                             | nom du professeur                                                                  |
+| `prenom`          | `string`                                             | prenom du professeur                                                               |
+| `numero_tel`      | `string`                                             | numéro de téléphone du professeur                                                  |
+| `metier`          | `string`                                             | métier du professeur                                                               |
+| `etablissement`   | `string`                                             | établissement dans lequel le professeur exerce                                     |
+| `role`            | `Tuteur`, `Encadrant`,`Encadrant et Tuteur`, `Admin` | role que souhaite avoir le professeur                                              |
+| `nb_eleve_tuteur` | `int`                                                | nombre d'élèves dont le professeur souhaite être tuteur, 0 si encadrant uniquement |
+
+<details>
+<summary>Exemple</summary>
+<br>
+
+- #### Request
+
+```http
+  PUT /api/professeurs/62
+```
+
+```
+      {
+          "nom": "nom aa"
+      }
+```
+
+- #### Response
+
+```
+      {
+          "id": 62,
+          "nom": "nom aa",
+          "prenom": "bb",
+          "email": "aa@bb.fr",
+          "numero_tel": "92830982390",
+          "metier": "prof",
+          "etablissement": "polytech",
+          "role": "Encadrant",
+          "nb_eleve_tuteur": 0,
+          "password": "$2b$10$n3crbsRZ4UHrAlpafeYene8zuxIwrKg.TtkXctQqlpiork4IRW7VC",
+          "createdAt": "2023-07-17T12:13:50.000Z",
+          "updatedAt": "2023-08-07T11:41:38.834Z"
+      }
+```
+
+</details>
 
 ### Créer un professeur
 
@@ -221,23 +282,23 @@ La liste des élèves dont le professeur est tuteur
   POST /api/professeurs
 ```
 
-| Body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `nom`| `string` | **Required**. nom du professeur|
-| `prenom`| `string` | **Required**. prenom du professeur|
-| `email`| `string` | **Required**. email du professeur utile à sa connexion|
-| `numero_tel`| `string` | **Required**. numéro de téléphone du professeur|
-| `metier`| `string` | **Required**. métier du professeur|
-| `etablissement`| `string` | **Required**. établissement dans lequel le professeur exerce|
-| `role`| `Tuteur`, `Encadrant`,`Encadrant et Tuteur` | **Required**. role que souhaite avoir le professeur|
-| `nb_eleve_tuteur`| `int` | **Required**. nombre d'élèves dont le professeur souhaite être tuteur, 0 si encadrant uniquement|
-
+| Body              | Type                                                 | Description                                                                                      |
+| :---------------- | :--------------------------------------------------- | :----------------------------------------------------------------------------------------------- |
+| `nom`             | `string`                                             | **Required**. nom du professeur                                                                  |
+| `prenom`          | `string`                                             | **Required**. prenom du professeur                                                               |
+| `email`           | `string`                                             | **Required**. email du professeur utile à sa connexion                                           |
+| `numero_tel`      | `string`                                             | **Required**. numéro de téléphone du professeur                                                  |
+| `metier`          | `string`                                             | **Required**. métier du professeur                                                               |
+| `etablissement`   | `string`                                             | **Required**. établissement dans lequel le professeur exerce                                     |
+| `role`            | `Tuteur`, `Encadrant`,`Encadrant et Tuteur`, `Admin` | **Required**. role que souhaite avoir le professeur                                              |
+| `nb_eleve_tuteur` | `int`                                                | **Required**. nombre d'élèves dont le professeur souhaite être tuteur, 0 si encadrant uniquement |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   POST /api/professeurs
 ```
@@ -255,7 +316,8 @@ La liste des élèves dont le professeur est tuteur
         }
 ```
 
-- #### Response 
+- #### Response
+
 ```
         {
             "id": 61,
@@ -275,30 +337,32 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
-
 ### Supprimer un professeur
 
 ```http
   DELETE /api/professeurs/{id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                                |
+| :-------- | :---- | :----------------------------------------- |
 | `id`      | `int` | **Required**. Id du professeur à supprimer |
-
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   DELETE /api/professeurs/61
 ```
-- #### Response 
+
+- #### Response
+
 ```
     { message: 'Le professeur a bien été supprimé.' }
 ```
+
 </details>
 
 ### Supprimer tous les professeurs
@@ -311,14 +375,15 @@ La liste des élèves dont le professeur est tuteur
 <summary>Exemple</summary>
 <br>
 
-- #### Response 
+- #### Response
+
 ```
     { message: 'Nombre de professeurs supprimés : 14' }
 ```
-</details>
 
 </details>
 
+</details>
 
 <details>
 <summary> <h1>Eleves</h1> </summary>
@@ -333,7 +398,7 @@ La liste des élèves dont le professeur est tuteur
   <summary> Exemple </summary>
   <br>
 
- -  #### Response
+- #### Response
 
 ```
     {
@@ -368,6 +433,7 @@ La liste des élèves dont le professeur est tuteur
     },
 
 ```
+
 </details>
 
 ### récupérer un élève
@@ -375,23 +441,24 @@ La liste des élèves dont le professeur est tuteur
 ```http
   GET /api/eleves/{id}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `int` | **Required**. Id de l'élève à trouver|
+| Parameter | Type  | Description                           |
+| :-------- | :---- | :------------------------------------ |
+| `id`      | `int` | **Required**. Id de l'élève à trouver |
 
 <details>
   <summary> Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/eleves/54
-  ``` 
-  - #### Response
+```http
+  GET /api/eleves/54
+```
+
+- #### Response
 
 ```
     {
@@ -413,30 +480,31 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
-
 ### récupérer les membres du groupe d'un élève
+
 > les élèves d'un même groupe ont le même parcours, voir partie sur les Parcours pour plus d'informations
 
 ```http
   GET /api/eleves/groupe/{id}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `int` | **Required**. Id de l'élève à trouver|
+| Parameter | Type  | Description                           |
+| :-------- | :---- | :------------------------------------ |
+| `id`      | `int` | **Required**. Id de l'élève à trouver |
 
 <details>
   <summary> Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/eleves/groupe/54
-  ``` 
-  - #### Response
+```http
+  GET /api/eleves/groupe/54
+```
+
+- #### Response
 
 ```
     {
@@ -473,31 +541,30 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
-
 ### récupérer les élèves pour une activité donnée et un moment donné
-
 
 ```http
   GET /api/eleves/activite/{activiteId}/{indexMoment}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `activiteId`      | `int` | **Required**. id d'une activité |
-| `indexMoment`      | `int` [0,9]| **Required**. index d'un moment de la semaine : 0 étant lundi matin, 1 lundi aprés-midi...|
+| Parameter     | Type        | Description                                                                                |
+| :------------ | :---------- | :----------------------------------------------------------------------------------------- |
+| `activiteId`  | `int`       | **Required**. id d'une activité                                                            |
+| `indexMoment` | `int` [0,9] | **Required**. index d'un moment de la semaine : 0 étant lundi matin, 1 lundi aprés-midi... |
 
 <details>
   <summary> Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/eleves/activite/48/0
-  ``` 
-  - #### Response
+```http
+  GET /api/eleves/activite/48/0
+```
+
+- #### Response
 
 ```
     {
@@ -536,31 +603,29 @@ La liste des élèves dont le professeur est tuteur
 
 ### Créer un élève
 
-
 ```http
   POST /api/eleves
 ```
 
-| Body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `nom`| `string` | **Required**. nom de l'élève|
-| `prenom`| `string` | **Required**. prenom de l'élève|
-| `email`| `string` | **Required**. email de l'élève utile à sa connexion|
-| `numero_tel`| `string` | **Required**. numéro de téléphone de l'élève|
-| `numero_tel_parent`| `string` | **Required**. numéro de téléphone d'un responsable légal de l'élève|
-| `etablissement`| `string` | **Required**. collège ou étudie l'élève|
-| `adresse`| `string` | **Required**. adress de l'élève|
-
+| Body                | Type     | Description                                                         |
+| :------------------ | :------- | :------------------------------------------------------------------ |
+| `nom`               | `string` | **Required**. nom de l'élève                                        |
+| `prenom`            | `string` | **Required**. prenom de l'élève                                     |
+| `email`             | `string` | **Required**. email de l'élève utile à sa connexion                 |
+| `numero_tel`        | `string` | **Required**. numéro de téléphone de l'élève                        |
+| `numero_tel_parent` | `string` | **Required**. numéro de téléphone d'un responsable légal de l'élève |
+| `etablissement`     | `string` | **Required**. collège ou étudie l'élève                             |
+| `adress`            | `string` | **Required**. adress de l'élève                                     |
 
 <details>
   <summary> Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    POST /api/eleves
-  ```
+```http
+  POST /api/eleves
+```
 
 ```
         {
@@ -575,7 +640,7 @@ La liste des élèves dont le professeur est tuteur
 
 ```
 
-  - #### Response
+- #### Response
 
 ```
     {
@@ -594,35 +659,95 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
-### Confirmer un élève
-> confirmer un élève revient à lui attribuer un tuteur disponible
-
+### Modifier un élève
 
 ```http
-  PUT /api/eleves/confirmation/{id}
+  PUT /api/eleves/{id}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+| Parameter | Type  | Description                            |
+| :-------- | :---- | :------------------------------------- |
+| `id`      | `int` | **Required**. id de l'élève à modifier |
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `int` | **Required**. Id de l'élève à confirmer|
-
+| Body                | Type     | Description                                           |
+| :------------------ | :------- | :---------------------------------------------------- |
+| `nom`               | `string` | nom de l'élève                                        |
+| `prenom`            | `string` | prenom de l'élève                                     |
+| `numero_tel`        | `string` | numéro de téléphone de l'élève                        |
+| `numero_tel_parent` | `string` | numéro de téléphone d'un responsable légal de l'élève |
+| `etablissement`     | `string` | collège ou étudie l'élève                             |
+| `adress`            | `string` | adresse de l'élève                                    |
 
 <details>
   <summary> Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    PUT /api/eleves/confirmation/67
-  ```
-
-  - #### Response
+```http
+  PUT /api/eleves/68
+```
 
 ```
-    
+    {
+        "parcoursId": 573
+    }
+
+```
+
+- #### Response
+
+```
+{
+    "message": "Eleve modifié avec succès",
+    "eleveUpd": {
+        "id": 68,
+        "nom": "a",
+        "prenom": "b",
+        "email": "a@b.fr",
+        "numero_tel": "987654321",
+        "numero_tel_parent": "1234567890",
+        "adress": "montpellier",
+        "etablissement": "college",
+        "password": null,
+        "professeurId": 83,
+        "parcoursId": 573,
+        "createdAt": "2023-07-17T12:12:03.000Z",
+        "updatedAt": "2023-08-07T07:27:43.000Z"
+    }
+}
+```
+
+</details>
+
+### Confirmer un élève
+
+> confirmer un élève revient à lui attribuer un tuteur disponible
+
+```http
+  PUT /api/eleves/confirmation/{id}
+```
+
+> ne pas intégrer les "{}" dans votre requête
+
+| Parameter | Type  | Description                             |
+| :-------- | :---- | :-------------------------------------- |
+| `id`      | `int` | **Required**. Id de l'élève à confirmer |
+
+<details>
+  <summary> Exemple</summary>
+  <br>
+
+- #### Request
+
+```http
+  PUT /api/eleves/confirmation/67
+```
+
+- #### Response
+
+```
+
     {
         "id": 67,
         "nom": "John",
@@ -638,38 +763,38 @@ La liste des élèves dont le professeur est tuteur
         "createdAt": "2023-07-11T10:36:53.000Z",
         "updatedAt": "2023-07-11T10:43:53.953Z"
     }
-        
+
 ```
+
 > ainsi professeurId n'est plus null, il a donc un tuteur
 
 </details>
 
-
 ### Attribuer un parcours à un élève
+
 > attribution d'un parcours à l'élève s'il y en a de disponible
 
 ```http
   PUT /api/eleves/parcours/{id}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `int` | **Required**. Id de l'élève à qui on veut attribuer un parcours|
-
+| Parameter | Type  | Description                                                     |
+| :-------- | :---- | :-------------------------------------------------------------- |
+| `id`      | `int` | **Required**. Id de l'élève à qui on veut attribuer un parcours |
 
 <details>
   <summary> Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    PUT /api/eleves/parcours/67
-  ```
+```http
+  PUT /api/eleves/parcours/67
+```
 
-  - #### Response
+- #### Response
 
 ```
     {
@@ -686,10 +811,10 @@ La liste des élèves dont le professeur est tuteur
         "parcoursId": 552,
         "createdAt": "2023-07-11T10:36:53.000Z",
         "updatedAt": "2023-07-11T11:04:51.622Z"
-    }   
+    }
 ```
-> ainsi parcoursId n'est plus null, il a donc un parcours
 
+> ainsi parcoursId n'est plus null, il a donc un parcours
 
 </details>
 
@@ -699,40 +824,44 @@ La liste des élèves dont le professeur est tuteur
   DELETE /api/eleves/{id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                             |
+| :-------- | :---- | :-------------------------------------- |
 | `id`      | `int` | **Required**. Id de l'élève à supprimer |
-
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   DELETE /api/eleves/67
 ```
-- #### Response 
+
+- #### Response
+
 ```
     { message: "L'élève a bien été supprimé."" }
 ```
-</details>
 
+</details>
 
 ### Supprimer tous les élèves
 
 ```http
-  DELETE /api/eleves   
+  DELETE /api/eleves
 ```
 
 <details>
 <summary>Exemple</summary>
 <br>
 
-- #### Response 
+- #### Response
+
 ```
     { message: "Nombre d'élèves supprimés : 18" }
 ```
+
 </details>
 
 </details>
@@ -751,7 +880,7 @@ La liste des élèves dont le professeur est tuteur
   <summary> Exemple </summary>
   <br>
 
- -  #### Response
+- #### Response
 
 ```
     {
@@ -796,31 +925,33 @@ La liste des élèves dont le professeur est tuteur
     }
 
 ```
+
   </details>
 
-### récupérer une activite 
+### récupérer une activite
 
 ```http
   GET /api/activites/{id}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                              |
+| :-------- | :---- | :--------------------------------------- |
 | `id`      | `int` | **Required**. Id de l'activité à trouver |
-
 
 <details>
   <summary>Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/activites/48
-  ``` 
-  - #### Response
+```http
+  GET /api/activites/48
+```
+
+- #### Response
+
 ```
     {
         "id": 48,
@@ -843,6 +974,7 @@ La liste des élèves dont le professeur est tuteur
         "updatedAt": "2023-07-06T11:42:17.000Z"
     }
 ```
+
 </details>
 
 ### Créer une activité
@@ -851,22 +983,23 @@ La liste des élèves dont le professeur est tuteur
   POST /api/activites
 ```
 
-| Body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `nom`| `string` | **Required**. nom de l'activité|
-| `description`| `string` | **Required**. déscription du déroulement de l'activité|
-| `nb_realisations`| `int` | **Required**. nombre de fois que l'encadrant peut réaliser l'activité dans la semaine|
-| `nb_eleve_max`| `int` | **Required**. nombre d'élèves que peut accepter au maximum l'encadrant durant l'activité|
-| `l1`, `l2`, `ma1`, `ma2`, `me1`, `me2`, `j1`, `j2`, `v1`, `v2`| `0`, `1` | **Required**. disponibilité de l'activité à ce moment : 1 disponible, 0 pas disponible|
-| `professeurId`| `int` | **Required**. **clé étrangère ref : professeur** l'identifiant de l'encadrant de l'activité|
-
-
+| Body                                                           | Type     | Description                                                                                 |
+| :------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------ |
+| `nom`                                                          | `string` | **Required**. nom de l'activité                                                             |
+| `description`                                                  | `string` | **Required**. déscription du déroulement de l'activité                                      |
+| `nb_realisations`                                              | `int`    | **Required**. nombre de fois que l'encadrant peut réaliser l'activité dans la semaine       |
+| `nb_eleve_max`                                                 | `int`    | **Required**. nombre d'élèves que peut accepter au maximum l'encadrant durant l'activité    |
+| `l1`, `l2`, `ma1`, `ma2`, `me1`, `me2`, `j1`, `j2`, `v1`, `v2` | `0`, `1` | **Required**. disponibilité de l'activité à ce moment : 1 disponible, 0 pas disponible      |
+| `professeurId`                                                 | `int`    | **Required**. **clé étrangère ref : professeur** l'identifiant de l'encadrant de l'activité |
+| `lieu`                                                         | `string` | **Required** le lieu du déroulement de l'activité                                           |
+| `lieu_rdv`                                                     | `string` | **Required**. lieu où doivent se rendre les stagiaires pour rencontrer leur encadrant       |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   POST /api/activites
 ```
@@ -891,7 +1024,8 @@ La liste des élèves dont le professeur est tuteur
     }
 ```
 
-- #### Response 
+- #### Response
+
 ```
     {
         "message": "Activité créée avec succès",
@@ -920,6 +1054,77 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
+### Modifier une activité
+
+```http
+  PUT /api/activites
+```
+
+| Parameters | Type  | Description                                        |
+| :--------- | :---- | :------------------------------------------------- |
+| `id`       | `int` | **Required**. Identifiant de l'activité à modifier |
+
+| Body                                                           | Type     | Description                                                                   |
+| :------------------------------------------------------------- | :------- | :---------------------------------------------------------------------------- |
+| `nom`                                                          | `string` | nom de l'activité                                                             |
+| `description`                                                  | `string` | déscription du déroulement de l'activité                                      |
+| `nb_realisations`                                              | `int`    | nombre de fois que l'encadrant peut réaliser l'activité dans la semaine       |
+| `nb_eleve_max`                                                 | `int`    | nombre d'élèves que peut accepter au maximum l'encadrant durant l'activité    |
+| `l1`, `l2`, `ma1`, `ma2`, `me1`, `me2`, `j1`, `j2`, `v1`, `v2` | `0`, `1` | disponibilité de l'activité à ce moment : 1 disponible, 0 pas disponible      |
+| `professeurId`                                                 | `int`    | **clé étrangère ref : professeur** l'identifiant de l'encadrant de l'activité |
+| `lieu`                                                         | `string` | le lieu du déroulement de l'activité                                          |
+| `lieu_rdv`                                                     | `string` | . lieu où doivent se rendre les stagiaires pour rencontrer leur encadrant     |
+
+<details>
+<summary>Exemple</summary>
+<br>
+
+- #### Request
+
+```http
+  PUT /api/activites/129
+```
+
+```
+    {
+        "nom": "Activite 10",
+        "descriptions": "finalement c'est l'activité 10",
+        "lieu": "Place Eugène bataillon",
+        "lieu_rdv": "à l'entrée de la fac devant le grand batiment blanc"
+    }
+```
+
+- #### Response
+
+```
+    {
+        "message": "Activité modifiée avec succès",
+        "activite": {
+            "id": 129,
+            "nom": "Activite 10",
+            "description": "description",
+            "nb_realisations": 2,
+            "nb_eleve_max": 6,
+            "l1": 0,
+            "l2": 0,
+            "ma1": 1,
+            "ma2": 0,
+            "me1": 0,
+            "me2": 1,
+            "j1": 0,
+            "j2": 1,
+            "v1": 0,
+            "v2": 0,
+            "lieu": "Place Eugène bataillon",
+            "lieu_rdv": "à l'entrée de la fac devant le grand batiment blanc",
+            "professeurId": 77,
+            "createdAt": "2023-08-02T06:10:11.000Z",
+            "updatedAt": "2023-08-03T06:16:28.253Z"
+        }
+    }
+```
+
+</details>
 
 ### Supprimer une activité
 
@@ -927,23 +1132,26 @@ La liste des élèves dont le professeur est tuteur
   DELETE /api/activité/{id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                                |
+| :-------- | :---- | :----------------------------------------- |
 | `id`      | `int` | **Required**. Id de l'activité à supprimer |
-
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   DELETE /api/activites/57
 ```
-- #### Response 
+
+- #### Response
+
 ```
     { message: 'Activité supprimée avec succès' }
 ```
+
 </details>
 
 ### Supprimer toutes les activités
@@ -956,10 +1164,12 @@ La liste des élèves dont le professeur est tuteur
 <summary>Exemple</summary>
 <br>
 
-- #### Response 
+- #### Response
+
 ```
     { message: 'Toutes les activités ont été supprimées' }
 ```
+
 </details>
 
 </details>
@@ -974,16 +1184,16 @@ La liste des élèves dont le professeur est tuteur
   POST /api/parcours
 ```
 
-| Body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `nbParcours`      | `int` | **Required**. nombre de parcours à générer |
+| Body         | Type  | Description                                                  |
+| :----------- | :---- | :----------------------------------------------------------- |
+| `nbParcours` | `int` | **Required**. nombre de parcours à générer                   |
 | `nbEleveMax` | `int` | **Required**. nombre d'élève par groupe et donc par parcours |
 
   <details>
   <summary> Exemple </summary>
   <br>
 
- -  #### Request
+- #### Request
 
 ```
     {
@@ -993,7 +1203,7 @@ La liste des élèves dont le professeur est tuteur
 
 ```
 
- -  #### Response
+- #### Response
 
 ```
     {
@@ -1001,6 +1211,7 @@ La liste des élèves dont le professeur est tuteur
     }
 
 ```
+
   </details>
 
 </details>
@@ -1010,6 +1221,7 @@ La liste des élèves dont le professeur est tuteur
 <br>
 
 ### récupérer toutes les association activité-parcours-indexMoment
+
 > 📝 les indexMoment correspondent au moment où se déroule l'activité durant la semaine : 0 = lundi matin, 1 = lundi après-midi...
 
 ```http
@@ -1020,7 +1232,7 @@ La liste des élèves dont le professeur est tuteur
   <summary> Exemple </summary>
   <br>
 
- -  #### Response
+- #### Response
 
 ```
     {
@@ -1046,6 +1258,7 @@ La liste des élèves dont le professeur est tuteur
     }
 
 ```
+
   </details>
 
 ### Récupérer toutes les activités pour chaque parcours
@@ -1058,7 +1271,8 @@ La liste des élèves dont le professeur est tuteur
   <summary>Exemple</summary>
   <br>
 
-  - #### Response
+- #### Response
+
 ```
     "555": [
         {
@@ -1098,6 +1312,7 @@ La liste des élèves dont le professeur est tuteur
         }
     ]
 ```
+
 </details>
 
 ### Récupérer toutes les activités d'un parcours
@@ -1105,25 +1320,25 @@ La liste des élèves dont le professeur est tuteur
 ```http
   GET /api/activiteparcours/{parcoursId}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `parcoursId`      | `int` | **Required**. Id du parcours dont on veut récupérer les activités|
-
+| Parameter    | Type  | Description                                                       |
+| :----------- | :---- | :---------------------------------------------------------------- |
+| `parcoursId` | `int` | **Required**. Id du parcours dont on veut récupérer les activités |
 
 <details>
   <summary>Exemple</summary>
   <br>
 
-  - #### Request 
+- #### Request
 
 ```http
   GET /api/activiteparcours/555
 ```
 
-  - #### Response
+- #### Response
+
 ```
     "555": [
         {
@@ -1163,26 +1378,27 @@ La liste des élèves dont le professeur est tuteur
         }
     ]
 ```
+
 </details>
 
-
 ### Récupérer les activités d'un élève
- > à utiliser uniquement lorsqu'on a attribué un parcours à l'élève en question
+
+> à utiliser uniquement lorsqu'on a attribué un parcours à l'élève en question
 
 ```http
   GET /api/activiteparcours/eleve/{eleveId}
 ```
 
-| Body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `eleveId`| `int` | **Required**. identifiant de l'élève dont on veut récupérer le parcours et les activités |
-
+| Body      | Type  | Description                                                                              |
+| :-------- | :---- | :--------------------------------------------------------------------------------------- |
+| `eleveId` | `int` | **Required**. identifiant de l'élève dont on veut récupérer le parcours et les activités |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   GET /api/activiteparcours/eleve/54
 ```
@@ -1265,20 +1481,22 @@ La liste des élèves dont le professeur est tuteur
   GET /api/activiteparcours/professeur/{profId}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `profId`      | `int` | **Required**. Id de l'encadrant dont on veut récupérer le parcours |
-
+| Parameter | Type  | Description                                                        |
+| :-------- | :---- | :----------------------------------------------------------------- |
+| `profId`  | `int` | **Required**. Id de l'encadrant dont on veut récupérer le parcours |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   GET /api/activiteparcours/professeur/50
 ```
-- #### Response 
+
+- #### Response
+
 ```
     {
         "0": [
@@ -1330,28 +1548,31 @@ La liste des élèves dont le professeur est tuteur
         ]
     }
 ```
+
 </details>
 
 ### Ajouter une activité à un parcours particulier à un moment particulier
-> il va falloir créer l'activité avant et récupérer son identifiant pour l'utiliser ici 
+
+> il va falloir créer l'activité avant et récupérer son identifiant pour l'utiliser ici
 
 ```http
   POST /api/activiteparcours/
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `parcoursId`      | `int` | **Required**. Id du parcours dans lequel on souhaite ajouter l'activité |
-| `activiteId`      | `int` | **Required**. id de l'activité qu'on souhaite rajouter dans le parcours |
-| `indexMoment`      | `int` | **Required**. idex du moment durant lequel on veut ajouter l'activité |
+| Parameter     | Type  | Description                                                             |
+| :------------ | :---- | :---------------------------------------------------------------------- |
+| `parcoursId`  | `int` | **Required**. Id du parcours dans lequel on souhaite ajouter l'activité |
+| `activiteId`  | `int` | **Required**. id de l'activité qu'on souhaite rajouter dans le parcours |
+| `indexMoment` | `int` | **Required**. idex du moment durant lequel on veut ajouter l'activité   |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```
-    
+
     {
         "parcoursId": 554,
         "activiteId": 57,
@@ -1360,7 +1581,7 @@ La liste des élèves dont le professeur est tuteur
 
 ```
 
-- #### Response 
+- #### Response
 
 ```
     {
@@ -1371,27 +1592,30 @@ La liste des élèves dont le professeur est tuteur
         "createdAt": "2023-07-12T12:29:56.250Z"
     }
 ```
+
 </details>
 
 ### Ajouter une activité à tous les parcours à un moment particulier
-> il va falloir créer l'activité avant et récupérer son identifiant pour l'utiliser ici 
+
+> il va falloir créer l'activité avant et récupérer son identifiant pour l'utiliser ici
 
 ```http
   POST /api/activiteparcours/parcours
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `activiteId`      | `int` | **Required**. id de l'activité qu'on souhaite rajouter dans le parcours |
-| `indexMoment`      | `int` | **Required**. idex du moment durant lequel on veut ajouter l'activité |
+| Parameter     | Type  | Description                                                             |
+| :------------ | :---- | :---------------------------------------------------------------------- |
+| `activiteId`  | `int` | **Required**. id de l'activité qu'on souhaite rajouter dans le parcours |
+| `indexMoment` | `int` | **Required**. idex du moment durant lequel on veut ajouter l'activité   |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```
-    
+
     {
         "activiteId": 57,
         "indexMoment": 7
@@ -1399,13 +1623,14 @@ La liste des élèves dont le professeur est tuteur
 
 ```
 
-- #### Response 
+- #### Response
 
 ```
   {
     "message": "L'activité à été ajoutée à tous les parcours avec succés"
   }
 ```
+
 </details>
 
 </details>
@@ -1424,7 +1649,7 @@ La liste des élèves dont le professeur est tuteur
   <summary> Exemple </summary>
   <br>
 
- -  #### Response
+- #### Response
 
 ```
     [
@@ -1445,31 +1670,33 @@ La liste des élèves dont le professeur est tuteur
     ]
 
 ```
+
   </details>
 
-### récupérer une question 
+### récupérer une question
 
 ```http
   GET /api/questions/{id}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                               |
+| :-------- | :---- | :---------------------------------------- |
 | `id`      | `int` | **Required**. Id de la question à trouver |
-
 
 <details>
   <summary>Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/questions/1
-  ``` 
-  - #### Response
+```http
+  GET /api/questions/1
+```
+
+- #### Response
+
 ```
     {
         "id": 1,
@@ -1479,32 +1706,33 @@ La liste des élèves dont le professeur est tuteur
         "updatedAt": "2023-06-21T07:08:59.000Z"
     }
 ```
+
 </details>
 
-### récupérer les questions d'un questionnaire 
+### récupérer les questions d'un questionnaire
 
 ```http
   GET /api/questions/questionnaire/{questionnaire}
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `questionnaire`| `Tuteur`, `Encadrant`, `Eleve` | **Required**. détermine pour qui les questions sont adressées|
-
+| Parameter       | Type                           | Description                                                   |
+| :-------------- | :----------------------------- | :------------------------------------------------------------ |
+| `questionnaire` | `Tuteur`, `Encadrant`, `Eleve` | **Required**. détermine pour qui les questions sont adressées |
 
 <details>
   <summary>Exemple</summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/questions/Tuteur
-  ``` 
+```http
+  GET /api/questions/Tuteur
+```
 
-  - #### Response
+- #### Response
+
 ```
 [
     {
@@ -1523,6 +1751,7 @@ La liste des élèves dont le professeur est tuteur
     }
 ]
 ```
+
 </details>
 
 ### Créer une question
@@ -1531,16 +1760,17 @@ La liste des élèves dont le professeur est tuteur
   POST /api/questions
 ```
 
-| Body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `contenu`| `string` | **Required**. l'énoncé de la question|
-| `questionnaire`| `Tuteur`, `Encadrant`, `Eleve` | **Required**. détermine pour qui les questions sont adressées|
+| Body            | Type                           | Description                                                   |
+| :-------------- | :----------------------------- | :------------------------------------------------------------ |
+| `contenu`       | `string`                       | **Required**. l'énoncé de la question                         |
+| `questionnaire` | `Tuteur`, `Encadrant`, `Eleve` | **Required**. détermine pour qui les questions sont adressées |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   POST /api/questions
 ```
@@ -1552,7 +1782,8 @@ La liste des élèves dont le professeur est tuteur
     }
 ```
 
-- #### Response 
+- #### Response
+
 ```
     {
         "id": 10,
@@ -1570,24 +1801,24 @@ La liste des élèves dont le professeur est tuteur
 ```http
   PUT /api/questions/{id}
 ```
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`| `int` | **Required**. id de la question à modifier|
+
+| Parameter | Type  | Description                                |
+| :-------- | :---- | :----------------------------------------- |
+| `id`      | `int` | **Required**. id de la question à modifier |
 
 <br>
 
-
-
-| Body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `contenu`| `string` | l'énoncé de la question|
-| `questionnaire`| `Tuteur`, `Encadrant`, `Eleve` | détermine pour qui les questions sont adressées|
+| Body            | Type                           | Description                                     |
+| :-------------- | :----------------------------- | :---------------------------------------------- |
+| `contenu`       | `string`                       | l'énoncé de la question                         |
+| `questionnaire` | `Tuteur`, `Encadrant`, `Eleve` | détermine pour qui les questions sont adressées |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   PUT /api/questions/10
 ```
@@ -1598,7 +1829,8 @@ La liste des élèves dont le professeur est tuteur
     }
 ```
 
-- #### Response 
+- #### Response
+
 ```
     {
         "id": 10,
@@ -1611,30 +1843,32 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
-
 ### Supprimer une question
 
 ```http
   DELETE /api/questions/{id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                                 |
+| :-------- | :---- | :------------------------------------------ |
 | `id`      | `int` | **Required**. Id de la question à supprimer |
-
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   DELETE /api/questions/10
 ```
-- #### Response 
+
+- #### Response
+
 ```
     {message: "Question supprimée avec succés"}
 ```
+
 </details>
 </details>
 
@@ -1648,21 +1882,21 @@ La liste des élèves dont le professeur est tuteur
   GET /api/reponses/question/{questionId}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `questionId`| `int` | **Required**. Id de la question dont on veut récupérer les réponses |
+| Parameter    | Type  | Description                                                         |
+| :----------- | :---- | :------------------------------------------------------------------ |
+| `questionId` | `int` | **Required**. Id de la question dont on veut récupérer les réponses |
 
   <details>
   <summary> Exemple </summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/reponses/question/1
-  ```   
+```http
+  GET /api/reponses/question/1
+```
 
- -  #### Response
+- #### Response
 
 ```
 [
@@ -1688,77 +1922,79 @@ La liste des élèves dont le professeur est tuteur
 ]
 
 ```
+
   </details>
 
-  ### récupérer toutes les réponses faite sur un élève
+### récupérer toutes les réponses faite sur un élève
 
 ```http
   GET /api/reponses/foreleve/{eleveId}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `eleveId`| `int` | **Required**. Id de l'élève sur lequel on veut récupérer les réponses de son tuteur
+| Parameter | Type  | Description                                                                            |
+| :-------- | :---- | :------------------------------------------------------------------------------------- |
+| `eleveId` | `int` | **Required**. Id de l'élève sur lequel on veut récupérer les réponses de ses activités |
 
   <details>
   <summary> Exemple </summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/reponses/foreleve/54
-  ```   
+```http
+  GET /api/reponses/foreleve/68
+```
 
- -  #### Response
+- #### Response
 
 ```
-{
-    "2": {
-        "contenu": "Sur 10, comment jugeriez vous la ponctualité de l'élève ?",
+[
+    {
+        "contenu": "Comment jugeriez vous la ponctualité de l'élève ?",
         "reponses": [
             {
-                "id": 178,
-                "contenu": "élève très ponctuel",
+                "id": 192,
+                "contenu": "élève trés ponctuel super !",
                 "repondantEleveId": null,
-                "repondantProfId": 51,
-                "eleveConcerneId": 54,
-                "questionId": 2,
-                "activiteId": null,
-                "indexMoment": null,
-                "createdAt": "2023-07-10T06:43:44.000Z",
-                "updatedAt": "2023-07-10T06:43:44.000Z"
+                "repondantProfId": 62,
+                "eleveConcerneId": 68,
+                "questionId": 1,
+                "activiteId": 117,
+                "indexMoment": 0,
+                "createdAt": "2023-08-04T09:47:58.000Z",
+                "updatedAt": "2023-08-04T09:47:58.000Z"
             }
         ]
     }
-}
+]
 
 ```
+
   </details>
 
+### récupérer toutes les réponses faites sur une activité
 
-  ### récupérer toutes les réponses faites sur une activité
 > ce sont donc les réponses du questionnaire encadrant d'un encadrant sur son activité
 
 ```http
   GET /api/reponses/activite/{activiteId}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `activiteId`| `int` | **Required**. Id de l'activité dont on veut récupérer les réponses
+| Parameter    | Type  | Description                                                        |
+| :----------- | :---- | :----------------------------------------------------------------- |
+| `activiteId` | `int` | **Required**. Id de l'activité dont on veut récupérer les réponses |
 
   <details>
   <summary> Exemple </summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/reponses/activite/48
-  ```   
+```http
+  GET /api/reponses/activite/48
+```
 
- -  #### Response
+- #### Response
 
 ```
 {
@@ -1782,34 +2018,34 @@ La liste des élèves dont le professeur est tuteur
 }
 
 ```
+
   </details>
 
-
-  ### récupérer toutes les réponses faites par un tuteur sur tous ses élèves
+### récupérer toutes les réponses faites par un tuteur sur tous ses élèves
 
 ```http
   GET /api/reponses/tuteur/{profId}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `profId`| `int` | **Required**. Id du tuteur dont on veut récupérer les réponses
+| Parameter | Type  | Description                                                    |
+| :-------- | :---- | :------------------------------------------------------------- |
+| `profId`  | `int` | **Required**. Id du tuteur dont on veut récupérer les réponses |
 
   <details>
   <summary> Exemple </summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/reponses/tuteur/51
-  ```   
+```http
+  GET /api/reponses/tuteur/51
+```
 
- -  #### Response
- le première clé correspond à l'identifiant de l'élève, la seconde à l'id de laqiestion
+- #### Response
+  le première clé correspond à l'identifiant de l'élève, la seconde à l'id de laqiestion
 
- > ici "54" et "55" sont les identifiants des élèves concerné par les réponses,
- le "2" est l'identifiant de la question 
+> ici "54" et "55" sont les identifiants des élèves concerné par les réponses,
+> le "2" est l'identifiant de la question
 
 ```
 {
@@ -1854,34 +2090,35 @@ La liste des élèves dont le professeur est tuteur
 }
 
 ```
+
   </details>
 
+### récupérer toutes les réponses faites par un encadrant sur toutes ses activités
 
-  ### récupérer toutes les réponses faites par un encadrant sur toutes ses activités
 > ce sont donc les réponses du questionnaire encadrant d'un encadrant sur son activité
 
 ```http
   GET /api/reponses/encadrant/{profId}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `profId`| `int` | **Required**. Id de l'encadrant dont on veut récupérer les réponses
+| Parameter | Type  | Description                                                         |
+| :-------- | :---- | :------------------------------------------------------------------ |
+| `profId`  | `int` | **Required**. Id de l'encadrant dont on veut récupérer les réponses |
 
   <details>
   <summary> Exemple </summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/reponses/encadrant/50
-  ```   
+```http
+  GET /api/reponses/encadrant/50
+```
 
- -  #### Response
- Ici le premier indice correspond à l'id l'activité que le prof encadre, ensuite le deuxieme correspond à l'id de la quesiton
+- #### Response
+  Ici le premier indice correspond à l'id l'activité que le prof encadre, ensuite le deuxieme correspond à l'id de la quesiton
 
- > ici "48" est l'identifiant de l'activité et "1" celui de la question, "54" et "56" sont les activités pour lesquelles il n'y a toujours pas eu de réponse
+> ici "48" est l'identifiant de l'activité et "1" celui de la question, "54" et "56" sont les activités pour lesquelles il n'y a toujours pas eu de réponse
 
 ```
 {
@@ -1909,33 +2146,33 @@ La liste des élèves dont le professeur est tuteur
 }
 
 ```
+
   </details>
 
-  ### récupérer toutes les réponses faites par un élève sur le questionnaire de satisfaction élève
-
+### récupérer toutes les réponses faites par un élève sur le questionnaire de satisfaction élève
 
 ```http
   GET /api/reponses/eleve/{eleveId}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `eleveId`| `int` | **Required**. Id de l'élève répondant
+| Parameter | Type  | Description                           |
+| :-------- | :---- | :------------------------------------ |
+| `eleveId` | `int` | **Required**. Id de l'élève répondant |
 
   <details>
   <summary> Exemple </summary>
   <br>
 
-  - #### Request
+- #### Request
 
-  ```http
-    GET /api/reponses/eleve/54
-  ```   
+```http
+  GET /api/reponses/eleve/54
+```
 
- -  #### Response
- Ici le premier indice correspond à l'id l'activité que le prof encadre, ensuite le deuxieme correspond à l'id de la quesiton
+- #### Response
+  Ici le premier indice correspond à l'id l'activité que le prof encadre, ensuite le deuxieme correspond à l'id de la quesiton
 
- > ici "48" est l'identifiant de l'activité et "1" celui de la question
+> ici "48" est l'identifiant de l'activité et "1" celui de la question
 
 ```
 {
@@ -1967,47 +2204,48 @@ La liste des élèves dont le professeur est tuteur
 }
 
 ```
+
   </details>
 
-
-### récupérer une question 
+### récupérer une question
 
 ```http
   GET /api/questions/unique
 ```
-> ne pas intégrer les "{}" dans votre requête 
 
+> ne pas intégrer les "{}" dans votre requête
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `repondantEleveId`      | `int` si le répondant est un élève son id|
-| `repondantProfId`      | `int` | si le répondant est un prof son id |
-| `eleveConcerneId`      | `int` | si le répondant est un tuteur, l'id de l'élève sur lequel il répond|
-| `questionId`      | `int` | **Required** Id de la question à laquelle on répond |
-| `activiteId`      | `int` | si le répondant est un encadrant, l'id de l'activité sur laquelle il répond|
-| `indexMoment`     | `int` | si le répondant est un encadrant, l'index du moment durant lequel se déroule l'activité |
-
+| Parameter          | Type                                      | Description                                                                             |
+| :----------------- | :---------------------------------------- | :-------------------------------------------------------------------------------------- |
+| `repondantEleveId` | `int` si le répondant est un élève son id |
+| `repondantProfId`  | `int`                                     | si le répondant est un prof son id                                                      |
+| `eleveConcerneId`  | `int`                                     | si le répondant est un tuteur, l'id de l'élève sur lequel il répond                     |
+| `questionId`       | `int`                                     | **Required** Id de la question à laquelle on répond                                     |
+| `activiteId`       | `int`                                     | si le répondant est un encadrant, l'id de l'activité sur laquelle il répond             |
+| `indexMoment`      | `int`                                     | si le répondant est un encadrant, l'index du moment durant lequel se déroule l'activité |
 
 <details>
   <summary>Exemple</summary>
   <br>
 
-  - #### Request 
+- #### Request
 
-  ```http
-    GET /api/questions/unique
-  ``` 
+```http
+  GET /api/questions/unique
+```
 
-  ```
-    {
-        "repondantProfId": 50,
-        "questionId": 1,
-        "activiteId": 48,
-        "indexMoment": 0
-    }
+```
+  {
+      "repondantProfId": 50,
+      "questionId": 1,
+      "activiteId": 48,
+      "indexMoment": 0
+  }
 
-  ```
-  - #### Response
+```
+
+- #### Response
+
 ```
 {
     "id": 177,
@@ -2022,9 +2260,10 @@ La liste des élèves dont le professeur est tuteur
     "updatedAt": "2023-07-10T06:40:49.000Z"
 }
 ```
+
 </details>
 
-> cette requette est censé retourner une unique réponse en fonction des paramètres qu'on lui passe 
+> cette requette est censé retourner une unique réponse en fonction des paramètres qu'on lui passe
 > si le répondant est un encadrant il faut impérativement passer l'activiteId et l'index moment en paramètres
 > si le répondant est un tuteur il faut impérativement passer l'eleveConcerneId en paramètres
 
@@ -2034,15 +2273,15 @@ La liste des élèves dont le professeur est tuteur
   POST /api/reponses
 ```
 
-| body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `contenu`      | `string`  **Required**  le contenu de la réponse|
-| `repondantEleveId`      | `int` si le répondant est un élève son id|
-| `repondantProfId`      | `int` | si le répondant est un prof son id |
-| `eleveConcerneId`      | `int` | si le répondant est un tuteur, l'id de l'élève sur lequel il répond|
-| `questionId`      | `int` | **Required** Id de la question à laquelle on répond |
-| `activiteId`      | `int` | si le répondant est un encadrant, l'id de l'activité sur laquelle il répond|
-| `indexMoment`     | `int` | si le répondant est un encadrant, l'index du moment durant lequel se déroule l'activité |
+| body               | Type                                           | Description                                                                             |
+| :----------------- | :--------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| `contenu`          | `string` **Required** le contenu de la réponse |
+| `repondantEleveId` | `int` si le répondant est un élève son id      |
+| `repondantProfId`  | `int`                                          | si le répondant est un prof son id                                                      |
+| `eleveConcerneId`  | `int`                                          | si le répondant est un tuteur, l'id de l'élève sur lequel il répond                     |
+| `questionId`       | `int`                                          | **Required** Id de la question à laquelle on répond                                     |
+| `activiteId`       | `int`                                          | si le répondant est un encadrant, l'id de l'activité sur laquelle il répond             |
+| `indexMoment`      | `int`                                          | si le répondant est un encadrant, l'index du moment durant lequel se déroule l'activité |
 
 > si un encadrant a déjà ajouté une réponse sur une activité à un moment donné, il ne peut plus le faire pour la même question
 
@@ -2053,13 +2292,14 @@ La liste des élèves dont le professeur est tuteur
 <br>
 
 - #### Request 1 pour encadrant
+
 ```http
   POST /api/réponse
 ```
 
 ```
     {
-        "contenu": "ça s'est trés bien déroulé", 
+        "contenu": "ça s'est trés bien déroulé",
         "repondantProfId": 50,
         "questionId": 1,
         "activiteId": 54,
@@ -2068,6 +2308,7 @@ La liste des élèves dont le professeur est tuteur
 ```
 
 - #### Response 1 pour encadrant
+
 ```
     {
         "id": 187,
@@ -2082,13 +2323,14 @@ La liste des élèves dont le professeur est tuteur
 ```
 
 - #### Request 2 pour tuteur
+
 ```http
   POST /api/réponse
 ```
 
 ```
     {
-        "contenu": "l'activité sur l'eau", 
+        "contenu": "l'activité sur l'eau",
         "repondantEleveId": 54,
         "questionId": 4
 
@@ -2096,6 +2338,7 @@ La liste des élèves dont le professeur est tuteur
 ```
 
 - #### Response 2 pour tuteur
+
 ```
     {
         "id": 190,
@@ -2115,7 +2358,7 @@ La liste des élèves dont le professeur est tuteur
 
 ```
     {
-        "contenu": "l'activité sur l'eau", 
+        "contenu": "l'activité sur l'eau",
         "eleveReppondantId": 54,
         "questionId": 4
 
@@ -2141,23 +2384,23 @@ La liste des élèves dont le professeur est tuteur
 ```http
   PUT /api/reponses/{id}
 ```
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`| `int` | **Required**. id de la réponse à modifier|
+
+| Parameter | Type  | Description                               |
+| :-------- | :---- | :---------------------------------------- |
+| `id`      | `int` | **Required**. id de la réponse à modifier |
 
 <br>
 
-
-
-| Body | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `contenu`| `string` | **Required** l'énoncé de la question|
+| Body      | Type     | Description                          |
+| :-------- | :------- | :----------------------------------- |
+| `contenu` | `string` | **Required** l'énoncé de la question |
 
 <details>
 <summary>Exemple</summary>
 <br>
 
 - #### Request
+
 ```http
   PUT /api/reponses/190
 ```
@@ -2168,7 +2411,8 @@ La liste des élèves dont le professeur est tuteur
     }
 ```
 
-- #### Response 
+- #### Response
+
 ```
     {
         "id": 190,
@@ -2186,17 +2430,15 @@ La liste des élèves dont le professeur est tuteur
 
 </details>
 
-
 ### Supprimer une réponse
 
 ```http
   DELETE /api/reponses/{id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
+| Parameter | Type  | Description                                |
+| :-------- | :---- | :----------------------------------------- |
 | `id`      | `int` | **Required**. Id de la réponse à supprimer |
-
 
 <details>
 <summary>Exemple</summary>
@@ -2207,11 +2449,13 @@ La liste des élèves dont le professeur est tuteur
 ```http
   DELETE /api/reponses/190
 ```
-- #### Response 
+
+- #### Response
 
 ```
     {message: "Réponse supprimé avec succés"}
 ```
+
 </details>
 
 ### Supprimer toutes les réponses
@@ -2219,18 +2463,18 @@ La liste des élèves dont le professeur est tuteur
 ```http
   DELETE /api/reponses
 ```
+
 <details>
 <summary>Exemple</summary>
 <br>
 
-- #### Response 
+- #### Response
 
 ```
     {message: "Les réponses ont été supprimées avec succés"}
 
 ```
-</details>
-
 
 </details>
 
+</details>

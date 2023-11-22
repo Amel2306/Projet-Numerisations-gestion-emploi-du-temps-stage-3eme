@@ -36,79 +36,131 @@
     transform: rotate(360deg);
   }
 }
-.image-fixed {
+
+.image-fixed-bottom {
   position: fixed;
   bottom: 20px; 
   left: 20px; 
-  width: 1000px; 
+  width: 1100px; 
   height: auto; 
   z-index: -900; 
 }
 
+ul {
+  list-style: none;
+}
+
+li button {
+  border-radius: 10px;
+  padding: 4px;
+  margin: 10px;
+  margin-left: 20px;
+  background: transparent;
+  border: none;
+  border: #6c584c 1px solid;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-left: 70px;
+  margin-right: 70px;
+  list-style: none;
+}
+
+.element {
+  background: rgb(255, 255, 255, 0.4);
+  max-width: 400px;
+  max-height: 150px;
+  min-width: 300px;
+  min-height: 150px;
+  margin: 20px;
+  border-radius: 15px;
+  border: 2px solid #6c584c;
+  box-shadow: 2px 2px 2px 2px rgb(108, 88, 76, 0.4);
+  cursor: pointer;
+}
+
+.element:hover {
+  transform: translateY(-20px);
+  transition: 0.4s;
+  box-shadow: 12px 12px 2px 1px rgb(108, 88, 76, 0.4);
+}
+
+@media (min-width: 40rem) {
+  .element {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .element {
+    width: 33.3333%;
+  }
+}
+
 input {
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   font-weight: 500px;
   font-size: 15px;
-  color: #5B2B2A ;
+  color: #6c584c ;
   width: 100%;
   height: 100%;
   max-width: 300px;
   background-color: transparent;
-  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
   border-radius: 15px ;
-  border: #CC7D7C 2px;
+  border: #c9ada7 2px;
   outline: none;
   padding: 0.4vw;
   transition: .4s;
-  margin: 10px;
+  margin: 5px;
 }
 
 input:hover {
-  box-shadow: 0 0 0 .15vw #5B2B2A;
+  box-shadow: 0 0 0 .15vw #6c584c;
 }
 
 input:focus {
-  box-shadow: 0 0 0 .15vw #CC7D7C;
+  box-shadow: 0 0 0 .15vw #c9ada7;
 }
 
 textarea {
   font-weight: 500px;
   font-size: 15px;
-  color: #5B2B2A ;
-  width: 100%;
-  height: 100%;
-  max-width: 400px;
-  max-height: 70px;
-  min-width: 400px;
-  min-height: 70px;
+  color: #6c584c ;
+  min-height: 60px;
+  min-width: 250px;
+  resize: none;
   background-color: transparent;
-  box-shadow: 2px 2px 2px 2px rgb(91, 43, 42, 0.5);
+  box-shadow: 2px 2px 2px 2px rgb(108, 88, 76, 0.5);
   border-radius: 15px ;
-  border: rgb(91, 43, 42, 0.5) 1px solid;
+  border: rgb(108, 88, 76, 0.5) 1px solid;
   outline: none;
   padding: 0.4vw;
   transition: .4s;
-  margin: 10px;
+  margin: 5px;
 }
 
 textarea:hover {
-  box-shadow: 0 0 0 .15vw #5B2B2A;
+  box-shadow: 0 0 0 .15vw #6c584c;
 }
 
 textarea:focus {
-  box-shadow: 0 0 0 .15vw #CC7D7C;
+  box-shadow: 0 0 0 .15vw #c9ada7;
 }
 
 
 select {
   font-weight: 500px;
   font-size: 15px;
-  color: #5B2B2A ;
-  width: 300px;
+  color: #6c584c ;
   background-color: transparent;
-  box-shadow: 0 0 .4vw #5B2B2A, 0 0 0 .15vw transparent;
+  box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
   border-radius: 15px ;
-  border: #CC7D7C 2px;
+  border: #c9ada7 2px;
   outline: none;
   padding: 0.4vw;
   transition: .4s;
@@ -116,23 +168,64 @@ select {
 }
 
 select:hover {
-  box-shadow: 0 0 0 .15vw #5B2B2A;
+  box-shadow: 0 0 0 .15vw #6c584c;
 }
 
 select:focus {
-  box-shadow: 0 0 0 .15vw #CC7D7C;
+  box-shadow: 0 0 0 .15vw #c9ada7;
 }
 
 .container-form {
   border-radius: 20px;
-  border-color: #5B2B2A;
+  border-color: #6c584c;
 }
 
 .link {
   text-decoration: none;
-  color: #5B2B2A
+  color: #6c584c;
+  margin-top: 10px;
 }
 
-.link:hover {
-  color:#CC7D7C; 
+.link i {
+  border-radius: 50px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.pdf {
+  display: block;
+  box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
+  border-radius: 30px;
+  padding: 7px;
+  color:#6c584c; 
+  margin: 20px;
+  height: auto;
+  width: auto;
+}
+
+.pdf:hover {
+  color:#6c584c;
+  background-color: rgb(201, 173, 166, 0.4);
+  transition: 0.3s;
+}
+
+form {
+  box-shadow: 0 0 .4vw #6c584c, 0 0 0 .15vw transparent;
+  border-radius: 30px;
+  margin: 10px;
+  margin-top: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 10px;
+  min-width: 80%;
+  width: auto;
+  height: auto;
+  max-width: 575px;
+}
+
+.label-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

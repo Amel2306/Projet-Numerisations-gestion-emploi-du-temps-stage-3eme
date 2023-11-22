@@ -1,79 +1,83 @@
+import { useEffect, useState, useContext } from "react";
 import axiosInstance from "../../config/axiosConfig";
-import { useEffect, useState } from "react";
 import ActiviteDescr from "../Activites/ActiviteDescr";
 import ParcoursPdf from "./ParcoursPdf";
-import { PDFDownloadLink } from '@react-pdf/renderer';
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { MomentsContext } from "../../utils/tabMoments";
 
+function Parc(props) {
+  const parcoursId = props.parcoursId;
+  const prof = props.profId;
+  const eleve = props.eleve;
 
-function Parc (props) {
+  const { tab_moments } = useContext(MomentsContext);
 
-    const parcoursId = props.parcoursId
-    const prof = props.profId
-    const eleve = props.eleve
+  const [etat, setEtat] = useState(false);
 
-    const moment = [
-        "Lundi Matin",
-        "Lundi Aprés-midi",
-        "Mardi Matin",
-        "Mardi Aprés-midi",
-        "Mercredi Matin",
-        "Mercredi Aprés-midi",
-        "Jeudi Matin",
-        "Jeudi Aprés-midi",
-        "Vendredi Matin",
-        "Vendredi Aprés-midi"
-    ]
+  const handleAfficherParc = () => {
+    setEtat(!etat);
+  };
 
-    const [etat, setEtat] = useState(false)
+  const [activites, setActivites] = useState(null);
 
-    const handleAfficherParc = () => {
-      setEtat(!etat);
-    }
+  let route;
+  if (prof) {
+    route = `/activiteparcours/professeur/${prof}`;
+  } else {
+    route = `/activiteparcours/${parcoursId}`;
+  }
+  useEffect(() => {
+    axiosInstance
+      .get(route)
+      .then((res) => {
+        setActivites(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
-    const [activites, setActivites] = useState(null)
-
-    let route;
-    if (prof) {
-        route = `/activiteparcours/professeur/${prof}`
-    }
-    else {
-        route = `/activiteparcours/${parcoursId}`
-    }
-    useEffect (() => {
-
-        axiosInstance.get(route)
-        .then ((res) =>{
-            setActivites(res.data)
-        })
-        .catch ((err) => {
-            console.error(err)
-        })
-
-    }, [])
-
-    return (
-        <div>
-            <h1 className="parcours">Parcours {parcoursId}</h1>
-            <button className="btn" onClick={() => handleAfficherParc()}> 
-              {etat ? 
-                <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>:
-                <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>}  Afficher le parcours
-            </button>
-            <ul className="container">
-              {(activites && etat) && activites.map((act) => (
-                <li key={act.activiteId}>
-                    <h3>{moment[act.indexMoment]} :</h3>
-                    <ActiviteDescr id={act.activiteId} />
-                </li>
-              ))}
-            </ul>
-            {<PDFDownloadLink className="link"  document={<ParcoursPdf activites={activites} moment={moment} eleve={eleve}/>} fileName={"parcours"+parcoursId+".pdf"}>
-                {({ blob, url, loading, error }) =>
-                    loading ? 'Téléchargement en cours...' : 'Télécharger le parcours'
-                }
-            </PDFDownloadLink>}
-        </div>
-    )
+  return (
+    <div>
+      <button className="btn" onClick={() => handleAfficherParc()}>
+        {etat ? (
+          <i className="fa-solid fa-play fa-rotate-270 fa-lg"></i>
+        ) : (
+          <i className="fa-solid fa-play fa-rotate-90 fa-lg"></i>
+        )}{" "}
+        Parcours {parcoursId}
+      </button>
+      <ul className="container liste-activite">
+        {activites &&
+          etat &&
+          tab_moments &&
+          activites.map((act) => (
+            <li key={act.activiteId}>
+              <h3>{tab_moments && tab_moments[act.indexMoment]} :</h3>
+              <ActiviteDescr id={act.activiteId} />
+            </li>
+          ))}
+      </ul>
+      {
+        <PDFDownloadLink
+          className="link pdf"
+          document={<ParcoursPdf activites={activites} eleve={eleve} />}
+          fileName={"parcours" + parcoursId + ".pdf"}
+        >
+          {({ blob, url, loading, error }) =>
+            loading ? (
+              "Téléchargement en cours..."
+            ) : (
+              <>
+                <i className="fa-solid fa-circle-down fa-xl"></i> Télécharger le
+                Parcours
+              </>
+            )
+          }
+        </PDFDownloadLink>
+      }
+    </div>
+  );
 }
 
-export default Parc
+export default Parc;
